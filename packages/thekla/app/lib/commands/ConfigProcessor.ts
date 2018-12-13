@@ -19,6 +19,8 @@ interface SeleniumConfig {
 }
 
 interface Capabilities {
+    [key: string]: any;
+
     browserName?: string;
     seleniumServerAddress?: string;
     baseUrl?: string;
