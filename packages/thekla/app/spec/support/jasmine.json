@@ -1,0 +1,12 @@
+{
+  "spec_dir": "dist/spec"
+  ,"spec_files": [
+    "cucumber/**/*[sS]pec.js",
+    "jasmine/**/*[sS]pec.js"
+  ]
+  ,"helpers": [
+    "helpers/**/*.js"
+  ]
+  ,"oneFailurePerSpec": false
+  ,"randomizeTests": true
+}

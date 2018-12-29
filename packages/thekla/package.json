@@ -1,34 +1,39 @@
 {
-  "name": "cli_tester",
+  "name": "thekla",
   "version": "1.0.0",
   "description": "test on how to run jasmine from my own cli",
   "main": "index.js",
   "scripts": {
-    "test": "node dist/spec/command/command_spec_option_spec.js"
+    "test": "jasmine --config=app/spec/support/jasmine.json"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/andy-schulz/cli_tester.git"
+    "url": "git+https://github.com/andy-schulz/thekla.git"
   },
   "author": "Andy Schulz",
   "license": "MIT",
   "bugs": {
-    "url": "https://github.com/andy-schulz/cli_tester/issues"
+    "url": "https://github.com/andy-schulz/thekla/issues"
   },
-  "homepage": "https://github.com/andy-schulz/cli_tester#readme",
+  "homepage": "https://github.com/andy-schulz/thekla#readme",
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
+    "@types/cucumber": "^4.0.4",
     "@types/glob": "^7.1.1",
     "@types/jasmine": "^2.8.9",
     "@types/minimist": "^1.2.0",
     "@types/node": "^10.12.11",
+    "cucumber": "^5.0.3",
     "glob": "^7.1.3",
     "jasmine": "^3.3.0",
     "log4js": "^3.0.6",
-    "minimist": "^1.2.0"
+    "minimist": "^1.2.0",
+    "thekla-core": "git+https://github.com/andy-schulz/thekla-core.git"
   },
   "devDependencies": {
+    "@types/fs-extra": "^5.0.4",
     "@types/tape": "^4.2.32",
+    "fs-extra": "^7.0.1",
     "tape": "^4.9.1"
   }
 }

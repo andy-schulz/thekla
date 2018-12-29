@@ -1,22 +1,25 @@
-import * as minimist       from "minimist";
-import * as path           from "path";
-import {helpText}          from "./commands/help";
-import {versionText}       from "./commands/version";
-import {Thekla}            from "./thekla";
-import * as glob           from "glob";
-import {getLogger, Logger} from "@log4js-node/log4js-api";
-
+import * as minimist           from "minimist";
+import * as path               from "path";
+import * as fs               from "fs";
+import {ProcessedTheklaConfig} from "thekla-core";
+import {helpText}              from "./commands/help";
+import {versionText}           from "./commands/version";
+import {Thekla}                from "./thekla";
+import * as glob               from "glob";
+import {getLogger, Logger}     from "@log4js-node/log4js-api";
 
 
 export class Command {
     private configFile: string = "";
     private specs: string[] = [];
     private logger: Logger = getLogger("Command");
+    private configPath = "";
 
     constructor(
         private thekla: Thekla,
         private args: minimist.ParsedArgs) {
         let command = args._[0] || 'help';
+
 
         if (args.version || args.v) {
             command = 'version'
@@ -36,60 +39,53 @@ export class Command {
                 break;
 
             default:
-                this.configFile = command;
-                console.log(path.resolve());
-                break
+                this.configFile = `${path.resolve()}/${command}`;
+                console.log(this.configFile);
+                if(!fs.existsSync(this.configFile)) {
+                    const message = `No Configuration file found at location ${this.configFile}`;
+                    this.logger.error(message);
+                    throw Error(message);
+                }
+                break;
         }
 
-        this.processCommands(args);
+        this.processOptions(args);
     }
 
     /**
      * process all options passed via command line
      * @param args
      */
-    processCommands(args: minimist.ParsedArgs): void {
-         if(args.specs) {
-            this.specs = this.processSpecs(args);
-
-         }
-    }
-
-    /**
-     * process given spec options
-     * @param args - parsed minimist args
-     */
-    processSpecs(args: minimist.ParsedArgs): string[] {
-        let files: string[] = [];
-
-        const globfiles = (globFinder: string[]) => {
-            for(const spec of globFinder) {
-                const f = glob.sync(spec);
-                if(f.length != 0) {
-                    files = [...files,...f]
-                }
+    processOptions(args: minimist.ParsedArgs): void {
+        if (args.specs) {
+            if (Array.isArray(args.specs)) {
+                this.specs = args.specs;
+            } else {
+                this.specs = [args.specs];
             }
-        };
-
-        globfiles(Array.isArray(args.specs) ? args.specs : [args.specs]);
-
-        // remove duplicates before passing the files
-        return [...(new Set(files))];
+        }
     }
+
+
+
+    // loadConfig(): Promise<ProcessedTheklaConfig> {
+    // }
 
     /**
      * load jasmine specs
      * @param speclist
      */
-    loadSpecs(speclist: string[]) {
-        this.thekla.loadSpecs(speclist);
-    }
+    // loadSpecs(speclist: string[]) {
+    //     this.thekla.loadSpecs(speclist);
+    // }
 
     /**
      * start spec execution with jasmine
      */
     run() {
-        this.thekla.loadSpecs(this.specs);
-        this.thekla.run();
+        return this.thekla.loadConfig(this.configFile)
+            .then(() => this.thekla.processSpecsFromCommandLine(this.specs))
+            .then(() => this.thekla.run());
+
     }
 }

@@ -2,15 +2,16 @@
 import * as minimist from "minimist";
 import {Command}     from "../lib/command";
 import {Thekla}      from "../lib/thekla";
-
-
-console.log(process.argv);
+import {configure} from "log4js";
+configure(`config/log4js/log4js.json`);
 
 const args: minimist.ParsedArgs = require('minimist')(process.argv.slice(2));
 
 const thekla = new Thekla();
 const command = new Command(thekla, args);
-command.run();
+command.run().then(() => {
+    console.log("DONE")
+});
 
 
 // const args = minimist(process.argv.slice(2));
