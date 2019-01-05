@@ -223,7 +223,7 @@ describe('execute a basic cucumber feature file', () => {
         });
 
         afterAll(() => {
-            // return fsExtra.remove(fullReportPath);
+            return fsExtra.remove(fullReportPath);
         });
 
         it('it should generate the report - (test case id: b8cdd200-2341-45a8-ae80-673d89e3e502)', async () => {
