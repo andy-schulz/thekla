@@ -90,7 +90,7 @@ describe('Specifying support files', () => {
 
     });
 
-    describe('not on command line and not config file', () => {
+    describe('not on command line and not in config file', () => {
 
         it('should fail the test ' +
             '- (test case id: 6c3f3e1a-6d29-439b-9b57-29a55c48eacb)', async () => {
