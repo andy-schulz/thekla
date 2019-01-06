@@ -1,10 +1,12 @@
 {
   "name": "thekla",
   "version": "1.0.0",
-  "description": "test on how to run jasmine from my own cli",
+  "description": "cli for thekla-core",
   "main": "index.js",
   "scripts": {
-    "test": "jasmine --config=app/spec/support/jasmine.json"
+    "prepare": "npm run build",
+    "test": "tsc & jasmine --config=app/test/support/jasmine.json",
+    "build": "tsc"
   },
   "repository": {
     "type": "git",
@@ -28,12 +30,10 @@
     "jasmine": "^3.3.0",
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
-    "thekla-core": "git+https://github.com/andy-schulz/thekla-core.git"
+    "thekla-core": "^1.0.0"
   },
   "devDependencies": {
     "@types/fs-extra": "^5.0.4",
-    "@types/tape": "^4.2.32",
-    "fs-extra": "^7.0.1",
-    "tape": "^4.9.1"
+    "fs-extra": "^7.0.1"
   }
 }
