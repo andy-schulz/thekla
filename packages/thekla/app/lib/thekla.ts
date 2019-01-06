@@ -4,9 +4,21 @@ import {getLogger}             from "@log4js-node/log4js-api";
 import {CucumberTestFramework} from "./testFramework/CucumberTestFramework";
 import {JasmineTestFramework}  from "./testFramework/JasmineTestFramework";
 
+export interface TheklaCliOpts {
+    "require"?: string | string[];
+    "format"?: string | string[];
+    [arg: string]: any;
+    '--'?: string[];
+    _: string[];
+}
+
 export class Thekla {
     private specList: string[] = [];
     private specFinder: string[];
+    private _cliOptions: TheklaCliOpts = {
+        "--": [],
+        "_": []
+    };
 
     private formatList: string[] = [];
 
@@ -16,6 +28,10 @@ export class Thekla {
     private logger = getLogger("Thekla");
 
     constructor() {
+    }
+
+    set cliOptions(cliOpts: TheklaCliOpts) {
+        this._cliOptions = cliOpts;
     }
 
     /**
@@ -65,6 +81,7 @@ export class Thekla {
 
 
     }
+
 
     private processSpecs(specFinder: string[]): Promise<string[]> {
         let files: string[] = [];
@@ -128,7 +145,7 @@ export class Thekla {
             return new JasmineTestFramework(opts).run(this.specList);
         } else if (framework === "cucumber") {
             let specs: string = "";
-            const opts = this.theklaConfig.testFramework.cucumberOptions ? this.theklaConfig.testFramework.cucumberOptions : {};
+            const configOpts = this.theklaConfig.testFramework.cucumberOptions ? this.theklaConfig.testFramework.cucumberOptions : {};
 
             if(this.specFinder.length != 1) {
                 const message = `Passing multiple features files in an array is not supported yet, please pass in a single string as described in: https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#running-specific-features`;
@@ -138,7 +155,7 @@ export class Thekla {
                 specs = this.specFinder[0];
             }
 
-            return new CucumberTestFramework(opts).run(specs);
+            return new CucumberTestFramework(configOpts, this._cliOptions).run(specs);
         } else {
             throw Error(`Framework ${framework} is not implemented yet`);
         }

@@ -1,23 +1,27 @@
 import * as minimist           from "minimist";
 import * as path               from "path";
-import * as fs               from "fs";
-import {ProcessedTheklaConfig} from "thekla-core";
+import * as fs                 from "fs";
 import {helpText}              from "./commands/help";
 import {versionText}           from "./commands/version";
-import {Thekla}                from "./thekla";
-import * as glob               from "glob";
+import {Thekla, TheklaCliOpts} from "./thekla";
 import {getLogger, Logger}     from "@log4js-node/log4js-api";
 
 
 export class Command {
     private configFile: string = "";
     private specs: string[] = [];
+    private cliOptions: TheklaCliOpts = {
+        "--": [],
+        "_": []
+    };
+
     private logger: Logger = getLogger("Command");
-    private configPath = "";
 
     constructor(
         private thekla: Thekla,
         private args: minimist.ParsedArgs) {
+        this.logger.debug(`passed arguments: ${JSON.stringify(args)}`);
+
         let command = args._[0] || 'help';
 
 
@@ -57,6 +61,9 @@ export class Command {
      * @param args
      */
     processOptions(args: minimist.ParsedArgs): void {
+
+        this.cliOptions = args;
+
         if (args.specs) {
             if (Array.isArray(args.specs)) {
                 this.specs = args.specs;
@@ -83,8 +90,9 @@ export class Command {
      * start spec execution with jasmine
      */
     run() {
-        return this.thekla.loadConfig(this.configFile)
-            .then(() => this.thekla.processSpecsFromCommandLine(this.specs))
+        return this.thekla.processSpecsFromCommandLine (this.specs)
+            .then(() => this.thekla.cliOptions = this.cliOptions)
+            .then(() => this.thekla.loadConfig(this.configFile))
             .then(() => this.thekla.run());
 
     }
