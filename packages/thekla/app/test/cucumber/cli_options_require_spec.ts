@@ -130,7 +130,7 @@ describe('Specifying support files', () => {
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleCliAndConfOption");
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -160,7 +160,7 @@ describe('Specifying support files', () => {
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, "ErrorWithSingleCliOption");
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
