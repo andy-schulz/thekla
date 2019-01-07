@@ -84,10 +84,97 @@ describe('Specifying support files', () => {
                 expect(specResult.success).toBeTruthy();
             });
         });
+
+        it('as a single option with multiple support files, it should execute multiple feature files' +
+            '- (test case id: c06b4331-2374-4904-ba96-0694eeaf2442)', async () => {
+
+            const testConfig: TheklaConfig = {
+                browserName: "firefox",
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        require: [file1Result.relativeStepDefinitionFilePath,file2Result.relativeStepDefinitionFilePath]
+                    }
+                }
+            };
+
+            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleFeatureFilesConfOption");
+
+            const args: minimist.ParsedArgs = {
+                "_": [theklaConfigResult.relativeConfFilePath],
+                "specs": `${file1Result.baseDir}/../`,
+            };
+
+            console.log("SPECS: " + args.specs);
+
+            const thekla = new Thekla();
+            const command = new Command(thekla, args);
+            await command.run().then((specResult: any) => {
+                expect(specResult.success).toBeTruthy();
+            });
+        });
     });
 
     describe('on command line and config file', () => {
+        it('when loading the wrong support files with config option, the test passes ' +
+            '- (test case id: b77d6249-ea6e-4919-8b20-d453a1c895c1)', async () => {
 
+
+            const testConfig: TheklaConfig = {
+                browserName: "firefox",
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        require: [file2Result.relativeStepDefinitionFilePath]
+                    }
+                }
+            };
+
+            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleConfOption");
+
+            const args: minimist.ParsedArgs = {
+                "_": [theklaConfigResult.relativeConfFilePath],
+                "specs": `${file1Result.relativeFeatureFilePath}`,
+                "require": `${file1Result.relativeStepDefinitionFilePath}`,
+            };
+
+            const thekla = new Thekla();
+            const command = new Command(thekla, args);
+            await command.run().then((specResult: any) => {
+                expect(specResult.success).toBeTruthy();
+            });
+
+        });
+
+        it('when loading the wrong support files with cli option, the test fails ' +
+            '- (test case id: 2853cfa8-b1cb-4953-9364-27d32d420e97)', async () => {
+
+
+            const testConfig: TheklaConfig = {
+                browserName: "firefox",
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        require: [file1Result.relativeStepDefinitionFilePath]
+                    }
+                }
+            };
+
+            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleConfOption");
+
+            const args: minimist.ParsedArgs = {
+                "_": [theklaConfigResult.relativeConfFilePath],
+                "specs": `${file1Result.relativeFeatureFilePath}`,
+                "require": `${file2Result.relativeStepDefinitionFilePath}`,
+            };
+
+            const thekla = new Thekla();
+            const command = new Command(thekla, args);
+            await command.run().then((specResult: any) => {
+                expect(specResult.success).toBeFalsy();
+            });
+
+        });
     });
 
     describe('not on command line and not in config file', () => {
