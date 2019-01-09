@@ -1,4 +1,3 @@
-import * as glob               from "glob";
 import {TheklaConfig}          from "./config/TheklaConfig";
 import {getLogger}             from "@log4js-node/log4js-api";
 import {CucumberTestFramework} from "./testFramework/CucumberTestFramework";
@@ -18,15 +17,10 @@ export namespace thekla {
 }
 
 export class Thekla {
-    private specList: string[] = [];
-    private specFinder: string[];
     private _cliOptions: TheklaCliOpts = {
         "--": [],
         "_": []
     };
-
-    private formatList: string[] = [];
-
 
     private theklaConfig: TheklaConfig;
 
@@ -35,108 +29,8 @@ export class Thekla {
     constructor() {
     }
 
-    set cliOptions(cliOpts: TheklaCliOpts) {
-        this._cliOptions = cliOpts;
-    }
-
-    /**
-     * process given spec options, will be called with command line options or config file options
-     * @param specFinder - List of spec or feature files
-     */
-    processSpecsFromCommandLine(specFinder: string[] | undefined): Promise<string[]> {
-
-        if(specFinder === undefined || specFinder.length === 0) {
-            const message = `no Specs were given by command line`;
-            this.logger.info(message);
-            return Promise.resolve([])
-        }
-
-        return this.processSpecs(specFinder);
-    }
-
-    private processSpecsFromConfig(specFinder: string[] | undefined) {
-        if(this.specList.length > 0) {
-            this.logger.warn(`Specs were passed by command line, ignoring the specs from config.`);
-            return Promise.resolve(this.specList);
-        }
-
-        if(/*this.specList.length === 0 && */(specFinder === undefined || specFinder.length === 0)) {
-            const message = `
-            No Specs found in config file, please specify one as command line parameter or as a config file attribute
-            Use:
-                --specs=glob|dir|file
-            or
-                config = {
-                    specs: [glob|dir|file]
-                }
-            `;
-            this.logger.error(message);
-            return Promise.reject(message);
-        }
-
-        return this.processSpecs(specFinder)
-            .then((specs: string[]) => {
-                if(this.specList.length === 0) {
-                    const message = `No Specs found with the given finder: ${JSON.stringify(specFinder)}`;
-                    this.logger.error(message);
-                    return Promise.reject(message);
-                }
-                return Promise.resolve(specs);
-            })
-
-
-    }
-
-
-    private processSpecs(specFinder: string[]): Promise<string[]> {
-        let files: string[] = [];
-
-        const globfiles = (globFinder: string[]) => {
-            for (const spec of globFinder) {
-                const f = glob.sync(spec);
-                if (f.length != 0) {
-                    files = [...files, ...f]
-                }
-            }
-        };
-
-        // globfiles requires an array so create one if its necessary
-        globfiles(Array.isArray(specFinder) ? specFinder : [specFinder]);
-
-        // remove duplicates before passing the files
-        this.specList = [...(new Set(files))];
-
-        this.specFinder = specFinder;
-
-        return Promise.resolve(this.specList);
-    }
-
-    processConfig(configFile: any): Promise<any> {
-        const options: Promise<any>[] = [];
-
-        this.theklaConfig = configFile.config;
-
-        // if no specs are passed by command line use specs specified in config file
-        if (this.specList.length == 0) {
-            options.push(this.processSpecsFromConfig(this.theklaConfig.specs));
-        }
-
-        // TODO: put proxy handling etc. here
-
-        return Promise.all(options);
-    }
-
-
-    loadConfig(configPath: string): Promise<void> {
-        return import(configPath)
-            .then((config: TheklaConfig) => {
-                this.processConfig(config)
-            })
-    }
-
     run(theklaConfig: TheklaConfig): Promise<any> {
-        thekla.config = this.theklaConfig;
-
+        thekla.config = theklaConfig;
         this.theklaConfig = theklaConfig;
 
         // set jasmine as default TestFramework
@@ -147,7 +41,22 @@ export class Thekla {
 
         if (framework === "jasmine") {
             const opts = this.theklaConfig.testFramework.jasmineOptions ? this.theklaConfig.testFramework.jasmineOptions : {};
-            return new JasmineTestFramework(opts).run(this.specList);
+
+            if(this.theklaConfig.specs === undefined || this.theklaConfig.specs.length === 0) {
+                const message = `
+No Specs found in config file, please specify one as command line parameter or as a config file attribute
+Use:
+    --specs=glob|dir|file
+or
+    config = {
+        specs: [glob|dir|file]
+    }
+            `;
+                this.logger.error(message);
+                return Promise.reject(message);
+            } else {
+                return new JasmineTestFramework(opts).run(this.theklaConfig.specs);
+            }
         } else if (framework === "cucumber") {
             const configOpts = this.theklaConfig.testFramework.cucumberOptions ? this.theklaConfig.testFramework.cucumberOptions : {};
 
