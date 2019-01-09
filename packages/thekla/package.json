@@ -2,7 +2,7 @@
   "name": "thekla",
   "version": "1.0.0",
   "description": "cli for thekla-core",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepare": "npm run build",
     "test": "tsc & jasmine --config=app/test/support/jasmine.json",
