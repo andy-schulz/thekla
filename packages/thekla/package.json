@@ -1,12 +1,12 @@
 {
   "name": "thekla",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "cli for thekla-core",
   "main": "dist/index.js",
   "scripts": {
     "prepare": "npm run build",
     "test": "tsc & jasmine --config=app/test/support/jasmine.json",
-    "build": "tsc"
+    "build": "./node_modules/.bin/del-cli dist/**/* & tsc"
   },
   "repository": {
     "type": "git",
@@ -21,17 +21,18 @@
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
     "@types/cucumber": "^4.0.4",
+    "@types/fs-extra": "^5.0.4",
     "@types/glob": "^7.1.1",
     "@types/jasmine": "^2.8.9",
     "@types/minimist": "^1.2.0",
     "@types/node": "^10.12.11",
-    "@types/fs-extra": "^5.0.4",
     "cucumber": "^5.0.3",
+    "del-cli": "^1.1.0",
+    "fs-extra": "^7.0.1",
     "glob": "^7.1.3",
     "jasmine": "^3.3.0",
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
-    "thekla-core": "^1.0.0",
-    "fs-extra": "^7.0.1"
+    "thekla-core": "^1.0.0"
   }
 }

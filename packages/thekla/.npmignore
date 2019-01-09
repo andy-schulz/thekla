@@ -1,9 +1,8 @@
-# Created by .ignore support plugin (hsz.mobi)
 .idea
-dist
-app/test
+app/
+dist/test/
 _testData/
 node_modules/
-logs
+logs/
 *.log
 
