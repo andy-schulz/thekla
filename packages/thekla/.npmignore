@@ -5,4 +5,5 @@ _testData/
 node_modules/
 logs/
 *.log
+tsconfig.json
 
