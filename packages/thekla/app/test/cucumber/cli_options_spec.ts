@@ -4,7 +4,7 @@ import {Command}      from "../../lib/command";
 import {TheklaConfig} from "../../lib/config/TheklaConfig";
 import {Thekla}       from "../../lib/thekla";
 import {
-    baseAbsoluteTestDir, createTestFiles, createTheklaConfigFile, CucumberTestFileResult,
+    baseAbsoluteCucumberTestDir, createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult,
     getDynamicTestDir,
     simpleFeatureTestFileContent,
     simpleStepDefinitionFileContent, TheklaConfigFileResult
@@ -17,7 +17,7 @@ describe('execute a basic cucumber feature file', () => {
     let theklaConfigResult: TheklaConfigFileResult;
 
     beforeEach(async () => {
-        file1Result = await createTestFiles("simple", "", "", "SpecOptionCli");
+        file1Result = await createCucumberTestFiles("simple", "", "", "SpecOptionCli");
     });
 
     afterEach(async () => {
@@ -56,9 +56,10 @@ describe('execute a basic cucumber feature file', () => {
 
             const thekla = new Thekla();
             const command = new Command(thekla, args);
-            return  command.run().then((specResult: any) => {
-                console.log(specResult);
-                expect(specResult.success).toBeTruthy();
+            return  command.run()
+                .then((specResult: any) => {
+                    console.log(specResult);
+                    expect(specResult.success).toBeTruthy();
             });
         });
 

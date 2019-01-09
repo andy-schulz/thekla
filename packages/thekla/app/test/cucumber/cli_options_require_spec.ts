@@ -1,9 +1,9 @@
-import * as minimist                                                                             from "minimist";
-import {Command}                                                                                 from "../../lib/command";
-import {TheklaConfig}                                                                            from "../../lib/config/TheklaConfig";
-import {Thekla}                                                                                  from "../../lib/thekla";
-import {createTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "./testFiles";
-import fsExtra                                                                                   from 'fs-extra'
+import * as minimist                                                                                     from "minimist";
+import {Command}                                                                                         from "../../lib/command";
+import {TheklaConfig}                                                                                    from "../../lib/config/TheklaConfig";
+import {Thekla}                                                                                          from "../../lib/thekla";
+import {createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "./testFiles";
+import fsExtra                                                                                           from 'fs-extra'
 
 
 describe('Specifying support files', () => {
@@ -12,8 +12,8 @@ describe('Specifying support files', () => {
     let theklaConfigResult: TheklaConfigFileResult;
 
     beforeEach(async () => {
-        file1Result = await createTestFiles("simple", "test1", "step1", "RequireOptionCli");
-        file2Result = await createTestFiles("example", "test2", "step2", "RequireOptionFramework");
+        file1Result = await createCucumberTestFiles("simple", "test1", "step1", "RequireOptionCli");
+        file2Result = await createCucumberTestFiles("example", "test2", "step2", "RequireOptionFramework");
     });
 
     afterEach(async () => {

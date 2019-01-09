@@ -1,26 +1,17 @@
-import {TheklaConfig} from "../../lib/config/TheklaConfig";
-import {Thekla}       from "../../lib/thekla";
+import {Command}                                        from "../../lib/command";
+import {Thekla}                                         from "../../lib/thekla";
+import * as minimist                                    from "minimist";
 
 export interface TheklaTestData {
-    config: TheklaConfig;
-
-    /**
-     * specs == undefined
-     */
-    specs?: string | null;
+    args: minimist.ParsedArgs;
 }
 
 const proc = process;
 
 proc.on('message', async (testData: TheklaTestData) => {
     const thekla = new Thekla();
-
-    if(!testData.specs !== null) {
-        await thekla.processSpecsFromCommandLine(<string[] | undefined>testData.specs);
-    }
-
-    // await thekla.processConfig({config: testData.config});
-    return thekla.run(testData.config)
+    const command = new Command(thekla, testData.args);
+    return  command.run()
         .then((specResult: any) => {
             // @ts-ignore
             proc.send(specResult);

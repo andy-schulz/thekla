@@ -5,20 +5,12 @@ import {helpText}                    from "./commands/help";
 import {versionText}                 from "./commands/version";
 import {TestFramework, TheklaConfig} from "./config/TheklaConfig";
 import {TheklaConfigProcessor}       from "./config/TheklaConfigProcessor";
-import {Thekla, TheklaCliOpts}       from "./thekla";
+import {Thekla}                      from "./thekla";
 import {getLogger, Logger}           from "@log4js-node/log4js-api";
-import merge                         from "deepmerge";
 
 
 export class Command {
     private configFile: string = "";
-    private config: TheklaConfig;
-    private specs: string[] = [];
-    private cliOptions: TheklaCliOpts = {
-        "--": [],
-        "_": []
-    };
-
     private logger: Logger = getLogger("Command");
 
     constructor(
@@ -48,8 +40,7 @@ export class Command {
 
             default:
                 this.configFile = `${path.resolve()}/${command}`;
-                console.log(this.configFile);
-                if(!fs.existsSync(this.configFile)) {
+                if (!fs.existsSync(this.configFile)) {
                     const message = `No Configuration file found at location ${this.configFile}`;
                     this.logger.error(message);
                     throw Error(message);
@@ -60,14 +51,14 @@ export class Command {
 
     /**
      * process all options passed via command line
-     * @param args
+     * @param configFilePath
      */
 
 
     private loadConfigFile(configFilePath: string): Promise<TheklaConfig> {
         return import(configFilePath)
             .then((config: any) => {
-                if(!config.config) {
+                if (!config.config) {
                     const message = `An object called 'config' was expected in config file '${configFilePath}', but could not be found.`;
                     this.logger.info(message);
                     return Promise.reject(message);

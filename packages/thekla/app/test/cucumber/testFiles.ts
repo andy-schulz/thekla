@@ -51,13 +51,36 @@ Then(/^I should see 3 console logs$/, function() {
 });
 `;
 
-const cwd = process.cwd();
-export const baseRelativeTestDir = `_testData/cucumber/`;
-export const baseAbsoluteTestDir = `${cwd}/${baseRelativeTestDir}`;
 
-export const getDynamicTestDir = () => {
+export const spec_timeout_wait_for_10000ms = `
+"use strict";
+describe('timeout a spec', () => {
+    it('in the master directory', (done) => {
+        const prom = new Promise((fulfill, reject) => {
+            setTimeout(fulfill, 10000);
+        });
+        prom.then(() => {
+            done();
+        });
+    });
+});
+`;
+
+const cwd = process.cwd();
+export const baseRelativeCucumberTestDir = `_testData/cucumber/`;
+export const baseRelativeJasmineTestDir = `_testData/jasmine/`;
+export const baseAbsoluteCucumberTestDir = `${cwd}/${baseRelativeCucumberTestDir}`;
+export const baseAbsoluteJasmineTestDir = `${cwd}/${baseRelativeJasmineTestDir}`;
+
+export const getDynamicTestDir = (type: "cucumber" | "jasmine" = "cucumber") => {
   const date = new Date().getTime();
-  return {absolute: `${baseAbsoluteTestDir}/${date}/`, relative: `${baseRelativeTestDir}/${date}/`}
+
+
+  if(type === "cucumber") {
+      return {absolute: `${baseAbsoluteCucumberTestDir}/${date}/`, relative: `${baseRelativeCucumberTestDir}/${date}/`};
+  } else {
+      return {absolute: `${baseAbsoluteJasmineTestDir}/${date}/`, relative: `${baseRelativeJasmineTestDir}/${date}/`};
+  }
 };
 
 type TestFileType = "simple" | "example";
@@ -86,6 +109,31 @@ const getStepDefinitionFileContent = (fileType: TestFileType) => {
   }
 };
 
+export interface JasmineTestFileResult {
+    baseDir: string;
+    specFilePath: string;
+    relativeSpecFilePath: string;
+}
+
+export const createJasmineTestFiles = async function(name: string, path: string, content: string): Promise<JasmineTestFileResult> {
+    let result: JasmineTestFileResult;
+
+    const testPath = getDynamicTestDir("jasmine");
+
+    const specFileName = `${name}_specFile.js`;
+    const absolutSpecFilePath = path ? `${testPath.absolute}/${path}/${specFileName}` : `${testPath.absolute}/${specFileName}`;
+    const relativeSpecFilePath = path ? `${testPath.relative}/${path}/${specFileName}` : `${testPath.relative}/${specFileName}`;
+    await fsExtra.outputFile(absolutSpecFilePath, content);
+
+    result = {
+        baseDir: testPath.absolute,
+        specFilePath: absolutSpecFilePath,
+        relativeSpecFilePath: relativeSpecFilePath
+    };
+
+    return Promise.resolve(result);
+};
+
 export interface CucumberTestFileResult {
     baseDir: string;
     featureFilePath: string;
@@ -94,7 +142,9 @@ export interface CucumberTestFileResult {
     relativeStepDefinitionFilePath: string;
 }
 
-export const createTestFiles = async (
+
+
+export const createCucumberTestFiles = async (
     fileType: TestFileType,
     featurePath: string,
     stepPath: string,
