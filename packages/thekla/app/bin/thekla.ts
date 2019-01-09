@@ -1,4 +1,4 @@
-// #!/usr/bin/env node
+#!/usr/bin/env node
 import * as minimist from "minimist";
 import {Command}     from "../lib/command";
 import {Thekla}      from "../lib/thekla";

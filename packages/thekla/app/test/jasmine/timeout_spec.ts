@@ -1,7 +1,7 @@
 import * as child     from 'child_process';
 import fsExtra        from "fs-extra";
 import * as minimist  from "minimist";
-import {TheklaConfig} from "../../lib/config/ConfigProcessor";
+import {TheklaConfig} from "../../lib/config/TheklaConfig";
 
 const testArgs: string[] = [];
 const args: minimist.ParsedArgs = require('minimist')(testArgs);

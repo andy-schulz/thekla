@@ -1,5 +1,5 @@
 import fsExtra        from "fs-extra";
-import {TheklaConfig} from "../../lib/config/ConfigProcessor";
+import {TheklaConfig} from "../../lib/config/TheklaConfig";
 
 export  const simpleFeatureTestFileContent =
 `Feature: Simple Feature File

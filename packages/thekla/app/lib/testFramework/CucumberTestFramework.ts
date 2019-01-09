@@ -1,4 +1,4 @@
-import {CucumberOptions} from "../config/ConfigProcessor";
+import {CucumberOptions} from "../config/TheklaConfig";
 import {getLogger}       from "@log4js-node/log4js-api";
 import {TheklaCliOpts}   from "../thekla";
 

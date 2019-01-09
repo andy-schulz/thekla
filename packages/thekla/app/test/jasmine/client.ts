@@ -1,5 +1,5 @@
-import {TheklaConfig} from "../../lib/config/ConfigProcessor";
-import {Thekla} from "../../lib/thekla";
+import {TheklaConfig} from "../../lib/config/TheklaConfig";
+import {Thekla}       from "../../lib/thekla";
 
 export interface TheklaTestData {
     config: TheklaConfig;
@@ -19,8 +19,8 @@ proc.on('message', async (testData: TheklaTestData) => {
         await thekla.processSpecsFromCommandLine(<string[] | undefined>testData.specs);
     }
 
-    await thekla.processConfig({config: testData.config});
-    return thekla.run()
+    // await thekla.processConfig({config: testData.config});
+    return thekla.run(testData.config)
         .then((specResult: any) => {
             // @ts-ignore
             proc.send(specResult);

@@ -1,5 +1,5 @@
 import * as path        from "path";
-import {JasmineOptions} from "../config/ConfigProcessor";
+import {JasmineOptions} from "../config/TheklaConfig";
 import {TheklaReporter} from "../reporters/TheklaReporter";
 import {getLogger}      from "@log4js-node/log4js-api";
 

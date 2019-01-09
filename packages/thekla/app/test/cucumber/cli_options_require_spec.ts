@@ -1,6 +1,6 @@
 import * as minimist                                                                             from "minimist";
 import {Command}                                                                                 from "../../lib/command";
-import {TheklaConfig}                                                                            from "../../lib/config/ConfigProcessor";
+import {TheklaConfig}                                                                            from "../../lib/config/TheklaConfig";
 import {Thekla}                                                                                  from "../../lib/thekla";
 import {createTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "./testFiles";
 import fsExtra                                                                                   from 'fs-extra'
@@ -26,6 +26,7 @@ describe('Specifying support files', () => {
             fsExtra.remove(theklaConfigResult.baseDir);
         }
 
+        // reset result after deleting the test dir
         theklaConfigResult = {baseDir: "", confFilePath: "", relativeConfFilePath: ""};
     });
 
@@ -46,12 +47,17 @@ describe('Specifying support files', () => {
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
                 "specs": `${file1Result.relativeFeatureFilePath}`,
-                "require": `${file1Result.relativeStepDefinitionFilePath}`
+                "testFramework": {
+                    cucumberOptions: {
+                        require: `${file1Result.relativeStepDefinitionFilePath}`
+                    }
+                }
             };
 
             const thekla = new Thekla();
             const command = new Command(thekla, args);
             await command.run().then((specResult: any) => {
+                console.log(specResult);
                 expect(specResult.success).toBeTruthy();
             });
         });
@@ -135,7 +141,11 @@ describe('Specifying support files', () => {
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
                 "specs": `${file1Result.relativeFeatureFilePath}`,
-                "require": `${file1Result.relativeStepDefinitionFilePath}`,
+                testFramework: {
+                    cucumberOptions: {
+                        require: `${file1Result.relativeStepDefinitionFilePath}`
+                    }
+                }
             };
 
             const thekla = new Thekla();
@@ -165,7 +175,11 @@ describe('Specifying support files', () => {
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
                 "specs": `${file1Result.relativeFeatureFilePath}`,
-                "require": `${file2Result.relativeStepDefinitionFilePath}`,
+                testFramework: {
+                    cucumberOptions: {
+                        require: `${file2Result.relativeStepDefinitionFilePath}`
+                    }
+                },
             };
 
             const thekla = new Thekla();

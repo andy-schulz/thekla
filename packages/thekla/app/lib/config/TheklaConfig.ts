@@ -71,7 +71,3 @@ export interface CucumberOptions {
     exit?: boolean;
 }
 
-export class ConfigProcessor {
-    constructor(config: TheklaConfig) {
-    }
-}

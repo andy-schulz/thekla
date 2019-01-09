@@ -1,5 +1,5 @@
 import * as glob               from "glob";
-import {TheklaConfig}          from "./config/ConfigProcessor";
+import {TheklaConfig}          from "./config/TheklaConfig";
 import {getLogger}             from "@log4js-node/log4js-api";
 import {CucumberTestFramework} from "./testFramework/CucumberTestFramework";
 import {JasmineTestFramework}  from "./testFramework/JasmineTestFramework";
@@ -10,6 +10,11 @@ export interface TheklaCliOpts {
     [arg: string]: any;
     '--'?: string[];
     _: string[];
+}
+
+export namespace thekla {
+    export let config: TheklaConfig;
+    export let params: any;
 }
 
 export class Thekla {
@@ -129,10 +134,10 @@ export class Thekla {
             })
     }
 
-    run(): Promise<any> {
-        if(!this.theklaConfig) {
-            throw Error(`No configuration file found.`);
-        }
+    run(theklaConfig: TheklaConfig): Promise<any> {
+        thekla.config = this.theklaConfig;
+
+        this.theklaConfig = theklaConfig;
 
         // set jasmine as default TestFramework
         let framework: string = "jasmine";
@@ -144,18 +149,30 @@ export class Thekla {
             const opts = this.theklaConfig.testFramework.jasmineOptions ? this.theklaConfig.testFramework.jasmineOptions : {};
             return new JasmineTestFramework(opts).run(this.specList);
         } else if (framework === "cucumber") {
-            let specs: string = "";
             const configOpts = this.theklaConfig.testFramework.cucumberOptions ? this.theklaConfig.testFramework.cucumberOptions : {};
 
-            if(this.specFinder.length != 1) {
-                const message = `Passing multiple features files in an array is not supported yet, please pass in a single string as described in: https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#running-specific-features`;
+            if(this.theklaConfig.specs === undefined || this.theklaConfig.specs.length === 0) {
+                const message = `
+No Specs found in config file, please specify one as command line parameter or as a config file attribute
+Use:
+    --specs=glob|dir|file
+or
+    config = {
+        specs: [glob|dir|file]
+    }
+            `;
+                this.logger.error(message);
+                return Promise.reject(message);
+            } if(this.theklaConfig.specs.length > 1) {
+                const message = `
+Passing multiple features files in an array is not supported yet, please pass in a single string as described in: https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#running-specific-features
+            `;
                 this.logger.error(message);
                 return Promise.reject(message);
             } else {
-                specs = this.specFinder[0];
+                return new CucumberTestFramework(configOpts, this._cliOptions).run(this.theklaConfig.specs[0]);
             }
 
-            return new CucumberTestFramework(configOpts, this._cliOptions).run(specs);
         } else {
             throw Error(`Framework ${framework} is not implemented yet`);
         }
