@@ -2,7 +2,7 @@ import * as minimist                                                            
 import {Command}                                                                                         from "../../lib/command";
 import {TheklaConfig}                                                                                    from "../../lib/config/TheklaConfig";
 import {Thekla}                                                                                          from "../../lib/thekla";
-import {createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "./testFiles";
+import {createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "../data/testFiles";
 import fsExtra                                                                                           from 'fs-extra'
 
 

@@ -54,10 +54,6 @@ describe('Passing spec files', () => {
         await fsExtra.outputFile(masterSpecFilePath, masterSpecContent);
         await fsExtra.outputFile(subSpecFilePath, subSpecContent);
         await fsExtra.outputFile(jasmineConfFilePath, jasmineConfContent);
-
-        const testArgs = [
-            `${jasmineConfRelativeFilePath}`,
-        ];
     });
 
     afterAll(async () => {

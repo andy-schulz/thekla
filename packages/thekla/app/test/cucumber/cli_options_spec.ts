@@ -1,19 +1,15 @@
-import fsExtra          from 'fs-extra'
-import * as minimist    from "minimist";
-import {Command}        from "../../lib/command";
-import {TheklaConfig}   from "../../lib/config/TheklaConfig";
-import {thekla, Thekla} from "../../lib/thekla";
+import fsExtra        from 'fs-extra'
+import * as minimist  from "minimist";
+import {Command}      from "../../lib/command";
+import {TheklaConfig} from "../../lib/config/TheklaConfig";
+import {Thekla}       from "../../lib/thekla";
 import {
-    baseAbsoluteCucumberTestDir, createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult,
-    getDynamicTestDir,
-    simpleFeatureTestFileContent,
-    simpleStepDefinitionFileContent, TheklaConfigFileResult
-}                       from "./testFiles";
+    createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult
+}                     from "../data/testFiles";
 
 
 describe('execute a basic cucumber feature file', () => {
     let file1Result: CucumberTestFileResult;
-    let file2Result: CucumberTestFileResult;
     let theklaConfigResult: TheklaConfigFileResult;
 
     beforeEach(async () => {
@@ -84,13 +80,7 @@ describe('execute a basic cucumber feature file', () => {
             return  command.run().then((specResult: any) => {
                 console.log(specResult);
                 expect(specResult.success).toBeTruthy();
-
-                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
-                console.log(thekla.config);
-                console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             });
-
-
         });
 
 
@@ -114,7 +104,7 @@ describe('execute a basic cucumber feature file', () => {
             const thekla = new Thekla();
             const command = new Command(thekla, args);
             return  command.run()
-                .then((specResult: any) => {
+                .then(() => {
                     expect(true).toBeFalsy(`command.run should throw an Error and should not pass as it is right now`);
                 }).catch((e: any) => {
                     expect(e).toContain(`Passing multiple features files in an array is not supported yet, please pass in a single string as described in: https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#running-specific-features`);
@@ -252,7 +242,7 @@ or
             const thekla = new Thekla();
             const command = new Command(thekla, args);
             return  command.run()
-                .then((specResult: any) => {
+                .then(() => {
                     expect(true).toBeFalsy(`The spec should not run successful as the report folder does not exist`);
                 }).catch((e: any) => {
                     expect(e.toString()).toContain(`no such file or directory, open`);
