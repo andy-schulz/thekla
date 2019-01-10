@@ -2,6 +2,9 @@ import {SeleniumConfig, RestConfig} from "thekla-core";
 
 
 export interface TheklaConfig {
+    // index signature is used for
+    [key: string]: any;
+
     specs?: string[];
 
     seleniumConfig?: SeleniumConfig;
