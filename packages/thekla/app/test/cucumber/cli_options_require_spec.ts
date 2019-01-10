@@ -36,7 +36,6 @@ describe('Specifying support files', () => {
             '- (test case id: 0c7dab32-8f0d-4f98-8931-251636256503)', async () => {
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                 }
@@ -68,7 +67,6 @@ describe('Specifying support files', () => {
             '- (test case id: dfcf68da-e41f-4669-9f48-c25cb475826d)', async () => {
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                     cucumberOptions: {
@@ -95,7 +93,6 @@ describe('Specifying support files', () => {
             '- (test case id: c06b4331-2374-4904-ba96-0694eeaf2442)', async () => {
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                     cucumberOptions: {
@@ -127,7 +124,6 @@ describe('Specifying support files', () => {
 
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                     cucumberOptions: {
@@ -161,7 +157,6 @@ describe('Specifying support files', () => {
 
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                     cucumberOptions: {
@@ -197,7 +192,6 @@ describe('Specifying support files', () => {
             '- (test case id: 6c3f3e1a-6d29-439b-9b57-29a55c48eacb)', async () => {
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                 }

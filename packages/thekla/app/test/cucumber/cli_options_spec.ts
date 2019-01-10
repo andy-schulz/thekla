@@ -1,14 +1,14 @@
-import fsExtra        from 'fs-extra'
-import * as minimist  from "minimist";
-import {Command}      from "../../lib/command";
-import {TheklaConfig} from "../../lib/config/TheklaConfig";
-import {Thekla}       from "../../lib/thekla";
+import fsExtra          from 'fs-extra'
+import * as minimist    from "minimist";
+import {Command}        from "../../lib/command";
+import {TheklaConfig}   from "../../lib/config/TheklaConfig";
+import {thekla, Thekla} from "../../lib/thekla";
 import {
     baseAbsoluteCucumberTestDir, createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult,
     getDynamicTestDir,
     simpleFeatureTestFileContent,
     simpleStepDefinitionFileContent, TheklaConfigFileResult
-} from "./testFiles";
+}                       from "./testFiles";
 
 
 describe('execute a basic cucumber feature file', () => {
@@ -41,7 +41,6 @@ describe('execute a basic cucumber feature file', () => {
 
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                 }
@@ -67,7 +66,6 @@ describe('execute a basic cucumber feature file', () => {
             '- (test case id: fcfac440-f13c-4dbd-be6b-f93eef045e57)', async () => {
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 specs: [file1Result.relativeFeatureFilePath],
                 testFramework: {
                     frameworkName: "cucumber",
@@ -81,12 +79,18 @@ describe('execute a basic cucumber feature file', () => {
             };
 
 
-            const thekla = new Thekla();
-            const command = new Command(thekla, args);
+            const th = new Thekla();
+            const command = new Command(th, args);
             return  command.run().then((specResult: any) => {
                 console.log(specResult);
                 expect(specResult.success).toBeTruthy();
+
+                console.log("$$$$$$$$$$$$$$$$$$$$$$$$$$$$$$");
+                console.log(thekla.config);
+                console.log("%%%%%%%%%%%%%%%%%%%%%%%%%%%%%%");
             });
+
+
         });
 
 
@@ -94,7 +98,6 @@ describe('execute a basic cucumber feature file', () => {
             '- (test case id: bbbfc97d-b4ba-4731-a774-2a0635f5d3f9)', async () => {
 
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 specs: [file1Result.relativeFeatureFilePath, file1Result.relativeFeatureFilePath],
                 testFramework: {
                     frameworkName: "cucumber",
@@ -121,7 +124,6 @@ describe('execute a basic cucumber feature file', () => {
         it('should throw an Error when an empty spec Array is passed ' +
             '- (test case id: ebfd78a6-c683-4227-ac3c-5304d6cdae57)', async () => {
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 specs: [],
                 testFramework: {
                     frameworkName: "cucumber",
@@ -157,7 +159,6 @@ or
         it('should ignore empty specs array defined in config file when specs are passed via command line ' +
             '- (test case id: 8cd2e0a6-e14d-435c-985d-29e635eae1bf)', async () => {
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 specs: [],
                 testFramework: {
                     frameworkName: "cucumber",
@@ -202,7 +203,6 @@ or
 
             const reportFileName = `${baseName}RepotFile.json`;
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                     cucumberOptions: {
@@ -234,7 +234,6 @@ or
 
             const reportFileName = `${baseName}RepotFile.json`;
             const testConfig: TheklaConfig = {
-                browserName: "firefox",
                 testFramework: {
                     frameworkName: "cucumber",
                     cucumberOptions: {

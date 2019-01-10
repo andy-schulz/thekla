@@ -1,15 +1,13 @@
-import {SeleniumConfig, RestConfig, Capabilities} from "thekla-core";
+import {SeleniumConfig, RestConfig} from "thekla-core";
 
 
 export interface TheklaConfig {
-    [key: string]: any;
-
     specs?: string[];
 
     seleniumConfig?: SeleniumConfig;
     restConfig?: RestConfig;
     params?: {
-        [key: string]: string | object
+        [key: string]: any
     };
 
     testFramework: TestFramework;
