@@ -1,13 +1,13 @@
-import * as child                                                               from 'child_process';
-import fsExtra                                                                  from "fs-extra";
-import * as minimist                                                            from "minimist";
-import {TheklaConfig}                                                           from "../../lib/config/TheklaConfig";
+import * as child     from 'child_process';
+import fsExtra        from "fs-extra";
+import * as minimist  from "minimist";
+import {TheklaConfig} from "../../lib/config/TheklaConfig";
 import {
     createJasmineTestFiles,
     createTheklaConfigFile,
     JasmineTestFileResult, spec_timeout_wait_for_10000ms,
     TheklaConfigFileResult
-} from "../cucumber/testFiles";
+}                     from "../data/testFiles";
 
 
 import {TheklaTestData} from './client';
