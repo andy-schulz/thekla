@@ -66,6 +66,21 @@ describe('timeout a spec', () => {
 });
 `;
 
+
+export const createTheklaGlobalSpec = (expected: string) => {
+    return `
+"use strict";
+describe('Thekla globals', () => {
+    it('Should be accessible inside a spec', () => {
+        const exp = ${expected};
+        let th = thekla;
+        th.config.specs = [""]; // remove specs from config as its given by command line not by config
+        expect(th.config).toEqual(exp);
+    });
+});
+`
+};
+
 const cwd = process.cwd();
 export const baseRelativeCucumberTestDir = `_testData/cucumber/`;
 export const baseRelativeJasmineTestDir = `_testData/jasmine/`;

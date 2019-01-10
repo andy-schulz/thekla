@@ -1,5 +1,6 @@
 import {TheklaConfig}          from "./config/TheklaConfig";
 import {getLogger}             from "@log4js-node/log4js-api";
+// import {thekla}                from "./globals/globals";
 import {CucumberTestFramework} from "./testFramework/CucumberTestFramework";
 import {JasmineTestFramework}  from "./testFramework/JasmineTestFramework";
 
@@ -11,10 +12,8 @@ export interface TheklaCliOpts {
     _: string[];
 }
 
-export namespace thekla {
-    export let config: TheklaConfig;
-    export let params: any;
-}
+// declare let thekla:any;
+declare let global: any;
 
 export class Thekla {
     private _cliOptions: TheklaCliOpts = {
@@ -30,7 +29,8 @@ export class Thekla {
     }
 
     run(theklaConfig: TheklaConfig): Promise<any> {
-        thekla.config = theklaConfig;
+        global.thekla = {};
+        global.thekla.config = theklaConfig;
         this.theklaConfig = theklaConfig;
 
         // set jasmine as default TestFramework

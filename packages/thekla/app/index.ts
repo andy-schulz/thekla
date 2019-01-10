@@ -1,1 +1,1 @@
-export {thekla} from "./lib/thekla"
+//export {thekla} from "./lib/globals/globals"
