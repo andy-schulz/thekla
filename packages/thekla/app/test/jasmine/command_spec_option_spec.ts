@@ -61,7 +61,7 @@ describe('Passing spec files', () => {
     });
 
     afterAll(async () => {
-        // await fsExtra.remove(specFinderAbsoluteDir);
+        await fsExtra.remove(specFinderAbsoluteDir);
     });
 
     beforeEach(() => {
