@@ -1,4 +1,4 @@
-import {CucumberOptions, TestFramework, TheklaConfig} from "./TheklaConfig";
+import {CucumberOptions, TheklaConfig, JasmineOptions} from "./TheklaConfig";
 import merge from "deepmerge";
 
 import {getLogger} from "log4js";
@@ -27,7 +27,7 @@ export class TheklaConfigProcessor {
             if(!name) return cnfg;
 
             if(!(name === "jasmine" || name === "cucumber")) {
-                const message: string = `Passed framework name as command line argument is ${name} but should be 'jasmine' or 'cucumber'`;
+                const message: string = `Passed framework name as command line argument is ${JSON.stringify(name)} but should be 'jasmine' or 'cucumber'`;
                 this.logger.error(message);
                 throw new Error(message);
             } else {
@@ -46,22 +46,41 @@ export class TheklaConfigProcessor {
 
             const mergeRequire = (req: string | string[] | undefined) => {
                 if(!req) return;
+                cn.testFramework.cucumberOptions.require = Array.isArray(req) ? req : [req];
+            };
 
-                if(Array.isArray(req)) {
-                    cn.testFramework.cucumberOptions.require = req;
+            const mergeTags = (tags: string | string[] | undefined) => {
+                if(!tags) return;
+                cn.testFramework.cucumberOptions.tags = Array.isArray(tags) ? tags : [tags];
+            };
+
+            const mergeWorldParameter = (worldParams: any) => {
+                if(!worldParams) return;
+                if(typeof worldParams === "object" && {}.constructor == worldParams.constructor) {
+                    cn.testFramework.cucumberOptions.worldParameters  =  worldParams
                 } else {
-                    cn.testFramework.cucumberOptions.require = [req];
+                    throw new Error(`Can't parse the World Parameter ${worldParams}`)
                 }
             };
 
             mergeRequire(ccOpts.require);
+            mergeTags(ccOpts.tags);
+            mergeWorldParameter(ccOpts.worldParameters);
+
             const overwriteMerge = (destinationArray: any[], sourceArray: any[], options: any) => sourceArray;
             return merge(cnfg,cn, { arrayMerge: overwriteMerge });
+        };
+
+        const mergeJasmineOptions = (jsmOpts: JasmineOptions| undefined, cnfg: TheklaConfig) => {
+            if(!jsmOpts) return cnfg;
+
+            throw new Error("Jasmine CLI Options are not implemented yet");
         };
 
         let conf: TheklaConfig;
         conf = mergeTestframeworkName(fwk.frameworkName, config);
         conf = mergeCucumberOptions(fwk.cucumberOptions, conf);
+        conf = mergeJasmineOptions(fwk.jasmineOptions, conf);
         return conf;
     }
 }

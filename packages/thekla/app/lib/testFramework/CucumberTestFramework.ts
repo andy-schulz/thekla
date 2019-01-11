@@ -4,47 +4,48 @@ import {TheklaCliOpts}   from "../thekla";
 
 export class CucumberTestFramework {
     private readonly logger = getLogger("CucumberTestFramework");
-    private requireOptions: string[] = [];
+    private ccOptionsList: string[] = [];
 
     private formatOptions: string[] =  [];
     constructor(
-        private frameworkOptions: CucumberOptions,
-        private cliOptions: TheklaCliOpts) {
+        private frameworkOptions: CucumberOptions) {
 
         if(frameworkOptions) {
-            this.processFrameworkOptions(cliOptions, frameworkOptions);
+            this.processFrameworkOptions(frameworkOptions);
         }
     }
 
-    private processFrameworkOptions(cliOptions: TheklaCliOpts, frameworkOptions: CucumberOptions) {
+    private processFrameworkOptions(frameworkOptions: CucumberOptions) {
 
-        this.processOptions(cliOptions.require, frameworkOptions.require, "--require");
-        this.processOptions(cliOptions.format, frameworkOptions.format, "--format");
+        this.processOptions(frameworkOptions.require, "--require");
+        this.processOptions(frameworkOptions.format, "--format");
+        this.processOptions(frameworkOptions.tags, "--tags");
+
+        this.processWorldParameters(frameworkOptions.worldParameters);
     }
 
+    private processWorldParameters (worldParams: any) {
+        if(!worldParams) return;
 
-    private processOptions(cliOptions: undefined | string | string[], confOptions: undefined | string[], optsString: string) {
-        this.logger.debug(`processing ${optsString} option with CLI: ${cliOptions} and CONF: ${confOptions}`);
+        if(!(typeof worldParams === "object" && {}.constructor === worldParams.constructor)) {
+            const message = `The World Parameters in the config file cant be parsed: ${worldParams}`;
+            throw new Error(message);
+        }
+
+        this.ccOptionsList.push("--world-parameters");
+        this.ccOptionsList.push(JSON.stringify(worldParams));
+    }
+    private processOptions(confOptions: undefined | string[], optsString: string) {
+        this.logger.debug(`processing ${optsString} option with CONF: ${confOptions}`);
 
         const processOptions = (options: string[]) => {
             for(let opt of options) {
-                this.requireOptions.push(optsString);
-                this.requireOptions.push(opt);
+                this.ccOptionsList.push(optsString);
+                this.ccOptionsList.push(opt);
             }
         };
 
-        const processCliOptions = (options: string | string[]) => {
-            processOptions (Array.isArray(options) ? options : [options])
-        };
-
-        if(cliOptions && confOptions) {
-            this.logger.warn(`${optsString} are specified on command line and in the config file. I am going to use the command line options and ignore the config file.`);
-            processCliOptions(cliOptions);
-        } else if (cliOptions) {
-            processCliOptions(cliOptions);
-        } else if (confOptions) {
-            processOptions(confOptions)
-        }
+        if(confOptions) processOptions(confOptions);
     }
 
 
@@ -70,8 +71,7 @@ export class CucumberTestFramework {
             args.push(cwd + "\\node_modules\\cucumber\\bin\\cucumber-js");
             args.push(specs);
 
-            args = [...args, ...this.formatOptions];
-            args = [...args, ...this.requireOptions];
+            args = [...args, ...this.ccOptionsList];
 
             this.logger.debug(JSON.stringify(Cucumber, null, "\t"));
 

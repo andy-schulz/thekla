@@ -79,7 +79,7 @@ Passing multiple features files in an array is not supported yet, please pass in
                 this.logger.error(message);
                 return Promise.reject(message);
             } else {
-                return new CucumberTestFramework(configOpts, this._cliOptions).run(this.theklaConfig.specs[0]);
+                return new CucumberTestFramework(configOpts).run(this.theklaConfig.specs[0]);
             }
 
         } else {

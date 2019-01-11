@@ -21,6 +21,18 @@ When(/^I type it in$/, function() {return Promise.resolve()});
 Then(/^it should appear$/, function() {return Promise.resolve()});
 `;
 
+export const worldParameterStepDefinitionFileContent = (parameter: string) => `
+const assert = require('assert');
+const { Given, When, Then } = require('cucumber')
+           
+Given(/^I search$/, function() {
+    const exp = ${parameter};
+    assert.deepStrictEqual(this.parameters, exp);
+});
+When(/^I type it in$/, function() {return Promise.resolve()});
+Then(/^it should appear$/, function() {return Promise.resolve()});
+`;
+
 export const exampleFeatureTestFileContent =
 `Feature: Example Feature File
 
@@ -98,13 +110,13 @@ export const getDynamicTestDir = (type: "cucumber" | "jasmine" = "cucumber") => 
   }
 };
 
-type TestFileType = "simple" | "example";
+type TestFileType = "simple" | "example" | "worldParameter";
 
 const featureFileStdName = `FeatureTestFile.feature`;
 const stepDefinitionFileStdName = `StepDefinitionFile.js`;
 const confFileStdName = `_conf.js`;
 
-const getFeatureFileContent = (fileType: TestFileType) => {
+const getFeatureFileContent = (fileType: string) => {
     if(fileType === "simple") {
         return simpleFeatureTestFileContent;
     } else if (fileType === "example") {
@@ -114,11 +126,13 @@ const getFeatureFileContent = (fileType: TestFileType) => {
     }
 };
 
-const getStepDefinitionFileContent = (fileType: TestFileType) => {
+const getStepDefinitionFileContent = (fileType: string, param: string = "") => {
   if(fileType === "simple") {
     return simpleStepDefinitionFileContent;
   } else if (fileType === "example") {
     return exampleStepDefinitionFileContent;
+  } else if (fileType === "worldParameter") {
+      return worldParameterStepDefinitionFileContent(param);
   } else {
     throw new Error(`File with TestFileType: ${fileType} does not exist.`);
   }
@@ -163,7 +177,13 @@ export const createCucumberTestFiles = async (
     fileType: TestFileType,
     featurePath: string,
     stepPath: string,
-    fileBaseName: string): Promise<CucumberTestFileResult> => {
+    fileBaseName: string,
+    param: string = ""): Promise<CucumberTestFileResult> => {
+
+    const fileTypes: Map<TestFileType, TestFileType[]> = new Map();
+    fileTypes.set("simple", ["simple", "simple"]);
+    fileTypes.set("example", ["example", "example"]);
+    fileTypes.set("worldParameter", ["simple", "worldParameter"]);
 
     const result: CucumberTestFileResult = {
         baseDir: ``,
@@ -188,8 +208,13 @@ export const createCucumberTestFiles = async (
     result.stepDefinitionFilePath = stepDefinitionFileFullPath;
     result.relativeStepDefinitionFilePath = stepDefinitionFileRelativePath;
 
-    await fsExtra.outputFile(featureFileFullPath, getFeatureFileContent(fileType));
-    await fsExtra.outputFile(stepDefinitionFileFullPath, getStepDefinitionFileContent(fileType));
+    const ft = fileTypes.get(fileType);
+    if(ft !== undefined) {
+        await fsExtra.outputFile(featureFileFullPath, getFeatureFileContent(ft[0]));
+        await fsExtra.outputFile(stepDefinitionFileFullPath, getStepDefinitionFileContent(ft[1],param));
+    } else {
+        Promise.reject("Error creating files.")
+    }
 
     return Promise.resolve(result);
 };

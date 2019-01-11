@@ -80,11 +80,6 @@ export class Command {
         return Promise.resolve(config);
     }
 
-    private mergeTestframeworkOptions(arg: TestFramework, config: TheklaConfig): TheklaConfig {
-
-        return config;
-    }
-
     /**
      * start spec execution with jasmine
      */

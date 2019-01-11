@@ -96,6 +96,35 @@ describe('Merge into TheklaConfig', () => {
         });
     });
     describe('new test framework options given on command line', () => {
+        // require option
+        it('with an unknown options - (test case id: 9cec3689-6b1d-4176-a93a-4ae71b801bd8)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber"
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        require: ["TESTREQUIRE", "TESTREQUIRE2"],
+                        unknown: "THIS IS UNKNOWN BY THEKLA CONFIG"
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        require: ["TESTREQUIRE", "TESTREQUIRE2"]
+                    }
+                }
+            };
+            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            expect(actual).toEqual(expected);
+        });
+
         it('with new single require option - (test case id: 9c89d7d2-95b3-45b1-88a4-51943b512744)', () => {
             const config: TheklaConfig = {
                 testFramework: {
@@ -150,34 +179,6 @@ describe('Merge into TheklaConfig', () => {
             expect(actual).toEqual(expected);
         });
 
-        it('with an unknown options - (test case id: 9cec3689-6b1d-4176-a93a-4ae71b801bd8)', () => {
-            const config: TheklaConfig = {
-                testFramework: {
-                    frameworkName: "cucumber"
-                }
-            };
-
-            const fn = {
-                testFramework: {
-                    cucumberOptions: {
-                        require: ["TESTREQUIRE", "TESTREQUIRE2"],
-                        unknown: "THIS IS UNKNOWN BY THEKLA CONFIG"
-                    }
-                }
-            };
-
-            const expected: TheklaConfig = {
-                testFramework: {
-                    frameworkName: "cucumber",
-                    cucumberOptions: {
-                        require: ["TESTREQUIRE", "TESTREQUIRE2"]
-                    }
-                }
-            };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
-            expect(actual).toEqual(expected);
-        });
-
         it('with a replacement to the require options - (test case id: 9cec3689-6b1d-4176-a93a-4ae71b801bd8)', () => {
             const config: TheklaConfig = {
                 testFramework: {
@@ -206,6 +207,262 @@ describe('Merge into TheklaConfig', () => {
             };
             const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
+        });
+
+        // Tags option
+        it('with new single tags option - (test case id: 2d14cd88-569a-47a2-8112-33c3511b09ca)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber"
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        tags: "@Focus"
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        tags: ["@Focus"]
+                    }
+                }
+            };
+            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            expect(actual).toEqual(expected);
+        });
+
+        it('with new multiple tags options - (test case id: 9af82806-0607-47e1-8389-de98d16664a2)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber"
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        tags: ["@TAGS", "@tags"]
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        tags: ["@TAGS", "@tags"]
+                    }
+                }
+            };
+            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            expect(actual).toEqual(expected);
+        });
+
+        it('with a replacement to the tags options - (test case id: 1ea0ebc5-bad9-497f-b6a5-f62c71e83aa6)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        tags: ["@original"],
+                    }
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        tags: ["@replacement"],
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        tags: ["@replacement"],
+                    }
+                }
+            };
+            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            expect(actual).toEqual(expected);
+        });
+
+        it('with an empty replacement to the tags options - (test case id: bc197e55-2413-4318-8d0e-20d623d216fc)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        tags: ["@original"],
+                    }
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        tags: "",
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        tags: ["@original"],
+                    }
+                }
+            };
+            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            expect(actual).toEqual(expected);
+        });
+
+        // world parameter
+        it('with an new empty worldParameter - (test case id: 0ec768b4-6c6e-4a2c-ab93-3ed8edc7c263)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                    }
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        worldParameters: "",
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                    }
+                }
+            };
+            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            expect(actual).toEqual(expected);
+        });
+
+        it('with an new worldParameter attribute - (test case id: 0453934a-b4d9-43e6-bcd6-c2671c9352ba)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        worldParameters: {
+                            proxy: "testproxy"
+                        }
+                    }
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        worldParameters: {
+                            attribute: "testattribute"
+                        },
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        worldParameters: {
+                            proxy: "testproxy",
+                            attribute: "testattribute"
+                        }
+                    }
+                }
+            };
+            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            expect(actual).toEqual(expected);
+        });
+
+        it('with an new empty worldParameter - (test case id: c58a57c0-14bb-4bc5-ad93-6d06e64bc913)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        worldParameters: {
+                            proxy: "testproxy"
+                        }
+                    }
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        worldParameters: {
+                        },
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        worldParameters: {
+                            proxy: "testproxy",
+                        }
+                    }
+                }
+            };
+            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            expect(actual).toEqual(expected);
+        });
+
+        it('with an new string worldParameter - (test case id: f7640175-e0da-441f-b294-77e06aebb024)', () => {
+            const config: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        worldParameters: {
+                            proxy: "testproxy"
+                        }
+                    }
+                }
+            };
+
+            const fn = {
+                testFramework: {
+                    cucumberOptions: {
+                        worldParameters: "worldParameters",
+                    }
+                }
+            };
+
+            const expected: TheklaConfig = {
+                testFramework: {
+                    frameworkName: "cucumber",
+                    cucumberOptions: {
+                        worldParameters: {
+                            proxy: "testproxy",
+                        }
+                    }
+                }
+            };
+
+            try {
+                processor.mergeTestframeworkOptions(fn.testFramework,config);
+                expect(false).toBeTruthy('processor.mergeTestframeworkOptions should throw an Error, but it doesnt.');
+            } catch (e) {
+                expect(e.toString()).toContain("Can't parse the World Parameter worldParameters");
+                expect(e.name).toEqual("Error");
+            }
         });
     });
 });
