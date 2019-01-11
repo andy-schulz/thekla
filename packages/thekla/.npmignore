@@ -1,3 +1,4 @@
+.circleci
 .idea
 app/
 dist/test/
