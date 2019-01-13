@@ -33,6 +33,6 @@
     "jasmine": "^3.3.1",
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
-    "thekla-core": "^1.0.2"
+    "thekla-core": "^1.0.3"
   }
 }
