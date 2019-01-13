@@ -2,8 +2,7 @@
 import * as minimist from "minimist";
 import {Command}     from "../lib/command";
 import {Thekla}      from "../lib/thekla";
-import {configure, getLogger} from "log4js";
-configure(`config/log4js/log4js.json`);
+import {getLogger} from "log4js";
 
 const logger = getLogger();
 const args: minimist.ParsedArgs = require('minimist')(process.argv.slice(2));
