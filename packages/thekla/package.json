@@ -29,6 +29,7 @@
     "@types/jasmine": "^2.8.14",
     "@types/minimist": "^1.2.0",
     "@types/node": "^10.12.18",
+    "chalk": "^2.4.2",
     "cucumber": "^5.1.0",
     "del-cli": "^1.1.0",
     "fs-extra": "^7.0.1",
@@ -37,5 +38,9 @@
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
     "thekla-core": "^1.0.3"
+  },
+  "devDependencies": {
+    "@rauschma/stringio": "^1.4.0",
+    "capture-console": "^1.0.1"
   }
 }

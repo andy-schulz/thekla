@@ -1,17 +1,18 @@
-import * as minimist                 from "minimist";
-import * as path                     from "path";
-import * as fs                       from "fs";
-import {helpText}                    from "./commands/help";
-import {versionText}                 from "./commands/version";
-import {TestFramework, TheklaConfig} from "./config/TheklaConfig";
-import {TheklaConfigProcessor}       from "./config/TheklaConfigProcessor";
-import {Thekla}                      from "./thekla";
-import {getLogger, Logger}           from "@log4js-node/log4js-api";
+import * as minimist           from "minimist";
+import * as path               from "path";
+import * as fs                 from "fs";
+import {helpText}              from "./commands/help";
+import {versionText}           from "./commands/version";
+import {TheklaConfig}          from "./config/TheklaConfig";
+import {TheklaConfigProcessor} from "./config/TheklaConfigProcessor";
+import {Thekla}                from "./thekla";
+import {getLogger, Logger}     from "@log4js-node/log4js-api";
 
 
 export class Command {
-    private configFile: string = "";
-    private logger: Logger = getLogger("Command");
+    private readonly helpTextPrinted: boolean = false;
+    private readonly configFile: string = "";
+    private readonly logger: Logger = getLogger("Command");
 
     constructor(
         private thekla: Thekla,
@@ -32,18 +33,22 @@ export class Command {
         switch (command) {
             case 'version':
                 versionText();
+                this.helpTextPrinted = true;
                 break;
 
             case 'help':
                 helpText(args);
+                this.helpTextPrinted = true;
                 break;
 
             default:
                 this.configFile = `${path.resolve()}/${command}`;
                 if (!fs.existsSync(this.configFile)) {
+                    helpText(args);
+                    this.helpTextPrinted = true;
                     const message = `No Configuration file found at location ${this.configFile}`;
                     this.logger.error(message);
-                    throw Error(message);
+                    throw new Error(message);
                 }
                 break;
         }
@@ -84,6 +89,8 @@ export class Command {
      * start spec execution with jasmine
      */
     run(): Promise<any> {
+        if(this.helpTextPrinted) return Promise.resolve();
+
         return this.loadConfigFile(this.configFile)
             .then((config: TheklaConfig) => this.mergeCommandLineArgsIntoConfig(this.args, config))
             .then((config: TheklaConfig) => this.thekla.run(config));

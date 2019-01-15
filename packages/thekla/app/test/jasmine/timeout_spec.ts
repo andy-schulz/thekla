@@ -10,7 +10,7 @@ import {
 }                     from "../data/testFiles";
 
 
-import {TheklaTestData} from './client';
+import {TheklaTestData} from '../data/client';
 
 describe('Setting the Timeout', () => {
     let forked: child.ChildProcess;
@@ -20,7 +20,7 @@ describe('Setting the Timeout', () => {
 
 
     beforeEach(() => {
-        forked = child.fork(`${__dirname}/client.js`, [], {stdio: "ignore"});
+        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: "ignore"});
     });
 
     beforeEach(async () => {

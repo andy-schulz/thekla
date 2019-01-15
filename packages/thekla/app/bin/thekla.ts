@@ -9,9 +9,10 @@ const args: minimist.ParsedArgs = require('minimist')(process.argv.slice(2));
 
 const thekla = new Thekla();
 const command = new Command(thekla, args);
-command.run().then(() => {
-    logger.info("THEKLA DONE")
-});
-
-
-
+command.run()
+    .then(() => {
+        logger.info("THEKLA DONE")
+    })
+    .catch((e) => {
+        process.exit(1);
+    });

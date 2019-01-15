@@ -1,6 +1,6 @@
-import {Command}                                        from "../../lib/command";
-import {Thekla}                                         from "../../lib/thekla";
-import * as minimist                                    from "minimist";
+import {Command}     from "../../lib/command";
+import {Thekla}      from "../../lib/thekla";
+import * as minimist from "minimist";
 
 export interface TheklaTestData {
     args: minimist.ParsedArgs;

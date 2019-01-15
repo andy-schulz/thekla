@@ -1,7 +1,7 @@
-import * as child               from "child_process";
-import fsExtra                  from "fs-extra";
-import * as minimist            from "minimist";
-import {TheklaTestData}         from "./client";
+import * as child       from "child_process";
+import fsExtra          from "fs-extra";
+import * as minimist    from "minimist";
+import {TheklaTestData} from "../data/client";
 
 const cwd = process.cwd();
 
@@ -61,7 +61,7 @@ describe('Passing spec files', () => {
     });
 
     beforeEach(() => {
-        forked = child.fork(`${__dirname}/client.js`, [], {stdio: "ignore"});
+        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: "ignore"});
     });
 
     describe('by command line',() => {

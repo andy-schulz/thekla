@@ -1,3 +1,4 @@
+import {printHelpText}         from "./commands/help";
 import {TheklaConfig}          from "./config/TheklaConfig";
 import {getLogger}             from "@log4js-node/log4js-api";
 // import {thekla}                from "./globals/globals";
@@ -28,6 +29,10 @@ export class Thekla {
     constructor() {
     }
 
+    private printHelpMessage() {
+
+    };
+
     run(theklaConfig: TheklaConfig): Promise<any> {
         global.thekla = {};
         global.thekla.config = theklaConfig;
@@ -43,17 +48,10 @@ export class Thekla {
             const opts = this.theklaConfig.testFramework.jasmineOptions ? this.theklaConfig.testFramework.jasmineOptions : {};
 
             if(this.theklaConfig.specs === undefined || this.theklaConfig.specs.length === 0) {
-                const message = `
-No Specs found in config file, please specify one as command line parameter or as a config file attribute
-Use:
-    --specs=glob|dir|file
-or
-    config = {
-        specs: [glob|dir|file]
-    }
-            `;
-                this.logger.error(message);
-                return Promise.reject(message);
+                printHelpText("specs");
+
+                this.logger.error(`Help Text for missing spec declaration was printed`);
+                return Promise.reject();
             } else {
                 return new JasmineTestFramework(opts).run(this.theklaConfig.specs);
             }
@@ -61,23 +59,11 @@ or
             const configOpts = this.theklaConfig.testFramework.cucumberOptions ? this.theklaConfig.testFramework.cucumberOptions : {};
 
             if(this.theklaConfig.specs === undefined || this.theklaConfig.specs.length === 0) {
-                const message = `
-No Specs found in config file, please specify one as command line parameter or as a config file attribute
-Use:
-    --specs=glob|dir|file
-or
-    config = {
-        specs: [glob|dir|file]
-    }
-            `;
-                this.logger.error(message);
-                return Promise.reject(message);
+                printHelpText("specs");
+                return Promise.reject();
             } if(this.theklaConfig.specs.length > 1) {
-                const message = `
-Passing multiple features files in an array is not supported yet, please pass in a single string as described in: https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#running-specific-features
-            `;
-                this.logger.error(message);
-                return Promise.reject(message);
+                printHelpText("ccMultipleFeatureFiles");
+                return Promise.reject();
             } else {
                 return new CucumberTestFramework(configOpts).run(this.theklaConfig.specs[0]);
             }
