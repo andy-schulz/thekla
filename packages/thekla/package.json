@@ -24,12 +24,12 @@
   "homepage": "https://github.com/andy-schulz/thekla#readme",
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@types/cucumber": "^4.0.4",
-    "@types/fs-extra": "^5.0.4",
+    "@types/cucumber": "^4.0.5",
+    "@types/fs-extra": "^5.0.5",
     "@types/glob": "^7.1.1",
     "@types/jasmine": "^2.8.16",
     "@types/minimist": "^1.2.0",
-    "@types/node": "^10.12.21",
+    "@types/node": "^10.14.2",
     "chalk": "^2.4.2",
     "cucumber": "^5.1.0",
     "del-cli": "^1.1.0",
@@ -38,7 +38,7 @@
     "jasmine": "^3.3.1",
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
-    "thekla-core": "^1.8.0"
+    "thekla-core": "^1.9.1"
   },
   "devDependencies": {
     "@rauschma/stringio": "^1.4.0",
