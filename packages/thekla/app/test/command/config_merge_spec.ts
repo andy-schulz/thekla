@@ -316,7 +316,7 @@ describe('Merge into TheklaConfig', () => {
                 testFramework: {
                     frameworkName: "cucumber",
                     cucumberOptions: {
-                        tags: ["@original"],
+                        tags: undefined,
                     }
                 }
             };

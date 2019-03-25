@@ -45,11 +45,25 @@ export class TheklaConfigProcessor {
 
 
             const mergeRequire = (req: string | string[] | undefined) => {
+                // remove the require if --require="" was passed as command line
+                if(req === "" && cnfg.testFramework && cnfg.testFramework.cucumberOptions && cnfg.testFramework.cucumberOptions.require) {
+                    this.logger.debug(`--require="" was passed on command line. Removing all support files from config ...`);
+                    cnfg.testFramework.cucumberOptions.require = undefined;
+                    return;
+                }
+
                 if(!req) return;
                 cn.testFramework.cucumberOptions.require = Array.isArray(req) ? req : [req];
             };
 
             const mergeTags = (tags: string | string[] | undefined) => {
+                // remove the tags if --tags="" was passed as command line
+                if(tags === "" && cnfg.testFramework && cnfg.testFramework.cucumberOptions && cnfg.testFramework.cucumberOptions.tags) {
+                    this.logger.debug(`--tags="" was passed on command line. Removing all tags from config ...`);
+                    cnfg.testFramework.cucumberOptions.tags = undefined;
+                    return;
+                }
+
                 if(!tags) return;
                 cn.testFramework.cucumberOptions.tags = Array.isArray(tags) ? tags : [tags];
             };

@@ -6,7 +6,7 @@ export  const simpleFeatureTestFileContent =
 
 Test the feature Files
 
-    @Simple @Cucumber
+    @Simple @Cucumber @Focus
     Scenario: Simple Search
         Given I search
         When I type it in
@@ -102,11 +102,10 @@ export const baseAbsoluteJasmineTestDir = `${cwd}/${baseRelativeJasmineTestDir}`
 export const getDynamicTestDir = (type: "cucumber" | "jasmine" = "cucumber") => {
   const date = new Date().getTime();
 
-
   if(type === "cucumber") {
-      return {absolute: `${baseAbsoluteCucumberTestDir}/${date}/`, relative: `${baseRelativeCucumberTestDir}/${date}/`};
+      return {timeStampDir: `${date}`, absolute: `${baseAbsoluteCucumberTestDir}/${date}/`, relative: `${baseRelativeCucumberTestDir}/${date}/`};
   } else {
-      return {absolute: `${baseAbsoluteJasmineTestDir}/${date}/`, relative: `${baseRelativeJasmineTestDir}/${date}/`};
+      return {timeStampDir: `${date}`, absolute: `${baseAbsoluteJasmineTestDir}/${date}/`, relative: `${baseRelativeJasmineTestDir}/${date}/`};
   }
 };
 
@@ -164,6 +163,7 @@ export const createJasmineTestFiles = async function(name: string, path: string,
 };
 
 export interface CucumberTestFileResult {
+    timeStampDir: string;
     baseDir: string;
     featureFilePath: string;
     relativeFeatureFilePath: string;
@@ -186,6 +186,7 @@ export const createCucumberTestFiles = async (
     fileTypes.set("worldParameter", ["simple", "worldParameter"]);
 
     const result: CucumberTestFileResult = {
+        timeStampDir: ``,
         baseDir: ``,
         featureFilePath: ``,
         relativeFeatureFilePath: ``,
@@ -195,6 +196,7 @@ export const createCucumberTestFiles = async (
 
     const testPath = getDynamicTestDir();
 
+    result.timeStampDir = testPath.timeStampDir;
     result.baseDir = testPath.absolute;
     const featureFileFullPath = `${testPath.absolute}/${featurePath}/${fileBaseName}${featureFileStdName}`;
     const featureFileRelativePath = `${testPath.relative}/${featurePath}/${fileBaseName}${featureFileStdName}`;

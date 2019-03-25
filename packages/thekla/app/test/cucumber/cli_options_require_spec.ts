@@ -108,8 +108,6 @@ describe('Specifying support files', () => {
                 "specs": `${file1Result.baseDir}/../`,
             };
 
-            console.log("SPECS: " + args.specs);
-
             const thekla = new Thekla();
             const command = new Command(thekla, args);
             await command.run().then((specResult: any) => {

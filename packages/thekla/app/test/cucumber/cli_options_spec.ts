@@ -1,6 +1,4 @@
 import * as child       from "child_process";
-import * as fs from "fs";
-const {chunksToLinesAsync, chomp} = require('@rauschma/stringio');
 
 
 import fsExtra          from 'fs-extra'
