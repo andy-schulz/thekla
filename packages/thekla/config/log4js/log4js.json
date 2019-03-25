@@ -18,6 +18,6 @@
   "categories": {
     "default": {
       "appenders": ["output"],
-      "level": "DEBUG" }
+      "level": "WARN" }
   }
 }
