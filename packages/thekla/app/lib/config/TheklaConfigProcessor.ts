@@ -1,7 +1,7 @@
 import {CucumberOptions, TheklaConfig, JasmineOptions} from "./TheklaConfig";
 import merge from "deepmerge";
 
-import {getLogger} from "log4js";
+import {getLogger} from "@log4js-node/log4js-api";
 
 export class TheklaConfigProcessor {
     private logger = getLogger("TheklaConfigProcessor");
