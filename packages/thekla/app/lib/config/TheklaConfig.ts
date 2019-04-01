@@ -1,13 +1,14 @@
-import {SeleniumConfig, RestConfig} from "thekla-core";
+import {SeleniumConfig, RestConfig, DesiredCapabilities} from "thekla-core";
 
 
 export interface TheklaConfig {
     // index signature is used for
-    [key: string]: any;
+    // [key: string]: any;
 
     specs?: string[];
 
     seleniumConfig?: SeleniumConfig;
+    capabilities?: DesiredCapabilities[];
     restConfig?: RestConfig;
     params?: {
         [key: string]: any
