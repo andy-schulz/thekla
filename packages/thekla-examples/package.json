@@ -1,0 +1,28 @@
+{
+  "name": "01_quick_start_guide",
+  "version": "1.0.0",
+  "description": "guide on how to use thekla, a screenplay implementation",
+  "main": "index.js",
+  "scripts": {
+    "pretest": "tsc",
+    "quickStart": "npm run pretest && node_modules/.bin/thekla dist/01_Quick_Start_Guide/thekla_conf.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andy-schulz/thekla-examples.git"
+  },
+  "keywords": [
+    "thekla",
+    "screenplay",
+    "examples"
+  ],
+  "author": "Andy Schulz",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/andy-schulz/thekla-examples/issues"
+  },
+  "homepage": "https://github.com/andy-schulz/thekla-examples#readme",
+  "dependencies": {
+    "thekla": "^1.12.2"
+  }
+}

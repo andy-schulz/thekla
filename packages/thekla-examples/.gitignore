@@ -1,0 +1,8 @@
+# IDE ignores
+.idea
+
+# node ignores
+node_modules
+
+# typescript ignores
+dist
