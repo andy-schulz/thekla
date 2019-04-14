@@ -103,7 +103,7 @@ import {TheklaConfig} from "thekla"
 
 export const config: TheklaConfig = {
 
-    specs: ["dist/01_Quick_Start_Guide/google_search_spec.js"],
+    specs: ["dist/google_search_spec.js"],
 
     seleniumConfig: {
         seleniumServerAddress: "http://localhost:4444/wd/hub"
@@ -124,23 +124,22 @@ export const config: TheklaConfig = {
 
 ## Tell Typescript on how to transpile the code
 
-Create a file 
+Create the file ``tsconfig.json`` in the root directory of your project.
 
 ````json
 {
   "compilerOptions": {
-        "target": "ES2016"                          /* Specify ECMAScript target version: 'ES3' (default), 'ES5', 'ES2015', 'ES2016', 'ES2017','ES2018' or 'ESNEXT'. */
-        ,"module": "commonjs"                       /* Specify module code generation: 'none', 'commonjs', 'amd', 'system', 'umd', 'es2015', or 'ESNext'. */
-        ,"sourceMap": true                          /* Generates corresponding '.map' file. */
-        ,"outDir": "dist"                           /* Redirect output structure to the directory. */
-        ,"rootDir": "test"                           /* Specify the root directory of input files. Use to control the output directory structure with --outDir. */
-        ,"strict": true                             /* Enable all strict type-checking options. */
-        ,"noImplicitAny": true                      /* Raise error on expressions and declarations with an implied 'any' type. */
-        ,"inlineSources": true                      /* Emit the source alongside the sourcemaps within a single file; requires '--inlineSourceMap' or '--sourceMap' to be set. */
+        "target": "ES2016"
+        ,"module": "commonjs"
+        ,"sourceMap": true
+        ,"outDir": "dist"
+        ,"rootDir": "test"
+        ,"strict": true
+        ,"noImplicitAny": true
+        ,"inlineSources": true
   }
 }
 ````
-Create a ``tsconfig.json`` 
 
 ## Add the test scripts to package.json
 
