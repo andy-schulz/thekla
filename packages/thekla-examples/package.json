@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "pretest": "tsc",
-    "quickStart": "npm run pretest && node_modules/.bin/thekla dist/01_Quick_Start_Guide/thekla_conf.js"
+    "01_Quick_Start_Guide": "npm run pretest && node_modules/.bin/thekla dist/01_Quick_Start_Guide/thekla_conf.js"
   },
   "repository": {
     "type": "git",
