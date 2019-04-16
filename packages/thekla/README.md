@@ -62,9 +62,7 @@ describe('Search on Google with thekla', function () {
     it('should return a value', async function () {
 
         // create a browser with the configuration from thekla_conf.ts
-        // the browser is created async right away, 
-        // this will change in future versions, then it will created upon first use
-        const aBrowser = await RunningBrowser
+        const aBrowser = RunningBrowser
             .startedOn(thekla.config.seleniumConfig as SeleniumConfig)
             .withDesiredCapability((thekla.config.capabilities as DesiredCapabilities[])[0]);
 
@@ -103,7 +101,7 @@ describe('Search on Google with thekla', function () {
 
     afterAll(() => {
         // cleanup all created browser when you are done
-        RunningBrowser.cleanup()
+        return RunningBrowser.cleanup()
     });
 });
 ````
