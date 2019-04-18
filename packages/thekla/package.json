@@ -38,7 +38,7 @@
     "jasmine": "^3.4.0",
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
-    "thekla-core": "^1.13.1"
+    "thekla-core": "^1.13.2"
   },
   "devDependencies": {
     "@rauschma/stringio": "^1.4.0",
