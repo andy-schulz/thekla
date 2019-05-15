@@ -168,19 +168,11 @@ Create the file ``tsconfig.json`` in the root directory of your project.
 npm test
 ````
 
-# Further Usage Information
+# Further Information
 
-!! TODO update documentation !!
-* Working elements
-  * Basics of element chaining
-  * Use separate locator strategies to find elements
-  * [How to work with Frames](docs/creating_elements/WORKING_WITH_FRAMES.md)
-  * How to wait for an elements appearance
-  * Give an element a name
-* Use the screenplay pattern to write your tests
-  * Basics of the screenplay pattern
-  * Use Jasmine or CucumberJS as a test framework
-  * How to use an Actor and assign a capability
+* [Web Test](docs/md/create_web_ui_tests/README.md) 
+* [Rest API tests](docs/md/create_rest_api_tests/README.md)
+
 
 ## Detailed Information about the Screenplay Pattern 
 If you want to know more about the screenplay pattern, check out the following resources:
