@@ -1,13 +1,13 @@
 # Locate Elements
 
 ## Table of Content
-1. [Using the basic](#using-the-basic) 
+1. [The Basics](#the-basics) 
 1. [Chain elements](#chain-elements)
-1. [Working with frames](working-with-frames)
-1. [Give your element a name](give-your-element-a-name)
+1. [Working with frames](#working-with-frames)
+1. [Give your element a name](#give-your-element-a-name)
 1. [Waiting for elements](#waiting-for-elements)
 
-## Using the basic 
+## The Basics 
 
 To locate an element you can use the build in css selector as follows:
 
