@@ -1,6 +1,7 @@
 import {configure}             from "log4js";
 import {TheklaConfig}          from "../../lib/config/TheklaConfig";
 import {TheklaConfigProcessor} from "../../lib/config/TheklaConfigProcessor";
+
 configure({
     appenders: { output: {"type": "stdout"}},
     categories: {   default: { appenders: ['output'], level: 'error' },
@@ -557,17 +558,6 @@ describe('Merge into TheklaConfig', () => {
                 testFramework: {
                     cucumberOptions: {
                         worldParameters: "worldParameters",
-                    }
-                }
-            };
-
-            const expected: TheklaConfig = {
-                testFramework: {
-                    frameworkName: "cucumber",
-                    cucumberOptions: {
-                        worldParameters: {
-                            proxy: "testproxy",
-                        }
                     }
                 }
             };

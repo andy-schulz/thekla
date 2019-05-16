@@ -134,25 +134,6 @@ export const config: TheklaConfig = {
 };
 ````
 
-## Tell Typescript on how to transpile the code
-
-Create the file ``tsconfig.json`` in the root directory of your project.
-
-````json
-{
-  "compilerOptions": {
-        "target": "ES2016"
-        ,"module": "commonjs"
-        ,"sourceMap": true
-        ,"outDir": "dist"
-        ,"rootDir": "test"
-        ,"strict": true
-        ,"noImplicitAny": true
-        ,"inlineSources": true
-  }
-}
-````
-
 ## Add the test scripts to package.json
 
 ````json
@@ -168,13 +149,14 @@ Create the file ``tsconfig.json`` in the root directory of your project.
 npm test
 ````
 
-# Further Information
+# Detailed Information
 
 * [Web Test](docs/md/create_web_ui_tests/README.md) 
 * [Rest API tests](docs/md/create_rest_api_tests/README.md)
+* [Configure your tests](docs/md/configure_thekla/README.md)
 
 
-## Detailed Information about the Screenplay Pattern 
+# Detailed Information about the Screenplay Pattern 
 If you want to know more about the screenplay pattern, check out the following resources:
 * [Presentation given by Antony Marcano (SeleniumConf 2016)](https://www.youtube.com/watch?v=8f8tdZBvAbI)
   * Gives you short an precise overview what the screenplay pattern really is

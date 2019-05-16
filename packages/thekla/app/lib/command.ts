@@ -81,6 +81,7 @@ export class Command {
 
         config = processor.mergeSpecs(args.specs, config);
         config = processor.mergeTestframeworkOptions(args.testFramework, config);
+        config = processor.mergeRestConfigOptions(args.restConfig, config);
 
         return Promise.resolve(config);
     }

@@ -5,7 +5,7 @@ export {TheklaConfig} from "./lib/config/TheklaConfig";
  *  exports from thekla-core
  */
 
-export {SeleniumConfig, RestConfig, DesiredCapabilities} from "thekla-core"
+export {SeleniumConfig, RestApiConfig, DesiredCapabilities} from "thekla-core";
 
 
 /**
@@ -35,9 +35,9 @@ export {Post}                                                        from "thekl
 export {Delete}                                                      from "thekla-core";
 export {Send}                                                        from "thekla-core";
 
-export {On}                                                          from "thekla-core"
-export {Method}                                                      from "thekla-core"
-export {RestApiFactory}                                              from "thekla-core"
+export {On}                                                          from "thekla-core";
+export {Method}                                                      from "thekla-core";
+export {RestClient}                                                  from "thekla-core";
 
 /**
  * screenplay Elements
@@ -52,7 +52,7 @@ export {request, SppRestRequest}                                     from "thekl
 export {Ability}                                                from "thekla-core";
 export {BrowseTheWeb}                                           from "thekla-core";
 export {Authenticate, AuthenticationInfo}                       from "thekla-core";
-export {UseTheRestApi, RestAbilityOptions}                      from "thekla-core";
+export {UseTheRestApi}                                          from "thekla-core";
 
 // Tasks
 export {PerformsTask} from "thekla-core";
@@ -80,10 +80,10 @@ export {Status}                               from "thekla-core";
 export {Response}                             from "thekla-core";
 
 // Custom Errors
-export {NoSuchAbilityError} from "thekla-core";
+export {DoesNotHave, DidNotFind} from "thekla-core";
 
 //Function Matcher
-export {Expected} from "thekla-core"
+export {Expected} from "thekla-core";
 
 // Decorators
-export {stepDetails, step} from "thekla-core"
+export {stepDetails, step} from "thekla-core";
