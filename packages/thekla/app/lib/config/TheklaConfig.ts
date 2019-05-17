@@ -1,4 +1,4 @@
-import {SeleniumConfig, DesiredCapabilities, RestApiConfig} from "thekla-core";
+import {SeleniumConfig, DesiredCapabilities, RestClientConfig} from "thekla-core";
 
 
 export interface TheklaConfig {
@@ -9,7 +9,7 @@ export interface TheklaConfig {
 
     seleniumConfig?: SeleniumConfig;
     capabilities?: DesiredCapabilities[];
-    restConfig?: RestApiConfig;
+    restConfig?: RestClientConfig;
     params?: {
         [key: string]: any
     };

@@ -5,7 +5,7 @@ export {TheklaConfig} from "./lib/config/TheklaConfig";
  *  exports from thekla-core
  */
 
-export {SeleniumConfig, RestApiConfig, DesiredCapabilities} from "thekla-core";
+export {SeleniumConfig, RestClientConfig, DesiredCapabilities} from "thekla-core";
 
 
 /**
@@ -37,7 +37,7 @@ export {Send}                                                        from "thekl
 
 export {On}                                                          from "thekla-core";
 export {Method}                                                      from "thekla-core";
-export {RestClient}                                                  from "thekla-core";
+export {ExecutingRestClient}                                         from "thekla-core";
 
 /**
  * screenplay Elements

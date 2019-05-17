@@ -1,5 +1,5 @@
 import {RequestPromiseOptions}                         from "request-promise-native";
-import {RestApiConfig}                                 from "thekla-core";
+import {RestClientConfig}                              from "thekla-core";
 import {CucumberOptions, TheklaConfig, JasmineOptions} from "./TheklaConfig";
 import merge                                           from "deepmerge";
 
@@ -37,7 +37,7 @@ export class TheklaConfigProcessor {
                 cn.testFramework = {};
                 cn.testFramework.frameworkName = name;
             }
-            return  <TheklaConfig>merge(cnfg,cn);
+            return  merge(cnfg,cn) as TheklaConfig;
         });
 
         const mergeCucumberOptions = curry((ccOpts: CucumberOptions | undefined, cnfg: TheklaConfig): TheklaConfig => {
@@ -97,7 +97,7 @@ export class TheklaConfigProcessor {
         // return conf;
     }
 
-    public mergeRestConfigOptions(restConfig: RestApiConfig | undefined, config: TheklaConfig): TheklaConfig {
+    public mergeRestConfigOptions(restConfig: RestClientConfig | undefined, config: TheklaConfig): TheklaConfig {
         if(!restConfig) return config;
 
         if(!config.restConfig)
@@ -109,7 +109,7 @@ export class TheklaConfigProcessor {
             const conf = config;
 
             if(restClientName === "request")
-                (conf.restConfig as RestApiConfig).restClient = "request";
+                (conf.restConfig as RestClientConfig).restClient = "request";
             else
                 throw new Error(`Dont know rest client ${restClientName}. Only nodjs request client is implemented. `);
 
@@ -124,14 +124,14 @@ export class TheklaConfigProcessor {
 
             let m: RequestPromiseOptions;
 
-            if(!(conf.restConfig as RestApiConfig).restClientOptions) {
-                (conf.restConfig as RestApiConfig).restClientOptions = {};
+            if(!(conf.restConfig as RestClientConfig).restClientOptions) {
+                (conf.restConfig as RestClientConfig).restClientOptions = {};
             }
-            m = (conf.restConfig as RestApiConfig).restClientOptions as RequestPromiseOptions;
+            m = (conf.restConfig as RestClientConfig).restClientOptions as RequestPromiseOptions;
 
             const mergedOpts = merge(m, restClientOptions);
 
-            (conf.restConfig as RestApiConfig).restClientOptions = mergedOpts;
+            (conf.restConfig as RestClientConfig).restClientOptions = mergedOpts;
 
             return conf
         });

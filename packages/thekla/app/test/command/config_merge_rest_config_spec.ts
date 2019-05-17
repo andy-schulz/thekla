@@ -1,5 +1,5 @@
 import {configure}             from "log4js";
-import {RestApiConfig}         from "thekla-core";
+import {RestClientConfig}      from "thekla-core";
 import {TheklaConfig}          from "../../lib/config/TheklaConfig";
 import {TheklaConfigProcessor} from "../../lib/config/TheklaConfigProcessor";
 
@@ -22,7 +22,7 @@ describe('Passing the rest config', () => {
 
             };
 
-            const fn: RestApiConfig = {
+            const fn: RestClientConfig = {
                     restClient: "request"
             };
 
