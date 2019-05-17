@@ -2,6 +2,23 @@
 
 ## Table of Content
 
+* [Create an Actor with the ability to use a Rest API](#create-an-actor-with-the-ability-to-use-a-rest-api)
+    * [Create the actor](#create-the-actor)
+    * [Create a configuration](#create-a-configuration)
+    * [Create the rest client](#create-the-rest-client)
+    * [Assign the UseTheRestApi ability to the actor](#assign-the-usetherestapi-ability-to-the-actor)
+* [Create a request](#create-a-request)
+    * [A Simple Request](#a-simple-request)
+    * [A parameterized Request](#a-parameterized-request)
+    * [attach request options to your request declaration](#attach-request-options-to-your-request-declaration)
+* [Send a request](#send-a-request)
+    * [GET](#get)
+    * [POST](#post)
+    * [DELETE](#delete)
+    * [The general SEND function](#the-general-send-function)
+* [Check the Requests result](#check-the-requests-result)
+
+
 ## Create an Actor with the ability to use a Rest API
 
 ### Create the actor
