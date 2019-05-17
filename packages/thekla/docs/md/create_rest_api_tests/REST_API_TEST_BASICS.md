@@ -126,17 +126,17 @@ See the [Rest Configuration](REST_CLIENT_CONFIGURATION.md) Chapter on how config
 Configuring a request is possible on three different places:
 
 1. When you assign the ``UseTheRestApi`` ability to you actor
-    2. ``actor.can(UseTheRestApi.using(MY_CLIENT_CONFIG_1))``
-    2. here you can specify the base url or the proxy
-    2. see chapter on using the [UseTheRestApi](#create-an-actor-with-the-ability-to-use-a-rest-api) ability
+    1. ``actor.can(UseTheRestApi.using(MY_CLIENT_CONFIG_1))``
+    1. here you can specify the base url or the proxy
+    1. see chapter on using the [UseTheRestApi](#create-an-actor-with-the-ability-to-use-a-rest-api) ability
 1. On the ``request(...)`` itself 
-    2. ``const req = request(On.resource("myResource")).using(MY_CLIENT_CONFIG_2)``
-    2. here you can add options which are common to to all request methods, like header info or authentication info
-    2. see [above](#attach-request-options-to-your-request-declaration) for details
+    1. ``const req = request(On.resource("myResource")).using(MY_CLIENT_CONFIG_2)``
+    1. here you can add options which are common to to all request methods, like header info or authentication info
+    1. see [above](#attach-request-options-to-your-request-declaration) for details
 1. When you actually send the request
-    2. ``john.attemptsTo(Get.from(req)).withConfig(MY_CLIENT_CONFIG_3)``
-    2. when sending a resource you can e.g. pass the body of a POST request
-    2. See [Send a request](#send-a-request) for more details
+    1. ``john.attemptsTo(Get.from(req)).withConfig(MY_CLIENT_CONFIG_3)``
+    1. when sending a resource you can e.g. pass the body of a POST request
+    1. See [Send a request](#send-a-request) for more details
     
 All three configurations are merged before sending the request. This way you can give only the relevant information
 when you build up your tests.
