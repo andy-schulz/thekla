@@ -9,7 +9,8 @@ Firefox and Chrome.
 
 # Quick Start Guide
 
-Examples using thekla can be found in the [Thekla Examples](https://github.com/andy-schulz/thekla-examples) repository
+The fastest way to get started is by downloading the 
+[Thekla Examples](https://github.com/andy-schulz/thekla-examples) repository
 
 ## Preparation
 
@@ -130,16 +131,41 @@ export const config: TheklaConfig = {
 };
 ````
 
+## Tell Typescript how to transpile the code
+
+Create the file ``tsconfig.json`` in the root directory of your project.
+
+````json
+{
+  "compilerOptions": {
+        "target": "ES2016"
+        ,"module": "commonjs"
+        ,"sourceMap": true
+        ,"outDir": "dist"
+        ,"rootDir": "test"
+        ,"strict": true
+        ,"noImplicitAny": true
+        ,"inlineSources": true
+  }
+}
+````
+
 ## Add the test scripts to package.json
 
 ````json
 {
   "scripts": {
-    "pretest": "tsc",
+    "pretest": "npm install & tsc",
     "test": "node_modules/.bin/thekla dist/thekla_conf.js"
   }
 }
 ````
+
+## install the packages
+
+```bash
+npm install thekla --save
+```
 
 ## Start the tests
 
