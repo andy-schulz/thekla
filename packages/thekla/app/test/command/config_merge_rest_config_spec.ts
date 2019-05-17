@@ -23,7 +23,7 @@ describe('Passing the rest config', () => {
             };
 
             const fn: RestClientConfig = {
-                    restClient: "request"
+                    restClientName: "request"
             };
 
             const expected: TheklaConfig = {
@@ -31,7 +31,7 @@ describe('Passing the rest config', () => {
                     frameworkName: "jasmine"
                 },
                 restConfig: {
-                    restClient: "request"
+                    restClientName: "request"
                 }
             };
 
@@ -45,12 +45,12 @@ describe('Passing the rest config', () => {
                     frameworkName: "jasmine",
                 },
                 restConfig: {
-                    restClient: "request"
+                    restClientName: "request"
                 }
             };
 
             const fn = {
-                restClient: undefined
+                restClientName: undefined
             };
 
             const expected: TheklaConfig = {
@@ -58,7 +58,7 @@ describe('Passing the rest config', () => {
                     frameworkName: "jasmine"
                 },
                 restConfig: {
-                    restClient: "request"
+                    restClientName: "request"
                 }
             };
 
@@ -77,7 +77,7 @@ describe('Passing the rest config', () => {
             };
 
             const fn = {
-                restClientOptions: {
+                requestOptions: {
                     body: {
                         test: "myElement"
                     }
@@ -89,7 +89,7 @@ describe('Passing the rest config', () => {
                     frameworkName: "jasmine"
                 },
                 restConfig: {
-                    restClientOptions: {
+                    requestOptions: {
                         body: {
                             test: "myElement"
                         }
@@ -108,8 +108,8 @@ describe('Passing the rest config', () => {
                     frameworkName: "jasmine"
                 },
                 restConfig: {
-                    restClient: "request",
-                    restClientOptions: {
+                    restClientName: "request",
+                    requestOptions: {
                         proxy: "mzProxy"
                     }
                 },
@@ -117,7 +117,7 @@ describe('Passing the rest config', () => {
             };
 
             const fn = {
-                restClientOptions: {
+                requestOptions: {
                     proxy: "mzProxy2"
                 }
             };
@@ -127,8 +127,8 @@ describe('Passing the rest config', () => {
                     frameworkName: "jasmine"
                 },
                 restConfig: {
-                    restClient: "request",
-                    restClientOptions: {
+                    restClientName: "request",
+                    requestOptions: {
                         proxy: "mzProxy2"
                     }
                 },

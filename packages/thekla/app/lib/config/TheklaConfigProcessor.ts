@@ -109,7 +109,7 @@ export class TheklaConfigProcessor {
             const conf = config;
 
             if(restClientName === "request")
-                (conf.restConfig as RestClientConfig).restClient = "request";
+                (conf.restConfig as RestClientConfig).restClientName = "request";
             else
                 throw new Error(`Dont know rest client ${restClientName}. Only nodjs request client is implemented. `);
 
@@ -124,21 +124,21 @@ export class TheklaConfigProcessor {
 
             let m: RequestPromiseOptions;
 
-            if(!(conf.restConfig as RestClientConfig).restClientOptions) {
-                (conf.restConfig as RestClientConfig).restClientOptions = {};
+            if(!(conf.restConfig as RestClientConfig).requestOptions) {
+                (conf.restConfig as RestClientConfig).requestOptions = {};
             }
-            m = (conf.restConfig as RestClientConfig).restClientOptions as RequestPromiseOptions;
+            m = (conf.restConfig as RestClientConfig).requestOptions as RequestPromiseOptions;
 
             const mergedOpts = merge(m, restClientOptions);
 
-            (conf.restConfig as RestClientConfig).restClientOptions = mergedOpts;
+            (conf.restConfig as RestClientConfig).requestOptions = mergedOpts;
 
             return conf
         });
 
         return flow(
-            setRestClient(restConfig.restClient),
-            mergeRestClientOptions(restConfig.restClientOptions)
+            setRestClient(restConfig.restClientName),
+            mergeRestClientOptions(restConfig.requestOptions)
         )(config);
 
         // const conf1 = setRestClient(restConfig.restClient, config);
