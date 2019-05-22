@@ -60,6 +60,7 @@ export {PerformsTask} from "thekla-core";
 // Activities
 export {Activity, Task, Interaction}     from "thekla-core";
 export {Click}                           from "thekla-core";
+export {Hover}                           from "thekla-core";
 export {Enter}                           from "thekla-core";
 export {Navigate}                        from "thekla-core";
 export {Wait}                            from "thekla-core";
