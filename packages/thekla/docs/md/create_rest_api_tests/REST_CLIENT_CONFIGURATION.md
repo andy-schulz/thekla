@@ -24,14 +24,14 @@ export interface RestClientConfig {
 }
 ```
 
-The `restClientName` is meant to specify which client implementation to take. As of yet I just implemented implemented
+The `restClientName` is meant to specify which client implementation to take. As of yet I just implemented
 the nodejs 'request' module, so specify it like seen above. 
 
 To configure the client and the requests the `requestOptions` will be used. 
 
 ## Useful request Options in detail
 
-I will just 
+I will only document four of the available options.
 
 Check out the [Full List of request options]() for more details, or consult the the 
 [nodejs request module](https://github.com/request/request) on GitHub.
