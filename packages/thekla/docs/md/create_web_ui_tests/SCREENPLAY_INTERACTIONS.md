@@ -87,7 +87,7 @@ Josh.attemptsTo(
 
 ### HOVER over an element
 
-To hover 
+To hover over an element the interaction ``Hover`` can be used by passing the element with the 
 
 ```typescript
 Josh.attemptsTo(
@@ -110,14 +110,19 @@ Josh.attemptsTo(
 
 ### SLEEP for an amount of time 
 
-Sleep is a problematic 
+Sleep will pause the interaction execution at the site specified location. Only the execution is paused, the generation of the interaction and task objects is not interrupted it will be finished first.
 
-``
-``
+The amount of time to ``Sleep`` will be specified by using the ``for(...)`` method.
 
+In later versions Sleep will only be used in debug mode, so please be careful when using it.
 
+Example:
 
-
+```typescript
+Josh.attempts to(
+    Sleep.for(5000)
+)
+```
 
 ### Ask a QUESTION
 
