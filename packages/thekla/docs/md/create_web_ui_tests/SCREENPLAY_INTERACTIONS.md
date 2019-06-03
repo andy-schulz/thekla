@@ -9,7 +9,6 @@
     1. [HOVER over an elememt](#hover-over-an-element)
     1. [WAIT for an element](#wait-for-an-element)
     1. [SLEEP for an amount of time](#sleep-for-an-amount-of-time)
-    1. [Ask a QUESTION](#ask-a-question)
 1. [Questions](#questions)
     1. [Get the inner TEXT](#get-the-inner-text)
     1. [get the elements VALUE](#get-the-elements-value)
@@ -108,23 +107,14 @@ Josh.attemptsTo(
 )
 ```
 
-### SLEEP for an amount of time 
 
-Sleep will pause the interaction execution at the site specified location. Only the execution is paused, the generation of the interaction and task objects is not interrupted it will be finished first.
 
-The amount of time to ``Sleep`` will be specified by using the ``for(...)`` method.
 
-In later versions Sleep will only be used in debug mode, so please be careful when using it.
 
-Example:
 
-```typescript
-Josh.attempts to(
-    Sleep.for(5000)
-)
-```
 
-### Ask a QUESTION
+
+
 
 ## Questions
 

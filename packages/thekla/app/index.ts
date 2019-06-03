@@ -55,7 +55,8 @@ export {Authenticate, AuthenticationInfo}                       from "thekla-cor
 export {UseTheRestApi}                                          from "thekla-core";
 
 // Tasks
-export {PerformsTask} from "thekla-core";
+export {PerformsTask}    from "thekla-core";
+export {ReturnTaskValue} from "thekla-core"
 
 // Activities
 export {Activity, Task, Interaction}     from "thekla-core";
@@ -71,14 +72,23 @@ export {Sleep}                           from "thekla-core";
 export {See}     from "thekla-core";
 export {Extract} from "thekla-core";
 
-// Questions
-export {Text}                                 from "thekla-core";
-export {Value}                                from "thekla-core";
-export {Attribute}                            from "thekla-core";
-export {Count}                                from "thekla-core";
-export {TheSites}                             from "thekla-core";
-export {Status}                               from "thekla-core";
-export {Response}                             from "thekla-core";
+
+/**
+ * Questions
+ */
+// the interface
+export {Question}        from "thekla-core";
+// Basic Questions
+export {ReturnedResult}  from "thekla-core";
+// Web Questions
+export {Text}            from "thekla-core";
+export {Value}           from "thekla-core";
+export {Attribute}       from "thekla-core";
+export {Count}           from "thekla-core";
+export {TheSites}        from "thekla-core";
+export {Status}          from "thekla-core";
+// Rest Questions
+export {Response}        from "thekla-core";
 
 // Custom Errors
 export {DoesNotHave, DidNotFind} from "thekla-core";

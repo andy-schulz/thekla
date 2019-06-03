@@ -175,6 +175,7 @@ npm test
 
 # Detailed Information
 
+* [Screnplay Fundamentals](docs/md/SCREENPLAY_FUNDAMENTALS.md) 
 * [Web Test](docs/md/create_web_ui_tests/README.md) 
 * [Rest API tests](docs/md/create_rest_api_tests/README.md)
 * [Configure your tests](docs/md/configure_thekla/README.md)
