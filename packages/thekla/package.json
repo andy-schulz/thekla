@@ -1,6 +1,6 @@
 {
   "name": "thekla",
-  "version": "1.19.2",
+  "version": "1.19.3",
   "description": "cli for thekla-core",
   "main": "dist/index.js",
   "scripts": {
