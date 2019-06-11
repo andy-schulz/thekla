@@ -55,7 +55,7 @@ export {Authenticate, AuthenticationInfo}                       from "thekla-cor
 export {UseTheRestApi}                                          from "thekla-core";
 
 // Tasks
-export {PerformsTask}    from "thekla-core";
+export {PerformsTask}    from "thekla-core/dist/screenplay/Actor";
 export {ReturnTaskValue} from "thekla-core"
 
 // Activities
