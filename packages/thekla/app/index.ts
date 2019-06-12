@@ -65,7 +65,7 @@ export {Hover}                           from "thekla-core/dist/screenplay/web/a
 export {Enter}                           from "thekla-core/dist/screenplay/web/actions/Enter";
 export {Navigate}                        from "thekla-core/dist/screenplay/web/actions/Navigate";
 export {Wait}                            from "thekla-core/dist/screenplay/web/actions/Wait";
-export {Scroll}                          from "thekla-core/dist/screenplay/web/actions/Scroll";
+export {Scroll, Page}                    from "thekla-core/dist/screenplay/web/actions/Scroll";
 export {Sleep}                           from "thekla-core";
 
 
