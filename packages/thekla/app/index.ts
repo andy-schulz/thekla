@@ -59,12 +59,13 @@ export {PerformsTask}    from "thekla-core/dist/screenplay/Actor";
 export {ReturnTaskValue} from "thekla-core"
 
 // Activities
-export {Activity, Task, Interaction}     from "thekla-core";
-export {Click}                           from "thekla-core";
-export {Hover}                           from "thekla-core";
-export {Enter}                           from "thekla-core";
-export {Navigate}                        from "thekla-core";
-export {Wait}                            from "thekla-core";
+export {Activity, Task, Interaction}     from "thekla-core/dist/screenplay/lib/actions/Activities";
+export {Click}                           from "thekla-core/dist/screenplay/web/actions/Click";
+export {Hover}                           from "thekla-core/dist/screenplay/web/actions/Hover";
+export {Enter}                           from "thekla-core/dist/screenplay/web/actions/Enter";
+export {Navigate}                        from "thekla-core/dist/screenplay/web/actions/Navigate";
+export {Wait}                            from "thekla-core/dist/screenplay/web/actions/Wait";
+export {Scroll}                          from "thekla-core/dist/screenplay/web/actions/Scroll";
 export {Sleep}                           from "thekla-core";
 
 
@@ -81,12 +82,12 @@ export {Question}        from "thekla-core";
 // Basic Questions
 export {ReturnedResult}  from "thekla-core";
 // Web Questions
-export {Text}            from "thekla-core";
-export {Value}           from "thekla-core";
-export {Attribute}       from "thekla-core";
-export {Count}           from "thekla-core";
-export {TheSites}        from "thekla-core";
-export {Status}          from "thekla-core";
+export {Text}            from "thekla-core/dist/screenplay/web/questions/Text";
+export {Value}           from "thekla-core/dist/screenplay/web/questions/Value";
+export {Attribute}       from "thekla-core/dist/screenplay/web/questions/Attribute";
+export {Count}           from "thekla-core/dist/screenplay/web/questions/Count";
+export {TheSites}        from "thekla-core/dist/screenplay/web/questions/TheSites";
+export {Status}          from "thekla-core/dist/screenplay/web/questions/Status";
 // Rest Questions
 export {Response}        from "thekla-core";
 
