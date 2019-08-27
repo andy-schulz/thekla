@@ -5,7 +5,7 @@ export {TheklaConfig} from "./lib/config/TheklaConfig";
  *  exports from thekla-core
  */
 
-export {SeleniumConfig, RestClientConfig, DesiredCapabilities} from "thekla-core";
+export {ServerConfig, RestClientConfig, DesiredCapabilities} from "thekla-core";
 
 
 /**
@@ -17,7 +17,7 @@ export {BrowserScreenshotData}            from "thekla-core";
 export {WebElementFinder}                 from "thekla-core";
 
 export {RunningBrowser} from "thekla-core";
-export {BrowserHelper}  from "thekla-core";
+export {ClientHelper}  from "thekla-core";
 export {By}             from "thekla-core";
 export {Key}            from "thekla-core";
 export {until}          from "thekla-core";
