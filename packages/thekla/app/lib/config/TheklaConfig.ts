@@ -7,9 +7,9 @@ export interface TheklaConfig {
 
     specs?: string[];
 
-    serverConfig?: ServerConfig;
-    capabilities?: DesiredCapabilities[];
-    restConfig?: RestClientConfig;
+    serverConfig?: ServerConfigSet;
+    capabilities?: CapabilitiesConfigSet;
+    restConfig?: RestClientConfigSet;
     params?: {
         [key: string]: any
     };
@@ -17,6 +17,14 @@ export interface TheklaConfig {
     testFramework: TestFramework;
 }
 
+export type ServerConfigSet = ServerConfig | ConfigSet<ServerConfig>
+export type CapabilitiesConfigSet = DesiredCapabilities | ConfigSet<DesiredCapabilities>
+export type RestClientConfigSet = RestClientConfig | ConfigSet<RestClientConfig>
+
+export type ConfigSet<T> = {
+    default: string;
+    [key: string]: T | string;
+}
 
 export interface TestFramework {
     frameworkName: "jasmine" | "cucumber";
@@ -53,7 +61,7 @@ export interface CucumberOptions {
 
     //cli --format-options
     formatOptions?: {
-        snippetInterface?:  "async-await" | "callback" | "generator" | "promise" | "synchronous";
+        snippetInterface?: "async-await" | "callback" | "generator" | "promise" | "synchronous";
         snippetSyntax?: string;
         rerun?: {
             separator: string

@@ -1,13 +1,16 @@
-import {printHelpText}         from "./commands/help";
-import {TheklaConfig}          from "./config/TheklaConfig";
-import {getLogger}             from "@log4js-node/log4js-api";
-import {CucumberTestFramework} from "./testFramework/CucumberTestFramework";
-import {JasmineTestFramework}  from "./testFramework/JasmineTestFramework";
+import {printHelpText}             from "./commands/help";
+import {getConfiguredTheklaGlobal} from "./config/config_finder";
+import {TheklaConfig}              from "./config/TheklaConfig";
+import {getLogger}                 from "@log4js-node/log4js-api";
+import {CucumberTestFramework}     from "./testFramework/CucumberTestFramework";
+import {JasmineTestFramework}      from "./testFramework/JasmineTestFramework";
 
 export interface TheklaCliOpts {
     "require"?: string | string[];
     "format"?: string | string[];
+
     [arg: string]: any;
+
     '--'?: string[];
     _: string[];
 }
@@ -16,14 +19,14 @@ export interface TheklaCliOpts {
 declare let global: any;
 
 export class Thekla {
+    private logger = getLogger("Thekla");
+
     private _cliOptions: TheklaCliOpts = {
         "--": [],
         "_": []
     };
 
     private theklaConfig: TheklaConfig;
-
-    private logger = getLogger("Thekla");
 
     constructor() {
     }
@@ -33,8 +36,7 @@ export class Thekla {
     };
 
     run(theklaConfig: TheklaConfig): Promise<any> {
-        global.thekla = {};
-        global.thekla.config = theklaConfig;
+        global.thekla = getConfiguredTheklaGlobal(theklaConfig);
         this.theklaConfig = theklaConfig;
 
         // set jasmine as default TestFramework
@@ -46,7 +48,7 @@ export class Thekla {
         if (framework === "jasmine") {
             const opts = this.theklaConfig.testFramework.jasmineOptions ? this.theklaConfig.testFramework.jasmineOptions : {};
 
-            if(this.theklaConfig.specs === undefined || this.theklaConfig.specs.length === 0) {
+            if (this.theklaConfig.specs === undefined || this.theklaConfig.specs.length === 0) {
                 printHelpText("specs");
 
                 this.logger.error(`Help Text for missing spec declaration was printed`);
@@ -57,10 +59,11 @@ export class Thekla {
         } else if (framework === "cucumber") {
             const configOpts = this.theklaConfig.testFramework.cucumberOptions ? this.theklaConfig.testFramework.cucumberOptions : {};
 
-            if(this.theklaConfig.specs === undefined || this.theklaConfig.specs.length === 0) {
+            if (this.theklaConfig.specs === undefined || this.theklaConfig.specs.length === 0) {
                 printHelpText("specs");
                 return Promise.reject();
-            } if(this.theklaConfig.specs.length > 1) {
+            }
+            if (this.theklaConfig.specs.length > 1) {
                 printHelpText("ccMultipleFeatureFiles");
                 return Promise.reject();
             } else {
