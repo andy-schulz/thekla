@@ -3,6 +3,7 @@
   ,"spec_files": [
     "command/**/*[sS]pec.js",
     "cucumber/**/*[sS]pec.js",
+    "config/**/*[sS]pec.js",
     "jasmine/**/*[sS]pec.js"
   ]
   ,"oneFailurePerSpec": false
