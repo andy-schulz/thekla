@@ -17,7 +17,7 @@ export {BrowserScreenshotData}            from "thekla-core";
 export {WebElementFinder}                 from "thekla-core";
 
 export {RunningBrowser} from "thekla-core";
-export {ClientHelper}  from "thekla-core";
+export {ClientHelper}   from "thekla-core";
 export {By}             from "thekla-core";
 export {Key}            from "thekla-core";
 export {until}          from "thekla-core";
@@ -55,8 +55,8 @@ export {Authenticate, AuthenticationInfo}                       from "thekla-cor
 export {UseTheRestApi}                                          from "thekla-core";
 
 // Tasks
-export {PerformsTask}    from "thekla-core/dist/screenplay/Actor";
-export {ReturnTaskValue} from "thekla-core"
+export {PerformsTask, UsesAbilities, LogsActivity, AnswersQuestions}    from "thekla-core/dist/screenplay/Actor";
+export {ReturnTaskValue}                                                from "thekla-core"
 
 // Activities
 export {Activity, Task, Interaction}     from "thekla-core/dist/screenplay/lib/actions/Activities";
@@ -70,8 +70,8 @@ export {Sleep}                           from "thekla-core";
 
 
 // Oracle
-export {See}     from "thekla-core";
-export {Extract} from "thekla-core";
+export {See}             from "thekla-core";
+export {Extract}         from "thekla-core";
 
 
 /**
