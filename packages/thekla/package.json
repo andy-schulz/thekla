@@ -29,7 +29,7 @@
     "@types/glob": "^7.1.1",
     "@types/jasmine": "^2.8.16",
     "@types/minimist": "^1.2.0",
-    "@types/node": "^10.14.17",
+    "@types/node": "^10.14.18",
     "chalk": "^2.4.2",
     "cucumber": "^5.1.0",
     "del-cli": "^1.1.0",
@@ -39,6 +39,6 @@
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
     "npm": "^6.11.3",
-    "thekla-core": "^1.22.1"
+    "thekla-core": "^1.22.2"
   }
 }
