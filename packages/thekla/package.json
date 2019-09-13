@@ -39,6 +39,6 @@
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
     "npm": "^6.11.3",
-    "thekla-core": "^1.22.4"
+    "thekla-core": "^1.22.5"
   }
 }
