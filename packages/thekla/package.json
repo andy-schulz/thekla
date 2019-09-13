@@ -7,7 +7,15 @@
     "prepare": "npm run build",
     "test": "tsc & jasmine --config=app/test/support/jasmine.json",
     "build": "./node_modules/.bin/del-cli dist/**/* & tsc",
-    "postversion": "git push --tags"
+    "postversion": "git push --tags",
+    "new:patch": "run-s new:npmupdate new:gitadd new:gitcommit new:gitpush new:npmversionpatch new:npmpublish",
+    "new:npmupdate": "npm update",
+    "new:gitadd": "git add package*.json",
+    "new:gitcommit": "git commit -m ''",
+    "new:gitpush": "git push",
+    "new:npmversionpatch": "npm version patch -m ''",
+    "new:npmversionminor": "npm version minor -m ''",
+    "new:npmpublish": "npm publish"
   },
   "repository": {
     "type": "git",
@@ -39,6 +47,9 @@
     "log4js": "^3.0.6",
     "minimist": "^1.2.0",
     "npm": "^6.11.3",
-    "thekla-core": "^1.22.7"
+    "thekla-core": "^1.22.8"
+  },
+  "devDependencies": {
+    "npm-run-all": "^4.1.5"
   }
 }
