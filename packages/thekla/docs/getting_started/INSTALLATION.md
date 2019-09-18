@@ -5,11 +5,6 @@ has_children: false
 nav_order: 1
 ---
 
-# Another page
-
-Test this
----
-
 # Installation
 
 Install ``webdriver-manager`` and start the selenium standalone server.
