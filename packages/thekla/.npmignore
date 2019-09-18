@@ -8,3 +8,9 @@ logs/
 *.log
 tsconfig.json
 
+### github pages ignores
+index.html
+_config.yml
+_sites
+_layouts
+
