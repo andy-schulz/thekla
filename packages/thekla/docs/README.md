@@ -1,8 +1,3 @@
----
-title: Thekla
-has_children: true
----
-
 # thekla
 Thekla is a Screenplay Pattern Implementation implemented in Typescript and using WebdriverJS as the browser driver.
 If you want to know more about the Screenplay Pattern check out
