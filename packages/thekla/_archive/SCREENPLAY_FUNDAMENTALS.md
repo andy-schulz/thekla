@@ -7,7 +7,7 @@ nav_exclude: true
 ## Table of Content
 
 ## Overview
-![Overview](../images/screenplay_overview.png)
+![Overview](../docs/images/screenplay_overview.png)
 
 ## Interactions
 
@@ -86,5 +86,5 @@ Josh.attemptsTo(
 
 
 ## Further Information
-* [Create Rest API tests](./create_rest_api_tests/README.md)
-* [Create Web tests](./create_web_ui_tests)
+* [Create Rest API tests](create_rest_api_tests/README.md)
+* [Create Web tests](create_web_ui_tests)
