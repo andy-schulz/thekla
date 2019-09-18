@@ -89,3 +89,5 @@ dist
 
 ### Jekyll ignores
 _site/
+
+_testData

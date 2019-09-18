@@ -7,6 +7,7 @@ node_modules/
 logs/
 *.log
 tsconfig.json
+docs
 
 ### github pages ignores
 index.html
