@@ -1,3 +1,10 @@
+---
+title: TEMPLATE
+parent: NONE
+has_children: true
+nav_order: 1
+---
+
 # Use your Rest API with Thekla
 
 To use a REST API in your tests you have to do the following steps:

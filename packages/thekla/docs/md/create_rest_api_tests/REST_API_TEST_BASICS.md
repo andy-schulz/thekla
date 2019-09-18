@@ -1,3 +1,10 @@
+---
+title: TEMPLATE
+parent: NONE
+has_children: true
+nav_order: 1
+---
+
 # The Rest API Test Basics
 
 ## Table of Content

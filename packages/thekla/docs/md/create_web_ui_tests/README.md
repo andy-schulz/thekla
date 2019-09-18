@@ -1,3 +1,10 @@
+---
+title: TEMPLATE
+parent: NONE
+has_children: true
+nav_order: 1
+---
+
 # How to create web UI tests using Thekla
 
 * [Locate Elements](LOCATE_ELEMENTS.md)
