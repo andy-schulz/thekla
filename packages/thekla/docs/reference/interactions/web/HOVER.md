@@ -9,7 +9,7 @@ has_children: false
 
 ## Ability
 
-- [BrowserTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
 ## Methods
 

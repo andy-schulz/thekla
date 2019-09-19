@@ -9,8 +9,7 @@ has_children: false
 
 ## Ability
 
-- [BrowserTheWeb](../../abilities/BROWSE_THE_WEB.md)
-- [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
+none
 
 ## Methods
 
