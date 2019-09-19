@@ -1,6 +1,6 @@
 ---
 title: Sleep
-parent: Interactions
+parent: General
 has_children: false
 ---
 
