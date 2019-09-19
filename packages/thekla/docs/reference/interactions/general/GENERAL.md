@@ -2,7 +2,7 @@
 title: General
 parent: Interactions
 grant_parent: Reference
-has_children: true
+has_children: false
 ---
 # General Interactions
 
