@@ -4,4 +4,4 @@ remote_theme: pmarsceill/just-the-docs
 search_enabled: true
 color_scheme: "dark"
 exclude:
-  - part_*
+  - ./**/part_*
