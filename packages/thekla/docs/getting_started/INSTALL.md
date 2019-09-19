@@ -1,11 +1,11 @@
 ---
-title: Installation
+title: Install
 parent: Getting Started
 has_children: false
 nav_order: 1
 ---
 
-# Installation
+# Environment Setup
 
 Install ``webdriver-manager`` and start the selenium standalone server.
 
@@ -23,13 +23,21 @@ cd /path/to/you/project
 npm init # follow the instructions
 ````
 
-## Install thekla
-
+## Install Packages
+### thekla
 ````bash
 npm install thekla --save
 ````
 
-## Create the jasmine test spec
+### typescript
+````bash
+npm install typescript --save
+````
+
+## Create the test folder
+
+If you are just setting up a test script repository you can place your all scripts in the main folder. 
+Otherwise its good practice to place all test scripts inside a test folder.
 
 Create the test folder ``test`` inside your projects folder.
 

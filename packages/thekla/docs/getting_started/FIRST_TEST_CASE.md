@@ -1,11 +1,11 @@
 ---
-title: First Test Case
+title: The Test Spec
 parent: Getting Started
 has_children: false
-nav_order: 2
+nav_order: 3
 ---
 
-# Quick Start Guide
+# Create the Test Spec
 
 The fastest way to get started is by downloading the 
 [Thekla Examples](https://github.com/andy-schulz/thekla-examples) repository
@@ -70,72 +70,3 @@ describe('Search on Google with thekla', function () {
 });
 ````
 
-## Create the test configuration
-
-Create the file ``thekla_conf.ts`` in the ``test`` folder with the following content:
-
-````typescript
-import {TheklaConfig} from "thekla"
-
-export const config: TheklaConfig = {
-
-    specs: ["dist/google_search_spec.js"],
-
-    seleniumConfig: {
-        seleniumServerAddress: "http://localhost:4444/wd/hub"
-    },
-
-    capabilities: [{
-        browserName: "chrome"
-    }],
-
-    testFramework: {
-        frameworkName: "jasmine",
-        jasmineOptions: {
-            defaultTimeoutInterval: 10 * 1000
-        }
-    }
-};
-````
-
-## Tell Typescript how to transpile the code
-
-Create the file ``tsconfig.json`` in the root directory of your project.
-
-````json
-{
-  "compilerOptions": {
-        "target": "ES2016"
-        ,"module": "commonjs"
-        ,"sourceMap": true
-        ,"outDir": "dist"
-        ,"rootDir": "test"
-        ,"strict": true
-        ,"noImplicitAny": true
-        ,"inlineSources": true
-  }
-}
-````
-
-## Add the test scripts to package.json
-
-````json
-{
-  "scripts": {
-    "pretest": "npm install & tsc",
-    "test": "node_modules/.bin/thekla dist/thekla_conf.js"
-  }
-}
-````
-
-## install the packages
-
-```bash
-npm install thekla --save
-```
-
-## Start the tests
-
-````bash
-npm test
-````
