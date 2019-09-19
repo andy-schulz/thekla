@@ -6,12 +6,21 @@ nav_order: 2
 ---
 # Interactions
 
-To interact with the desktop / mobile browser or an app on a mobile device, 
-you need to locate the elements and interact with them.
+Interactions are the basic building blocks of work flows and are bound to an ability.
 
-To 
-give your actor the ability to BrowseTheWeb.
+An example for an interaction is the [`Click`](../reference/interactions/web/CLICK.md) interaction.
 
-See [Locate Elements](LOCATE_ELEMENTS.md) and the [BrowseTheWeb ability](BROWSE-THE-WEB_ABILITY.md) description for details.
+An actor can execute an interaction with his `.attemptsTo()` method.
 
-In all examples i will use the object ``Googles`` as an page object containing all element definitions of the page.
+If you want to `Click` on a web page element, you actor needs the `BrowseTheWeb` ability to locate the element and then 
+click on it.
+
+```typescript
+const bernd = Actor.named(`Bernd`);
+
+bernd.whoCan(BrowseTheWeb.using(aBrowser));
+
+bernd.attemptsTo(
+    Click.on(MyElement)
+)
+```
