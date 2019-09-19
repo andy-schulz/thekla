@@ -2,35 +2,10 @@
 nav_exclude: true
 ---
 
-# Thekla screenplay fundamentals
 
-## Table of Content
 
-## Overview
-![Overview](../docs/images/screenplay_overview.png)
 
-## Interactions
 
-Interactions are the basic elements provided by an ability. Only the ``Sleep`` interaction does not depend on an 
-ability.
-
-### SLEEP for an amount of time 
-
-Sleep will pause the interaction execution flow. Only the execution is paused, the generation of the interaction and 
-task objects is not interrupted and will be finished first.
-
-The amount of time to ``Sleep`` will be specified by using the ``for(...)`` method.
-
-In later versions Sleep will only be used in debug mode and will be automatically deactivated during test execution. 
-So please be careful when using it.
-
-Example:
-
-```typescript
-Josh.attempts to(
-    Sleep.for(5000)
-)
-```
 
 ### Ask a QUESTION
 
@@ -76,13 +51,6 @@ Josh.attemptsTo(
 )
 ```
 
-#### ```toBe``` matcher
-
-#### ``toEqual`` matcher
-
-#### ``toMatch`` matcher
-
-#### ``toContain`` matcher
 
 
 ## Further Information
