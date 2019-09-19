@@ -12,12 +12,12 @@ Possible `Questions` are:
 - Attribute.of(ELEMENT).called(ATTRIBUTE_NAME)
 - etc. 
 
-> ![test image size](../../../res/icons/info-circle-solid.svg){:height="30px" width="30px"}
-Check section [Questions](../../questions/QUESTIONS.md) for more details.
+> See [Questions](../../questions/QUESTIONS.md).
 
 The `Matcher` is a function of type `(answer: <TYPE>) => boolean)`.
-You can provide you own function or choose one provided by see `Expected` module 
-(See section [Matcher](../../matcher/MATCHER.md) for details).
+You can provide you own function or choose one provided by see `Expected` module.
+
+> See [Matcher](../../matcher/MATCHER.md).
 
 ## Methods
 
