@@ -12,7 +12,7 @@ Possible `Questions` are:
 - Attribute.of(ELEMENT).called(ATTRIBUTE_NAME)
 - etc. 
 
-{% include DOCU.md docu="Check section [Questions](../../questions/QUESTIONS.md) for more details." %}
+> ![alt text](../../../res/icons/info-circle-solid.svg | width=30) Check section [Questions](../../questions/QUESTIONS.md) for more details.
 
 The `Matcher` is a function of type `(answer: <TYPE>) => boolean)`.
 You can provide you own function or choose one provided by see `Expected` module 
