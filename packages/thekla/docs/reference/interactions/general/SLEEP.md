@@ -1,9 +1,3 @@
----
-title: Sleep
-parent: General
-has_children: false
----
-
 # SLEEP
 
 Sleep will pause the interaction execution flow. Only the execution is paused, the generation of the interaction and 
