@@ -12,7 +12,7 @@ nav_order: 1
 
 Interactions are the basic elements provided by an ability.
  e.g.
- - [`Sleep`](../reference/interactions/general/SLEEP.md) for an amount of time
+ - [`Sleep`](../reference/interactions/general#sleep) for an amount of time
  - `Click` on an element
  - `Enter` a text into a text field or area
  - `See` if a `Question` matches a specified state
