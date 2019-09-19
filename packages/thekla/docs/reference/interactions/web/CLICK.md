@@ -18,9 +18,9 @@ Clicks on the given browser element (mobile / desktop) or an app element (mobile
 
 ## Methods
 
-| name          | parameter        | description |
-| :---          | :---             | :---        |
-| ` .method()`* | param: PARAMETER | description |
+| name     | parameter           | description              |
+| :---     | :---                | :---                     |
+| `.on()`* | element: SppElement | the element to click on. |
 
 ## Example
 

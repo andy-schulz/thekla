@@ -13,8 +13,8 @@ has_children: false
 
 ## Methods
 
-| name          | parameter        | description |
-| :---          | :---             | :---        |
-| ` .method()`* | param: PARAMETER | description |
+| name         | parameter        | description |
+| :---         | :---             | :---        |
+| `.method()`* | param: PARAMETER | description |
 
 ## Example

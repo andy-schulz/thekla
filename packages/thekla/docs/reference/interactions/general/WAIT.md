@@ -21,8 +21,8 @@ none
 
 | name            | parameter                        | description                                               |
 | :---            | :---                             | :---                                                      |
-| ` .for()`*      | element: SppElement              | the element it should be waited for (presence or absence) |
-| ` .andCheck()` | condition: UntilElementCondition | the state the element should have                         |
+| `.for()`*      | element: SppElement              | the element it should be waited for (presence or absence) |
+| `.andCheck()` | condition: UntilElementCondition | the state the element should have                         |
 
 ## Example
 

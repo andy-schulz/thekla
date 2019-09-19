@@ -15,9 +15,9 @@ Move the mouse pointer over an element.
 
 ## Methods
 
-| name        | parameter | description                     |
-| :---        | :---      | :---                            |
-| ` .over()`* | -         | move the mouse over the element |
+| name       | parameter | description                     |
+| :---       | :---      | :---                            |
+| `.over()`* | -         | move the mouse over the element |
 
 ## Example
 

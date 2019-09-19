@@ -32,13 +32,13 @@ none
 
 ## Methods
 
-| name             | parameter                                | description                                                                               |
-| :---             | :---                                     | :---                                                                                      |
-| ` .if()`*        | question: Question                       | extract                                                                                   |
-| ` .is() `        | matcher: (value: <GENERIC>) => boolean)  | verify that the Question passed in `if()` fulfills the function                           |
-| ` .repeatFor() ` | maxIterations: number,  interval: number | repeat until check is `true` for `maxIterations` and wait for `intervall` between retries |
-| ` .then() `      | activities: Activity[]                   | if check is `true` execute the following activites                                        |
-| ` .otherwise() ` | activities: Activity[]                   | if check is `false` execute the following activities                                      |
+| name           | parameter                                | description                                                                               |
+| :---           | :---                                     | :---                                                                                      |
+| `.if()`*       | question: Question                       | extract                                                                                   |
+| `.is()`        | matcher: (value: <GENERIC>) => boolean)  | verify that the Question passed in `if()` fulfills the function                           |
+| `.repeatFor()` | maxIterations: number,  interval: number | repeat until check is `true` for `maxIterations` and wait for `intervall` between retries |
+| `.then()`      | activities: Activity[]                   | if check is `true` execute the following activites                                        |
+| `.otherwise()` | activities: Activity[]                   | if check is `false` execute the following activities                                      |
 
 ## Example
 

@@ -16,9 +16,9 @@ Tap on an element or position of an touch enabled device ( mobile or desktop / l
 
 ## Methods
 
-| name      | parameter                              | description                              |
-| :---      | :---                                   | :---                                     |
-| ` .on()`* | element: SppElement or position: Point | taps on an element or a screens position |
+| name     | parameter                              | description                              |
+| :---     | :---                                   | :---                                     |
+| `.on()`* | element: SppElement or position: Point | taps on an element or a screens position |
 
 ## Example
 

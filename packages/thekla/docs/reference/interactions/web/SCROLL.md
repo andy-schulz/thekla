@@ -14,8 +14,15 @@ has_children: false
 
 ## Methods
 
-| name          | parameter        | description |
-| :---          | :---             | :---        |
-| ` .method()`* | param: PARAMETER | description |
+| name         | parameter        | description |
+| :---         | :---             | :---        |
+| `.to()`* | element: SppElement or PagePosition | description |
 
 ## Example
+
+```typescript
+josh.attemptsTo(
+    Scroll.to(MY_ELEMENT),
+    Scroll.to(Page.top())
+)
+```

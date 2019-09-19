@@ -16,9 +16,9 @@ none
 
 ## Methods
 
-| name  | parameter    | description                        |
-| :---  | :---         | :---                               |
-| for() | time: number | sleep for the amount of time in ms |
+| name      | parameter    | description                        |
+| :---      | :---         | :---                               |
+| `.for()`* | time: number | sleep for the amount of time in ms |
 
 
 In later versions Sleep will only be used in debug mode and will be automatically deactivated during test execution. 
