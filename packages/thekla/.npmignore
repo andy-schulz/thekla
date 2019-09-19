@@ -1,17 +1,27 @@
+### SOURCE
+app/
+
+### BUILD
 .circleci
 .idea
-app/
+
+
+
+### automated tests
 dist/test/
 _testData/
+
+### node
 node_modules/
+
+### logs
 logs/
 *.log
+
+### typescript
 tsconfig.json
-docs
+
 
 ### github pages ignores
-index.html
-_config.yml
-_sites
-_layouts
+docs
 
