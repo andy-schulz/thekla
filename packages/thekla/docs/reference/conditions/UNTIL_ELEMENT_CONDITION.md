@@ -16,12 +16,12 @@ The UntilElementCondition specifies the state an element can have. Right now 4 s
 
 # Methods and Attributes
 
-| name            | parameter                        | description                                        |
-| :---          | :---                             | :---                                                |
-| ` .is*`       | element: SppElement              | attribute to specify that the status is present     |
-| ` .isNot*`    | condition: UntilElementCondition | attribute to specify that the status is not present |
-| ` .visible()` | condition: UntilElementCondition | check for the visibility status                     |
-| ` .enabled()` | condition: UntilElementCondition | check for the enabled status                        |
+| T    | name          | parameter                        | description                                         |
+| :--- | :---          | :---                             | :---                                                |
+| s    | ` .is`        | element: SppElement              | attribute to specify that the status is present     |
+| s    | ` .isNot`     | condition: UntilElementCondition | attribute to specify that the status is not present |
+| m    | ` .visible()` | condition: UntilElementCondition | check for the visibility status                     |
+| m    | ` .enabled()` | condition: UntilElementCondition | check for the enabled status                        |
 
 ## Example
 
