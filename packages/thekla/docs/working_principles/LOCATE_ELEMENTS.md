@@ -13,49 +13,16 @@ nav_exclude: true
 
 ## The Basics 
 
-To locate an element you can use the build in css selector as follows:
+To locate an element you can use the build in element selector as follows:
+
+* ``By.css('my css selector')`` and
+* ``By.xpath('my xpath selector')`` and
+* ``By.cssContainingText('my css selector','the elements text')`` 
 
 ````typescript
 import {element, By} from "thekla"
 
 const myElement = element(By.css("#myElementId"));
-````
-
-Additionally you can use use the 
-
-* ``By.xpath()`` and
-* ``By.cssContainingText()`` 
-
-selectors.
-
-There is and there will be no ``By.tagName``, ``By.id`` or any other selector. I decided to keep it simple with those
-three selector functions. If you want to select an element by Id you can use ```By.css("#myElementId")``` as shown above
-and selecting an element by tag name can be achieved simply by using ``By.css("myElementTagName")``.
-
-Use the ``By.xpath()`` selector to locate an element based on the Dom structure.
-
-The selector ``By.cssContainingText()`` comes in handy when selecting elements from a drop down:
-
-````typescript
-import {element, By, Click} from "thekla"
-
-const myFirstDropDownItem = element(By.cssContainingText("#myDropDownId option", "My Drop Down first Item Text"));
-
-jonathan.attemptsTo(
-    Click.on(myFirstDropDownItem)
-)
-````
-
-or when locating a button with a unique text
-
-````typescript
-import {element, By, Click} from "thekla"
-
-const myButton = element(By.cssContainingText("button", "My unique button text"));
-
-jonathan.attemptsTo(
-    Click.on(myButton)
-)
 ````
 
 ## Chain elements

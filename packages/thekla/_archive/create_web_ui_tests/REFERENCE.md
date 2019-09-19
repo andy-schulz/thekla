@@ -1,24 +1,3 @@
----
-nav_exclude: true
----
-
-# Reference
-
-## Using basic Actions
-
-### Click
-
-### Enter
-
-### Select a 
-
-## Using Questions
-
-### How to extract values
-
-### Evaluate a State
-
-
 ### Choose specific actions depending on a state
 
 If you want to execute specific actions depending on a UI or REST state you can use the See Action in the following way.
