@@ -1,3 +1,10 @@
+---
+title: See
+parent: Interactions
+grand_parent: Reference
+has_children: false
+---
+
 # SEE
 
 The See interaction executes a `Question` and checks if the answer matches a given state. 
@@ -12,12 +19,16 @@ Possible `Questions` are:
 - Attribute.of(ELEMENT).called(ATTRIBUTE_NAME)
 - etc. 
 
-> See [Questions](../../questions/QUESTIONS.md).
+> See [Questions](../../QUESTIONS.md).
 
 The `Matcher` is a function of type `(answer: <TYPE>) => boolean)`.
 You can provide you own function or choose one provided by see `Expected` module.
 
-> See [Matcher](../../matcher/MATCHER.md).
+> See [Matcher](../../MATCHER.md).
+
+## Ability
+
+none
 
 ## Methods
 

@@ -1,18 +1,18 @@
 ---
 title: Working Principles
 has_children: true
-nav_order: 1
+nav_order: 3
 ---
 # Working Principles
 
 ## Overview
-![Overview](../res/images/screenplay_overview.png)
+![Overview](res/images/screenplay_overview.png)
 
 ## Interactions
 
 Interactions are the basic elements provided by an ability.
  e.g.
- - [`Sleep`](../reference/interactions/general#sleep) for an amount of time
+ - [`Sleep`](reference/interactions/general#sleep) for an amount of time
  - `Click` on an element
  - `Enter` a text into a text field or area
  - `See` if a `Question` matches a specified state
