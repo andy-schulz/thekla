@@ -19,11 +19,11 @@ If the field contains already a value, the new value will be appended.
 
 ## Methods
 
-| name                          | parameter           | description                                                                                      |
-| :---                          | :---                | :---                                                                                             |
-| ` .value()*`                  | value: string       | the string value which will be entered into the element                                          |
-| ` .into()`                    | element: SppElement | the input field or text area the value shall be entered into                                     |
-| ` .butClearsTheFieldBefore()` | -                   | remove all text from the field before entering the new value, otherwise the value will be append |
+| T    | name                          | parameter           | description                                                                                      |
+| :--- | :---                          | :---                | :---                                                                                             |
+| s    | ` .value()`                   | value: string       | the string value which will be entered into the element                                          |
+| m    | ` .into()`                    | element: SppElement | the input field or text area the value shall be entered into                                     |
+| m    | ` .butClearsTheFieldBefore()` | -                   | remove all text from the field before entering the new value, otherwise the value will be append |
 
 ## Example
 
