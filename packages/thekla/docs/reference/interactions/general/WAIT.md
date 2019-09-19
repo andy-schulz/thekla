@@ -1,11 +1,11 @@
 ---
-title: Click
+title: Wait
 parent: Interactions
 grand_parent: Reference
 has_children: false
 ---
 
-# Click
+# Wait
 
 ## Ability
 

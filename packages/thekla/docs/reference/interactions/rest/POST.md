@@ -1,15 +1,15 @@
 ---
-title: Drag
+title: Post
 parent: Interactions
 grand_parent: Reference
 has_children: false
 ---
 
-# Drag
+# Post
 
 ## Ability
 
-- [BrowserTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [UseTheRestApi](../../abilities/USE_THE_REST_API.md)
 
 ## Methods
 

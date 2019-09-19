@@ -1,16 +1,15 @@
 ---
-title: Click
+title: Navigate
 parent: Interactions
 grand_parent: Reference
 has_children: false
 ---
 
-# Click
+# Navigate
 
 ## Ability
 
 - [BrowserTheWeb](../../abilities/BROWSE_THE_WEB.md)
-- [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
 ## Methods
 

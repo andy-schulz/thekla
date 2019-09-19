@@ -1,15 +1,15 @@
 ---
-title: Drag
+title: Delete
 parent: Interactions
 grand_parent: Reference
 has_children: false
 ---
 
-# Drag
+# Delete
 
 ## Ability
 
-- [BrowserTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [UseTheRestApi](../../abilities/USE_THE_REST_API.md)
 
 ## Methods
 
