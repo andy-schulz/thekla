@@ -14,9 +14,10 @@ Load the an URL in the browser.
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
 ## Methods
-| name      | parameter   | description             |
-| :---      | :---        | :---                    |
-| ` .to()`* | url: string | browse to the given url |
+
+| name     | parameter   | description             |
+| :---     | :---        | :---                    |
+| `.to()`* | url: string | browse to the given url |
 
 ## Example
 
