@@ -1,7 +1,6 @@
 ---
-title: All
-parent: Elements
-grand_parent: Reference
+title: SppElementList
+parent: Ref:Elements
 ---
 
-# All
+# SppElementList

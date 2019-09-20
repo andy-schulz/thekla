@@ -1,7 +1,6 @@
 ---
 title: Drag
-parent: Interactions
-grand_parent: Reference
+parent: Ref:Interactions
 has_children: false
 ---
 

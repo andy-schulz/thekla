@@ -1,7 +1,6 @@
 ---
 title: By
-parent: Elements
-grand_parent: Reference
+parent: Ref:Elements
 ---
 
 # By element selector
@@ -24,7 +23,7 @@ none
 ## Example
 
 ````typescript
-import {element, By, Click} from "thekla"
+import {element, By} from "thekla"
 
 const myFirstDropDownItem = element(By.cssContainingText("#myDropDownId option", "My Drop Down first Item Text"));
 

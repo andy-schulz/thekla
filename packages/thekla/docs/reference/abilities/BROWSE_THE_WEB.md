@@ -1,7 +1,6 @@
 ---
 title: BrowseTheWeb
-parent: Abilities
-grand_parent: Reference
+parent: Ref:Abilities
 ---
 
 # BrowseTheWeb

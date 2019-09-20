@@ -1,7 +1,6 @@
 ---
-title: Frame
-parent: Elements
-grand_parent: Reference
+title: SppFrameElement
+parent: Ref:Elements
 ---
 
-# Frame
+# SppFrameElement

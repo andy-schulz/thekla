@@ -1,7 +1,6 @@
 ---
 title: Value
-parent: Questions
-grand_parent: Reference
+parent: Ref:Questions
 ---
 
 # Value

@@ -1,7 +1,6 @@
 ---
 title: OperateOnMobileDevice
-parent: Abilities
-grand_parent: Reference
+parent: Ref:Abilities
 ---
 
 # OperateOnMobileDevice

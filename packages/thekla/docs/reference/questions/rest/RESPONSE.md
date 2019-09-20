@@ -1,7 +1,6 @@
 ---
 title: Response
-parent: Questions
-grand_parent: Reference
+parent: Ref:Questions
 ---
 
 # Response

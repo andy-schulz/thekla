@@ -1,7 +1,6 @@
 ---
 title: UntilElementCondition
-parent: Conditions
-grand_parent: Reference
+parent: Ref:Conditions
 has_children: false
 ---
 

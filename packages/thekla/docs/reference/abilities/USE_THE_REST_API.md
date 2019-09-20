@@ -1,7 +1,6 @@
 ---
 title: UseTheRestApi
-parent: Abilities
-grand_parent: Reference
+parent: Ref:Abilities
 ---
 
 # USeTheRestApi

@@ -1,10 +1,9 @@
 ---
-title: element
-parent: Elements
-grand_parent: Reference
+title: SppElement
+parent: Ref:Elements
 ---
 
-# SppElement function
+# SppElement
 
 An `SppElement` can be created by calling the `element()` function.
 The `SppElement` is used when interacting with the browser or mobile device.
@@ -25,7 +24,7 @@ To identify the element  the [`By`] selector is passed to the `element()` functi
 | `.called()`    | element: SppElement              | Give the element a name. When the element cant be found the name is printed, it makes it easier to identify the error |
 | `.shallWait()` | condition: UntilElementCondition | wait for the condition to be met, before trying to interact with the element                                          |
 | `.element()`   | locator: By                      | search for an element from this element in the DOM                                                                    |
-| `.all()`       | locator: by                      | search for all element from this element in the dom                                                                   |
+| `.all()`       | locator: by                      | search for all elements from this element in the dom                                                                   |
 
 
 ## Example

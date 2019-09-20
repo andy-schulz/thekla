@@ -1,7 +1,6 @@
 ---
 title: ReturnedResult
-parent: Questions
-grand_parent: Reference
+parent: Ref:Questions
 ---
 
 # ReturnedResult

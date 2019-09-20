@@ -1,7 +1,6 @@
 ---
 title: TheSites
-parent: Questions
-grand_parent: Reference
+parent: Ref:Questions
 ---
 
 # TheSites

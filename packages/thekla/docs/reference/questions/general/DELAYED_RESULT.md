@@ -1,7 +1,6 @@
 ---
 title: DelayedResult
-parent: Questions
-grand_parent: Reference
+parent: Ref:Questions
 ---
 
 # DelayedResult

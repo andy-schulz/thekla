@@ -1,7 +1,6 @@
 ---
 title: Attribute
-parent: Questions
-grand_parent: Reference
+parent: Ref:Questions
 ---
 
 # Attribute

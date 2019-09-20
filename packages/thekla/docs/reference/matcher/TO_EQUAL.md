@@ -1,7 +1,6 @@
 ---
 title: toEqual
-parent: Matcher
-grand_parent: Reference
+parent: Ref:Matcher
 has_children: false
 ---
 
