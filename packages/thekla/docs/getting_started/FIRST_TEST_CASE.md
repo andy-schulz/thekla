@@ -15,57 +15,59 @@ Create a file ``google_search_spec.ts`` inside the ``test`` folder with the foll
 
 ````typescript
 import {
-    Actor, BrowseTheWeb, RunningBrowser, SeleniumConfig, DesiredCapabilities,
-    Navigate, element, By, UntilElement, Enter, Sleep, See, 
-    Expected, Value, TheklaConfig} from "thekla";
+    Actor, BrowseTheWeb, RunningBrowser,
+    Navigate, element, By, UntilElement, Enter, Sleep, See, Expected, Value } from "thekla-core";
 
-// thekla is a gloabal variable, so declare it here that you can use it
-declare const thekla: {config: TheklaConfig};
+import {TheklaGlobal} from "thekla";
+
+// declare thekla, its global
+declare const thekla: TheklaGlobal;
+
 
 describe('Search on Google with thekla', function () {
 
     it('should return a value', async function () {
 
-        // configure where to find you hub
-        const seleniumConfig: SeleniumConfig = {
-            seleniumServerAddress: "http://localhost:4444/wd/hub"
-        };
-
-        // configure which browser capabilities to use
-        const browserCapability: DesiredCapabilities = {
-            browserName: "chrome"
-        };
-
         // create a browser with the configuration
         const aBrowser = RunningBrowser
-            .startedOn(seleniumConfig)
-            .withDesiredCapability(browserCapability);
+            // get the server config from theklas config file
+            .startedOn(thekla.serverConfig())
+            // get the capabilities from theklas config file
+            .withCapabilities(thekla.capabilities());
 
         // create the actor and give it a name
         const jonathan = Actor.named("Jonathan");
 
-        // specify what your actor can do. In this case he can use a web browser with the browser created before.
+        // specify what your actor can do.
+        // In this case he can use a web browser with the browser created before.
         jonathan.can(BrowseTheWeb.using(aBrowser));
 
         // create the search field and give it a name.
-        const googleSearchField = element(By.css(`[name='q']`))        // say how you want to locate the element
-            .called(`The Google search field`)                       // give the element a name (optional)
-            .shallWait(UntilElement.is.visible().forAsLongAs(1000));    // if its not there right away, wait for it (optional)
+        // 1. locate the element by css
+        const googleSearchField = element(By.css(`[name='q']`))
+        // 2. name the element
+            .called(`The Google search field`)
+        // wait for the element if its not there right away
+            .shallWait(UntilElement.is.visible().forAsLongAs(1000));
 
         await jonathan.attemptsTo(
-            Navigate.to("https://www.google.com/"),                         // Go to Google
+            // Go to Google
+            Navigate.to("https://www.google.com/"),
+            // send the search text to the search field
             Enter.value("software test automation")
-                .into(googleSearchField),                               // send the search text to the search field
-            Sleep.for(5 * 1000),                              // Wait for 5 Seconds (just to visually follow the test case)
+                .into(googleSearchField),
+            // Wait for 5 Seconds (just to visually follow the test case)
+            Sleep.for(5 * 1000),
+            // check if the text was entered
             See.if(Value.of(googleSearchField))
-                .is(Expected.toBe("software test automation"))      // check if the text was entered
+                .is(Expected.toBe("software test automation"))
         )
 
     });
 
-    afterAll(() => {
+    afterAll((): Promise<void[]> => {
         // cleanup all created browser when you are done
-        return RunningBrowser.cleanup()
+        return RunningBrowser.cleanup();
     });
 });
 ````
