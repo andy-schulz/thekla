@@ -43,7 +43,7 @@ export {ExecutingRestClient}                                         from "thekl
  * screenplay Elements
  */
 export {element, all, frame}                                         from "thekla-core";
-export {SppWebElementFinder, SppWebElementListFinder}                from "thekla-core";
+export {SppElement, SppElementList}                from "thekla-core";
 export {Actor}                                                       from "thekla-core";
 export {request, SppRestRequest}                                     from "thekla-core";
 
