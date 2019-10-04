@@ -1,46 +1,62 @@
 import {
-    Actor, BrowseTheWeb, RunningBrowser, SeleniumConfig, DesiredCapabilities,
-    Navigate, element, By, UntilElement, Enter, Sleep, See, strictEqualTo, Value} from "thekla-core";
+    Actor, BrowseTheWeb, RunningBrowser, SppElement,
+    Navigate, element, By, UntilElement, Enter, Sleep, See, Expected, Value } from "thekla-core";
 
-import {TheklaConfig} from "thekla/dist";
+import {TheklaGlobal} from "thekla";
 
-// thekla is a gloabal variable, so declare it here that you can use it
-declare const thekla: {config: TheklaConfig};
+// declare thekla, its global
+declare const thekla: TheklaGlobal;
 
 
 describe('Search on Google with thekla', function () {
 
-    it('should return a value', async function () {
+    let googleSearchField: SppElement;
+    let jonathan: Actor;
 
-        // create a browser with the configuration from thekla_conf.ts
-        // the browser is created async right away, this will change in future versions, then it will created upon first use
-        const aBrowser = await RunningBrowser
-            .startedOn(thekla.config.seleniumConfig as SeleniumConfig)
-            .withDesiredCapability((thekla.config.capabilities as DesiredCapabilities[])[0]);
+    beforeAll(() => {
+
+        // create a browser with the configuration
+        const aBrowser = RunningBrowser
+        // get the server config from theklas config file
+            .startedOn(thekla.serverConfig())
+            // get the capabilities from theklas config file
+            .withCapabilities(thekla.capabilities());
 
         // create the actor and give it a name
-        const jonathan = Actor.named("Jonathan");
+        jonathan = Actor.named("Jonathan");
 
-        // specify what your actor can do. In this case he can use a web browser with the browser created before.
+        // specify what your actor can do.
+        // In this case he can use a web browser with the browser created before.
         jonathan.can(BrowseTheWeb.using(aBrowser));
 
-        // create the search field and give it a name. If
-        const googleSearchField = element(By.css(`[name='q']`))        // say how you want to locate the element
-            .called(`The Google search field`)                       // give the element a name (optional)
-            .shallWait(UntilElement.is.visible().forAsLongAs(1000));    // if its not there right away, wait for it (optional)
+        // create the search field and give it a name.
+        // 1. locate the element by css
+        googleSearchField = element(By.css(`[name='q']`))
+            // 2. name the element
+            .called(`The Google search field`)
+            // wait for the element if its not there right away
+            .shallWait(UntilElement.is.visible().forAsLongAs(1000));
+    });
+
+    it('should fill the search field with a text', async function () {
 
         await jonathan.attemptsTo(
-            Navigate.to("https://www.google.com/"),                         // Go to Google
+            // Go to Google
+            Navigate.to("https://www.google.com/"),
+            // send the search text to the search field
             Enter.value("software test automation")
-                .into(googleSearchField),                               // send the search text to the search field
-            Sleep.for(5 * 1000),                              // Wait for 5 Seconds (just to visually follow the test case)
+                .into(googleSearchField),
+            // Wait for 5 Seconds (just to visually follow the test case)
+            Sleep.for(5 * 1000),
+            // check if the text was entered
             See.if(Value.of(googleSearchField))
-                .is(strictEqualTo("software test automation"))      // check if the text was entered
+                .is(Expected.toBe("software test automation"))
         )
 
     });
 
-    afterAll(() => {
-        RunningBrowser.cleanup()            // cleanup all created browser when you are done
+    afterAll((): Promise<void[]> => {
+        // cleanup all created browser when you are done
+        return RunningBrowser.cleanup();
     });
 });
