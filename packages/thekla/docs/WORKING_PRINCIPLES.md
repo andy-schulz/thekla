@@ -6,9 +6,12 @@ nav_order: 3
 # Working Principles
 
 ## Overview
-![Overview](res/images/screenplay_overview.png)
+
+![Overview](res/images/screenplay.png)
 
 ## Actor
+
+An Acto
 
 ## Ability
 

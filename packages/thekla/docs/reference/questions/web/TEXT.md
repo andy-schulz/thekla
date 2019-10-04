@@ -4,6 +4,7 @@ parent: Ref:Questions
 ---
 
 # Text
+
 Get the content / text of element.
 
 ## Ability
@@ -19,14 +20,7 @@ Get the content / text of element.
 
 ## Example
 
-create the an actor 
-
-````typescript
-const john = Actor.named(`John`);
-john.whoCan(BrowseTheWeb.using(aBrowser));
-````
-
-use the `See` interaction to check for a text
+Use the `See` interaction to check for a text
 
 ````typescript
 john.attemptsTo(
@@ -35,7 +29,8 @@ john.attemptsTo(
 )
 ````
 
-save the text for later use.
+Save the text to a variable.
+
 ```typescript
 const text = await Text.of(element).answerdBy(john)
 ```
