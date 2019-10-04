@@ -36,3 +36,8 @@ for example
 ```bash
 npm run 01_Quick_Start_Guide
 ```
+
+## Available examples
+
+* ``01_Quick_Start_Guide`` - Enter a search string into Googles search bar
+* ``02_Use_a_Rest_Api`` - use a Rest API to add two numbers
