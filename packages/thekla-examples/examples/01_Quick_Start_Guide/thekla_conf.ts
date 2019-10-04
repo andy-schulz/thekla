@@ -4,18 +4,23 @@ export const config: TheklaConfig = {
 
     specs: ["dist/01_Quick_Start_Guide/google_search_spec.js"],
 
-    seleniumConfig: {
-        seleniumServerAddress: "http://localhost:4444/wd/hub"
+    serverConfig: {
+        serverAddress: {
+            hostname: "localhost",
+            port: 4444,
+            protocol: "http",
+            path: "/wd/hub"
+        }
     },
 
-    capabilities: [{
+    capabilities: {
         browserName: "chrome"
-    }],
+    },
 
     testFramework: {
         frameworkName: "jasmine",
         jasmineOptions: {
-            defaultTimeoutInterval: 10 * 1000
+            defaultTimeoutInterval: 20 * 1000
         }
     }
 };
