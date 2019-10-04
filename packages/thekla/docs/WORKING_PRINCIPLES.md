@@ -7,7 +7,7 @@ nav_order: 3
 
 ## Overview
 
-![Overview](res/images/screenplay.png)
+![Overview](res/images/Screenplay.png)
 
 ## Actor
 
