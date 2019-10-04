@@ -15,7 +15,7 @@ Create a file ``google_search_spec.ts`` inside the ``test`` folder with the foll
 
 ````typescript
 import {
-    Actor, BrowseTheWeb, RunningBrowser,
+    Actor, BrowseTheWeb, RunningBrowser, SppElement,
     Navigate, element, By, UntilElement, Enter, Sleep, See, Expected, Value } from "thekla-core";
 
 import {TheklaGlobal} from "thekla";
@@ -26,17 +26,20 @@ declare const thekla: TheklaGlobal;
 
 describe('Search on Google with thekla', function () {
 
-    it('should return a value', async function () {
+    let googleSearchField: SppElement;
+    let jonathan: Actor;
+
+    beforeAll(() => {
 
         // create a browser with the configuration
         const aBrowser = RunningBrowser
-            // get the server config from theklas config file
+        // get the server config from theklas config file
             .startedOn(thekla.serverConfig())
             // get the capabilities from theklas config file
             .withCapabilities(thekla.capabilities());
 
         // create the actor and give it a name
-        const jonathan = Actor.named("Jonathan");
+        jonathan = Actor.named("Jonathan");
 
         // specify what your actor can do.
         // In this case he can use a web browser with the browser created before.
@@ -44,11 +47,14 @@ describe('Search on Google with thekla', function () {
 
         // create the search field and give it a name.
         // 1. locate the element by css
-        const googleSearchField = element(By.css(`[name='q']`))
-        // 2. name the element
+        googleSearchField = element(By.css(`[name='q']`))
+            // 2. name the element
             .called(`The Google search field`)
-        // wait for the element if its not there right away
+            // wait for the element if its not there right away
             .shallWait(UntilElement.is.visible().forAsLongAs(1000));
+    });
+
+    it('should fill the search field with a text', async function () {
 
         await jonathan.attemptsTo(
             // Go to Google
@@ -71,4 +77,3 @@ describe('Search on Google with thekla', function () {
     });
 });
 ````
-
