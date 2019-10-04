@@ -21,9 +21,9 @@ export const config: TheklaConfig = {
         seleniumServerAddress: "http://localhost:4444/wd/hub"
     },
 
-    capabilities: [{
+    capabilities: {
         browserName: "chrome"
-    }],
+    },
 
     testFramework: {
         frameworkName: "jasmine",
