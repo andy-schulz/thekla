@@ -4,8 +4,11 @@
   "description": "guide on how to use thekla, a screenplay implementation",
   "main": "index.js",
   "scripts": {
-    "pretest": "tsc",
-    "01_Quick_Start_Guide": "npm run pretest && node_modules/.bin/thekla dist/01_Quick_Start_Guide/thekla_conf.js"
+    "pretest": "npm install & tsc",
+    "01": "./node_modules/.bin/thekla dist/01_Quick_Start_Guide/thekla_conf.js",
+    "01_Quick_Start_Guide": "npm run pretest & npm run 01",
+    "02": "./node_modules/.bin/thekla dist/02_Use_a_Rest_Api/thekla_conf.js",
+    "02_Use_a_Rest_Api": "npm run pretest & npm run 02"
   },
   "repository": {
     "type": "git",
@@ -23,6 +26,6 @@
   },
   "homepage": "https://github.com/andy-schulz/thekla-examples#readme",
   "dependencies": {
-    "thekla": "^1.12.2"
+    "thekla": "^1.22.14"
   }
 }
