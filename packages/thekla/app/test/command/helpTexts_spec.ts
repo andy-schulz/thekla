@@ -1,6 +1,7 @@
-import * as child    from "child_process";
-import {menus}       from "../../lib/commands/help";
-import * as minimist from "minimist";
+import * as child         from "child_process";
+import {mainMenu, menus}  from "../../lib/commands/help";
+import * as minimist      from "minimist";
+import {TheklaTestResult} from "../data/client";
 
 describe('The Help Text', () => {
     describe('on how to use thekla', () => {
@@ -9,7 +10,9 @@ describe('The Help Text', () => {
 
         beforeEach(() => {
             forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: ['ignore', 'pipe', process.stderr, 'ipc']});
-            forked.stdout.on("data", function (chunk) { output = chunk.toString()});
+            forked.stdout.on("data", function (chunk) {
+                output = chunk.toString()
+            });
         });
 
         afterEach(() => {
@@ -22,8 +25,8 @@ describe('The Help Text', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        resolve(specResult);
+                    forked.on('message', (result: any) => {
+                        resolve(result);
                     });
                 } catch (e) {
                     const message = `Error on forked process ${e} ${Error().stack}`;
@@ -39,12 +42,13 @@ describe('The Help Text', () => {
             };
 
             return startTest(args)
-                .then((specResult: any) => {
-                    expect(specResult.error).toEqual({});
+                .then((result: TheklaTestResult) => {
+                    expect(result.specResult).toBeUndefined();
+                    console.log(result.colorSupport);
                     console.log(`Output length: `, output.trim().length);
-                    console.log(`Expected menu length: `, menus.main.trim().length);
-                    // expect(output.trim().length === menus.main.trim()).toBeTruthy()
+                    console.log(`Expected menu length: `, mainMenu(result.colorSupport.level).trim().length);
+                    expect(output.trim()).toEqual(mainMenu(result.colorSupport.level).trim());
                 });
-        });
+        }, 1000000);
     });
 });

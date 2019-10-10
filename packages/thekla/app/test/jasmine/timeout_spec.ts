@@ -10,7 +10,7 @@ import {
 }                     from "../data/testFiles";
 
 
-import {TheklaTestData} from '../data/client';
+import {TheklaTestData, TheklaTestResult} from '../data/client';
 
 describe('Setting the Timeout', () => {
     let forked: child.ChildProcess;
@@ -68,10 +68,10 @@ describe('Setting the Timeout', () => {
 
         return new Promise((resolve, reject) => {
             try {
-                forked.on('message', (specResult: any) => {
-                    expect(specResult.failedCount).toEqual(1);
-                    expect(specResult.specResults[0].duration).toBeGreaterThanOrEqual(1000);
-                    expect(specResult.specResults[0].duration).toBeLessThanOrEqual(1100);
+                forked.on('message', (result: TheklaTestResult) => {
+                    expect(result.specResult.failedCount).toEqual(1);
+                    expect(result.specResult.specResults[0].duration).toBeGreaterThanOrEqual(1000);
+                    expect(result.specResult.specResults[0].duration).toBeLessThanOrEqual(1100);
                     resolve();
                 });
             } catch (e) {
@@ -82,7 +82,8 @@ describe('Setting the Timeout', () => {
         })
     });
 
-    it('to 5000ms the test case should time out after this time - (test case id: )', async () => {
+    it(`to 5000ms the test case should time out after this time - 
+    (test case id: dee7aec0-06b5-4fee-acc8-48ba00b07887)`, async () => {
         const testConfig: TheklaConfig =  {
             testFramework: {
                 frameworkName: "jasmine",
@@ -104,10 +105,10 @@ describe('Setting the Timeout', () => {
 
         return new Promise((resolve, reject) => {
             try {
-                forked.on('message', (specResult: any) => {
-                    expect(specResult.failedCount).toEqual(1);
-                    expect(specResult.specResults[0].duration).toBeGreaterThanOrEqual(5000);
-                    expect(specResult.specResults[0].duration).toBeLessThanOrEqual(5100);
+                forked.on('message', (result: TheklaTestResult) => {
+                    expect(result.specResult.failedCount).toEqual(1);
+                    expect(result.specResult.specResults[0].duration).toBeGreaterThanOrEqual(5000);
+                    expect(result.specResult.specResults[0].duration).toBeLessThanOrEqual(5100);
                     resolve();
                 });
             } catch (e) {

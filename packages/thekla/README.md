@@ -1,5 +1,6 @@
 # thekla
-Thekla is a Screenplay Pattern Implementation implemented in Typescript and using WebdriverJS as the browser driver.
+Thekla is a Screenplay Pattern Implementation in Typescript and using WebdriverIO as the browser driver.
+
 If you want to know more about the Screenplay Pattern check out
 [The Screenplay Pattern explained by the Serenity creators](https://serenity-js.org/design/screenplay-pattern.html).
 

@@ -1,16 +1,16 @@
 import * as child       from "child_process";
 
 
-import fsExtra          from 'fs-extra'
-import * as minimist    from "minimist";
-import {Command}        from "../../lib/command";
-import {menus}          from "../../lib/commands/help";
-import {TheklaConfig}   from "../../lib/config/TheklaConfig";
-import {Thekla}         from "../../lib/thekla";
-import {TheklaTestData} from "../data/client";
+import fsExtra                            from 'fs-extra'
+import * as minimist                      from "minimist";
+import {Command}                          from "../../lib/command";
+import {menus}                            from "../../lib/commands/help";
+import {TheklaConfig}                     from "../../lib/config/TheklaConfig";
+import {Thekla}                           from "../../lib/thekla";
+import {TheklaTestData, TheklaTestResult} from "../data/client";
 import {
     createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult
-}                       from "../data/testFiles";
+}                                         from "../data/testFiles";
 
 
 describe('execute a basic cucumber feature file', () => {
@@ -112,8 +112,8 @@ describe('execute a basic cucumber feature file', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.error).toEqual(undefined);
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult).toEqual(undefined);
                         expect(output.trim()).toEqual(menus.ccMultipleFeatureFiles.trim());
                         resolve();
                     });
@@ -174,9 +174,9 @@ describe('execute a basic cucumber feature file', () => {
             };
 
             return startTest(args)
-                .then((specResult: any) => {
-                    expect(specResult.error).toEqual(undefined);
-                    expect(specResult.success).toBe(true);
+                .then((result: TheklaTestResult) => {
+                    expect(result.specResult.error).toEqual(undefined);
+                    expect(result.specResult.success).toBe(true);
                     expect(output.trim().slice(0,-4)).toEqual(cucumberSuccess.trim());
                 })
         });
@@ -197,9 +197,9 @@ describe('execute a basic cucumber feature file', () => {
             };
 
             return startTest(args)
-                .then((specResult: any) => {
-                    expect(specResult.error).toEqual(undefined);
-                    expect(specResult.success).toBe(true);
+                .then((result: TheklaTestResult) => {
+                    expect(result.specResult.error).toEqual(undefined);
+                    expect(result.specResult.success).toBe(true);
                     expect(output.trim().slice(0,-4)).toEqual(cucumberSuccess.trim());
                 });
         });
@@ -222,9 +222,9 @@ describe('execute a basic cucumber feature file', () => {
             };
 
             return startTest(args)
-                .then((specResult: any) => {
-                    expect(specResult.error).toEqual(undefined);
-                    expect(specResult.success).toBe(true);
+                .then((result: TheklaTestResult) => {
+                    expect(result.specResult.error).toEqual(undefined);
+                    expect(result.specResult.success).toBe(true);
                     expect(output.trim().slice(0,-4)).toEqual(cucumberSuccess.trim());
                 });
         });

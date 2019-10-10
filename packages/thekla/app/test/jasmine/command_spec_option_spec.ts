@@ -1,7 +1,7 @@
-import * as child       from "child_process";
-import fsExtra          from "fs-extra";
-import * as minimist    from "minimist";
-import {TheklaTestData} from "../data/client";
+import * as child                         from "child_process";
+import fsExtra                            from "fs-extra";
+import * as minimist                      from "minimist";
+import {TheklaTestData, TheklaTestResult} from "../data/client";
 
 const cwd = process.cwd();
 
@@ -83,11 +83,11 @@ describe('Passing spec files', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults.length).toEqual(2);
-                        expect(JSON.stringify(specResult.specResults)).toContain('finding a spec in a subdirectory');
-                        expect(JSON.stringify(specResult.specResults)).toContain('finding a spec in the master directory');
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults.length).toEqual(2);
+                        expect(JSON.stringify(result.specResult.specResults)).toContain('finding a spec in a subdirectory');
+                        expect(JSON.stringify(result.specResult.specResults)).toContain('finding a spec in the master directory');
                         resolve();
                     });
                 } catch (e) {
@@ -114,9 +114,9 @@ describe('Passing spec files', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults.length).toEqual(0);
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults.length).toEqual(0);
                         resolve();
                     });
                 } catch (e) {
@@ -126,8 +126,8 @@ describe('Passing spec files', () => {
             })
         });
 
-        it('as a single file, it should execute this file - ' +
-            '(test case id: 477b309b-a655-4a76-860f-871158b2ee95)', async () => {
+        it(`as a single file, it should execute this file - 
+            (test case id: 477b309b-a655-4a76-860f-871158b2ee95)`, async () => {
             const testArgsSpec = [
                 jasmineConfRelativeFilePath,
                 '--specs=_testData/command/specFinder/spec_master_finder.js',
@@ -142,10 +142,10 @@ describe('Passing spec files', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults.length).toEqual(1);
-                        expect(JSON.stringify(specResult.specResults)).toContain('finding a spec in the master directory');
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults.length).toEqual(1);
+                        expect(JSON.stringify(result.specResult.specResults)).toContain('finding a spec in the master directory');
                         resolve();
                     });
                 } catch (e) {
@@ -172,9 +172,9 @@ describe('Passing spec files', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults.length).toEqual(0);
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults.length).toEqual(0);
                         resolve();
                     });
                 } catch (e) {
@@ -201,9 +201,9 @@ describe('Passing spec files', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults.length).toEqual(0);
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults.length).toEqual(0);
                         resolve();
                     });
                 } catch (e) {
@@ -230,10 +230,10 @@ describe('Passing spec files', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults.length).toEqual(1);
-                        expect(JSON.stringify(specResult.specResults)).toContain('finding a spec in the master directory');
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults.length).toEqual(1);
+                        expect(JSON.stringify(result.specResult.specResults)).toContain('finding a spec in the master directory');
                         resolve();
                     });
                 } catch (e) {
@@ -260,10 +260,10 @@ describe('Passing spec files', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults.length).toEqual(1);
-                        expect(JSON.stringify(specResult.specResults)).toContain('finding a spec in the master directory');
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults.length).toEqual(1);
+                        expect(JSON.stringify(result.specResult.specResults)).toContain('finding a spec in the master directory');
                         resolve();
                     });
                 } catch (e) {
@@ -290,11 +290,11 @@ describe('Passing spec files', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults.length).toEqual(2);
-                        expect(JSON.stringify(specResult.specResults)).toContain('finding a spec in a subdirectory');
-                        expect(JSON.stringify(specResult.specResults)).toContain('finding a spec in the master directory');
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults.length).toEqual(2);
+                        expect(JSON.stringify(result.specResult.specResults)).toContain('finding a spec in a subdirectory');
+                        expect(JSON.stringify(result.specResult.specResults)).toContain('finding a spec in the master directory');
                         resolve();
                     });
                 } catch (e) {

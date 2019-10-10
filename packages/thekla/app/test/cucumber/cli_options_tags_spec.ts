@@ -1,7 +1,7 @@
-import * as child     from "child_process";
-import * as minimist  from "minimist";
-import {TheklaConfig} from "../../lib/config/TheklaConfig";
-import {TheklaTestData}                                                                                  from "../data/client";
+import * as child                                                                                        from "child_process";
+import * as minimist                                                                                     from "minimist";
+import {TheklaConfig}                                                                                    from "../../lib/config/TheklaConfig";
+import {TheklaTestData, TheklaTestResult}                                                                from "../data/client";
 import {createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "../data/testFiles";
 import fsExtra                                                                                           from 'fs-extra'
 
@@ -86,8 +86,8 @@ describe('Specifying tags', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
                         expect(output.trim()).toContain(expectedResult);
                         resolve();
                     });
@@ -143,8 +143,8 @@ describe('Specifying tags', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
                         expect(output.trim()).toContain(expectedResult);
                         resolve();
                     });
@@ -197,8 +197,8 @@ describe('Specifying tags', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
                         expect(output.trim()).toContain(expectedResult);
                         resolve();
                     });
@@ -254,8 +254,8 @@ describe('Specifying tags', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
                         expect(output.trim()).toContain(expectedResult);
                         resolve();
                     });

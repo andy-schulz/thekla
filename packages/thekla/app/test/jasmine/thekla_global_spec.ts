@@ -1,13 +1,13 @@
-import * as child       from "child_process";
-import fsExtra          from "fs-extra";
-import {TheklaConfig}   from "../../lib/config/TheklaConfig";
+import * as child                         from "child_process";
+import fsExtra                            from "fs-extra";
+import {TheklaConfig}                     from "../../lib/config/TheklaConfig";
 import {
     createJasmineTestFiles,
     createTheklaConfigFile, createTheklaGlobalSpec, JasmineTestFileResult,
     TheklaConfigFileResult
-}                       from "../data/testFiles";
-import {TheklaTestData} from "../data/client";
-import * as minimist    from "minimist";
+}                                         from "../data/testFiles";
+import {TheklaTestData, TheklaTestResult} from "../data/client";
+import * as minimist                      from "minimist";
 
 describe('The Thekla global object', () => {
     let forked: child.ChildProcess;
@@ -74,9 +74,9 @@ describe('The Thekla global object', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
-                        expect(specResult.failedCount).toEqual(0);
-                        expect(specResult.specResults[0].description)
+                    forked.on('message', (result: TheklaTestResult) => {
+                        expect(result.specResult.failedCount).toEqual(0);
+                        expect(result.specResult.specResults[0].description)
                             .toEqual("Thekla globals Should be accessible inside a spec");
                         resolve();
                     });
