@@ -6,7 +6,7 @@
   "scripts": {
     "prepare": "npm run build",
     "test": "jasmine --config=app/test/support/jasmine.json",
-    "build": "./node_modules/.bin/del-cli dist/**/* & tsc",
+    "build": "del-cli dist/**/* & tsc",
     "postversion": "git push --tags",
     "new:patch": "run-s new:npmupdate new:gitadd new:gitcommit new:gitpush new:npmversionpatch new:npmpublish",
     "new:npmupdate": "npm update",
