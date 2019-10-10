@@ -6,6 +6,9 @@
     <a href="https://circleci.com/gh/andy-schulz/thekla/tree/master">
         <img alt="Status" src="https://circleci.com/gh/andy-schulz/thekla/tree/master.svg?style=shield">
     </a>
+    <a href="hhttps://badge.fury.io/js/thekla.svg">
+        <img alt="Status" src="https://badge.fury.io/js/thekla.svg">
+    </a> 
 </p>
 
 ***
