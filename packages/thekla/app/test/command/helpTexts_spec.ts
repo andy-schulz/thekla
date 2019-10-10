@@ -41,7 +41,7 @@ describe('The Help Text', () => {
             return startTest(args)
                 .then((specResult: any) => {
                     expect(specResult.error).toEqual({});
-                    expect(output.trim()).toEqual(menus.main.trim());
+                    expect(output.trim() === menus.main.trim()).toBeTruthy()
                 });
         });
     });
