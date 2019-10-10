@@ -4,7 +4,6 @@
   "description": "cli for thekla-core",
   "main": "dist/index.js",
   "scripts": {
-    "pretest": "tsc",
     "prepare": "npm run build",
     "test": "jasmine --config=app/test/support/jasmine.json",
     "build": "./node_modules/.bin/del-cli dist/**/* & tsc",
