@@ -32,7 +32,7 @@ jobs:
           root: ~/thekla
           paths: .
 
-      - run: tsc
+      - run: npm run build
   test:
     <<: *defaults
     steps:
