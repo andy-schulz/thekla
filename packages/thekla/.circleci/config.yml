@@ -36,6 +36,8 @@ jobs:
   test:
     <<: *defaults
     steps:
+      - attach_workspace:
+          at: ~/thekla
       - run:
           name: Run tests
           command: npm test
