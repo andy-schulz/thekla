@@ -44,9 +44,6 @@ describe('The Help Text', () => {
             return startTest(args)
                 .then((result: TheklaTestResult) => {
                     expect(result.specResult).toBeUndefined();
-                    console.log(result.colorSupport);
-                    console.log(`Output length: `, output.trim().length);
-                    console.log(`Expected menu length: `, mainMenu(result.colorSupport ? result.colorSupport.level : 0).trim().length);
                     expect(output.trim()).toEqual(mainMenu(result.colorSupport ?  result.colorSupport.level: 0).trim());
                 });
         }, 1000000);
