@@ -10,7 +10,7 @@ defaults: &defaults
     - image: circleci/node:8.9.1
 
 jobs:
-  build:
+  buildThekla:
     <<: *defaults
     steps:
       - checkout
