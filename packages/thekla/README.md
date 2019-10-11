@@ -29,5 +29,5 @@ for detailed information on how to use thekla.
 Thekla is a Screenplay Pattern Implementation in Typescript and using WebdriverIO as the Selenium and Appium API.
 
 I started thekla as a pet project to understand the basic principles of the Screenplay Pattern without the need to use
-protractor, as it is used in SerenityJS. Protractor does provide the possibility to write browser interaction test 
+protractor in SerenityJS. Protractor does not provide the possibility to write browser interaction test 
 between different browsers like Firefox and Chrome.
