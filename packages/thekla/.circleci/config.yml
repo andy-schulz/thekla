@@ -45,7 +45,7 @@ jobs:
           name: Run tests
           command: npm run test:cov
       - codecov/upload:
-          file: ~/thekla/thekla/coverage/lcov.info
+          file: ./coverage/lcov.info
 #  deploy:
 #    <<: *defaults
 #    steps:
