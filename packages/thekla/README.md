@@ -9,9 +9,10 @@
     <a href="https://codecov.io/gh/andy-schulz/thekla">
       <img src="https://codecov.io/gh/andy-schulz/thekla/branch/master/graph/badge.svg" />
     </a>
-    <a href="hhttps://badge.fury.io/js/thekla.svg">
-        <img alt="Status" src="https://badge.fury.io/js/thekla.svg">
+    <a href="https://badge.fury.io/js/thekla">
+        <img src="https://badge.fury.io/js/thekla.svg" alt="npm version" height="18">
     </a>
+
 
 </p>
 
