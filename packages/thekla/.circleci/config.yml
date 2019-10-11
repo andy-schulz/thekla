@@ -43,7 +43,7 @@ jobs:
           at: ~/thekla
       - run:
           name: Run tests
-          command: npm test
+          command: npm run test:cov
       - codecov/upload:
           file: ~/thekla/coverage
 
