@@ -1,29 +1,15 @@
 {
-  "cache": false,
-  "check-coverage": false,
-  "extension": [
-    ".ts"
-  ],
-  "include": [
-    "**/*.js",
-    "**/*.ts"
-  ],
+  "extends": "@istanbuljs/nyc-config-typescript",
   "exclude": [
     "coverage/**",
-    "dist/**",
     "docs/**",
     "app/test/**",
     "_archive/**",
     "_testData/**",
-    "node_modules/**",
-    "**/*.d.ts"
+    "node_modules/**"
   ],
-  "sourceMap": true,
   "reporter": [
-    "html",
-    "text",
-    "text-summary"
-  ],
-  "all": true,
-  "instrument": true
+    "lcov",
+    "text"
+  ]
 }

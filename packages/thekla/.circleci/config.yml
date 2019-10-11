@@ -9,8 +9,8 @@ defaults: &defaults
   docker:
     - image: circleci/node:8
 
-orbs:
-  codecov: codecov/codecov@1.0.5
+#orbs:
+#  codecov: codecov/codecov@1.0.5
 
 jobs:
   build:
@@ -45,7 +45,7 @@ jobs:
           name: Run tests
           command: npm test
       - codecov/upload:
-          file: {{ coverage_report_filepath }}
+          file: {{ ~/thekla/coverage }}
 
 #  deploy:
 #    <<: *defaults
