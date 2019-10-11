@@ -31,3 +31,11 @@ Thekla is a Screenplay Pattern Implementation in Typescript and using WebdriverI
 I started thekla as a pet project to understand the basic principles of the Screenplay Pattern without the need to use
 protractor in SerenityJS. Protractor does not provide the possibility to write browser interaction test 
 between different browsers like Firefox and Chrome.
+
+# Credits
+
+Thanks to 
+
+[!Browserstack](docs/res/images/Browserstack.png)
+
+for supporting my project and letting me test on their *browser stack*.
