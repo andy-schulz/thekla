@@ -36,6 +36,6 @@ between different browsers like Firefox and Chrome.
 
 Thanks to 
 
-![Browserstack](docs/res/images/Browserstack.png)
+![Browserstack](docs/res/images/browserstack.png)
 
 for supporting my project and letting me test on their *browser stack*.
