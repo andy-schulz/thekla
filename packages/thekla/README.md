@@ -12,13 +12,11 @@
     <a href="https://badge.fury.io/js/thekla">
         <img src="https://badge.fury.io/js/thekla.svg" alt="npm version" height="18">
     </a>
-
-
 </p>
 
 ***
 
-# Documentation
+## Documentation
 
 Check the
 [the official project documentation](https://andy-schulz.github.io/thekla/)
@@ -32,7 +30,7 @@ I started thekla as a pet project to understand the basic principles of the Scre
 protractor in SerenityJS. Protractor does not provide the possibility to write browser interaction test 
 between different browsers like Firefox and Chrome.
 
-# Credits
+## Credits
 
 Thanks to 
 
