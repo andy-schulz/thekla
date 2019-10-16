@@ -28,6 +28,23 @@ between different browsers like Firefox and Chrome.
 
 Thanks to 
 
-<img src="docs/res/images/browserstack.png" alt="browserstack" width="300"/>
+<table> 
+    <tr>
+    <td>
+        <a href="https://circleci.com">
+            <img src="docs/res/images/browserstack.png" alt="circle ci" height="40"/>
+        </a>
+    </td>
+    <td>for letting me build the project for free</td>
+    </tr>
+    <tr>
+    <td>
+        <a href="https://www.browserstack.com">
+            <img src="docs/res/images/circle-logo-horizontal-black.png" alt="browserstack" height="40"/>
+        </a>
+    </td>
+    <td>for letting me test on their browser stack.</td>
+    </tr>
+</table>
 
-for supporting my project and letting me test on their *browser stack*.
+
