@@ -1,18 +1,12 @@
 # thekla
 
+
 ***
 
-<p align="center">
-    <a href="https://circleci.com/gh/andy-schulz/thekla/tree/master">
-        <img alt="Status" src="https://circleci.com/gh/andy-schulz/thekla/tree/master.svg?style=shield">
-    </a>
-    <a href="https://codecov.io/gh/andy-schulz/thekla">
-      <img src="https://codecov.io/gh/andy-schulz/thekla/branch/master/graph/badge.svg" />
-    </a>
-    <a href="https://badge.fury.io/js/thekla">
-        <img src="https://badge.fury.io/js/thekla.svg" alt="npm version" height="18">
-    </a>
-</p>
+| package      	| build                                                                                                                                            	| test                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                               	| available version                                                                                	|
+|--------------	|--------------------------------------------------------------------------------------------------------------------------------------------------	|--------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------	|--------------------------------------------------------------------------------------------------	|
+| thekla (cli) 	|  [![CIRCLE CI](https://circleci.com/gh/andy-schulz/thekla/tree/master.svg?style=shield)](https://circleci.com/gh/andy-schulz/thekla/tree/master) 	|                                                                                                                                                                                                                [![CODE COVERAGE](https://codecov.io/gh/andy-schulz/thekla/branch/master/graph/badge.svg)](https://codecov.io/gh/andy-schulz/thekla)                                                                                                                                                                                                                	|      [![NPM PACKAGE](https://badge.fury.io/js/thekla.svg)](https://badge.fury.io/js/thekla)      	|
+|  thekla-core 	| [![NPM PACKAGE](https://circleci.com/gh/andy-schulz/thekla-core.svg?style=shield)](https://circleci.com/gh/andy-schulz/thekla-core/tree/master)  	| [![NPM PACKAGE](https://codecov.io/gh/andy-schulz/thekla-core/branch/master/graph/badge.svg)](https://codecov.io/gh/andy-schulz/thekla-core) [![BrowserStack Status](https://automate.browserstack.com/badge.svg?badge_key=ZDFNNWVVNktNcnBHRkkra3VBV09zYkUvRkdPYXluSzB4Y2plbWcvdDRyST0tLXhBOUhSUlI5YWl2ZXdaRW1aRm5tckE9PQ==--5eb6391d56c4620901e99ccc6bc6bf9ad85334b9)](https://automate.browserstack.com/public-build/ZDFNNWVVNktNcnBHRkkra3VBV09zYkUvRkdPYXluSzB4Y2plbWcvdDRyST0tLXhBOUhSUlI5YWl2ZXdaRW1aRm5tckE9PQ==--5eb6391d56c4620901e99ccc6bc6bf9ad85334b9) 	| [![NPM PACKAGE](https://badge.fury.io/js/thekla-core.svg)](https://badge.fury.io/js/thekla-core) 	|
 
 ***
 
