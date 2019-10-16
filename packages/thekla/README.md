@@ -32,7 +32,7 @@ Thanks to
     <tr>
     <td>
         <a href="https://circleci.com">
-            <img src="docs/res/images/browserstack.png" alt="circle ci" height="40"/>
+            <img src="docs/res/images/circle-logo-horizontal-black.png" alt="circle ci" height="40"/>
         </a>
     </td>
     <td>for letting me build the project for free</td>
@@ -40,7 +40,7 @@ Thanks to
     <tr>
     <td>
         <a href="https://www.browserstack.com">
-            <img src="docs/res/images/circle-logo-horizontal-black.png" alt="browserstack" height="40"/>
+            <img src="docs/res/images/browserstack.png" alt="browserstack" height="90"/>
         </a>
     </td>
     <td>for letting me test on their browser stack.</td>
