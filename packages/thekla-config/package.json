@@ -3,8 +3,12 @@
   "version": "1.22.14",
   "description": "thekla configuration files",
   "main": "dist/index.js",
+  "files": [
+    "dist/*"
+  ],
   "scripts": {
-    "prepare": "tsc",
+    "prepare": "npm run build",
+    "build": "del-cli dist/**/* & tsc",
     "test": "jasmine --config=src/test/support/jasmine.json",
     "test:cov": "nyc npm run test"
   },
