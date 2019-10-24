@@ -1,5 +1,4 @@
-import {getConfiguredTheklaGlobal} from "../../lib/config/config_finder";
-import {TheklaConfig}              from "../../lib/config/TheklaConfig";
+import {getConfiguredTheklaGlobal, TheklaConfig} from "..";
 
 describe(`Creating the global object`, (): void => {
     describe(`from a minimal thekla config`, (): void => {

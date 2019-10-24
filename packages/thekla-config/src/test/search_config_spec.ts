@@ -1,12 +1,10 @@
-import {RestClientConfig}          from "thekla-core";
-import {getConfiguredTheklaGlobal} from "../../lib/config/config_finder";
-import {TheklaConfig}              from "../../lib/config/TheklaConfig";
-import _                           from "lodash";
+import {RestClientConfig, getConfiguredTheklaGlobal, TheklaConfig} from "..";
+import _                                                           from "lodash";
 
 describe(`The config retrievers`, (): void => {
     const basicConfig: TheklaConfig = {
         serverConfig: {
-            default: "myServerConfig2",
+            default: `myServerConfig2`,
             myServerConfig: {
                 serverAddress: {}
             },
@@ -17,28 +15,28 @@ describe(`The config retrievers`, (): void => {
             }
         },
         capabilities: {
-            default: "myCapabilities2",
+            default: `myCapabilities2`,
             myCapabilities: {
-                browserName: "myBrowser"
+                browserName: `myBrowser`
             },
             myCapabilities2: {
-                browserName: "myBrowser2"
+                browserName: `myBrowser2`
             }
         },
         restConfig: {
-            default: "myRestConfig2",
+            default: `myRestConfig2`,
             myRestConfig: {
-                restClientName: "request"
+                restClientName: `request`
             },
             myRestConfig2: {
-                restClientName: "request",
+                restClientName: `request`,
                 requestOptions: {
-                    host: "restClientHost2"
+                    host: `restClientHost2`
                 }
             }
         },
         testFramework: {
-            frameworkName: "jasmine"
+            frameworkName: `jasmine`
         }
     };
 
@@ -48,13 +46,13 @@ describe(`The config retrievers`, (): void => {
         - (test case id: 7310d772-1f49-4b30-9792-e28e0639d843)`, (): void => {
             const merge = {
                 serverConfig: {
-                    default: "",
+                    default: ``,
                 },
                 capabilities: {
-                    default: "",
+                    default: ``,
                 },
                 restConfig: {
-                    default: "",
+                    default: ``,
                 },
             };
 
@@ -133,13 +131,13 @@ But got:
         - (test case id: 4298e472-a0af-4e5d-aae1-0725b1e93272)`, (): void => {
             const merge = {
                 serverConfig: {
-                    default: "doesNotExist",
+                    default: `doesNotExist`,
                 },
                 capabilities: {
-                    default: "doesNotExist",
+                    default: `doesNotExist`,
                 },
                 restConfig: {
-                    default: "doesNotExist",
+                    default: `doesNotExist`,
                 },
             };
 
@@ -302,7 +300,7 @@ But got:
 
         it(`should return empty configs
         - (test case id: 745a7abe-60f3-49f5-bf20-ed0aedb8bcc4)`, (): void => {
-            const config: TheklaConfig = {testFramework: {frameworkName: "jasmine"}};
+            const config: TheklaConfig = {testFramework: {frameworkName: `jasmine`}};
 
             const globalConfig = getConfiguredTheklaGlobal(config);
             expect(globalConfig.serverConfig()).toEqual({});
@@ -317,19 +315,18 @@ But got:
                     serverAddress: {}
                 },
                 capabilities: {
-                    browserName: "myBrowser"
+                    browserName: `myBrowser`
                 },
                 restConfig: {
-                    restClientName: "request"
+                    restClientName: `request`
                 },
-                testFramework: {frameworkName: "jasmine"}
+                testFramework: {frameworkName: `jasmine`}
             };
-
 
             const globalConfig = getConfiguredTheklaGlobal(config);
             expect(globalConfig.serverConfig()).toEqual({serverAddress: {}});
-            expect(globalConfig.capabilities()).toEqual({browserName: "myBrowser"});
-            expect(globalConfig.restConfig()).toEqual({restClientName: "request"});
+            expect(globalConfig.capabilities()).toEqual({browserName: `myBrowser`});
+            expect(globalConfig.restConfig()).toEqual({restClientName: `request`});
         });
 
     });
@@ -368,7 +365,7 @@ But got:
             const config = _.merge(_.cloneDeep(basicConfig), merge);
 
             const expectedCapabilities = {
-                browserName: "myBrowser2"
+                browserName: `myBrowser2`
             };
 
             const theklaGlobal = getConfiguredTheklaGlobal(config);
@@ -387,9 +384,9 @@ But got:
             const config = _.merge(_.cloneDeep(basicConfig), merge);
 
             const expectedRestClientConfig: RestClientConfig = {
-                restClientName: "request",
+                restClientName: `request`,
                 requestOptions: {
-                    host: "restClientHost2"
+                    host: `restClientHost2`
                 }
             };
 
