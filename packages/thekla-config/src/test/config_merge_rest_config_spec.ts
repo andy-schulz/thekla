@@ -1,51 +1,51 @@
 import {configure}             from "log4js";
-import {RestClientConfig}      from "thekla-core";
-import {TheklaConfig}          from "../../lib/config/TheklaConfig";
-import {TheklaConfigProcessor} from "../../lib/config/TheklaConfigProcessor";
+import {RestClientConfig}      from "..";
+import {TheklaConfig}          from "..";
+import {TheklaConfigProcessor} from "..";
 
 configure({
-    appenders: { output: {"type": "stdout"}},
-    categories: {   default: { appenders: ['output'], level: 'error' },
-                    TheklaConfigProcessor: { appenders: ['output'], level: 'debug' } }
+    appenders: { output: {type: `stdout`}},
+    categories: {   default: { appenders: [`output`], level: `error` },
+                    TheklaConfigProcessor: { appenders: [`output`], level: `error` } }
 });
 
-describe('Passing the rest config', () => {
+describe(`Passing the rest config`, () => {
     const processor = new TheklaConfigProcessor();
 
-    describe('request client name on command line', () => {
-        it('should be merged into the config file ' +
-            '- (test case id: ea309d36-1549-4cdd-94b6-d01113be44bc)', () => {
+    describe(`request client name on command line`, () => {
+        it(`should be merged into the config file ` +
+            `- (test case id: ea309d36-1549-4cdd-94b6-d01113be44bc)`, () => {
             const config: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 }
 
             };
 
             const fn: RestClientConfig = {
-                    restClientName: "request"
+                    restClientName: `request`
             };
 
             const expected: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 },
                 restConfig: {
-                    restClientName: "request"
+                    restClientName: `request`
                 }
             };
 
             expect(processor.mergeRestConfigOptions(fn,config)).toEqual(expected);
         });
 
-        it('as an undefined value should not replace the  ' +
-            '- (test case id: 713e721f-852b-4520-8904-02dd6f2a627f)', () => {
+        it(`as an undefined value should not replace the  ` +
+            `- (test case id: 713e721f-852b-4520-8904-02dd6f2a627f)`, () => {
             const config: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine",
+                    frameworkName: `jasmine`,
                 },
                 restConfig: {
-                    restClientName: "request"
+                    restClientName: `request`
                 }
             };
 
@@ -55,10 +55,10 @@ describe('Passing the rest config', () => {
 
             const expected: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 },
                 restConfig: {
-                    restClientName: "request"
+                    restClientName: `request`
                 }
             };
 
@@ -66,32 +66,32 @@ describe('Passing the rest config', () => {
         });
     });
 
-    describe('request client options on command line', () => {
+    describe(`request client options on command line`, () => {
         // require option
-        it('with an unknown options ' +
-            '- (test case id: 9cec3689-6b1d-4176-a93a-4ae71b801bd8)', () => {
+        it(`with an unknown options ` +
+            `- (test case id: 9cec3689-6b1d-4176-a93a-4ae71b801bd8)`, () => {
             const config: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 }
             };
 
             const fn = {
                 requestOptions: {
                     body: {
-                        test: "myElement"
+                        test: `myElement`
                     }
                 }
             };
 
             const expected: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 },
                 restConfig: {
                     requestOptions: {
                         body: {
-                            test: "myElement"
+                            test: `myElement`
                         }
                     }
                 }
@@ -101,16 +101,16 @@ describe('Passing the rest config', () => {
             expect(actual).toEqual(expected);
         });
 
-        it('should replace an existing value ' +
-            '- (test case id: 55c3c90f-6a2b-4066-9fc4-89b26accece4)', () => {
+        it(`should replace an existing value ` +
+            `- (test case id: 55c3c90f-6a2b-4066-9fc4-89b26accece4)`, () => {
             const config: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 },
                 restConfig: {
-                    restClientName: "request",
+                    restClientName: `request`,
                     requestOptions: {
-                        proxy: "mzProxy"
+                        proxy: `mzProxy`
                     }
                 },
 
@@ -118,18 +118,18 @@ describe('Passing the rest config', () => {
 
             const fn = {
                 requestOptions: {
-                    proxy: "mzProxy2"
+                    proxy: `mzProxy2`
                 }
             };
 
             const expected: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 },
                 restConfig: {
-                    restClientName: "request",
+                    restClientName: `request`,
                     requestOptions: {
-                        proxy: "mzProxy2"
+                        proxy: `mzProxy2`
                     }
                 },
             };
