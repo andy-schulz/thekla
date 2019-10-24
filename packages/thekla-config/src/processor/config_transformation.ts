@@ -3,21 +3,18 @@ import {curry, set, transform} from "lodash"
 import * as fp                 from "lodash/fp"
 import {Options}               from "webdriver"
 import {
-    AppiumOptions,
-    BrowserStackCapabilities,
-    DesiredCapabilities,
-    ProxyConfig
-}                              from "../../../config/DesiredCapabilities";
-import {ServerConfig}          from "../../../config/ServerConfig";
+    AppiumOptions, BrowserStackCapabilities, DesiredCapabilities, ProxyConfig
+}                              from "..";
+import {ServerConfig}          from "../";
 
 const transformServerConfig = (serverConfig: ServerConfig): (option: Options) => Options => {
     return (options: Options): Options => {
         const opts = options;
 
-        if(serverConfig.user)
+        if (serverConfig.user)
             opts.user = serverConfig.user;
 
-        if(serverConfig.key)
+        if (serverConfig.key)
             opts.key = serverConfig.key;
 
         if (!serverConfig.serverAddress)
@@ -42,10 +39,10 @@ const transformServerConfig = (serverConfig: ServerConfig): (option: Options) =>
     }
 };
 const setMainProperties = curry((capabilities: DesiredCapabilities | undefined, options: Options): Options => {
-    if(!capabilities)
+    if (!capabilities)
         return options;
     const opts = transform(capabilities, (acc: Options, value: any, key: string) => {
-        if(typeof value !== `object`) {
+        if (typeof value !== `object`) {
             set(acc, `capabilities["${key}"]`, value)
         }
     }, options);
@@ -77,22 +74,22 @@ const setProxy = curry((proxy: ProxyConfig | undefined, options: Options): Optio
 });
 
 const setAppiumOptions = curry((appiumOptions: AppiumOptions | undefined, options: Options): Options => {
-    if(!appiumOptions)
+    if (!appiumOptions)
         return options;
 
     const opts = transform(appiumOptions, (acc, value, key) => {
-        if(key === `android`) {
-            return transform(appiumOptions.android as object,(acc: Options, value: any, key: string): void => {
-                set(acc,`capabilities[${key}]`, value);
+        if (key === `android`) {
+            return transform(appiumOptions.android as object, (acc: Options, value: any, key: string): void => {
+                set(acc, `capabilities[${key}]`, value);
             }, acc);
         }
 
-        if(key === `ios`)
-            return transform(appiumOptions.ios as object,(acc: Options, value: any, key: string) => {
-                set(acc,`capabilities[${key}]`, value);
+        if (key === `ios`)
+            return transform(appiumOptions.ios as object, (acc: Options, value: any, key: string) => {
+                set(acc, `capabilities[${key}]`, value);
             }, acc);
 
-        set(acc,`capabilities[${key}]`, value);
+        set(acc, `capabilities[${key}]`, value);
 
     }, options);
 
@@ -100,7 +97,7 @@ const setAppiumOptions = curry((appiumOptions: AppiumOptions | undefined, option
 });
 
 const setBrowserstackOptions = curry((browserstackOptions: BrowserStackCapabilities | undefined, options: Options) => {
-    if(browserstackOptions)
+    if (browserstackOptions)
         set(options, `capabilities["bstack:options"]`, browserstackOptions);
 
     return options;
@@ -108,7 +105,7 @@ const setBrowserstackOptions = curry((browserstackOptions: BrowserStackCapabilit
 
 const transformCapabilities = (capabilities: DesiredCapabilities): (option: Options) => Options => {
     return (options: Options): Options => {
-        const opts =  fp.flow(
+        const opts = fp.flow(
             setMainProperties(capabilities),
             setFirefoxOptions(capabilities[`moz:firefoxOptions`]),
             setChromeOptions(capabilities[`goog:chromeOptions`]),

@@ -1,5 +1,5 @@
-import {DesiredCapabilities, RestClientConfig, ServerConfig} from "thekla-core";
-import {TheklaConfig}                                        from "../config/TheklaConfig";
+import {DesiredCapabilities, RestClientConfig, ServerConfig} from "..";
+import {TheklaConfig}                                        from "..";
 
 export interface TheklaGlobal {
     config: TheklaConfig;

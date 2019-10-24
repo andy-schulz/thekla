@@ -1,5 +1,4 @@
-import {ServerConfig, DesiredCapabilities, RestClientConfig} from "thekla-core";
-
+import {ServerConfig, DesiredCapabilities, RestClientConfig} from "..";
 
 export interface TheklaConfig {
     // index signature is used for
@@ -27,7 +26,7 @@ export type ConfigSet<T> = {
 }
 
 export interface TestFramework {
-    frameworkName: "jasmine" | "cucumber";
+    frameworkName: `jasmine` | `cucumber`;
     jasmineOptions?: JasmineOptions;
     cucumberOptions?: CucumberOptions;
 

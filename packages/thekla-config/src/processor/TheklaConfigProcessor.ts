@@ -1,13 +1,13 @@
 import {RequestPromiseOptions}                         from "request-promise-native";
-import {RestClientConfig}                              from "thekla-core";
-import {CucumberOptions, TheklaConfig, JasmineOptions} from "./TheklaConfig";
+import {RestClientConfig}                              from "..";
 import merge                                           from "deepmerge";
 
 import {getLogger} from "@log4js-node/log4js-api";
 import {flow, curry}      from "lodash/fp";
+import { TheklaConfig, CucumberOptions, JasmineOptions } from "../config/TheklaConfig";
 
 export class TheklaConfigProcessor {
-    private logger = getLogger("TheklaConfigProcessor");
+    private logger = getLogger(`TheklaConfigProcessor`);
 
 
     public mergeSpecs(specs: string | string[] | undefined, config: TheklaConfig): TheklaConfig {
@@ -29,8 +29,8 @@ export class TheklaConfigProcessor {
             const cn:{[key: string]: any} = {};
             if(!name) return cnfg;
 
-            if(!(name === "jasmine" || name === "cucumber")) {
-                const message: string = `Passed framework name as command line argument is ${JSON.stringify(name)} but should be 'jasmine' or 'cucumber'`;
+            if(!(name === `jasmine` || name === `cucumber`)) {
+                const message = `Passed framework name as command line argument is ${JSON.stringify(name)} but should be 'jasmine' or 'cucumber'`;
                 this.logger.error(message);
                 throw new Error(message);
             } else {
@@ -48,9 +48,9 @@ export class TheklaConfigProcessor {
 
             const mergeAttributes = (index: string, format: string | string[] | undefined) => {
                 // remove the tags if --tags="" was passed as command line
-                if(format === "" && cnfg.testFramework && cnfg.testFramework.cucumberOptions && (cnfg.testFramework.cucumberOptions as {[key:string]: any})[index]) {
+                if(format === `` && cnfg.testFramework && cnfg.testFramework.cucumberOptions && (cnfg.testFramework.cucumberOptions as {[key: string]: any})[index]) {
                     this.logger.debug(`...${index}="" was passed on command line. Removing all tags from config ...`);
-                    (cnfg.testFramework.cucumberOptions as {[key:string]: any})[index] = undefined;
+                    (cnfg.testFramework.cucumberOptions as {[key: string]: any})[index] = undefined;
                     return;
                 }
 
@@ -60,18 +60,17 @@ export class TheklaConfigProcessor {
 
             const mergeWorldParameter = (worldParams: any) => {
                 if(!worldParams) return;
-                if(typeof worldParams === "object" && {}.constructor == worldParams.constructor) {
+                if(typeof worldParams === `object` && {}.constructor == worldParams.constructor) {
                     cn.testFramework.cucumberOptions.worldParameters  =  worldParams
                 } else {
                     throw new Error(`Can't parse the World Parameter ${worldParams}`)
                 }
             };
 
-            mergeAttributes("require",ccOpts.require);
-            mergeAttributes("tags",ccOpts.tags);
-            mergeAttributes("format",ccOpts.format);
+            mergeAttributes(`require`,ccOpts.require);
+            mergeAttributes(`tags`,ccOpts.tags);
+            mergeAttributes(`format`,ccOpts.format);
             mergeWorldParameter(ccOpts.worldParameters);
-
 
             const overwriteMerge = (destinationArray: any[], sourceArray: any[], options: any) => sourceArray;
             return merge(cnfg,cn, { arrayMerge: overwriteMerge });
@@ -80,7 +79,7 @@ export class TheklaConfigProcessor {
         const mergeJasmineOptions = curry((jsmOpts: JasmineOptions| undefined, cnfg: TheklaConfig) => {
             if(!jsmOpts) return cnfg;
 
-            throw new Error("Jasmine CLI Options are not implemented yet");
+            throw new Error(`Jasmine CLI Options are not implemented yet`);
         });
 
         // let conf: TheklaConfig;
@@ -108,8 +107,8 @@ export class TheklaConfigProcessor {
 
             const conf = config;
 
-            if(restClientName === "request")
-                (conf.restConfig as RestClientConfig).restClientName = "request";
+            if(restClientName === `request`)
+                (conf.restConfig as RestClientConfig).restClientName = `request`;
             else
                 throw new Error(`Dont know rest client ${restClientName}. Only nodjs request client is implemented. `);
 

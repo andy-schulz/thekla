@@ -1,6 +1,5 @@
-import {DesiredCapabilities, ServerConfig}  from "../..";
-import {transformToWdioConfig}              from "../../driver/lib/config/config_transformation";
-import Options = WebDriver.Options;
+import {DesiredCapabilities, ServerConfig} from "..";
+import {transformToWdioConfig}             from "../processor/config_transformation";
 
 describe(`creating the wdio config`, (): void => {
 

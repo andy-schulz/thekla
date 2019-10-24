@@ -1,8 +1,7 @@
-import {DesiredCapabilities, RestClientConfig, ServerConfig}                       from "thekla-core";
-import {TheklaGlobal}                                                              from "../globals/TheklaGlobal";
-import {ServerConfigSet, CapabilitiesConfigSet, RestClientConfigSet, TheklaConfig} from "./TheklaConfig";
+import {DesiredCapabilities, RestClientConfig, ServerConfig, TheklaConfig, TheklaGlobal} from "..";
+import {ServerConfigSet, CapabilitiesConfigSet, RestClientConfigSet,}                    from "../config/TheklaConfig";
 
-const defaultObjectMissingError  = (
+const defaultObjectMissingError = (
     name: string,
     defaultName: string,
     searchForDefault: boolean,
@@ -13,7 +12,7 @@ Configuration does not contain a ${configType} object called '${searchForDefault
 
 Expected:
     ${attribute}: {
-        default: "${searchForDefault ? defaultName : `aDefaultConfig` }",
+        default: "${searchForDefault ? defaultName : `aDefaultConfig`}",
         ${name}: { ... } // is of type ${configType}
     }
 
@@ -38,10 +37,10 @@ const getServerConfig = (config: ServerConfigSet | undefined): (name?: string) =
         if (!config)
             return {};
 
-        if (!('default' in config))
+        if (!(`default` in config))
             return config as ServerConfig;
 
-        if(name) {
+        if (name) {
             if (name in config)
                 return config[name] as ServerConfig;
 
@@ -59,7 +58,7 @@ const getServerConfig = (config: ServerConfigSet | undefined): (name?: string) =
                     `serverConfig`,
                     `ServerConfig`));
 
-            if(!(config.default in config))
+            if (!(config.default in config))
                 throw new Error(defaultObjectMissingError(
                     config.default,
                     config.default,
@@ -80,7 +79,7 @@ const getCapabilities = (caps: CapabilitiesConfigSet | undefined): (name?: strin
         if (!('default' in caps))
             return caps as DesiredCapabilities;
 
-        if(name) {
+        if (name) {
             if (name in caps)
                 return caps[name] as DesiredCapabilities;
 
@@ -98,7 +97,7 @@ const getCapabilities = (caps: CapabilitiesConfigSet | undefined): (name?: strin
                     `capabilities`,
                     `DesiredCapabilities`));
 
-            if(!(caps.default in caps))
+            if (!(caps.default in caps))
                 throw new Error(defaultObjectMissingError(
                     caps.default,
                     caps.default,
@@ -120,7 +119,7 @@ const getRestClientConfig = (config: RestClientConfigSet | undefined): (name?: s
         if (!('default' in config))
             return config as RestClientConfig;
 
-        if(name) {
+        if (name) {
             if (name in config)
                 return config[name] as RestClientConfig;
 
@@ -138,7 +137,7 @@ const getRestClientConfig = (config: RestClientConfigSet | undefined): (name?: s
                     `restConfig`,
                     `RestClientConfig`));
 
-            if(!(config.default in config))
+            if (!(config.default in config))
                 throw new Error(defaultObjectMissingError(
                     config.default,
                     config.default,
