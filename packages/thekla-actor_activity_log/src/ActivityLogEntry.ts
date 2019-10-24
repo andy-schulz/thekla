@@ -23,24 +23,41 @@ export class ActivityLogEntry {
 
     }
 
+    /**
+     * set the node status information
+     * @param status the node status
+     */
     public set status(status: ActivityStatus) {
         this.activityStatus = status;
     }
 
-    public get status() {
+    /**
+     * get the node status information
+     */
+    public get status(): ActivityStatus {
         return this.activityStatus;
     }
 
+    /**
+     * add an activity entry to the log, the entry will be added to the end of the list
+     * @param entry the entry to be added to the log
+     */
     public addActivityLogEntry(entry: ActivityLogEntry): void {
         this.subEntries.push(entry);
     }
 
+    /**
+     * get a list(array) of all node status
+     */
     public getSubTreeStatusList(): ActivityStatus[] {
         return this.subEntries.map((node: ActivityLogEntry): ActivityStatus => {
             return node.status
         })
     }
 
+    /**
+     * get the the JSON tree of the current node
+     */
     public getLogTree(): ActivityLogNode {
         return {
             name: this.activityName,

@@ -34,6 +34,10 @@ export class ActivityLog {
         return this.rootActivityLogEntry.getLogTree();
     }
 
+    /**
+     * if all activities are passed the root node is passed,
+     * if one is failed the root node will be marked as failed
+     */
     private setRootNodeStatus() {
         const list = this.rootActivityLogEntry.getSubTreeStatusList();
         this.rootActivityLogEntry.status = list.includes(`failed`) ? `failed` : list.includes(`running`) ? `running` : `passed`
@@ -48,7 +52,7 @@ export class ActivityLog {
         )(logTree)
     };
 
-    public getStructuredHtmlLog(encoding: string = ``): string {
+    public getStructuredHtmlLog(encoding = ``): string {
         this.setRootNodeStatus();
         const logTree = this.rootActivityLogEntry.getLogTree();
         return _.flow(

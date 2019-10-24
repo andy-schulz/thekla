@@ -1,10 +1,10 @@
-import {ActivityLogNode} from "../../../packages/ActivityLog/ActivityLogEntry";
+import {ActivityLogNode} from "..";
 import {
     encloseInTag,
     encodeLog,
     formatLogWithPrefix,
     formatLogWithHtmlTags
-}                        from "../../../packages/ActivityLog/format_log";
+}                        from "../format_log";
 
 describe(`Using the log formater`, (): void => {
 
