@@ -1,0 +1,23 @@
+{
+  "name": "@thekla/support",
+  "version": "1.22.14",
+  "description": "test configs for test execution",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "del-cli dist/**/* & tsc",
+    "test": "jasmine --config=src/test/support/jasmine.json",
+    "test:cov": "nyc npm run test"
+  },
+  "files": [
+    "dist/*"
+  ],
+  "author": "Andy Schulz",
+  "license": "MIT",
+  "dependencies": {
+    "@types/lodash": "^4.14.144",
+    "@thekla/config": "^1.22.14",
+    "lodash": "^4.17.15",
+    "moment": "^2.24.0"
+  }
+}
