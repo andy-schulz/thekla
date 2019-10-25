@@ -6,8 +6,8 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "del-cli dist/**/* & tsc",
-    "test": "jasmine --config=src/test/support/jasmine.json",
-    "test:cov": "nyc jasmine --config=src/test/support/jasmine.json"
+    "test": "jasmine --config=src/__test__/support/jasmine.json",
+    "test:cov": "nyc jasmine --config=src/__test__/support/jasmine.json"
   },
   "repository": {
     "type": "git",

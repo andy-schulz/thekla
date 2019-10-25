@@ -1,6 +1,6 @@
 import {getNewStandardWdioConfig} from "@thekla/support";
 import WebDriver                  from "webdriver"
-import {AnnotatorWdio}            from "../AnnotatorWdio";
+import {AnnotatorWdio}            from "../lib/AnnotatorWdio";
 import {getStyle}                 from "./client_side_scripts/getStyle";
 
 
