@@ -1,6 +1,5 @@
 import {Client}       from "webdriver"
 import * as uuid      from "uuid"
-import {TkWebElement} from "../../driver/interface/TkWebElement";
 import {getLogger}    from "@log4js-node/log4js-api";
 
 import {
@@ -72,7 +71,7 @@ export class AnnotatorWdio {
      * @param driver
      * @parm element
      */
-    private hlight(driver: Client, element: object): Promise<void> {
+    private hlight(driver: Client, element: object): Promise<string> {
         return this.promise = this.promise
             .then(() => {
                 return new Promise((resolve, reject) => {
@@ -89,7 +88,7 @@ export class AnnotatorWdio {
             })
             .catch((e): Promise<void> => {
                 if(e.toString().includes(`StaleElementReferenceError`)) {
-                    return Promise.resolve();
+                    return Promise.resolve(e);
                 }
                 return Promise.reject(e);
             })
@@ -102,10 +101,12 @@ export class AnnotatorWdio {
             .then((style: any) => {
                 this.elementBefore = element;
                 this.styleBefore = style === null ? undefined : style;
+                return `element highlighted`
             })
             .catch((e) => {
                 this.elementBefore = undefined;
-                console.log(e);
+                this.logger.debug(e);
+                return e.toString();
             })
     }
 
@@ -148,13 +149,12 @@ export class AnnotatorWdio {
      * @param driver
      * @param element
      */
-    public static highlight(element: TkWebElement<Client>): (driver: Client) => Promise<TkWebElement<Client>> {
-        return (driver: Client): Promise<TkWebElement<Client>> => {
+    public static highlight(element: {[key: string]: string}): (driver: Client) => Promise<string> {
+        return (driver: Client): Promise<string> => {
             if (!element)
                 return Promise.reject(`cant annotate an empty element`);
             const hl: AnnotatorWdio = AnnotatorWdio.hl(driver);
-            return hl.hlight(driver, element.getFrWkElement())
-                .then((): TkWebElement<Client> => element)
+            return hl.hlight(driver, element)
         }
     }
 

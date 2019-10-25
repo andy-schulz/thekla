@@ -1,0 +1,9 @@
+{
+  "spec_dir": "dist/test"
+  ,
+  "spec_files": [
+    "**/*[sS]pec.js"
+  ]
+  ,"oneFailurePerSpec": false
+  ,"random": true
+}

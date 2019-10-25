@@ -1,0 +1,17 @@
+{
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "report-dir":"../../coverage/thekla-annotator",
+  "exclude": [
+    "coverage/**",
+    "src/test/**",
+    "node_modules/**",
+    "src/client_side_scripts/**",
+    "dist/client_side_scripts/**",
+    "src/test/client_side_scripts/**",
+    "dist/test/client_side_scripts/**"
+  ],
+  "reporter": [
+    "lcov",
+    "text"
+  ]
+}
