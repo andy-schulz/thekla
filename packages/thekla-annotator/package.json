@@ -1,0 +1,23 @@
+{
+  "name": "@thekla/annotator",
+  "version": "1.22.14",
+  "description": "annotate web elements while interaction with it during test execution",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "del-cli dist/**/* & tsc",
+    "test": "jasmine --config=src/test/support/jasmine.json",
+    "test:cov": "nyc npm run test"
+  },
+  "author": "Andy Schulz",
+  "license": "MIT",
+  "dependencies": {
+    "@log4js-node/log4js-api": "^1.0.2",
+    "@types/lodash": "^4.14.144",
+    "lodash": "^4.17.15",
+    "webdriver": "^5.15.1"
+  },
+  "devDependencies": {
+    "@thekla/support": "^1.22.14"
+  }
+}
