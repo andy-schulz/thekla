@@ -9,15 +9,16 @@
     "test": "jasmine --config=src/test/support/jasmine.json",
     "test:cov": "nyc npm run test"
   },
-  "files": [
-    "dist/*"
-  ],
   "author": "Andy Schulz",
   "license": "MIT",
   "dependencies": {
-    "@types/lodash": "^4.14.144",
     "@thekla/config": "^1.22.14",
+    "@types/lodash": "^4.14.144",
     "lodash": "^4.17.15",
-    "moment": "^2.24.0"
+    "moment": "^2.24.0",
+    "webdriver": "^5.15.1"
+  },
+  "devDependencies": {
+    "del-cli": "^3.0.0"
   }
 }
