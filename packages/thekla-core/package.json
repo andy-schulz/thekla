@@ -1,21 +1,15 @@
 {
-  "name": "thekla-core",
+  "name": "@thekla/core",
   "version": "1.22.14",
   "description": "Thekla is a Screenplay pattern implementation and consists of the two modules, thekla-core (screenplay pattern libs) and thekla (command line interfae)",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "npm run build",
-    "pretest": "tsc",
-    "test": "jasmine --config=app/test/support/jasmine.json",
-    "test:cov": "nyc jasmine --config=app/test/support/jasmine_wdio_coverage.json",
-    "test:covp": "jasmine --config=app/test/support/jasmine_wdio_coverage.json",
     "build": "del-cli dist/**/* & tsc",
-    "postversion": "git push --tags",
-    "test-all": "tsc & run-p -c --silent test:no-web test:wdio:ff test:wdio:ch",
-    "test:no-web": "jasmine --config=app/test/support/jasmine.json",
-    "test:wdio:ff": "jasmine --config=app/test/support/jasmine_wdio_firefox.json",
-    "test:wdio:ch": "jasmine --config=app/test/support/jasmine_wdio_chrome.json"
+    "pretest": "tsc",
+    "test": "jasmine --config=src/__test__/support/jasmine.json",
+    "test:cov": "nyc jasmine --config=src/__test__/support/jasmine.json"
   },
   "repository": {
     "type": "git",
@@ -30,41 +24,17 @@
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
     "@types/deep-diff": "^1.0.0",
-    "@types/fs-extra": "^8.0.0",
     "@types/lodash": "^4.14.144",
     "@types/node": "^10.14.21",
-    "@types/request-promise-native": "^1.0.17",
     "deep-diff": "^1.0.2",
-    "deepmerge": "^4.1.1",
-    "del-cli": "^3.0.0",
-    "fs-extra": "^7.0.1",
-    "jimp": "^0.8.4",
     "lodash": "^4.17.15",
-    "log4js": "^5.2.2",
-    "npm": "^6.12.0",
-    "request": "^2.88.0",
-    "request-promise-native": "^1.0.7",
-    "typescript": "^3.6.4",
-    "webdriver": "^5.15.0"
+    "webdriver": "^5.15.0",
+    "@thekla/activity-log": "^1.22.14",
+    "@thekla/config": "^1.22.14",
+    "@thekla/support": "^1.22.14"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^0.1.3",
-    "@types/jasmine": "^3.4.4",
-    "@types/uuid": "^3.4.5",
-    "@typescript-eslint/eslint-plugin": "^2.3.3",
-    "@typescript-eslint/parser": "^2.3.3",
-    "eslint": "^6.5.1",
-    "eslint-config-standard": "^14.1.0",
-    "eslint-plugin-import": "^2.18.2",
-    "eslint-plugin-node": "^10.0.0",
-    "eslint-plugin-promise": "^4.2.1",
-    "eslint-plugin-standard": "^4.0.1",
-    "image-size": "^0.8.3",
-    "jasmine": "^3.5.0",
-    "moment": "^2.24.0",
-    "npm-run-all": "^4.1.5",
-    "nyc": "^14.1.1",
-    "source-map-support": "^0.5.13",
-    "uuid": "^3.3.3"
+    "del-cli": "^3.0.0",
+    "nyc": "^14.1.1"
   }
 }
