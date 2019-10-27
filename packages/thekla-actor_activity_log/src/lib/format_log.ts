@@ -78,7 +78,7 @@ export const encodeLog = (encoding = ``): (source: string) => string => {
         if(!encoding)
             return source;
 
-        return new Buffer(source).toString(encoding)
+        return Buffer.from(source).toString(encoding)
     }
 };
 
@@ -86,7 +86,7 @@ export const encodeLog = (encoding = ``): (source: string) => string => {
  * the css which is read from a file and added to the HTML tree
  */
 console.log(__dirname)
-const activityLogStyle = fs.readFileSync(`${__dirname}/../res/styles/ActivityLog.css`);
+const activityLogStyle = fs.readFileSync(`${__dirname}/../../res/styles/ActivityLog.css`);
 
 /**
  * The style which is added to the HTML tree

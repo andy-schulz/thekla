@@ -1,21 +1,21 @@
 {
-  "name": "thekla-actor_activity_log",
+  "name": "@thekla/activity-log",
   "version": "1.22.14",
   "description": "actor activity log",
-  "main": "index.js",
+  "main": "dist/index.js",
   "scripts": {
     "prepare": "npm run build",
     "build": "del-cli dist/**/* & tsc",
-    "test": "jasmine --config=src/test/support/jasmine.json",
+    "test": "jasmine --config=src/__test__/support/jasmine.json",
     "test:cov": "nyc npm run test"
   },
-  "files": [
-    "dist/*"
-  ],
   "author": "Andy Schulz",
   "license": "MIT",
   "dependencies": {
     "@types/lodash": "^4.14.144",
     "lodash": "^4.17.15"
+  },
+  "devDependencies": {
+    "del-cli": "^3.0.0"
   }
 }

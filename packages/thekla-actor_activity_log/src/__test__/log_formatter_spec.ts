@@ -4,7 +4,7 @@ import {
     encodeLog,
     formatLogWithPrefix,
     formatLogWithHtmlTags
-}                        from "../format_log";
+}                        from "../lib/format_log";
 
 describe(`Using the log formater`, (): void => {
 
@@ -173,7 +173,7 @@ describe(`Using the log formater`, (): void => {
 
         it(`should return a base64 string when the encoding is set 
         - (test case id: bdad05f3-4e3a-468b-af31-69f1ad395abf)`, (): void => {
-            expect(encodeLog(`base64`)(`MyString`)).toEqual(new Buffer(testString).toString(`base64`))
+            expect(encodeLog(`base64`)(`MyString`)).toEqual(Buffer.from(testString).toString(`base64`))
         });
 
         it(`should return the string if no encoding is set 

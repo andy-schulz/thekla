@@ -1,3 +1,4 @@
-export {ActivityLog}         from "./ActivityLog"
-export {ActivityLogNode}     from "./ActivityLogEntry"
-export {ActivityLogEntry}    from "./ActivityLogEntry"
+export {ActivityLog}             from "./lib/ActivityLog"
+export {ActivityLogNode}         from "./lib/ActivityLogEntry"
+export {ActivityLogEntry}        from "./lib/ActivityLogEntry"
+export {ActivityLogEntryType}    from "./lib/ActivityLogEntry"
