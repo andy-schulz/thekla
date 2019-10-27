@@ -1,5 +1,5 @@
 import {DesiredCapabilities, ServerConfig} from "..";
-import {transformToWdioConfig}             from "../processor/config_transformation";
+import {transformToWdioConfig}             from "../lib/processor/config_transformation";
 
 describe(`creating the wdio config`, (): void => {
 

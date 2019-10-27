@@ -1,4 +1,4 @@
-import {DesiredCapabilities, RestClientConfig, ServerConfig, TheklaConfig, TheklaGlobal} from "..";
+import {DesiredCapabilities, RestClientConfig, ServerConfig, TheklaConfig, TheklaGlobal} from "../../index";
 import {ServerConfigSet, CapabilitiesConfigSet, RestClientConfigSet,}                    from "../config/TheklaConfig";
 
 const defaultObjectMissingError = (

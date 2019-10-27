@@ -1,9 +1,9 @@
-import {RequestPromiseOptions}                         from "request-promise-native";
-import {RestClientConfig}                              from "..";
-import merge                                           from "deepmerge";
+import {RequestPromiseOptions} from "request-promise-native";
+import {RestClientConfig}      from "../../index";
+import merge                   from "deepmerge";
 
-import {getLogger} from "@log4js-node/log4js-api";
-import {flow, curry}      from "lodash/fp";
+import {getLogger}                                       from "@log4js-node/log4js-api";
+import {flow, curry}                                     from "lodash/fp";
 import { TheklaConfig, CucumberOptions, JasmineOptions } from "../config/TheklaConfig";
 
 export class TheklaConfigProcessor {

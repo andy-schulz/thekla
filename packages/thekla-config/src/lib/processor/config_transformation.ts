@@ -4,8 +4,8 @@ import * as fp                 from "lodash/fp"
 import {Options}               from "webdriver"
 import {
     AppiumOptions, BrowserStackCapabilities, DesiredCapabilities, ProxyConfig
-}                              from "..";
-import {ServerConfig}          from "../";
+}                              from "../../index";
+import {ServerConfig}          from "../../index";
 
 const transformServerConfig = (serverConfig: ServerConfig): (option: Options) => Options => {
     return (options: Options): Options => {

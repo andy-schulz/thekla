@@ -1,4 +1,4 @@
-import {ServerConfig, DesiredCapabilities, RestClientConfig} from "..";
+import {ServerConfig, DesiredCapabilities, RestClientConfig} from "../../index";
 
 export interface TheklaConfig {
     // index signature is used for
