@@ -1,9 +1,12 @@
-import * as minimist                                                                                     from "minimist";
-import {Command}                                                                                         from "../../lib/command";
-import {TheklaConfig}                                                                                    from "../../lib/config/TheklaConfig";
-import {Thekla}                                                                                          from "../../lib/thekla";
-import {createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "../data/testFiles";
-import fsExtra                                                                                           from 'fs-extra'
+import * as minimist  from "minimist";
+import {Command}      from "../../lib/command";
+import {TheklaConfig} from "@thekla/config";
+import {Thekla}       from "../../lib/thekla";
+import {
+    createCucumberTestFiles, createTheklaConfigFile,
+    CucumberTestFileResult, TheklaConfigFileResult
+}                     from "../data/testFiles";
+import fsExtra        from 'fs-extra'
 
 
 describe('Specifying support files', () => {
@@ -22,7 +25,7 @@ describe('Specifying support files', () => {
     });
 
     afterEach(() => {
-        if(theklaConfigResult.baseDir) {
+        if (theklaConfigResult.baseDir) {
             fsExtra.remove(theklaConfigResult.baseDir);
         }
 
@@ -96,7 +99,7 @@ describe('Specifying support files', () => {
                 testFramework: {
                     frameworkName: "cucumber",
                     cucumberOptions: {
-                        require: [file1Result.relativeStepDefinitionFilePath,file2Result.relativeStepDefinitionFilePath]
+                        require: [file1Result.relativeStepDefinitionFilePath, file2Result.relativeStepDefinitionFilePath]
                     }
                 }
             };

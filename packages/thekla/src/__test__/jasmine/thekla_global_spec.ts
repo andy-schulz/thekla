@@ -1,6 +1,6 @@
 import * as child                         from "child_process";
 import fsExtra                            from "fs-extra";
-import {TheklaConfig}                     from "../../lib/config/TheklaConfig";
+import {TheklaConfig}                     from "@thekla/config";
 import {
     createJasmineTestFiles,
     createTheklaConfigFile, createTheklaGlobalSpec, JasmineTestFileResult,

@@ -1,6 +1,6 @@
 import * as child                                                                                        from "child_process";
 import * as minimist                                                                                     from "minimist";
-import {TheklaConfig}                                                                                    from "../../lib/config/TheklaConfig";
+import {TheklaConfig}                                                                                    from "@thekla/config";
 import {TheklaTestData, TheklaTestResult}                                                                from "../data/client";
 import {createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "../data/testFiles";
 import fsExtra                                                                                           from 'fs-extra'

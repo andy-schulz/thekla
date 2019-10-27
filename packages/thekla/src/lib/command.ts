@@ -1,13 +1,11 @@
-import * as minimist           from "minimist";
-import * as path               from "path";
-import * as fs                 from "fs";
-import {helpText}              from "./commands/help";
-import {versionText}           from "./commands/version";
-import {TheklaConfig}          from "./config/TheklaConfig";
-import {TheklaConfigProcessor} from "./config/TheklaConfigProcessor";
-import {Thekla}                from "./thekla";
-import {getLogger, Logger}     from "@log4js-node/log4js-api";
-
+import * as minimist                         from "minimist";
+import * as path                             from "path";
+import * as fs                               from "fs";
+import {helpText}                            from "./commands/help";
+import {versionText}                         from "./commands/version";
+import {TheklaConfig, TheklaConfigProcessor} from "@thekla/config";
+import {Thekla}                              from "./thekla";
+import {getLogger, Logger}                   from "@log4js-node/log4js-api";
 
 export class Command {
     private readonly helpTextPrinted: boolean = false;
@@ -90,7 +88,7 @@ export class Command {
      * start spec execution with jasmine
      */
     run(): Promise<any> {
-        if(this.helpTextPrinted) return Promise.resolve();
+        if (this.helpTextPrinted) return Promise.resolve();
 
         return this.loadConfigFile(this.configFile)
             .then((config: TheklaConfig) => this.mergeCommandLineArgsIntoConfig(this.args, config))

@@ -1,5 +1,5 @@
 import fsExtra        from "fs-extra";
-import {TheklaConfig} from "../../lib/config/TheklaConfig";
+import {TheklaConfig} from "@thekla/config";
 
 export  const simpleFeatureTestFileContent =
 `Feature: Simple Feature File
@@ -63,7 +63,6 @@ Then(/^I should see 3 console logs$/, function() {
 });
 `;
 
-
 export const spec_timeout_wait_for_10000ms = `
 "use strict";
 describe('timeout a spec', () => {
@@ -77,7 +76,6 @@ describe('timeout a spec', () => {
     });
 });
 `;
-
 
 export const createTheklaGlobalSpec = (expected: string) => {
     return `

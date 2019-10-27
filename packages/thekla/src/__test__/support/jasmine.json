@@ -1,5 +1,5 @@
 {
-  "spec_dir": "dist/test"
+  "spec_dir": "dist/__test__"
   ,"spec_files": [
     "command/**/*[sS]pec.js",
     "cucumber/**/*[sS]pec.js",

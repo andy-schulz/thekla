@@ -1,9 +1,8 @@
-import {CucumberOptions} from "../config/TheklaConfig";
+import {CucumberOptions} from "@thekla/config";
 import {getLogger}       from "@log4js-node/log4js-api";
-import {TheklaCliOpts}   from "../thekla";
 
 export class CucumberTestFramework {
-    private readonly logger = getLogger("CucumberTestFramework");
+    private readonly logger = getLogger(`CucumberTestFramework`);
     private ccOptionsList: string[] = [];
 
     private formatOptions: string[] =  [];
@@ -17,9 +16,9 @@ export class CucumberTestFramework {
 
     private processFrameworkOptions(frameworkOptions: CucumberOptions) {
 
-        this.processOptions(frameworkOptions.require, "--require");
-        this.processOptions(frameworkOptions.format, "--format");
-        this.processOptions(frameworkOptions.tags, "--tags");
+        this.processOptions(frameworkOptions.require, `--require`);
+        this.processOptions(frameworkOptions.format, `--format`);
+        this.processOptions(frameworkOptions.tags, `--tags`);
 
         this.processWorldParameters(frameworkOptions.worldParameters);
     }
@@ -27,12 +26,12 @@ export class CucumberTestFramework {
     private processWorldParameters (worldParams: any) {
         if(!worldParams) return;
 
-        if(!(typeof worldParams === "object" && {}.constructor === worldParams.constructor)) {
+        if(!(typeof worldParams === `object` && {}.constructor === worldParams.constructor)) {
             const message = `The World Parameters in the config file cant be parsed: ${worldParams}`;
             throw new Error(message);
         }
 
-        this.ccOptionsList.push("--world-parameters");
+        this.ccOptionsList.push(`--world-parameters`);
         this.ccOptionsList.push(JSON.stringify(worldParams));
     }
     private processOptions(confOptions: undefined | string[], optsString: string) {
@@ -48,7 +47,6 @@ export class CucumberTestFramework {
         if(confOptions) processOptions(confOptions);
     }
 
-
     public run(specs: string): Promise<any> {
         this.logger.debug(`Starting Cucumber tests`);
 
@@ -59,8 +57,7 @@ export class CucumberTestFramework {
                 resolve(res);
             };
 
-
-            const Cucumber = require('cucumber');
+            const Cucumber = require(`cucumber`);
 
             const cwd = process.cwd();
 
@@ -68,7 +65,7 @@ export class CucumberTestFramework {
             let args: string[] = [];
 
             args.push(process.argv[0]);
-            args.push(cwd + "\\node_modules\\cucumber\\bin\\cucumber-js");
+            args.push(cwd + `\\node_modules\\cucumber\\bin\\cucumber-js`);
             args.push(specs);
 
             args = [...args, ...this.ccOptionsList];

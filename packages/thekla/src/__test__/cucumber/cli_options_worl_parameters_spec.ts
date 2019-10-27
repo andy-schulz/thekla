@@ -1,6 +1,6 @@
 import fsExtra        from "fs-extra";
 import {Command}      from "../../lib/command";
-import {TheklaConfig} from "../../lib/config/TheklaConfig";
+import {TheklaConfig} from "@thekla/config";
 import {Thekla}       from "../../lib/thekla";
 import {
     createCucumberTestFiles,

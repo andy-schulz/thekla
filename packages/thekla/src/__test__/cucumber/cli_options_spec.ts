@@ -5,7 +5,7 @@ import fsExtra                            from 'fs-extra'
 import * as minimist                      from "minimist";
 import {Command}                          from "../../lib/command";
 import {menus}                            from "../../lib/commands/help";
-import {TheklaConfig}                     from "../../lib/config/TheklaConfig";
+import {TheklaConfig}                     from "@thekla/config";
 import {Thekla}                           from "../../lib/thekla";
 import {TheklaTestData, TheklaTestResult} from "../data/client";
 import {
