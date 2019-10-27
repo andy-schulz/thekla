@@ -1,28 +1,4 @@
-### SOURCE
-app/
-
-### BUILD
-.circleci
-.idea
-
-
-
-### automated tests
-dist/test/
-_testData/
-
-### node
-node_modules/
-
-### logs
-logs/
-*.log
-
-### typescript
-tsconfig.json
-
-
-### github pages ignores
-docs
-_archive
-
+/**
+!dist/lib/**
+!dist/bin/**
+!dist/index.*

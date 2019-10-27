@@ -86,11 +86,11 @@ out/
 .idea/httpRequests
 
 ### Project ignores
-dist
+dist/
 
 ### Jekyll ignores
-_site/
+/_site/
 
-_testData
+/_testData/
 
-_archive
+/_archive/
