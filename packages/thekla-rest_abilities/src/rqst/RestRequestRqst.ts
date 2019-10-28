@@ -1,4 +1,4 @@
-import {RestClientConfig}  from "../../config/RestClientConfig";
+import {RestClientConfig}  from "@thekla/config";
 import {RestRequest}       from "../interface/RestRequest";
 import {RestRequestResult} from "../interface/RestRequestResult";
 import * as rp             from "request-promise-native";
@@ -29,7 +29,7 @@ export class RestRequestRqst implements RestRequest {
     }
 
     /**
-     * method was created to do a unit test on the merge
+     * merge two configs
      * @param orig
      * @param merger
      */

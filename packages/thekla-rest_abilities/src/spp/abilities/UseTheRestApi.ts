@@ -1,9 +1,7 @@
-import {RestClientConfig} from "../../../config/RestClientConfig";
-import {RestClient}       from "../../../rest/interface/RestClient";
-import {RestRequest}      from "../../../rest/interface/RestRequest";
-import {Ability}          from "../../lib/abilities/Ability";
-import {UsesAbilities}    from "../../Actor";
-import {SppRestRequest}   from "../SppRestRequests";
+import {RestClient}             from "../../interface/RestClient";
+import {RestRequest}            from "../../interface/RestRequest";
+import {Ability, UsesAbilities} from "@thekla/core";
+import {SppRestRequest}         from "../SppRestRequests";
 
 
 /**

@@ -1,4 +1,4 @@
-import {RestClientConfig}  from "../../config/RestClientConfig";
+import {RestClientConfig}  from "@thekla/config";
 import {RestRequestResult} from "./RestRequestResult";
 
 export interface RestRequest {

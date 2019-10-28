@@ -1,7 +1,6 @@
-import {RequestMethod}                        from "../../../rest/lib/Method";
-import {Question}                             from "../../lib/questions/Question";
+import {RequestMethod}                        from "../../lib/Method";
+import {Question, UsesAbilities}              from "@thekla/core";
 import {UseTheRestApi}                        from "../abilities/UseTheRestApi";
-import {UsesAbilities}                        from "../../Actor";
 import {SppRestRequest, SppRestRequestResult} from "../SppRestRequests";
 
 export class Response implements Question<void,SppRestRequestResult> {

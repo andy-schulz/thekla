@@ -1,6 +1,6 @@
 import * as assert        from "assert";
-import {RestClientConfig} from "../../config/RestClientConfig";
-import {RestRequestRqst}  from "../../rest/rqst/RestRequestRqst";
+import {RestClientConfig} from "@thekla/config";
+import { RestRequestRqst } from "../rqst/RestRequestRqst";
 
 class UT extends RestRequestRqst {
     public static testMerge(orig: RestClientConfig, merger: RestClientConfig): RestClientConfig {
@@ -12,7 +12,7 @@ describe(`Using the RestAPI`, (): void => {
 
     describe(`and try to merge request options`, (): void => {
 
-        it(`should return the merged option object ` +
+        fit(`should return the merged option object ` +
             `- (test case id: 82878ec9-736b-4db9-912a-139c3ea16949)`, (): void => {
 
             const restOptsOrig: RestClientConfig = {

@@ -1,15 +1,13 @@
-import {RestRequestResult} from "../../../rest/interface/RestRequestResult";
-import {UsesAbilities}     from "../../Actor";
-import {Interaction}       from "../../lib/actions/Activities";
-import {stepDetails}       from "../../lib/decorators/step_decorators";
-import {UseTheRestApi}     from "../abilities/UseTheRestApi";
-import {SppRestRequest}    from "../SppRestRequests";
+import {RestRequestResult}                                          from "../../interface/RestRequestResult";
+import {UsesAbilities, Interaction, stepDetails}                    from "@thekla/core";
+import {UseTheRestApi}                                              from "../abilities/UseTheRestApi";
+import {SppRestRequest}                                             from "../SppRestRequests";
 import {catchAndSaveOnError, MethodActions, saveResponse, SaveToFn} from "./0_helper";
 
 export class Delete implements Interaction<void, RestRequestResult>, MethodActions {
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private saveTo: (result: any) => void;
-    private catchError =  false;
+    private catchError = false;
 
     public static from(request: SppRestRequest): Delete {
         return new Delete(request);

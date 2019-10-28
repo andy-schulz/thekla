@@ -1,10 +1,8 @@
-import {RestClientConfig}  from "../../../config/RestClientConfig";
-import {RestRequestResult} from "../../../rest/interface/RestRequestResult";
-import {UsesAbilities}     from "../../Actor";
-import {Interaction}       from "../../lib/actions/Activities";
-import {stepDetails}       from "../../lib/decorators/step_decorators";
-import {UseTheRestApi}     from "../abilities/UseTheRestApi";
-import {SppRestRequest}    from "../SppRestRequests";
+import {RestClientConfig}                                           from "@thekla/config";
+import {RestRequestResult}                                          from "../../interface/RestRequestResult";
+import {Interaction, UsesAbilities, stepDetails}                    from "@thekla/core";
+import {UseTheRestApi}                                              from "../abilities/UseTheRestApi";
+import {SppRestRequest}                                             from "../SppRestRequests";
 import {catchAndSaveOnError, MethodActions, saveResponse, SaveToFn} from "./0_helper";
 
 export class Post implements Interaction<void, RestRequestResult>, MethodActions {

@@ -1,6 +1,6 @@
-import {
-    Actor, RestClientConfig, UseTheRestApi, Get, Post, On, Send, Method, See, Response, ExecutingRestClient, request
-} from "../../../index";
+import {RestClientConfig}                                                                   from "@thekla/config";
+import {Actor, See}                                                                         from "@thekla/core";
+import {UseTheRestApi, Get, Post, On, Send, Method, Response, ExecutingRestClient, request} from ".."
 
 import {curry} from "lodash";
 import fp      from "lodash/fp";

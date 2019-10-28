@@ -3,7 +3,7 @@ import {RestRequest}      from "../interface/RestRequest";
 import {On}               from "../lib/Ressource";
 import {RestRequestRqst}  from "./RestRequestRqst";
 import merge              from "deepmerge";
-import {RestClientConfig} from "../../config/RestClientConfig";
+import {RestClientConfig} from "@thekla/config";
 
 
 export class RestClientRqst implements RestClient {

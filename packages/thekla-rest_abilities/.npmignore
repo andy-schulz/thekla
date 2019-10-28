@@ -1,0 +1,7 @@
+/**
+!dist/lib/**
+!dist/interface/**
+!dist/rqst/**
+!dist/spp/**
+
+!dist/index.*

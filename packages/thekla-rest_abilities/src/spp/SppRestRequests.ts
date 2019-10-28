@@ -1,7 +1,7 @@
-import {RestClientConfig} from "../../config/RestClientConfig";
-import {RestClient}       from "../../rest/interface/RestClient";
-import {RestRequest}      from "../../rest/interface/RestRequest";
-import {On}               from "../../rest/lib/Ressource";
+import {RestClientConfig} from "@thekla/config";
+import {RestClient}       from "../interface/RestClient";
+import {RestRequest}      from "../interface/RestRequest";
+import {On}               from "../lib/Ressource";
 
 
 

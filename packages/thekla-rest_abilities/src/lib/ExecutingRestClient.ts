@@ -1,4 +1,4 @@
-import {RestClientConfig} from "../../config/RestClientConfig";
+import {RestClientConfig} from "@thekla/config";
 import {RestClient}       from "../interface/RestClient";
 import {RestClientRqst}   from "../rqst/RestClientRqst";
 
