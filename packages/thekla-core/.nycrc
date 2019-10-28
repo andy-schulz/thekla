@@ -4,7 +4,7 @@
     "coverage/**",
     "docs/**",
     "logs/**",
-    "app/test/**",
+    "src/__test__/**",
     "node_modules/**",
 
     "app/test/**",
