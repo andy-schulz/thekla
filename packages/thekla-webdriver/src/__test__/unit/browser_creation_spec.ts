@@ -2,7 +2,7 @@ import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} fro
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
 import {ClientHelper, Browser}                                               from "../../index";
 
-fdescribe(`When using the ClientWdio class`, (): void => {
+describe(`When using the ClientWdio class`, (): void => {
 
     const conf: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`browser_creation_spec`);
