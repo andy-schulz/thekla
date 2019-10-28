@@ -35,7 +35,7 @@ export class ActivityLog {
     }
 
     /**
-     * if all activities are passed the root node is passed,
+     * if all activities have status passed the root node status is passed,
      * if one is failed the root node will be marked as failed
      */
     private setRootNodeStatus() {

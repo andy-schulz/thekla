@@ -20,7 +20,8 @@ export class ActivityLogEntry {
         private activityStatus: ActivityStatus,
         public parent: ActivityLogEntry | null
     ) {
-
+        if(parent)
+            parent.addActivityLogEntry(this)
     }
 
     /**
