@@ -1,11 +1,12 @@
 {
   "extends": "@istanbuljs/nyc-config-typescript",
+  "report-dir":"../../coverage/thekla-config",
   "exclude": [
     "coverage/**",
     "docs/**",
     "logs/**",
     "src/__test__/**",
-    "node_modules/**",
+    "node_modules/**"
   ],
   "reporter": [
     "lcov",

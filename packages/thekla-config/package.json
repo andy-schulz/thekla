@@ -6,8 +6,9 @@
   "scripts": {
     "prepare": "npm run build",
     "build": "del-cli dist/**/* & tsc",
+    "pretest": "tsc",
     "test": "jasmine --config=src/__test__/support/jasmine.json",
-    "test:cov": "nyc npm run test"
+    "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json"
   },
   "author": "Andy Schulz",
   "license": "MIT",
