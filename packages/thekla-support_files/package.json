@@ -16,9 +16,10 @@
     "@types/lodash": "^4.14.144",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "webdriver": "^5.15.1"
+    "webdriver": "^5.15.4"
   },
   "devDependencies": {
-    "del-cli": "^3.0.0"
+    "del-cli": "^3.0.0",
+    "nyc": "^14.1.1"
   }
 }
