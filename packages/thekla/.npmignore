@@ -1,4 +1,6 @@
 /**
+
 !dist/lib/**
 !dist/bin/**
+
 !dist/index.*

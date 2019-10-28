@@ -47,8 +47,11 @@
     "fs-extra": "^8.1.0",
     "glob": "^7.1.5",
     "jasmine": "^3.5.0",
-    "log4js": "^5.3.0",
     "minimist": "^1.2.0",
     "request-promise-native": "^1.0.7"
+  },
+  "dev-dependancy" : {
+    "del-cli": "^3.0.0",
+    "nyc": "^14.1.1"
   }
 }

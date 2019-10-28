@@ -10,6 +10,7 @@ describe('The Help Text', () => {
 
         beforeEach(() => {
             forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: ['ignore', 'pipe', process.stderr, 'ipc']});
+            // @ts-ignore
             forked.stdout.on("data", function (chunk) {
                 output = chunk.toString()
             });

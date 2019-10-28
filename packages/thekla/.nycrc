@@ -1,12 +1,12 @@
 {
   "extends": "@istanbuljs/nyc-config-typescript",
   "exclude": [
-    "coverage/**",
-    "docs/**",
-    "app/test/**",
     "_archive/**",
     "_testData/**",
-    "node_modules/**"
+    "coverage/**",
+    "docs/**",
+    "node_modules/**",
+    "src/__test__/**"
   ],
   "reporter": [
     "lcov",
