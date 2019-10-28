@@ -1,7 +1,7 @@
 import {getNewStandardWdioConfig} from "@thekla/support";
 import WebDriver                  from "webdriver"
 import {AnnotatorWdio}            from "../lib/AnnotatorWdio";
-import {getStyle}                 from "./client_side_scripts/getStyle";
+import {getStyle}                 from "./__client_side_scripts__/getStyle";
 
 
 describe(`Using the Annotator`, (): void => {
