@@ -1,0 +1,33 @@
+{
+  "name": "@theka/rest-abilities",
+  "version": "1.22.14",
+  "description": "thekla rest ability and interactions",
+  "main": "index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "del-cli dist/**/* & tsc",
+    "pretest": "tsc",
+    "test": "jasmine --config=src/__test__/support/jasmine.json",
+    "test:cov": "nyc jasmine --config=src/__test__/support/jasmine.json"
+  },
+  "keywords": [
+    "screenplay",
+    "rest",
+    "thekla"
+  ],
+  "author": "Andy Schulz",
+  "license": "MIT",
+  "dependencies": {
+    "@thekla/config": "^1.22.14",
+    "@thekla/core": "^1.22.14",
+    "@types/lodash": "^4.14.144",
+    "@types/request-promise-native": "^1.0.17",
+    "deepmerge": "^4.2.1",
+    "lodash": "^4.17.15",
+    "request-promise-native": "^1.0.7"
+  },
+  "devDependencies": {
+    "del-cli": "^3.0.0",
+    "nyc": "^14.1.1"
+  }
+}
