@@ -1,0 +1,3 @@
+# typescript generated files
+packages/**
+!packages/thekla-annotator/src/**/*.ts
