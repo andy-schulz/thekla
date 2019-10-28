@@ -3,7 +3,7 @@
   "report-dir":"../../coverage/thekla-annotator",
   "exclude": [
     "coverage/**",
-    "src/test/**",
+    "src/__test__/**",
     "node_modules/**",
     "src/lib/__client_side_scripts__/**",
     "dist/lib/__client_side_scripts__/**",
