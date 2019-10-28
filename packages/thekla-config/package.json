@@ -17,6 +17,10 @@
     "@types/request-promise-native": "^1.0.17",
     "deepmerge": "^4.2.1",
     "request-promise-native": "^1.0.7",
-    "webdriver": "^5.15.1"
+    "webdriver": "^5.15.4"
+  },
+  "devDependencies": {
+    "del-cli": "^3.0.0",
+    "nyc": "^14.1.1"
   }
 }
