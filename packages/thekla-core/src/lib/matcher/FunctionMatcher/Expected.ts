@@ -6,7 +6,7 @@ import {diff}                        from 'deep-diff';
  * curried strictEqual to pass a function with the value to compare to the See.if Question
  */
 
-export const Expected = {
+export const Expected: {[key:string]: Function} = {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     toBe: curryRight((actual: any, expected: any): boolean => {
