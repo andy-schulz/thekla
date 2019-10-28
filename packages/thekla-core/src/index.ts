@@ -1,21 +1,15 @@
 /**
- * WebDriver Wrapper
+ * Screenplay Elements
  */
 
-
-/**
- * screenplay Elements
- */
 export {Actor}                                                                from "./lib/Actor";
 
 // AbilitySet
-export {Ability}                            from "./lib/abilities/Ability";
+export {Ability, AbilitySet}                            from "./lib/abilities/Ability";
 
 // Tasks
-export {
-    PerformsTask, LogsActivity, AnswersQuestions, UsesAbilities
-}                        from "./lib/Actor";
-export {ReturnTaskValue} from "./lib/actions/ReturnTaskValue";
+export {PerformsTask, LogsActivity, AnswersQuestions, UsesAbilities} from "./lib/Actor";
+export {ReturnTaskValue}                                             from "./lib/actions/ReturnTaskValue";
 
 
 // Activities
@@ -48,3 +42,4 @@ export {Expected}                             from "./lib/matcher/FunctionMatche
 
 // Decorators
 export {stepDetails, step} from "./lib/decorators/step_decorators"
+export {wait}              from "./lib/utils/utils"
