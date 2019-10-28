@@ -5,20 +5,10 @@
   "main": "dist/index.js",
   "scripts": {
     "prepare": "npm run build",
-    "test": "jasmine --config=src/__test__/support/jasmine.json",
-    "test:all": "npm run test",
-    "test:cov": "nyc jasmine --config=src/__test__/support/jasmine.json",
-    "test:no-web": "npm run test",
     "build": "del-cli dist/**/* & tsc",
-    "postversion": "git push --tags",
-    "new:patch": "run-s new:npmupdate new:gitadd new:gitcommit new:gitpush new:npmversionpatch new:npmpublish",
-    "new:npmupdate": "npm update",
-    "new:gitadd": "git add package*.json",
-    "new:gitcommit": "git commit -m ''",
-    "new:gitpush": "git push",
-    "new:npmversionpatch": "npm version patch -m ''",
-    "new:npmversionminor": "npm version minor -m ''",
-    "new:npmpublish": "npm publish"
+    "pretest": "tsc",
+    "test": "jasmine --config=src/__test__/support/jasmine.json",
+    "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json"
   },
   "repository": {
     "type": "git",
