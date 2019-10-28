@@ -9,7 +9,7 @@ describe(`Using the Annotator`, (): void => {
 
     const conf: WebDriver.Options = getNewStandardWdioConfig();
 
-    const baseUrl = process.env.BASE_URL ? process.env.BASE_URL : `http://localhost:3000`;
+    const baseUrl = process.env.BASEURL ? process.env.BASEURL : `http://localhost:3000`;
     // conf.annotateElement = true;
 
     // setBrowserStackSessionName(capabilities, `annotator_spec.ts`);
