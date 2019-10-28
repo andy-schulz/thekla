@@ -7,7 +7,7 @@ import {
     hideMessage,
     highlightElement,
     unHighlightElement
-} from "./client_side_scripts/annotator_scripts";
+} from "./__client_side_scripts__/annotator_scripts";
 
 /* eslint-disable @typescript-eslint/no-non-null-assertion */
 
