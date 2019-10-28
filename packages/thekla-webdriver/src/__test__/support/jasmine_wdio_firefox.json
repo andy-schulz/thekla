@@ -1,0 +1,17 @@
+{
+  "spec_dir": "dist/__test__",
+  "spec_files": [
+    "packages/annotator/**/*[sS]pec.js",
+    "wd_wrapper/**/*[sS]pec.js",
+    "!wd_wrapper/chrome/**/*[sS]pec.js",
+    "screenplay/web/**/*[sS]pec.js"
+  ]
+,
+  "helpers": [
+    "support/helpers/wdio_firefox.js"
+  ]
+,
+  "oneFailurePerSpec": false
+,
+  "random": true
+}
