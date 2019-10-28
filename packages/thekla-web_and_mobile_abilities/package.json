@@ -1,0 +1,32 @@
+{
+  "name": "@thekla/web-and-mobile-abilities",
+  "version": "1.22.14",
+  "description": "web and mobile abilities with interactions",
+  "main": "dist/index.js",
+  "scripts": {
+    "prepare": "npm run build",
+    "pretest": "tsc",
+    "test": "jasmine --config=src/__test__/support/jasmine.json",
+    "test:cov": "nyc jasmine --config=src/__test__/support/jasmine_wdio_coverage.json",
+    "test:covp": "jasmine --config=src/__test__/support/jasmine_wdio_coverage.json",
+    "build": "del-cli dist/**/* & tsc",
+    "postversion": "git push --tags",
+    "test-all": "tsc & run-p -c --silent test:no-web test:wdio:ff test:wdio:ch",
+    "test:no-web": "jasmine --config=src/__test__/support/jasmine.json",
+    "test:wdio:ff": "jasmine --config=src/__test__/support/jasmine_wdio_firefox.json",
+    "test:wdio:ch": "jasmine --config=src/__test__/support/jasmine_wdio_chrome.json"
+  },
+  "author": "Andy Schulz",
+  "license": "MIT",
+  "dependencies": {
+    "@log4js-node/log4js-api": "^1.0.2",
+    "@thekla/core": "^1.22.14",
+    "@thekla/webdriver": "^1.22.14"
+  },
+  "devDependencies": {
+    "@thekla/support": "^1.22.14",
+    "@thekla/config": "^1.22.14",
+    "del-cli": "^3.0.0",
+    "nyc": "^14.1.1"
+  }
+}
