@@ -2,9 +2,10 @@
   "name": "root",
   "private": true,
   "scripts": {
+    "lerna:bootstrap": "./node_modules/.bin/lerna bootstrap",
     "clean:cov": "del-cli coverage/.nyc_output",
     "pretest": "node src/prepare.js",
-    "test": "lerna run test",
+    "test": "./node_modules/.bin/lerna run test",
     "test:debug": "npm run pretest & lerna run test:debug -- --BUILD_NAME:LERNA",
     "test:cov": "npm run clean:cov & BUILD_NAME=MYTEST lerna run test:cov",
     "test:cov:report": "nyc report"
