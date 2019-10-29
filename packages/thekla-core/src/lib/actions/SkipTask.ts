@@ -1,11 +1,12 @@
-import {Interaction}                from "./Activities";
-import {stepDetails, UsesAbilities} from "../../index";
+import {Interaction}   from "./Activities";
+import {UsesAbilities} from "../Actor";
+import {stepDetails}   from "../decorators/step_decorators";
 
 export class SkipTask implements Interaction<void, void> {
     private myTaskName = ``;
     private myMessage = ``;
 
-    // @stepDetails<UsesAbilities,void,void>(`skip task '<<taskName>>' with reason: '<<message>>'`)
+    @stepDetails<UsesAbilities, void, void>(`skip task '<<taskName>>' with reason: '<<message>>'`)
     public performAs(actor: UsesAbilities): Promise<void> {
         return Promise.resolve();
     }
@@ -33,7 +34,7 @@ export class SkipTask implements Interaction<void, void> {
     }
 
     public withMessage(message: string): SkipTask {
-        this.message  = message;
+        this.message = message;
         return this;
     }
 
