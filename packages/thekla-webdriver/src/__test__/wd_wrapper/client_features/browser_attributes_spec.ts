@@ -2,15 +2,12 @@ import {cloneDeep}                                                           fro
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
 import {ClientHelper, WindowSize}                                            from "../../..";
+import {windowSize}                                                          from "../../__client_side_scripts__/window";
 
 describe(`creating a new Browser`, (): void => {
 
     const conf: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`browser_attributes_spec.ts`);
-
-    const windowSize = function (): {} {
-        return {width: window.innerWidth, height: window.innerHeight};
-    };
 
     beforeAll((): void => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;

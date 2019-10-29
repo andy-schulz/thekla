@@ -2,20 +2,15 @@ import {cloneDeep}                                                           fro
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
 import {ClientHelper, Browser, RunningBrowser, WindowSize}                   from "../../..";
+import {
+    windowSize, getUserAgent
+}                                                                            from "../../__client_side_scripts__/window";
 
 describe(`Starting a browser instance`, (): void => {
 
     const conf: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`chrome_capabilities_spec.ts`);
     capabilities.browserName = `chrome`;
-
-    const windowSize = function (): { width: number; height: number } {
-        return {width: window.innerWidth, height: window.innerHeight};
-    };
-
-    const browserFunc = (): string => {
-        return navigator.userAgent;
-    };
 
     beforeAll((): void => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
@@ -35,7 +30,7 @@ describe(`Starting a browser instance`, (): void => {
         - (test case id: 2e6b37af-c7e7-4cba-8959-082ae97e4084)`, async (): Promise<void> => {
 
             const browser: Browser = RunningBrowser.startedOn(conf).withCapabilities(capabilities);
-            const agent = await browser.executeScript(browserFunc);
+            const agent = await browser.executeScript(getUserAgent);
             expect(agent).toContain(`Chrome`);
         });
     });

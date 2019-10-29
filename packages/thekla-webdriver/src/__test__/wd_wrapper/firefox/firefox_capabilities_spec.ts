@@ -2,20 +2,13 @@ import {cloneDeep}                                                           fro
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
 import {ClientHelper, RunningBrowser, WindowSize, Browser}                   from "../../..";
+import {getUserAgent, windowSize}                                                        from "../../__client_side_scripts__/window";
 
 describe(`Starting a browser instance`, (): void => {
 
     const conf: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`firefox_capabilities_spec.ts`);
     capabilities.browserName = `firefox`;
-
-    const windowSize = function (): { width: number; height: number } {
-        return {width: window.innerWidth, height: window.innerHeight};
-    };
-
-    const browserFunc = (): string => {
-        return navigator.userAgent;
-    };
 
     beforeAll((): void => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
@@ -35,7 +28,7 @@ describe(`Starting a browser instance`, (): void => {
         - (test case id: 57480387-ed1c-43ca-8da0-0767e57d106b)`, async (): Promise<void> => {
 
             const browser: Browser = RunningBrowser.startedOn(conf).withCapabilities(capabilities);
-            const agent = await browser.executeScript(browserFunc);
+            const agent = await browser.executeScript(getUserAgent);
             expect(agent).toContain(`Firefox`);
         });
     });
