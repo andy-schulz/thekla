@@ -12,8 +12,19 @@
     "pack": "npm pack",
     "clean:pack": "del-cli *.tgz"
   },
+  "homepage": "https://andy-schulz.github.io/thekla/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andy-schulz/thekla.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andy-schulz/thekla/issues"
+  },
   "author": "Andy Schulz",
   "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
   "dependencies": {
     "@types/lodash": "^4.14.144",
     "lodash": "^4.17.15"
@@ -21,5 +32,6 @@
   "devDependencies": {
     "del-cli": "^3.0.0",
     "nyc": "^14.1.1"
-  }
+  },
+  "gitHead": "0e1d5bbe757c3f106177587f58056a388b9ee212"
 }
