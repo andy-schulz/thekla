@@ -12,7 +12,7 @@ describe(`Using the RestAPI`, (): void => {
 
     describe(`and try to merge request options`, (): void => {
 
-        fit(`should return the merged option object ` +
+        it(`should return the merged option object ` +
             `- (test case id: 82878ec9-736b-4db9-912a-139c3ea16949)`, (): void => {
 
             const restOptsOrig: RestClientConfig = {
