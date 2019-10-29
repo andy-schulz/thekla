@@ -4,13 +4,13 @@
 
 <p align="center">
     <a href="https://circleci.com/gh/andy-schulz/thekla/tree/master">
-        <img alt="Status" src="https://circleci.com/gh/andy-schulz/thekla/tree/master.svg?style=shield">
+        <img alt="Status" src="https://circleci.com/gh/andy-schulz/thekla/tree/master.svg?style=shield" alt="build status">
     </a>
     <a href="https://codecov.io/gh/andy-schulz/thekla">
-      <img src="https://codecov.io/gh/andy-schulz/thekla/branch/master/graph/badge.svg" />
+      <img src="https://codecov.io/gh/andy-schulz/thekla/branch/master/graph/badge.svg" alt="code coverage"/>
     </a>
     <a href="https://badge.fury.io/js/thekla">
-        <img src="https://badge.fury.io/js/thekla.svg" alt="npm version" height="18">
+        <img src="https://badge.fury.io/js/thekla.svg" alt="npm version">
     </a>
 </p>
 
