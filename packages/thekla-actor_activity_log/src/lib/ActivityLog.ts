@@ -17,7 +17,8 @@ export class ActivityLog {
             activityType,
             activityStatus,
             this._currentActivity);
-        this._currentActivity.addActivityLogEntry(logEntry);
+        // this._currentActivity.addActivityLogEntry(logEntry);
+        // if parent entry is passed in constructor, the new entry is already added to the parent entry
         this._currentActivity = logEntry;
 
         return logEntry;
