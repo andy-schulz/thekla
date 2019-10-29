@@ -1,5 +1,5 @@
-import {Activity, Task, Click, PerformsTask}    from "../../..";
-import {GoogleCalculator}                       from "./GoogleCalculator";
+import {Activity, Task, Click, PerformsTask} from "../../../thekla-core/src/index";
+import {GoogleCalculator}                    from "./GoogleCalculator";
 
 export class Add extends Task<void, void> {
     private secondNumber: number;

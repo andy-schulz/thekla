@@ -1,21 +1,4 @@
-import {
-    Actor,
-    RunningBrowser,
-    BrowseTheWeb,
-    By,
-    Click,
-    DesiredCapabilities,
-    element,
-    Enter,
-    Key,
-    Navigate,
-    See,
-    Text,
-    UntilElement,
-    ServerConfig, Expected
-}                                                                               from "../../../index";
 import {getLogger}                                                              from "log4js";
-import {setBrowserStackSessionName, standardCapabilities, standardServerConfig} from "../../0_helper/config";
 import {cloneDeep}                                                              from "lodash";
 
 class GooglePgo {

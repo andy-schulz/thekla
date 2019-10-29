@@ -1,4 +1,4 @@
-import {By, element, SppElement} from "../../..";
+import {By, element, SppElement} from "../../../thekla-core/src/index";
 
 export class GoogleCalculator {
     public static input: SppElement =          element(By.css(`.card-section [role='presentation']`)).called(`the calculator input field`);
