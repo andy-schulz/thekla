@@ -39,8 +39,6 @@ jobs:
             - node_modules
           key: v1-dependencies-{{ checksum "package.json" }}
 
-      - run: npm run build
-
       - persist_to_workspace:
           root: ~/thekla
           paths: .
@@ -52,7 +50,7 @@ jobs:
           at: ~/thekla
       - run:
           name: Run tests
-          command: lerna run test:cov
+          command: npm run test:cov
           no_output_timeout: 30m
       - run:
           name: Collect coverage statistics
