@@ -1,35 +1,9 @@
-# thekla-core
+# Thekla screenplay pattern core elements
 
-***
+The SPP core elements used to create abilities and interactions.
 
-<p align="center">
-    <a href="https://circleci.com/gh/andy-schulz/thekla-core/tree/master">
-        <img alt="Status" src="https://circleci.com/gh/andy-schulz/thekla-core.svg?style=shield">
-    </a>
-    <a href="https://codecov.io/gh/andy-schulz/thekla-core">
-        <img src="https://codecov.io/gh/andy-schulz/thekla-core/branch/master/graph/badge.svg" />
-    </a>
-    <a href="https://badge.fury.io/js/thekla-core">
-        <img src="https://badge.fury.io/js/thekla-core.svg" alt="npm version" height="18">
-    </a>
-</p>
+As of now it is used for the ``@thekla/rest-abilities`` and ``@thekla/web-and-mobile-abilities`` packages.
 
-***
 
-## Documentation
 
-thekla-core is a package used in [thekla](https://github.com/andy-schulz/thekla), see
-[the official project documentation](https://andy-schulz.github.io/thekla/)
-for more information.
-## Usage
-
-You can use thekla-core in 2 ways:
-
-* as a WebdriverJS Wrapper or
-* as a screenplay implementation
-
-## Installation
-
-```sh
-npm install thekla-core --save
-```
+Check the [the official project documentation](https://andy-schulz.github.io/thekla/).
