@@ -1,6 +1,6 @@
 {
   "name": "@thekla/web-and-mobile-abilities",
-  "version": "2.0.0-alpha.0",
+  "version": "2.0.0-alpha.1",
   "description": "web and mobile abilities with interactions",
   "main": "dist/index.js",
   "scripts": {
@@ -31,12 +31,12 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@thekla/core": "^2.0.0-alpha.0",
-    "@thekla/webdriver": "^2.0.0-alpha.0"
+    "@thekla/core": "^2.0.0-alpha.1",
+    "@thekla/webdriver": "^2.0.0-alpha.1"
   },
   "devDependencies": {
-    "@thekla/config": "^2.0.0-alpha.0",
-    "@thekla/support": "^2.0.0-alpha.0",
+    "@thekla/config": "^2.0.0-alpha.1",
+    "@thekla/support": "^2.0.0-alpha.1",
     "del-cli": "^3.0.0",
     "nyc": "^14.1.1"
   },
