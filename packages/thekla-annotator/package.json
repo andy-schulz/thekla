@@ -1,6 +1,6 @@
 {
   "name": "@thekla/annotator",
-  "version": "1.22.14",
+  "version": "2.0.0-alpha.0",
   "description": "annotate web elements while interaction with it during test execution",
   "main": "dist/index.js",
   "scripts": {
@@ -26,8 +26,8 @@
     "webdriver": "^5.15.4"
   },
   "devDependencies": {
-    "@thekla/support": "^1.22.14",
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
+    "@thekla/support": "^2.0.0-alpha.0",
     "del-cli": "^3.0.0",
     "nyc": "^14.1.1"
   }

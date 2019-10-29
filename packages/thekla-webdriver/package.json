@@ -1,6 +1,6 @@
 {
   "name": "@thekla/webdriver",
-  "version": "1.22.14",
+  "version": "2.0.0-alpha.0",
   "description": "",
   "main": "dist/index.js",
   "scripts": {
@@ -21,9 +21,9 @@
   "license": "MIT",
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@thekla/annotator": "1.22.14",
-    "@thekla/config": "1.22.14",
-    "@thekla/core": "1.22.14",
+    "@thekla/annotator": "^2.0.0-alpha.0",
+    "@thekla/config": "^2.0.0-alpha.0",
+    "@thekla/core": "^2.0.0-alpha.0",
     "@types/fs-extra": "^8.0.1",
     "@types/lodash": "^4.14.144",
     "fs-extra": "^8.1.0",
@@ -32,9 +32,9 @@
     "webdriver": "^5.15.4"
   },
   "devDependencies": {
-    "@thekla/support": "^1.22.14",
+    "@thekla/support": "^2.0.0-alpha.0",
     "del-cli": "^3.0.0",
-    "nyc": "^14.1.1",
-    "npm-run-all": "^4.1.5"
+    "npm-run-all": "^4.1.5",
+    "nyc": "^14.1.1"
   }
 }
