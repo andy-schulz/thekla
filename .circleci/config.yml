@@ -25,6 +25,11 @@ jobs:
             - v1-dependencies-
 
       - run:
+          name: install dev deps
+          command: npm install
+          no_output_timeout: 30m
+
+      - run:
           name: build mono repo
           command: lerna bootstrap
           no_output_timeout: 30m
