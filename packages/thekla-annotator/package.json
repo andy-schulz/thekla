@@ -24,8 +24,8 @@
     "webdriver": "^5.15.4"
   },
   "devDependencies": {
-    "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "@thekla/support": "^1.22.14",
+    "@istanbuljs/nyc-config-typescript": "^0.1.3",
     "del-cli": "^3.0.0",
     "nyc": "^14.1.1"
   }

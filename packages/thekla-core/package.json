@@ -9,7 +9,7 @@
     "build": "del-cli dist/**/* & tsc",
     "pretest": "tsc",
     "test": "jasmine --config=src/__test__/support/jasmine.json",
-    "test:cov": "nyc jasmine --config=src/__test__/support/jasmine.json"
+    "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json"
   },
   "repository": {
     "type": "git",
@@ -30,8 +30,7 @@
     "lodash": "^4.17.15",
     "webdriver": "^5.15.0",
     "@thekla/activity-log": "^1.22.14",
-    "@thekla/config": "^1.22.14",
-    "@thekla/support": "^1.22.14"
+    "@thekla/config": "^1.22.14"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
