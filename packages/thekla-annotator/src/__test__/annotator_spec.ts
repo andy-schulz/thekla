@@ -3,11 +3,10 @@ import WebDriver                  from "webdriver"
 import {AnnotatorWdio}            from "../lib/AnnotatorWdio";
 import {getStyle}                 from "./__client_side_scripts__/getStyle";
 
-
 describe(`Using the Annotator`, (): void => {
     let client: WebDriver.Client;
 
-    const conf: WebDriver.Options = getNewStandardWdioConfig();
+    const conf: WebDriver.Options = getNewStandardWdioConfig(`annotator_spec.ts`);
 
     const baseUrl = process.env.BASEURL ? process.env.BASEURL : `http://localhost:3000`;
     // conf.annotateElement = true;
@@ -28,8 +27,9 @@ describe(`Using the Annotator`, (): void => {
 
         it(`should fail when an empty element is passed 
         - (test case id: 51ca3807-06ee-43ff-97bf-643400f60488)`, async (): Promise<void> => {
+
             let emptyElement: any;
-            await client.navigateTo(baseUrl);
+            // await client.navigateTo(baseUrl);
             await AnnotatorWdio.highlight(emptyElement)(client)
                 .then(() => {
                     expect(false).toBeTruthy(`AnnotatorWdio.highlight() should reject the promise in case an empty element is passed, but it doesn't`)
@@ -88,7 +88,6 @@ describe(`Using the Annotator`, (): void => {
             const styleAfterResetHighlight = await client.executeScript(execFunc, [`[data-test-id='LoginExampleRow1'] #exampleEmail`]);
             expect(styleAfterResetHighlight.trim()).toEqual(`/* annotation start */ color: red; border: 2px solid red; /* annotation end */`);
 
-
             await AnnotatorWdio.highlight(searchInput2)(client);
 
             const style1AfterSecondHighlight = await client.executeScript(execFunc, [`[data-test-id='LoginExampleRow1'] #exampleEmail`]);
@@ -135,8 +134,6 @@ describe(`Using the Annotator`, (): void => {
 
         it(`should show and remove the message 
         - (test case id: 671178e0-fe12-4ca8-a91d-3854cd531f3c)`, async (): Promise<void> => {
-
-            const test = "test";
 
             await client.navigateTo(baseUrl);
 
