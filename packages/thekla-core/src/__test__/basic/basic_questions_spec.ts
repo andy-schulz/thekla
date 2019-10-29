@@ -120,14 +120,15 @@ describe(`Using the See interaction`, (): void => {
                 );
                 expect(true).toBeFalsy(`call should have thrown an error. But it did not.`);
             } catch (e) {
-                expect(e.toString()).toContain(
-                    `AssertionError [ERR_ASSERTION]: 'Default value. Timeout of 1000 ms not reached. Second value not set yet.' === 'b1afa0cd-bb66-432a-b6d3-755b422d6506'`)
+                expect(e.toString()).toContain(`AssertionError [ERR_ASSERTION]:`);
+                expect(e.toString()).toContain(`'Default value. Timeout of 1000 ms not reached. Second value not set yet.'`);
+                expect(e.toString()).toContain(`'b1afa0cd-bb66-432a-b6d3-755b422d6506'`);
             }
 
         });
 
-        it(`should throw an error on first` +
-            `- (test case id: 29bbbf6f-4741-48fb-9c44-7ecec23d1240)`, async (): Promise<void> => {
+        it(`should throw an error on first 
+        - (test case id: 29bbbf6f-4741-48fb-9c44-7ecec23d1240)`, async (): Promise<void> => {
             const testString =`29bbbf6f-4741-48fb-9c44-7ecec23d1240`;
             try {
                 await John.attemptsTo(
@@ -137,7 +138,9 @@ describe(`Using the See interaction`, (): void => {
                 expect(true).toBeFalsy(`call should have thrown an error. But it did not.`)
 
             } catch (e) {
-                expect(e.toString()).toContain(`AssertionError [ERR_ASSERTION]: 'Default value. Timeout of 1000 ms not reached. Second value not set yet.' === '29bbbf6f-4741-48fb-9c44-7ecec23d1240'`)
+                expect(e.toString()).toContain(`AssertionError [ERR_ASSERTION]:`);
+                expect(e.toString()).toContain(`Default value. Timeout of 1000 ms not reached. Second value not set yet.`);
+                expect(e.toString()).toContain(`29bbbf6f-4741-48fb-9c44-7ecec23d1240`)
             }
 
         });
@@ -257,11 +260,11 @@ describe(`Using the See interaction`, (): void => {
             }
         });
 
-    })
+    });
 
     describe(`with the otherwise method`, (): void => {
-        it(`should throw the first error when the otherwise-tree is empty` +
-            `- (test case id: cd5b5dc9-a231-4f7c-9607-3f4fe0573f8d)`, async (): Promise<void> => {
+        it(`should throw the first error when the otherwise-tree is empty
+        - (test case id: cd5b5dc9-a231-4f7c-9607-3f4fe0573f8d)`, async (): Promise<void> => {
             try {
                 await Josh.attemptsTo(
                     See
@@ -273,13 +276,14 @@ describe(`Using the See interaction`, (): void => {
                 expect(true).toBeFalsy(`call should have thrown an error. But it didn't.`)
 
             } catch (e) {
-                expect(e.toString()).toContain(`'Thrown error: ' === 'in first See interaction'`)
+                expect(e.toString()).toContain(`'Thrown error: '`);
+                expect(e.toString()).toContain(`in first See interaction'`);
             }
 
         });
 
-        it(`should throw the error raised in "otherwise-tree"` +
-            `- (test case id: b76d457a-5459-4479-a975-c0a9df9fb77c)`, async (): Promise<void> => {
+        it(`should throw the error raised in "otherwise-tree"
+        - (test case id: b76d457a-5459-4479-a975-c0a9df9fb77c)`, async (): Promise<void> => {
             try {
                 await Josh.attemptsTo(
                     See
@@ -295,7 +299,8 @@ describe(`Using the See interaction`, (): void => {
                 expect(true).toBeFalsy(`should throw an error, but it didn't`);
 
             } catch (e) {
-                expect(e.toString()).toContain(`'Error thrown:' === 'in otherwise tree'`);
+                expect(e.toString()).toContain(`'Error thrown:'`);
+                expect(e.toString()).toContain(`in otherwise tree'`);
             }
         });
 

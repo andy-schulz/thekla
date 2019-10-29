@@ -167,7 +167,7 @@ describe(`The ActivityLog`, (): void => {
 
         });
 
-        fit(`should create a double task activity log for the actor when one task and one skip task is passed
+        it(`should create a double task activity log for the actor when one task and one skip task is passed
         - (test case id: eb1de1e8-8bde-48a8-8c9d-55da61986974)`, async (): Promise<void> => {
             const logan = Actor.named(`Logan`);
             const noData = undefined;
@@ -205,7 +205,7 @@ describe(`The ActivityLog`, (): void => {
                 `[START] - Logan attempts to
   [MyNewTask] - execute the empty task to test the log activity
   [SkipTask] - skip task 'MyNewTask' with reason: 'no data was passed'`;
-
+            const tree = logan.activityLog.getLogTree();
             expect(logan.activityLog.getLogTree()).toEqual(expected);
             expect(logan.activityLog.getStructuredLog(`  `)).toEqual(expectedStructuredLog);
             expect(logan.activityLog.getStructuredLog(`  `, `base64`))

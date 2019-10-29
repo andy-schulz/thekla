@@ -23,11 +23,10 @@ describe(`Using the `, (): void => {
                 Expected.toEqual(true) (comparer);
                 expect(true).toBeFalsy(`The function toEqual should  throw an error, but it didn't.`)
             } catch (e) {
-                expect(e.toString()).toContain(`AssertionError [ERR_ASSERTION]: false === true`)
+                expect(e.toString()).toContain(`false`);
+                expect(e.toString()).toContain(`true`);
             }
 
         });
     });
 });
-
-
