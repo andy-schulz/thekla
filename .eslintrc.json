@@ -6,13 +6,13 @@
     },
     "plugins": ["@typescript-eslint"],
     "extends": ["plugin:@typescript-eslint/recommended"],
-    "overrides": [
-        {
-            "files": [
-                "src/**/*.ts"
-            ]
-        }
-    ],
+//    "overrides": [
+//        {
+//            "files": [
+//                "**/src/**/*.ts"
+//            ]
+//        }
+//    ],
     "settings": {
         "import/parsers": {
             "@typescript-eslint/parser": [
