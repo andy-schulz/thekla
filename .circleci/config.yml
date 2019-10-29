@@ -25,6 +25,11 @@ jobs:
             - v1-dependencies-
 
       - run:
+          name: install lerna
+          command: npm install -g lerna
+          no_output_timeout: 30m
+
+      - run:
           name: install dev deps
           command: npm install
           no_output_timeout: 30m
