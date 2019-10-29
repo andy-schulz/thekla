@@ -1,8 +1,12 @@
-import {DesiredCapabilities}    from "@thekla/config";
-import {LogLevel, ServerConfig} from "@thekla/config";
-import moment                   from "moment";
-import {set, cloneDeep}         from "lodash";
-import WebDriver                from "webdriver";
+import { resolve } from "path"
+import { config } from "dotenv"
+
+config({ path: resolve(__dirname, "./../../../.build") });
+
+import {LogLevel, ServerConfig, DesiredCapabilities} from "@thekla/config";
+import moment                                        from "moment";
+import {set, cloneDeep}                              from "lodash";
+import WebDriver, {WebDriverLogTypes}                from "webdriver";
 
 const standardTheklaServerConfig: ServerConfig = {
     automationFramework: {
@@ -37,13 +41,32 @@ export const getStandardTheklaDesiredCapabilities = (browserstackSessionName?: s
     const capabilities = cloneDeep(standardTheklaCapabilities);
 
     if (process.env.BROWSERSTACK === `enabled` && browserstackSessionName)
-        set(capabilities, `bstack:options.sessionName`, name);
+        set(capabilities, `bstack:options.sessionName`, browserstackSessionName);
 
     return capabilities;
 };
 
+const standardWdioConfig: WebDriver.Options = {
+    hostname: process.env.SERVER_HOSTNAME ? process.env.SERVER_HOSTNAME : `localhost`,
+    logLevel: (process.env.LOGLEVEL ? process.env.LOGLEVEL as WebDriverLogTypes : `info`),
+    capabilities: {
+        browserName: process.env.BROWSERNAME ? process.env.BROWSERNAME : `chrome`,
+        proxy: process.env.PROXY_TYPE === `manual` ? {
+            proxyType: `manual`,
+            httpProxy: process.env.PROXY_SERVER,
+            sslProxy: process.env.PROXY_SERVER,
+        } : {
+            proxyType: `system`
+        }
+    }
+};
+
 // browserstack options
+const buildName = process.env.BUILD_NAME ? process.env.BUILD_NAME : `${moment().format(`YYYY-MM-DD HH:mm:ss`)}`;
+
 if (process.env.BROWSERSTACK === `enabled`) {
+
+    // add opts for standard Thekla conf
     standardTheklaCapabilities[`bstack:options`] = {
         userName: process.env.CLOUD_USER ? process.env.CLOUD_USER : `fail`,
         accessKey: process.env.CLOUD_KEY ? process.env.CLOUD_KEY : `fail`,
@@ -52,25 +75,38 @@ if (process.env.BROWSERSTACK === `enabled`) {
         osVersion: `10`,
 
         projectName: `Thekla`,
-        buildName: `${moment().format(`YYYY-MM-DD HH:mm:ss`)}`,
+        buildName: buildName,
         video: false,
         seleniumVersion: `3.141.59`
     };
 }
 
-const standardWdioConfig: WebDriver.Options = {
-    hostname: process.env.SERVER_HOSTNAME ? process.env.SERVER_HOSTNAME : `localhost`,
-    capabilities: {
-        browserName: process.env.BROWSERNAME ? process.env.BROWSERNAME : `chrome`
-    }
-};
-
 export const getNewStandardWdioConfig = (browserStackSession?: string) => {
     const opts = cloneDeep(standardWdioConfig);
 
-    if(browserStackSession && process.env.BROWSERSTACK === `enabled`)
-        set(opts, `capabilities.bstack:options.sessionName`, name);
+    if (process.env.BROWSERSTACK === `enabled`) {
 
+        // add opts for wdio conf
+        if (!opts.capabilities) {
+            opts.capabilities = {};
+        }
+
+        opts.capabilities[`bstack:options`] = {
+            userName: process.env.CLOUD_USER ? process.env.CLOUD_USER : `fail`,
+            accessKey: process.env.CLOUD_KEY ? process.env.CLOUD_KEY : `fail`,
+
+            os: `Windows`,
+            osVersion: `10`,
+
+            projectName: `Thekla`,
+            buildName: buildName,
+            video: false,
+            seleniumVersion: `3.141.59`
+        };
+
+        if (browserStackSession)
+            set(opts, `capabilities.bstack:options.sessionName`, browserStackSession);
+    }
     return opts
 };
 
