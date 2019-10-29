@@ -8,7 +8,9 @@
     "test": "./node_modules/.bin/lerna run test",
     "test:debug": "npm run pretest & lerna run test:debug -- --BUILD_NAME:LERNA",
     "test:cov": "npm run pretest & npm run clean:cov & ./node_modules/.bin/lerna run test:cov --parallel",
-    "test:cov:report": "./node_modules/.bin/nyc report"
+    "test:cov:report": "./node_modules/.bin/nyc report",
+    "pack": "./node_modules/.bin/lerna run pack",
+    "clean:pack": "del-cli *.tgz"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",

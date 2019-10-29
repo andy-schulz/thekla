@@ -6,7 +6,9 @@
   "scripts": {
     "prepare": "npm run build",
     "pretest": "tsc",
-    "build": "del-cli dist/**/* & tsc"
+    "build": "del-cli dist/**/* & tsc",
+    "pack": "npm pack",
+    "clean:pack": "del-cli *.tgz"
   },
   "author": "Andy Schulz",
   "license": "MIT",

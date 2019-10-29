@@ -12,7 +12,9 @@
     "test:covp": "jasmine --config=src/__test__/support/jasmine_wdio_coverage.json",
     "test-all": "tsc & run-p -c --silent test:wdio:ff test:wdio:ch",
     "test:wdio:ff": "jasmine --config=src/__test__/support/jasmine_wdio_firefox.json",
-    "test:wdio:ch": "jasmine --config=src/__test__/support/jasmine_wdio_chrome.json"
+    "test:wdio:ch": "jasmine --config=src/__test__/support/jasmine_wdio_chrome.json",
+    "pack": "npm pack",
+    "clean:pack": "del-cli *.tgz"
   },
   "author": "Andy Schulz",
   "license": "MIT",
