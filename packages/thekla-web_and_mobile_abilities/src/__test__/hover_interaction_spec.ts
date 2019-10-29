@@ -12,7 +12,7 @@ describe(`Hover`, (): void => {
     const testUrl = process.env.BASEURL ? process.env.BASEURL : `http://localhost:3000`;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
     describe(`over a web element`, (): void => {

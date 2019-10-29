@@ -19,7 +19,7 @@ describe(`When locating an element,`, (): void => {
     let john: Actor;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         john = Actor.named(`John`);
         aBrowser = RunningBrowser.startedOn(config).withCapabilities(capabilities);
         john.whoCan(BrowseTheWeb.using(aBrowser));

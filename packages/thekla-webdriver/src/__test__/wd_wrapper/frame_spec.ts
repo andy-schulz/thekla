@@ -13,7 +13,7 @@ describe(`The Frame`, (): void => {
     let browser: Browser;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         browser = ClientHelper.create(conf, capabilities);
     });
 

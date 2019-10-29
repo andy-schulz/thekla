@@ -17,7 +17,7 @@ describe(`Scroll`, (): void => {
     const classNameOfLastRow = `lastTableRow`;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
     describe(`to a pages position`, (): void => {

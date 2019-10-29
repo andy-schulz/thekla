@@ -11,7 +11,7 @@ describe(`Starting a browser instance`, (): void => {
     capabilities.browserName = `firefox`;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
     afterEach(async (): Promise<void[]> => {

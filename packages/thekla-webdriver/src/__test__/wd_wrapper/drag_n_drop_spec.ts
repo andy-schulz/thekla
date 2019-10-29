@@ -18,7 +18,7 @@ describe(`drag an element`, (): void => {
         infoMessage: WebElementFinder;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         browser = ClientHelper.create(conf, capabilities);
         dragElement0 = browser.element(By.css(`[data-test-id='item-0']`));
         dragElement1 = browser.element(By.css(`[data-test-id='item-1']`));

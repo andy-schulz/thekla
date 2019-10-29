@@ -14,7 +14,7 @@ describe(`When using the ClientWdio class`, (): void => {
     const testUrl = process.env.BASEURL ? process.env.BASEURL : `http://localhost:3000`;
 
     beforeAll(async (): Promise<void> => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         await ClientHelper.cleanup();
     });
 

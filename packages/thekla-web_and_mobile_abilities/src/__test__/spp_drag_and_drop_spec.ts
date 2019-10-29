@@ -18,7 +18,7 @@ describe(`Drag an Element`, (): void => {
         dragIndicator: SppElement;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 200000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         theBrowser = RunningBrowser.startedOn(conf).withCapabilities(capabilities);
         Donnie = Actor.named(`Donnie`);
         Donnie.whoCan(BrowseTheWeb.using(theBrowser));

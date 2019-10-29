@@ -10,7 +10,7 @@ describe(`creating a new Browser`, (): void => {
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`browser_attributes_spec.ts`);
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
     afterEach((): Promise<void[]> => {

@@ -17,7 +17,7 @@ describe(`Waiting for SPP Elements`, (): void => {
     let walterTheWaiter: Actor;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         walterTheWaiter = Actor.named(`Walter`);
         const browser = RunningBrowser.startedOn(seleniumConfig).withCapabilities(capabilities);
         walterTheWaiter.whoCan(BrowseTheWeb.using(browser));

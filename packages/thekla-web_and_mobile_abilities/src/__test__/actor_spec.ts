@@ -19,7 +19,7 @@ describe(`Searching on Google`, (): void => {
     logger.trace(`actor_spec stated`);
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
 
         John = Actor.named(`John`);
         John.whoCan(BrowseTheWeb.using(RunningBrowser.startedOn(config).withCapabilities(capabilities)));

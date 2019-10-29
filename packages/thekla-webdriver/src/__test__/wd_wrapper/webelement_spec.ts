@@ -20,7 +20,7 @@ describe(`When using the Browser object`, (): void => {
 
     beforeAll((): void => {
         browser = RunningBrowser.startedOn(conf).withCapabilities(capabilities);
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
     afterAll(async (): Promise<void[]> => {

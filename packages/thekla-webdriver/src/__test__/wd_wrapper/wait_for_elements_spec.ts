@@ -14,7 +14,7 @@ describe(`Waiting for WD Elements`, (): void => {
     let appearButton4000ShallWait: WebElementFinder;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 40000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         browser = ClientHelper.create(conf, capabilities);
     });
 

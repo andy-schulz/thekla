@@ -8,7 +8,7 @@ describe(`Using the BrowserWdjs class`, (): void => {
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`title_spec.ts`);
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
     describe(`and work with the title`, (): void => {

@@ -16,7 +16,7 @@ describe(`using the browser instance`, (): void => {
     let origBrowser: Browser;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
     describe(`to attach to an existing session`, (): void => {

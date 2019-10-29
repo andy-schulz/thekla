@@ -24,7 +24,7 @@ describe(`Using the browser object`, (): void => {
     const testUrl: string = process.env.BASEURL ? process.env.BASEURL : `http://localhost:3000`;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         browser = ClientHelper.create(selConfig, capabilities);
 
     });

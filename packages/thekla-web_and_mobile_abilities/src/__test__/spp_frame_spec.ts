@@ -14,7 +14,7 @@ describe(`Locating Elements inside Frames`, (): void => {
     let Francine: Actor;
 
     beforeAll((): void => {
-        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
         Francine = Actor.named(`Francine`);
         Francine.whoCan(BrowseTheWeb.using(RunningBrowser.startedOn(config).withCapabilities(capabilities)));
     });
