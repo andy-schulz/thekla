@@ -1,5 +1,8 @@
 {
   "extends": "@istanbuljs/nyc-config-typescript",
+  "report-dir":"../../coverage/thekla-core",
+  "temp-dir": "../../coverage/.nyc_output",
+  "clean": false,
   "exclude": [
     "coverage/**",
     "docs/**",

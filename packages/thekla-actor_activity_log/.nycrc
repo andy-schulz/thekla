@@ -1,6 +1,8 @@
 {
   "extends": "@istanbuljs/nyc-config-typescript",
   "report-dir":"../../coverage/thekla-actor_activity_log",
+  "temp-dir": "../../coverage/.nyc_output",
+  "clean": false,
   "exclude": [
     "coverage/**",
     "docs/**",

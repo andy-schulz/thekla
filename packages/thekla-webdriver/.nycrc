@@ -1,11 +1,17 @@
 {
   "extends": "@istanbuljs/nyc-config-typescript",
+  "report-dir":"../../coverage/thekla-webdriver",
+  "temp-dir": "../../coverage/.nyc_output",
+  "clean": false,
   "exclude": [
     "coverage/**",
     "docs/**",
     "logs/**",
     "src/__test__/**",
     "node_modules/**",
+
+    "src/__test__/__client_side_scripts__/**",
+    "dist/__test__/__client_side_scripts__/**",
 
     "src/lib/__client_side_scripts__/**",
     "dist/lib/__client_side_scripts__/**"
