@@ -60,7 +60,7 @@ describe(`drag an element`, (): void => {
         //     await Utils.wait(10000);
         // });
 
-        fit(`should reorder the element list from bottom to top 
+        it(`should reorder the element list from bottom to top 
         - (test case id: e0c3ded6-cb21-4e58-8076-33660548e6ac)`, async (): Promise<void> => {
 
             await browser.get(`/dragndrop`);
