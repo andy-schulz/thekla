@@ -1,6 +1,6 @@
 {
   "name": "@thekla/webdriver",
-  "version": "2.0.0-alpha.3",
+  "version": "2.0.0-alpha.4",
   "description": "WebdriverIO wrapper providing the foundation for the SPP web and mobile abilities",
   "main": "dist/index.js",
   "scripts": {
@@ -34,7 +34,7 @@
     "@log4js-node/log4js-api": "^1.0.2",
     "@thekla/annotator": "^2.0.0-alpha.2",
     "@thekla/config": "^2.0.0-alpha.2",
-    "@thekla/core": "^2.0.0-alpha.2",
+    "@thekla/core": "^2.0.0-alpha.4",
     "@types/fs-extra": "^8.0.1",
     "@types/lodash": "^4.14.144",
     "fs-extra": "^8.1.0",
