@@ -58,12 +58,16 @@ export class Command {
     private loadConfigFile(configFilePath: string): Promise<TheklaConfig> {
         return import(configFilePath)
             .then((config: any) => {
-                if (!config.config) {
-                    const message = `An object called 'config' was expected in config file '${configFilePath}', but could not be found.`;
-                    this.logger.info(message);
-                    return Promise.reject(message);
-                }
-                return config.config
+
+                if(config.config)
+                    return config.config;
+                if(config.default)
+                    return config.default;
+
+                const message = `An export called 'config' or an default export was expected in file '${configFilePath}', but none could be found.`;
+                this.logger.info(message);
+                return Promise.reject(message);
+
             })
     }
 
