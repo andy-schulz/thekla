@@ -13,10 +13,8 @@ export {Key}                                   from "./lib/Key";
 export {until}                                 from "./lib/Condition";
 export {UntilElement, UntilElementCondition}   from "./lib/element/ElementConditions";
 
-export {WindowSize, WindowRect}     from "./interface/BrowserWindow"
-
+export {WindowSize, WindowRect}     from "./interface/BrowserWindow";
 
 export {DidNotFind}                           from "./errors/DidNotFind";
 
-// eslint-disable-next-line
 export {Actions} from "./interface/Actions";
