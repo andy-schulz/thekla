@@ -1,6 +1,6 @@
 {
   "name": "@thekla/webdriver",
-  "version": "2.0.0-alpha.2",
+  "version": "2.0.0-alpha.3",
   "description": "WebdriverIO wrapper providing the foundation for the SPP web and mobile abilities",
   "main": "dist/index.js",
   "scripts": {
