@@ -1,11 +1,10 @@
-import {
-    Actor, BrowseTheWeb, RunningBrowser, SppElement,
-    Navigate, element, By, UntilElement, Enter, Sleep, See, Expected, Value } from "thekla-core";
-
-import {TheklaGlobal} from "thekla";
+import * as Conf                     from "@thekla/config";
+import {Actor, Sleep, See, Expected} from "@thekla/core";
+import {RunningBrowser, SppElement, BrowseTheWeb, element, By, UntilElement, Navigate, Enter, Value}
+                                     from "@thekla/web-and-mobile-abilities";
 
 // declare thekla, its global
-declare const thekla: TheklaGlobal;
+declare const thekla: Conf.TheklaGlobal;
 
 
 describe('Search on Google with thekla', function () {
@@ -32,7 +31,7 @@ describe('Search on Google with thekla', function () {
         // create the search field and give it a name.
         // 1. locate the element by css
         googleSearchField = element(By.css(`[name='q']`))
-            // 2. name the element
+        // 2. name the element
             .called(`The Google search field`)
             // wait for the element if its not there right away
             .shallWait(UntilElement.is.visible().forAsLongAs(1000));

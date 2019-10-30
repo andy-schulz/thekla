@@ -1,5 +1,5 @@
 {
-  "name": "01_quick_start_guide",
+  "name": "@thekla/examples",
   "version": "1.0.0",
   "description": "guide on how to use thekla, a screenplay implementation",
   "main": "index.js",
@@ -26,6 +26,9 @@
   },
   "homepage": "https://github.com/andy-schulz/thekla-examples#readme",
   "dependencies": {
-    "thekla": "^1.22.14"
+    "@thekla/config": "^2.0.0-alpha.2",
+    "@thekla/core": "^2.0.0-alpha.2",
+    "@thekla/web-and-mobile-abilities": "^2.0.0-alpha.2",
+    "@thekla/rest-abilities": "^2.0.0-alpha.2"
   }
 }

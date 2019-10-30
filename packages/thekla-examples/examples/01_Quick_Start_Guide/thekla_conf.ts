@@ -1,6 +1,6 @@
-import {TheklaConfig} from "thekla"
+import * as Conf from "@thekla/config";
 
-export const config: TheklaConfig = {
+export const config: Conf.TheklaConfig = {
 
     specs: ["dist/01_Quick_Start_Guide/google_search_spec.js"],
 

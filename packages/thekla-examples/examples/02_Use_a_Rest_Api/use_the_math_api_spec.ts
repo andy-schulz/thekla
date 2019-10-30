@@ -1,21 +1,8 @@
-import {TheklaConfig} from "thekla";
-import {
-    ExecutingRestClient,
-    On,
-    request,
-    Actor,
-    UseTheRestApi,
-    Get,
-    Response,
-    Expected,
-    RestClientConfig,
-    Method,
-    See,
-    Send
-}                     from "thekla-core";
-import {TheklaGlobal} from "thekla";
+import * as Conf              from "@thekla/config";
+import {Actor, See, Expected} from "@thekla/core";
+import {ExecutingRestClient}  from "@thekla/rest-abilities";
 
-declare const thekla: TheklaGlobal;
+declare const thekla: Conf.TheklaGlobal;
 
 describe(`Using the MathJs API to add numbers`, () => {
 
@@ -40,7 +27,9 @@ describe(`Using the MathJs API to add numbers`, () => {
 
         // push the result from the request into the array
         // const to = (resultContainer: any[]) => (actual: any) => resultContainer.push(actual);
-        const to = (resultContainer: any[]) => (actual: any) => {result.push(actual)};
+        const to = (resultContainer: any[]) => (actual: any) => {
+            result.push(actual)
+        };
 
         // now Martha can execute the request and store the value into the result array
         await Martha.attemptsTo(
