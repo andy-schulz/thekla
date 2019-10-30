@@ -1,6 +1,5 @@
 import {printHelpText}             from "./commands/help";
-import {getConfiguredTheklaGlobal} from "@thekla/config";
-import {TheklaConfig}              from "@thekla/config";
+import {getConfiguredTheklaGlobal, TheklaConfig} from "@thekla/config";
 import {getLogger}                 from "@log4js-node/log4js-api";
 import {CucumberTestFramework}     from "./testFramework/CucumberTestFramework";
 import {JasmineTestFramework}      from "./testFramework/JasmineTestFramework";

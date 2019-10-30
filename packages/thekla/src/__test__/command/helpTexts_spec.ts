@@ -1,30 +1,30 @@
 import * as child         from "child_process";
-import {mainMenu, menus}  from "../../lib/commands/help";
+import {mainMenu}         from "../../lib/commands/help";
 import * as minimist      from "minimist";
 import {TheklaTestResult} from "../data/client";
 
 describe('The Help Text', () => {
     describe('on how to use thekla', () => {
         let forked: child.ChildProcess;
-        let output: string = "";
+        let output: string[] = [];
 
         beforeEach(() => {
             forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: ['ignore', 'pipe', process.stderr, 'ipc']});
             // @ts-ignore
             forked.stdout.on("data", function (chunk) {
-                output = chunk.toString()
+                output.push(chunk.toString())
             });
         });
 
         afterEach(() => {
             forked.kill();
-            output = "";
+            output = [];
         });
 
-        const startTest = (args:minimist.ParsedArgs): Promise<any> => {
-            forked.send({ args: args });
+        const startTest = (args: minimist.ParsedArgs): Promise<any> => {
+            forked.send({args: args});
 
-            return new Promise( (resolve, reject) => {
+            return new Promise((resolve, reject) => {
                 try {
                     forked.on('message', (result: any) => {
                         resolve(result);
@@ -45,7 +45,31 @@ describe('The Help Text', () => {
             return startTest(args)
                 .then((result: TheklaTestResult) => {
                     expect(result.specResult).toBeUndefined();
-                    expect(output.trim()).toEqual(mainMenu(result.colorSupport ?  result.colorSupport.level: 0).trim());
+                    expect(output.map((item: string) => item.trim()))
+                        .toContain(mainMenu(result.colorSupport ? result.colorSupport.level : 0).trim());
+                });
+        }, 10000);
+
+        it('shall be printed when no config file was specified' +
+            '- (test case id: 1c423511-c338-4a3c-892a-3e45b784b50c)', async () => {
+            const args: minimist.ParsedArgs = {
+                "_": [`_testData/fileDoesNotExist.js`],
+            };
+
+            return startTest(args)
+                .then((result: TheklaTestResult) => {
+                    expect(result.specResult).toBeUndefined();
+
+                    expect(output.length).toEqual(2);
+
+                    expect(output.map((item: string) => item.trim()))
+                        .toContain(mainMenu(result.colorSupport ? result.colorSupport.level : 0).trim());
+
+                    expect(output[0])
+                        .toMatch(/No Configuration file found at location(.*)_testData\/fileDoesNotExist.js/);
+
+                }).catch((e: Error) => {
+                    console.log(e);
                 });
         }, 1000000);
     });

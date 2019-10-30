@@ -9,32 +9,32 @@ import {getLogger, Logger}                   from "@log4js-node/log4js-api";
 
 export class Command {
     private readonly helpTextPrinted: boolean = false;
-    private readonly configFile: string = "";
-    private readonly logger: Logger = getLogger("Command");
+    private readonly configFile: string = ``;
+    private readonly logger: Logger = getLogger(`Command`);
 
     constructor(
         private thekla: Thekla,
         private args: minimist.ParsedArgs) {
         this.logger.debug(`passed arguments: ${JSON.stringify(args)}`);
 
-        let command = args._[0] || 'help';
+        let command = args._[0] || `help`;
 
 
         if (args.version || args.v) {
-            command = 'version'
+            command = `version`
         }
 
         if (args.help || args.h) {
-            command = 'help'
+            command = `help`
         }
 
         switch (command) {
-            case 'version':
+            case `version`:
                 versionText();
                 this.helpTextPrinted = true;
                 break;
 
-            case 'help':
+            case `help`:
                 helpText(args);
                 this.helpTextPrinted = true;
                 break;
@@ -42,7 +42,6 @@ export class Command {
             default:
                 this.configFile = `${path.resolve()}/${command}`;
                 if (!fs.existsSync(this.configFile)) {
-                    helpText(args);
                     this.helpTextPrinted = true;
                     const message = `No Configuration file found at location ${this.configFile}`;
                     this.logger.error(message);
@@ -56,8 +55,6 @@ export class Command {
      * process all options passed via command line
      * @param configFilePath
      */
-
-
     private loadConfigFile(configFilePath: string): Promise<TheklaConfig> {
         return import(configFilePath)
             .then((config: any) => {
