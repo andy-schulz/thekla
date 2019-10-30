@@ -1,0 +1,3 @@
+[submodule "packages/thekla-examples"]
+	path = packages/thekla-examples
+	url = https://github.com/andy-schulz/thekla-examples.git
