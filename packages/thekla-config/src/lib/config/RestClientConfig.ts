@@ -1,4 +1,4 @@
-// eslint-disable-next-line @typescript-eslint/no-empty-interface
+/* eslint-disable quotes */
 import {RequestPromiseOptions} from "request-promise-native";
 
 export interface RestClientConfig {

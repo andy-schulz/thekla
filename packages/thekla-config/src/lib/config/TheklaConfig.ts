@@ -1,3 +1,4 @@
+/* eslint-disable quotes*/
 import {ServerConfig, DesiredCapabilities, RestClientConfig} from "../../index";
 
 export interface TheklaConfig {
@@ -10,7 +11,7 @@ export interface TheklaConfig {
     capabilities?: CapabilitiesConfigSet;
     restConfig?: RestClientConfigSet;
     params?: {
-        [key: string]: any
+        [key: string]: any;
     };
 
     testFramework: TestFramework;
@@ -26,7 +27,7 @@ export type ConfigSet<T> = {
 }
 
 export interface TestFramework {
-    frameworkName: `jasmine` | `cucumber`;
+    frameworkName: "jasmine" | "cucumber";
     jasmineOptions?: JasmineOptions;
     cucumberOptions?: CucumberOptions;
 
