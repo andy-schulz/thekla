@@ -73,13 +73,13 @@ workflows:
   version: 2
   build-thekla:
     jobs:
-      - build
-#      - build:
-#          filters:
-#            branches:
-#              ignore: /.*/
-#            tags:
-#              only: /^v.*/
+#      - build
+      - build:
+          filters:
+            branches:
+              ignore: /.*/
+            tags:
+              only: /^v.*/
       - test:
           requires:
             - build
