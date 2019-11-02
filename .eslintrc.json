@@ -1,9 +1,9 @@
 {
     "root": true,
     "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-        "project": "./tsconfig.json"
-    },
+//    "parserOptions": {
+//        "project": "./packages/**/tsconfig.json"
+//    },
     "plugins": ["@typescript-eslint"],
     "extends": ["plugin:@typescript-eslint/recommended"],
 //    "overrides": [
@@ -28,8 +28,8 @@
         }
     },
     "rules": {
+        "@typescript-eslint/restrict-plus-operands": "off", // error
         "@typescript-eslint/no-parameter-properties": "off",
-        "@typescript-eslint/restrict-plus-operands": "error",
         "quotes": ["error", "backtick", { "avoidEscape": true }],
         "no-multiple-empty-lines": ["error", { "max": 1, "maxEOF": 1 }]
     }

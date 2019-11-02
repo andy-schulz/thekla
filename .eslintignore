@@ -1,4 +1,5 @@
 # typescript generated files
 # node_modules is not ignored in mono repos by default, it has to be added explicitly
+
 node_modules
 dist
