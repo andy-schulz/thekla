@@ -1,6 +1,6 @@
 {
   "name": "@thekla/activity-log",
-  "version": "2.0.0-alpha.4",
+  "version": "2.0.0-alpha.6",
   "description": "helper functions to log the actors activity during a test session",
   "main": "dist/index.js",
   "scripts": {
