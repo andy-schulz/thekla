@@ -26,7 +26,7 @@ describe(`The Frame`, (): void => {
         it(`should be found by css.  
         - (test case id: 68a541be-2a49-4177-bb1d-251136c3e569)`, async (): Promise<void> => {
             const frame = browser.frame(By.css(`.frame-button-in-single-frame`));
-            const button = frame.element(By.css(`.btn-secondary`));
+            const button = frame.element(By.css(`.firstNestedButton`));
 
             await browser.get(`/nestedFrames`);
 
@@ -49,7 +49,7 @@ describe(`The Frame`, (): void => {
             const frame = browser.frame(By.css(`.frame-button-in-single-frame`))
                 .shallWait(UntilElement.is.visible().forAsLongAs(10000))
                 .shallWait(UntilElement.is.enabled().forAsLongAs(10000));
-            const button = frame.element(By.css(`.btn-secondary`))
+            const button = frame.element(By.css(`.firstNestedButton `))
                 .shallWait(UntilElement.is.visible().forAsLongAs(10000));
 
             await browser.get(`/nestedFrames`);
@@ -60,11 +60,12 @@ describe(`The Frame`, (): void => {
         - (test case id: 6f5efcda-10d4-43f5-8465-13e8b6eff8a3)`, async (): Promise<void> => {
             const frame = browser.frame(By.css(`.frame-button-in-single-frame`))
                 .shallWait(UntilElement.is.visible().forAsLongAs(10000));
-            const button = frame.element(By.css(`.btn-secondary`))
+            const button = frame.element(By.css(`.firstNestedButton `))
                 .shallWait(UntilElement.is.visible().forAsLongAs(10000));
 
-            await browser.get(`/redirectToFrames`);
+            await browser.get(`/nestedFrames`);
             expect(await button.getText()).toEqual(`Button inside single frame`);
+
         });
     });
 
@@ -76,7 +77,7 @@ describe(`The Frame`, (): void => {
             const frame21 = browser.frame(By.css(`.button-in-two-frames`));
             const frame22 = frame21.frame(By.css(`.frame-button-in-single-frame`));
 
-            const button1 = frame1.element(By.css(`.btn-secondary`));
+            const button1 = frame1.element(By.css(`.firstNestedButton`));
             const button2 = frame22.element(By.css(`.btn-secondary`));
 
             await browser.get(`/nestedFrames`);
@@ -94,7 +95,7 @@ describe(`The Frame`, (): void => {
             const frame22 = frame21.frame(By.css(`.frame-button-in-single-frame`))
                 .shallWait(UntilElement.is.visible());
 
-            const button1 = frame1.element(By.css(`.btn-secondary`));
+            const button1 = frame1.element(By.css(`.firstNestedButton`));
             const button2 = frame22.element(By.css(`.btn-secondary`));
 
             await browser.get(`/nestedFrames`);
@@ -114,7 +115,7 @@ describe(`The Frame`, (): void => {
             const frame22 = frame21.frame(By.css(`.frame-button-in-single-frame`))
                 .shallWait(UntilElement.is.visible());
 
-            const button1 = frame1.element(By.css(`.btn-secondary`));
+            const button1 = frame1.element(By.css(`.firstNestedButton`));
             const button2 = frame22.element(By.css(`.btn-secondary`));
 
             await browser.get(`/nestedFrames`);
