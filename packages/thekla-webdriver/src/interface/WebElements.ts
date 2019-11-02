@@ -39,7 +39,7 @@ export interface WebElementFinder
     isDisplayed(): Promise<boolean>;
     isEnabled(): Promise<boolean>;
     sendKeys(keySequence: string): Promise<void>;
-    scrollIntoView(): Promise<void>;
+    scrollIntoView(center?: boolean): Promise<void>;
     movePointerTo(client: any): Promise<any>;
 }
 

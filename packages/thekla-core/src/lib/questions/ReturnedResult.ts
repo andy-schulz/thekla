@@ -12,7 +12,6 @@ export class ReturnedResult<PT> implements Question<PT,PT> {
         return new ReturnedResult<PT>(value)
     }
 
-
     public answeredBy(actor: UsesAbilities, activityResult: PT): Promise<PT> {
         return this.value ? Promise.resolve(this.value) : Promise.resolve(activityResult);
     }

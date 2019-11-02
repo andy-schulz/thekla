@@ -6,7 +6,7 @@ import {diff}                        from 'deep-diff';
  * curried strictEqual to pass a function with the value to compare to the See.if Question
  */
 
-export const Expected: {[key:string]: Function} = {
+export const Expected: {[key: string]: Function} = {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     toBe: curryRight((actual: any, expected: any): boolean => {
@@ -35,7 +35,6 @@ export const Expected: {[key:string]: Function} = {
         }
     }),
 
-
     /**
      * checks if the expected object is contained within the actual object
      * this way a subset of attributes can be checked
@@ -43,7 +42,6 @@ export const Expected: {[key:string]: Function} = {
     toContain: curry((expected: Record<string, any> | string, actual: Record<string, any> | string): boolean => {
         const exp = typeof expected === `string` ? JSON.parse(expected) : expected;
         const act = typeof actual === `string` ? JSON.parse(actual) : actual;
-
 
         const preFilter = (path: string[], key: string): boolean => {
             let filter = false;

@@ -20,23 +20,23 @@ export class WebElementWdio extends WebElementWd<Client> {
 
     private annotateElement = _.curry((shallAnnotateElement: boolean | undefined, element: TkWebElement<Client>): (client: Client) => Promise<TkWebElement<Client>> => {
         return shallAnnotateElement ?
-                (client) => {
+                (client): Promise<TkWebElement<Client>> => {
                     return AnnotatorWdio.highlight(element.getFrWkElement())(client)
                         .then(() => element)
                 } :
-            (client) => Promise.resolve(element)
+            (): Promise<TkWebElement<Client>> => Promise.resolve(element)
     });
 
     private displayTestMessage = _.curry((shallPrintTestMessage: boolean | undefined, testMessage: string): (client: Client) => Promise<Client> => {
         return shallPrintTestMessage ?
             AnnotatorWdio.displayTestMessage(testMessage) :
-            (client) => Promise.resolve(client)
+            (client): Promise<Client> => Promise.resolve(client)
     });
 
     private hideTestMessage = (shallPrintTestMessage: boolean | undefined): (client: Client) => Promise<Client> => {
         return shallPrintTestMessage ?
             AnnotatorWdio.hideTestMessage :
-            (client) => Promise.resolve(client)
+            (client): Promise<Client> => Promise.resolve(client)
     };
 
     public static readonly create = (elementList: WebElementListWdio,
@@ -45,8 +45,6 @@ export class WebElementWdio extends WebElementWd<Client> {
     };
 
     protected getWebElement = async (): Promise<TkWebElement<Client>> => {
-        // return this.parentGetWebElement();
-        // TODO: implement Annotator for WebdriverIO
 
         return this._browser.getFrameWorkClient()
             .then((client: Client): Promise<TkWebElement<Client>> => {

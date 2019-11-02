@@ -7,25 +7,25 @@ export interface RequestMethod {
 }
 
 export class MethodGet implements RequestMethod{
-    public send(request: RestRequest, clientConfig?: RestClientConfig) {
+    public send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult> {
         return request.get(clientConfig)
     }
 }
 
 export class MethodPost implements RequestMethod{
-    public send(request: RestRequest, clientConfig?: RestClientConfig) {
+    public send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult> {
         return request.post(clientConfig)
     }
 }
 
 export class MethodDelete implements RequestMethod{
-    public send(request: RestRequest, clientConfig?: RestClientConfig) {
+    public send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult> {
         return request.delete(clientConfig)
     }
 }
 
 export class MethodPatch implements RequestMethod{
-    public send(request: RestRequest, clientConfig?: RestClientConfig) {
+    public send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult> {
         return request.patch(clientConfig)
     }
 }

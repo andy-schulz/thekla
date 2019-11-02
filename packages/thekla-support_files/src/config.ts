@@ -1,12 +1,11 @@
-import { resolve } from "path"
-import { config } from "dotenv"
-
-config({ path: resolve(__dirname, "./../../../.build") });
-
+import {resolve}                                     from "path"
+import {config}                                      from "dotenv"
 import {LogLevel, ServerConfig, DesiredCapabilities} from "@thekla/config";
 import moment                                        from "moment";
 import {set, cloneDeep}                              from "lodash";
 import WebDriver, {WebDriverLogTypes}                from "webdriver";
+
+config({path: resolve(__dirname, `./../../../.build`)});
 
 const standardTheklaServerConfig: ServerConfig = {
     automationFramework: {
@@ -30,7 +29,7 @@ const standardTheklaCapabilities: DesiredCapabilities = {
     proxy: process.env.PROXY_TYPE === `manual` ? {
         proxyType: `manual`,
         httpProxy: process.env.PROXY_SERVER,
-        sslProxy: process.env.PROXY_SERVER,
+        sslProxy: process.env.PROXY_SERVER
     } : {
         proxyType: `system`
     }
@@ -54,8 +53,9 @@ const standardWdioConfig: WebDriver.Options = {
         proxy: process.env.PROXY_TYPE === `manual` ? {
             proxyType: `manual`,
             httpProxy: process.env.PROXY_SERVER,
-            sslProxy: process.env.PROXY_SERVER,
+            sslProxy: process.env.PROXY_SERVER
         } : {
+
             proxyType: `system`
         }
     }
@@ -67,6 +67,7 @@ const buildName = process.env.BUILD_NAME ? process.env.BUILD_NAME : `${moment().
 if (process.env.BROWSERSTACK === `enabled`) {
 
     // add opts for standard Thekla conf
+
     standardTheklaCapabilities[`bstack:options`] = {
         userName: process.env.CLOUD_USER ? process.env.CLOUD_USER : `fail`,
         accessKey: process.env.CLOUD_KEY ? process.env.CLOUD_KEY : `fail`,
@@ -81,7 +82,7 @@ if (process.env.BROWSERSTACK === `enabled`) {
     };
 }
 
-export const getNewStandardWdioConfig = (browserStackSession?: string) => {
+export const getNewStandardWdioConfig = (browserStackSession?: string): WebDriver.Options => {
     const opts = cloneDeep(standardWdioConfig);
 
     if (process.env.BROWSERSTACK === `enabled`) {
@@ -90,6 +91,9 @@ export const getNewStandardWdioConfig = (browserStackSession?: string) => {
         if (!opts.capabilities) {
             opts.capabilities = {};
         }
+
+        opts.port = 443;
+        opts.protocol = `https`;
 
         opts.capabilities[`bstack:options`] = {
             userName: process.env.CLOUD_USER ? process.env.CLOUD_USER : `fail`,
@@ -108,9 +112,4 @@ export const getNewStandardWdioConfig = (browserStackSession?: string) => {
             set(opts, `capabilities.bstack:options.sessionName`, browserStackSession);
     }
     return opts
-};
-
-export const setBrowserStackSessionNameInWdioConfig = (opts: WebDriver.Options, name: string): void => {
-    if (process.env.BROWSERSTACK === `enabled`)
-        set(opts, `capabilities.bstack:options.sessionName`, name);
 };

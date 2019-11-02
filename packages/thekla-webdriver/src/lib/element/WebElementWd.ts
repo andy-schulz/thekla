@@ -7,10 +7,10 @@ import {centerDistance, ElementDimensions, ElementLocationInView, Point} from ".
 import {WebElementListWd}                                                from "./WebElementListWd";
 import {getLogger, Logger}                                               from "log4js";
 import fp                                                                from "lodash/fp"
-import { By } from "./Locator";
+import {By}                                                              from "./Locator";
 
 export class WebElementWd<WD> implements WebElementFinder {
-    private _description: string = ``;
+    private _description = ``;
     private logger: Logger = getLogger(`WebElementWd`);
 
     public constructor(
@@ -37,7 +37,7 @@ export class WebElementWd<WD> implements WebElementFinder {
         };
 
         return this.elementList.getElements()
-            .then(head)
+                   .then(head)
     };
 
     protected parentGetWebElement = this.getWebElement;
@@ -48,83 +48,84 @@ export class WebElementWd<WD> implements WebElementFinder {
 
     public movePointerTo = (client: WD): Promise<WD> => {
         return this.getWebElement()
-            .then((element: TkWebElement<WD>): Promise<WD> => {
-                return element.move()(client);
-            })
-            .then(() => client)
+                   .then((element: TkWebElement<WD>): Promise<WD> => {
+                       return element.move()(client);
+                   })
+                   .then(() => client)
     };
 
     public dragToElement(element: WebElementFinder): Promise<void> {
 
         return this.getCenterDistanceTo(element)
-            .then((distance: Point): Promise<void> => {
-                return (this.browser.getFrameWorkClient())
-                    .then(this.movePointerTo)
-                    .then(this.browser.pointerButtonDown(0))
-                    // this is a workaround for chrome, firefox works great but chrome does not
-                    // it seems chrome swallows the first move action
-                    .then(this.browser.movePointerTo({x: 5, y: 5}))
-                    .then(this.browser.movePointerTo({x: distance.x, y: distance.y}))
-                    .then(this.browser.pointerButtonUp(0))
-                    .then((): void => {})
-            });
+                   .then((distance: Point): Promise<void> => {
+                       return (this.browser.getFrameWorkClient())
+                           .then(this.movePointerTo)
+                           .then(this.browser.pointerButtonDown(0))
+                           // this is a workaround for chrome, firefox works great but chrome does not
+                           // it seems chrome swallows the first move action
+                           .then(this.browser.movePointerTo({x: 5, y: 5}))
+                           .then(this.browser.movePointerTo({x: distance.x, y: distance.y}))
+                           .then(this.browser.pointerButtonUp(0))
+                           .then((): void => {
+                           })
+                   });
     }
 
-    private getCenterDistanceTo(element: WebElementFinder): Promise<Point>{
+    private getCenterDistanceTo(element: WebElementFinder): Promise<Point> {
 
         const calculateDistance = ([p1, p2]: Point[]): Point => {
-            return centerDistance(p1,p2)
+            return centerDistance(p1, p2)
         };
 
         return Promise.all([this.getCenterPoint(), element.getCenterPoint()])
-            .then(calculateDistance)
+                      .then(calculateDistance)
     }
 
     public hover(): Promise<void> {
         return this.browser.getFrameWorkClient()
-            .then(this.movePointerTo)
-            .then(() => {
-            });
+                   .then(this.movePointerTo)
+                   .then(() => {
+                   });
     }
 
     public sendKeys(keySequence: string): Promise<void> {
         return this.getWebElement()
-            .then((element: any): Promise<void> => element.sendKeys(keySequence))
+                   .then((element: any): Promise<void> => element.sendKeys(keySequence))
     }
 
     public getText(): Promise<string> {
         return this.getWebElement()
-            .then((element: any): Promise<string> => element.getText())
-            .then((text): string => text)
+                   .then((element: any): Promise<string> => element.getText())
+                   .then((text): string => text)
     }
 
     public getAttribute(attributeName: string): Promise<string> {
         return this.getWebElement()
-            .then(async (element: TkWebElement<WD>): Promise<string> => {
-                return element.getAttribute(attributeName);
-            })
-            .then((text): string => text);
+                   .then(async (element: TkWebElement<WD>): Promise<string> => {
+                       return element.getAttribute(attributeName);
+                   })
+                   .then((text): string => text);
     }
 
     public getProperty(propertyName: string): Promise<string> {
         return this.getWebElement()
-            .then((element: TkWebElement<WD>): Promise<string> => {
-                return element.getProperty(propertyName);
-            })
+                   .then((element: TkWebElement<WD>): Promise<string> => {
+                       return element.getProperty(propertyName);
+                   })
     }
 
     public getRect(): Promise<ElementDimensions> {
         return this.getWebElement()
-            .then((element: TkWebElement<WD>): Promise<ElementDimensions> => {
-                return element.getRect();
-            })
+                   .then((element: TkWebElement<WD>): Promise<ElementDimensions> => {
+                       return element.getRect();
+                   })
     }
 
     public getCenterPoint(): Promise<Point> {
         return this.getWebElement()
-            .then((element: TkWebElement<WD>): Promise<Point> => {
-                return element.getCenterPoint();
-            })
+                   .then((element: TkWebElement<WD>): Promise<Point> => {
+                       return element.getCenterPoint();
+                   })
     }
 
     private getElementLocationInViewFromElement = (pr: Promise<TkWebElement<WD>>): Promise<ElementLocationInView> => {
@@ -146,27 +147,27 @@ export class WebElementWd<WD> implements WebElementFinder {
 
     public isDisplayed(): Promise<boolean> {
         return this.getWebElement()
-            .then((element: any): TkWebElement<WD> => {
-                this.logger.trace(`${element ? `Did find ` : `Did not find`} the elements to check for display state`);
-                return element;
-            })
-            .then((element: any): Promise<boolean> => element[`isDisplayed`]())
-            .then((state): boolean => state) // returns a Promise and not the webdriver promise.Promise
-            .catch((): boolean => false)
+                   .then((element: any): TkWebElement<WD> => {
+                       this.logger.trace(`${element ? `Did find ` : `Did not find`} the elements to check for display state`);
+                       return element;
+                   })
+                   .then((element: any): Promise<boolean> => element[`isDisplayed`]())
+                   .then((state): boolean => state) // returns a Promise and not the webdriver promise.Promise
+                   .catch((): boolean => false)
     }
 
     public isEnabled(): Promise<boolean> {
         return this.getWebElement()
-            .then((element: any): Promise<boolean> => element[`isEnabled`]())
-            .then((state): boolean => state)
-            .catch((): boolean => false)
+                   .then((element: any): Promise<boolean> => element[`isEnabled`]())
+                   .then((state): boolean => state)
+                   .catch((): boolean => false)
     }
 
-    public scrollIntoView(): Promise<void> {
+    public scrollIntoView(center?: boolean): Promise<void> {
         return this.getWebElement()
-            .then((element): Promise<void> => {
-                return element.scrollIntoView();
-            })
+                   .then((element): Promise<void> => {
+                       return element.scrollIntoView(center);
+                   })
     }
 
     public clear(): Promise<void> {

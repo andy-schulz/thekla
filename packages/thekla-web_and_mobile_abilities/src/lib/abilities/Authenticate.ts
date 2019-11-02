@@ -15,7 +15,6 @@ export class Authenticate implements Ability {
         return false;
     }
 
-
     public static using(authInfo: AuthenticationInfo): Authenticate {
         return new Authenticate(authInfo);
     }

@@ -12,7 +12,7 @@ import {getLogger, Logger}                      from "@log4js-node/log4js-api";
  * List object to wrap the location strategy for finding multiple elements with WebDriverJS
  */
 export class WebElementListWd<WD> implements WebElementListFinder {
-    private _description: string = ``;
+    private _description = ``;
     private logger: Logger = getLogger(`WebElementListWd`);
 
     public constructor(
@@ -54,7 +54,7 @@ export class WebElementListWd<WD> implements WebElementListFinder {
     ): WebElementListFinder {
         this.logger.debug(`Chains all Elements: ${locator.toString()}`);
 
-        let getElements = async (): Promise<TkWebElement<WD>[]> => {
+        const getElements = async (): Promise<TkWebElement<WD>[]> => {
             this.logger.debug(`Getting ALL elements for locator ${locator.toString()}`);
             const elements = await this.getElements();
             this.logger.debug(`Got ${elements.length} elements for locator ${locator.toString()}`);
@@ -138,12 +138,13 @@ export class WebElementListWd<WD> implements WebElementListFinder {
                                 arr.push(element);
                             }
                             resolve(arr);
-                        });
+                        })
+                        .catch(reject);
                 })
             })
         };
 
-        let getElements = async (): Promise<TkWebElement<WD>[]> => {
+        const getElements = async (): Promise<TkWebElement<WD>[]> => {
             const elements = await oldGetElements();
             return elements.reduce(reducer, Promise.resolve([]));
         };

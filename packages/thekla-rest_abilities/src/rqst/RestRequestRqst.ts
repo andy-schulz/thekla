@@ -4,7 +4,6 @@ import {RestRequestResult} from "../interface/RestRequestResult";
 import * as rp             from "request-promise-native";
 import merge               from "deepmerge";
 
-
 export class RestRequestRqst implements RestRequest {
 
     public constructor(
@@ -33,10 +32,9 @@ export class RestRequestRqst implements RestRequest {
      * @param orig
      * @param merger
      */
-    protected mergeClientConfig(orig: RestClientConfig, merger: RestClientConfig) {
+    protected mergeClientConfig(orig: RestClientConfig, merger: RestClientConfig): RestClientConfig {
         return merge(orig, merger);
     }
-
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     private send(fn: any, clientConfig: RestClientConfig = {}): Promise<RestRequestResult> {

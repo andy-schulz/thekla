@@ -42,7 +42,7 @@ export interface ElementListHelper extends Function {
  * abstract class implementing the finders for sub elements
  */
 export abstract class SppFinderRoot implements SppFinder {
-    protected _description: string = ``;
+    protected _description = ``;
 
     protected constructor(
         public locator: By,

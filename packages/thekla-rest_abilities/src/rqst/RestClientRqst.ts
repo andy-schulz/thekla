@@ -5,7 +5,6 @@ import {RestRequestRqst}  from "./RestRequestRqst";
 import merge              from "deepmerge";
 import {RestClientConfig} from "@thekla/config";
 
-
 export class RestClientRqst implements RestClient {
 
     public static from(clientConfig: RestClientConfig): RestClient {

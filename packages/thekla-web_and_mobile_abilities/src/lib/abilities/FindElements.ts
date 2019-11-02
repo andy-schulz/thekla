@@ -28,8 +28,8 @@ export class FindElements implements Ability {
         return this.find(spe) as WebElementFinder;
     }
 
-    public findElements(spes: SppElementList): WebElementListFinder {
-        return this.find(spes) as WebElementListFinder;
+    public findElements(elements: SppElementList): WebElementListFinder {
+        return this.find(elements) as WebElementListFinder;
     }
 
     public find(spe: SppFinderRoot): WebElementFinder | WebElementListFinder {

@@ -1,7 +1,7 @@
 import * as fs           from "fs";
 import {ActivityLogNode} from "./ActivityLogEntry";
 
-const formatToText = (logPrefix: string, repeat: number, logNode: ActivityLogNode) => {
+const formatToText = (logPrefix: string, repeat: number, logNode: ActivityLogNode): string => {
     return `${logPrefix.repeat(repeat)}[${logNode.name}] - ${logNode.description}${(logNode.activityNodes.map((logEntry: ActivityLogNode): string => {
 
         return `\n` + formatToText(`${logPrefix}`, repeat + 1, logEntry)
@@ -41,7 +41,7 @@ export const formatNodeToHtml = (logNode: ActivityLogNode): string => {
  * @param tag - the tag enclosing the text
  * @param style - the inline style which will be added to the tag
  */
-export const encloseInTag = (text: string, tag: string, style?: string) => {
+export const encloseInTag = (text: string, tag: string, style?: string): string => {
     return `<${tag}${style ? ` style="${style}"` : ``}>${text}</${tag}>`
 };
 
@@ -50,7 +50,7 @@ export const encloseInTag = (text: string, tag: string, style?: string) => {
  * The node will be a foldable list (ul)
  * @param logNode - the log node to create a html list from
  */
-export const formatLogWithHtmlTags = (logNode: ActivityLogNode) => {
+export const formatLogWithHtmlTags = (logNode: ActivityLogNode): string => {
     return`<ul id="ActivityLog">${formatNodeToHtml(logNode)}</ul>`
 };
 
@@ -58,7 +58,7 @@ export const formatLogWithHtmlTags = (logNode: ActivityLogNode) => {
  * format the node to an html tree and add the style and JS function to the html representation
  * @param logNode - the log node to create a html list from
  */
-export const formatLogAsHtmlTree = (logNode: ActivityLogNode) => {
+export const formatLogAsHtmlTree = (logNode: ActivityLogNode): string => {
 
     // eslint-disable-next-line @typescript-eslint/no-use-before-define
     return `${htmlStyle} ${formatLogWithHtmlTags(logNode)} ${functionScript} `
@@ -85,7 +85,6 @@ export const encodeLog = (encoding = ``): (source: string) => string => {
 /**
  * the css which is read from a file and added to the HTML tree
  */
-console.log(__dirname)
 const activityLogStyle = fs.readFileSync(`${__dirname}/../../res/styles/ActivityLog.css`);
 
 /**

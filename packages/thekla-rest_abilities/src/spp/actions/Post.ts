@@ -18,7 +18,6 @@ export class Post implements Interaction<void, RestRequestResult>, MethodActions
             .catch(catchAndSaveOnError(this.saveTo, this.catchError))
     }
 
-
     public static to(request: SppRestRequest): Post {
         return new Post(request);
     }

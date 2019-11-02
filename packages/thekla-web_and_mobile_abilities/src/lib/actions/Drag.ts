@@ -22,9 +22,9 @@ class DragToElement implements Interaction<void, void> {
     /**
      * drag the fromElement and drop it to the toElement
      * @param fromElement - the draggable element
-     * @param toElement - the droppable element
+     * @param toElement - the element to drop the dragged element to
      */
-    public static dragElementToElement(fromElement: SppElement, toElement: SppElement) {
+    public static dragElementToElement(fromElement: SppElement, toElement: SppElement): DragToElement {
         return new DragToElement(fromElement, toElement)
     }
 
@@ -43,7 +43,7 @@ export class Drag {
 
     /**
      * specify where the first element should be dragged to
-     * @param element - the SPP Element
+     * @param toElement - the SPP Element
      */
     public toElement(toElement: SppElement): DragToElement {
         return DragToElement.dragElementToElement(this.fromElement, toElement)

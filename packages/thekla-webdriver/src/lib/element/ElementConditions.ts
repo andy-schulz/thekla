@@ -2,42 +2,49 @@ import {WebElementFinder} from "../../interface/WebElements";
 
 export interface UntilElementCondition {
     visible(): UntilElementCondition;
+
     forAsLongAs(timeout: number): UntilElementCondition;
+
     readonly modifierFunc: LogicFunction<boolean>;
     readonly waiter: ElementCondition;
     readonly timeout: number;
     readonly conditionHelpText: string;
 }
 
-abstract class  ElementCondition {
+abstract class ElementCondition {
     public abstract helpText: string;
-    public elementText: string = ``;
+    public elementText = ``;
+
     abstract isFulfilledFor(element: WebElementFinder): () => Promise<boolean>;
 }
 
-export class VisibilityCheck extends ElementCondition{
+export class VisibilityCheck extends ElementCondition {
     public constructor(
         public modifierFunc: (result: boolean) => boolean,
         public helpText = `visible`
-    ) {super()}
+    ) {
+        super()
+    }
 
     public isFulfilledFor(element: WebElementFinder): () => Promise<boolean> {
         this.elementText = `Waiting until element called '${element.description}'`;
-        return () => {
+        return (): Promise<boolean> => {
             return element.isVisible().then(this.modifierFunc)
         };
     }
 }
 
-export class EnabledCheck extends ElementCondition{
+export class EnabledCheck extends ElementCondition {
     public constructor(
         public modifierFunc: (result: boolean) => boolean,
         public helpText = `enabled`
-    ) {super()}
+    ) {
+        super()
+    }
 
     public isFulfilledFor(element: WebElementFinder): () => Promise<boolean> {
         const helpText = `${element.description}`;
-        return () => {
+        return (): Promise<boolean> => {
             return element.isEnabled().then(this.modifierFunc);
         };
     }
@@ -45,8 +52,8 @@ export class EnabledCheck extends ElementCondition{
 
 type LogicFunction<T> = (param: T) => T
 
-export class UntilElement implements UntilElementCondition{
-    private _timeout: number = 5000;
+export class UntilElement implements UntilElementCondition {
+    private _timeout = 5000;
     public waiter: ElementCondition;
 
     private static readonly id: LogicFunction<boolean> = (result: boolean): boolean => result;
@@ -88,8 +95,8 @@ export class UntilElement implements UntilElementCondition{
 
     public toString(): string {
         const conditionType = (waiter: ElementCondition): string => {
-            if(waiter.constructor.name === `VisibilityCheck`)   return `visible`;
-            if(waiter.constructor.name === `EnabledCheck`)      return `enabled`;
+            if (waiter.constructor.name === `VisibilityCheck`) return `visible`;
+            if (waiter.constructor.name === `EnabledCheck`) return `enabled`;
             throw new Error(`ElementCondition named: '${waiter.constructor.name}' not implemented yet. ${(new Error).stack}`)
         };
 

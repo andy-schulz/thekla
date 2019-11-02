@@ -19,7 +19,6 @@ export class Command {
 
         let command = args._[0] || `help`;
 
-
         if (args.version || args.v) {
             command = `version`
         }
@@ -74,6 +73,7 @@ export class Command {
     /**
      * process all options passed via command line
      * @param args
+     * @param config
      */
     private mergeCommandLineArgsIntoConfig(args: minimist.ParsedArgs, config: TheklaConfig): Promise<TheklaConfig> {
         const processor = new TheklaConfigProcessor();

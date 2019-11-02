@@ -3,8 +3,6 @@ import {RestClient}       from "../interface/RestClient";
 import {RestRequest}      from "../interface/RestRequest";
 import {On}               from "../lib/Ressource";
 
-
-
 export interface RequestHelper extends Function {
     (restClient: RestClient, clientConfig: RestClientConfig): RestRequest;
     description: string;

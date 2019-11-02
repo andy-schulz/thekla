@@ -12,7 +12,7 @@ export class By{
     public function: string | Function = ``;
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public args: any[];
-    public searchText: string = ``;
+    public searchText = ``;
 
     private constructor(
         public selectorType: string,
@@ -34,14 +34,14 @@ export class By{
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
     public static js(script: string | Function, ...varArgs: any[]): By {
-        let by = new By(ByType.js, script.toString());
+        const by = new By(ByType.js, script.toString());
         by.function = script;
         by.args = varArgs;
         return by;
     }
 
     public static cssContainingText(selector: string, searchText: string): By {
-        let by = new By(ByType.cssContainingText, selector);
+        const by = new By(ByType.cssContainingText, selector);
         by.function = findByCssContainingText;
         by.args = [selector, searchText];
         return by;

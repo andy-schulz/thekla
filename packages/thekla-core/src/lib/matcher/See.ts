@@ -5,8 +5,8 @@ import {stepDetails}                    from "../decorators/step_decorators";
 
 export class See<PT, MPT> implements Oracle<PT, void> {
     private matcher: (value: MPT) => boolean | Promise<boolean>;
-    private repeater: number = 1;
-    private ms: number = 1000;
+    private repeater = 1;
+    private ms = 1000;
 
     private thenActivities: Activity<PT, void>[] = [];
     private otherwiseActivities: Activity<PT, void>[] = [];
@@ -90,7 +90,7 @@ export class See<PT, MPT> implements Oracle<PT, void> {
         return this;
     }
 
-    public repeatFor(times: number, interval: number = 1000): See<PT,MPT> {
+    public repeatFor(times: number, interval = 1000): See<PT,MPT> {
 
         if(times < 1 || times > 1000)
             throw new Error(`The repeat 'times' value should be between 1 and 1000. But its: ${times}`);

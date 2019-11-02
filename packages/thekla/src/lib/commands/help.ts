@@ -1,21 +1,21 @@
 import chalk, {Chalk} from 'chalk'
 
 export const menus: { [key: string]: any } = {
-    main: (p_chalk: Chalk) => `
-    thekla [${p_chalk.blue('command')} | ${p_chalk.green(`configFile`)}] ${p_chalk.magenta(`options`)}
+    main: (chalk: Chalk) => `
+    thekla [${chalk.blue(`command`)} | ${chalk.green(`configFile`)}] ${chalk.magenta(`options`)}
     
-    ${p_chalk.blue(`commands:
+    ${chalk.blue(`commands:
     help .............. print help menu
     version ........... show version number`)}
-    ${p_chalk.green(`configFile ........ relative path to the thekla config file
+    ${chalk.green(`configFile ........ relative path to the thekla config file
         See: HelpSite for details on how to create a config file.`)}
     
-    ${p_chalk.magenta(`options:
+    ${chalk.magenta(`options:
     All config file parameter can be overwritten by command line parameters e.g.:
     
-    --specs=${p_chalk.magenta.bold(`PATH_TO_SPEC_OR_GLOB`)} .................................................... the spec files to execute (glob possible)
-    --testFramework.frameworkName=${p_chalk.magenta.bold(`FRAMEWORK_TO_USE`)} .................................. name of the test framework to use (jasmine | cucumber)
-    --seleniumConfig.capabilities.browserName=${p_chalk.magenta.bold(`BROWSER_TO_USE`)} ........................ browser to use for selenium tests`)}`,
+    --specs=${chalk.magenta.bold(`PATH_TO_SPEC_OR_GLOB`)} .................................................... the spec files to execute (glob possible)
+    --testFramework.frameworkName=${chalk.magenta.bold(`FRAMEWORK_TO_USE`)} .................................. name of the test framework to use (jasmine | cucumber)
+    --seleniumConfig.capabilities.browserName=${chalk.magenta.bold(`BROWSER_TO_USE`)} ........................ browser to use for selenium tests`)}`,
 
     specs: `
     No Specs found in config file. 
@@ -37,7 +37,7 @@ export const mainMenu = (level: number) => {
 };
 
 export const helpText = (args: any) => {
-    const subCmd = args._[0] === 'help'
+    const subCmd = args._[0] === `help`
         ? args._[1]
         : args._[0];
 

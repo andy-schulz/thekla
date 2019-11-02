@@ -5,11 +5,11 @@
 import {UsesAbilities, Interaction, stepDetails} from "@thekla/core";
 import {FindElements}                            from "../abilities/FindElements";
 import {UseBrowserFeatures}                      from "../abilities/UseBrowserFeatures";
-import {SppElementList, SppElement}              from "../SppWebElements";
+import {SppElement}                              from "../SppWebElements";
 
 class PagePosition implements PagePositionInterface {
 
-    public static of(x: number, y: number) {
+    public static of(x: number, y: number): PagePosition {
         return new PagePosition(x, y)
     }
 
@@ -37,14 +37,20 @@ interface PagePositionInterface {
     y: number;
 }
 
-
 class ElementScroller implements Interaction<void, void> {
+    private center = false;
+
     /**
      * @ignore
      */
     @stepDetails<UsesAbilities, void, void>(`scroll to element: '<<element>>'`)
     public performAs(actor: UsesAbilities): Promise<void> {
-        return FindElements.as(actor).findElement(this.element).scrollIntoView();
+        return FindElements.as(actor).findElement(this.element).scrollIntoView(this.center);
+    }
+
+    public atTheViewportCenter(): ElementScroller {
+        this.center = true;
+        return this;
     }
 
     /**
@@ -55,10 +61,11 @@ class ElementScroller implements Interaction<void, void> {
 }
 
 class PageScroller implements Interaction<void, void> {
+
     /**
      * @ignore
      */
-    @stepDetails<UsesAbilities, void, void>(`scroll to PagePositon: '<<position>>'`)
+    @stepDetails<UsesAbilities, void, void>(`scroll to PagePosition: '<<position>>'`)
     public performAs(actor: UsesAbilities): Promise<void> {
         return UseBrowserFeatures.as(actor).scrollTo(this.pagePosition.inspect());
     }
@@ -73,16 +80,14 @@ class PageScroller implements Interaction<void, void> {
 export class Scroll {
     /**
      * specify which element or position should be scrolled to
-     * @param elementOrPage - the SPP Element or PAge Position
+     * @param element
      */
-    public static to(elementOrPage: SppElement | SppElementList | PagePosition): ElementScroller | PageScroller {
+    public static to(element: SppElement): ElementScroller {
+        return new ElementScroller(element);
+    }
 
-        if (elementOrPage instanceof SppElement)
-            return new ElementScroller(elementOrPage as SppElement);
-        else if (elementOrPage instanceof PagePosition)
-            return new PageScroller(elementOrPage as PagePosition);
-
-        throw new Error(`Parameter of Scroll.to() should be SppElementList or Page!`)
+    public static toPosition(position: PagePosition): PageScroller {
+        return new PageScroller(position);
     }
 }
 

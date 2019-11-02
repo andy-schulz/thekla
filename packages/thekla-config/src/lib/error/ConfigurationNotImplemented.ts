@@ -11,7 +11,7 @@ class ConfigurationNotImplementedError extends Error {
 
 export class ConfigurationNotImplemented {
 
-    private property: string = ``;
+    private property = ``;
 
     public static forFramework(framework: string): ConfigurationNotImplemented {
         return new ConfigurationNotImplemented(framework)

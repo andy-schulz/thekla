@@ -37,7 +37,7 @@ export abstract class FrameElementWd<WD> implements FrameElementFinder {
         return (this.all(locator) as WebElementListWd<WD>).toWebElement();
     }
 
-    private switchFrame() {
+    private switchFrame(): Promise<void> {
         return this.getFrames()
             .then((element: TkWebElement<WD>[]) => {
                 if (element.length === 0) {
@@ -60,7 +60,7 @@ export abstract class FrameElementWd<WD> implements FrameElementFinder {
         locator: By): WebElementListFinder {
         this.logger.debug(`Chains all element from frame: ${locator.toString()}`);
 
-        let getElements = (): Promise<TkWebElement<WD>[]> => {
+        const getElements = (): Promise<TkWebElement<WD>[]> => {
             return this.switchFrame()
                 .then(() => {
                     return this.findElementsDriver(locator);

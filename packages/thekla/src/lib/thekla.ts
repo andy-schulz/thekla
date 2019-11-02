@@ -27,13 +27,6 @@ export class Thekla {
 
     private theklaConfig: TheklaConfig;
 
-    constructor() {
-    }
-
-    private printHelpMessage() {
-
-    };
-
     run(theklaConfig: TheklaConfig): Promise<any> {
         global.thekla = getConfiguredTheklaGlobal(theklaConfig);
         this.theklaConfig = theklaConfig;

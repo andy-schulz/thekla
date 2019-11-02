@@ -23,7 +23,7 @@ export class AnnotatorWdio {
 
     private static driverMap: Map<Client, AnnotatorWdio> = new Map();
 
-    private funcToString = (func: Function | string) => {
+    private funcToString = (func: Function | string): string => {
         return `return (${func}).apply(null, arguments);`
     };
 

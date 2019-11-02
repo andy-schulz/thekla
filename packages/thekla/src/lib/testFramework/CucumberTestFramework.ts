@@ -14,7 +14,7 @@ export class CucumberTestFramework {
         }
     }
 
-    private processFrameworkOptions(frameworkOptions: CucumberOptions) {
+    private processFrameworkOptions(frameworkOptions: CucumberOptions): void {
 
         this.processOptions(frameworkOptions.require, `--require`);
         this.processOptions(frameworkOptions.format, `--format`);
@@ -23,7 +23,7 @@ export class CucumberTestFramework {
         this.processWorldParameters(frameworkOptions.worldParameters);
     }
 
-    private processWorldParameters (worldParams: any) {
+    private processWorldParameters (worldParams: any): void {
         if(!worldParams) return;
 
         if(!(typeof worldParams === `object` && {}.constructor === worldParams.constructor)) {
@@ -34,11 +34,11 @@ export class CucumberTestFramework {
         this.ccOptionsList.push(`--world-parameters`);
         this.ccOptionsList.push(JSON.stringify(worldParams));
     }
-    private processOptions(confOptions: undefined | string[], optsString: string) {
+    private processOptions(confOptions: undefined | string[], optsString: string): void {
         this.logger.debug(`processing ${optsString} option with CONF: ${confOptions}`);
 
-        const processOptions = (options: string[]) => {
-            for(let opt of options) {
+        const processOptions = (options: string[]): void => {
+            for(const opt of options) {
                 this.ccOptionsList.push(optsString);
                 this.ccOptionsList.push(opt);
             }
@@ -52,7 +52,7 @@ export class CucumberTestFramework {
 
         return new Promise((resolve, reject) => {
 
-            const result = (res: any) => {
+            const result = (res: any): void => {
                 this.logger.debug(`Cucumber: Result: ${JSON.stringify(res)}`);
                 resolve(res);
             };
@@ -70,7 +70,7 @@ export class CucumberTestFramework {
 
             args = [...args, ...this.ccOptionsList];
 
-            this.logger.debug(JSON.stringify(Cucumber, null, "\t"));
+            this.logger.debug(JSON.stringify(Cucumber, null, `\t`));
 
             const opts =  {
                 argv: args,

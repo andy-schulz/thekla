@@ -5,4 +5,4 @@ export {
 
 }                                                        from "./config"
 export {checkForFireFoxCyclicError, parseBrowserVersion} from "./browser_bugs"
-export {BoundaryCheck, boundingRect, clientRect}         from "./browser_viewport"
+export {BoundaryCheck, isElementOutsideOfView, clientRect}         from "./browser_viewport"

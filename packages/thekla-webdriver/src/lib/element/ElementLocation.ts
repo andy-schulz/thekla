@@ -5,7 +5,7 @@ export interface ElementDimensions {
     height: number;
 }
 
-interface BoundingRect extends ElementDimensions {
+export interface BoundingRect extends ElementDimensions {
     top: number;
     bottom: number;
     left: number;

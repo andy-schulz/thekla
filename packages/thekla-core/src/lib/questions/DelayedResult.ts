@@ -2,7 +2,7 @@ import {Question} from "./Question";
 
 export class DelayedResult implements Question<void,string> {
     private timeout = 1000;
-    private delayedValue: string = `Default value. Timeout of ${this.timeout} ms not reached. Second value not set yet.`;
+    private delayedValue = `Default value. Timeout of ${this.timeout} ms not reached. Second value not set yet.`;
     private called = false;
     private setValue = (): string => this.delayedValue = this.value;
 
@@ -17,7 +17,6 @@ export class DelayedResult implements Question<void,string> {
         return new DelayedResult(value)
     };
 
-
     public after(timeInMs: number): DelayedResult {
         this.timeout = timeInMs;
         this.delayedValue = `Default value. Timeout of ${this.timeout} ms not reached. Second value not set yet.`;
@@ -27,7 +26,6 @@ export class DelayedResult implements Question<void,string> {
 
         return this;
     }
-
 
     private constructor(private value: string) {
     };

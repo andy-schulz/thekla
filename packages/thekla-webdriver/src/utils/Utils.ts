@@ -1,4 +1,4 @@
-export const funcToString = (func: Function | string) => {
+export const funcToString = (func: Function | string): string => {
     return `return (${func}).apply(null, arguments);`
 };
 

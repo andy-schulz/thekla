@@ -12,7 +12,7 @@ class ConfigurationValidationFailedError extends Error {
 
 export class ConfigurationValidationFailed {
 
-    private givenValue: string = ``;
+    private givenValue = ``;
 
     public static forAttribute(attribute: string): ConfigurationValidationFailed {
         return new ConfigurationValidationFailed(attribute)
@@ -23,7 +23,7 @@ export class ConfigurationValidationFailed {
         return this;
     }
 
-    public expected(expectedValue: string) {
+    public expected(expectedValue: string): ConfigurationValidationFailedError {
         return new ConfigurationValidationFailedError(this.attribute, this.givenValue, expectedValue);
     }
 

@@ -1,7 +1,7 @@
-import {Actor}                 from "../Actor";
-import {Ability, AbilityClass} from "../abilities/Ability";
+import {Actor}        from "../Actor";
+import {AbilityClass} from "../abilities/Ability";
 
-class DoesNotHaveTheAbility extends Error{
+class DoesNotHaveTheAbility extends Error {
     public constructor(
         private _ability: AbilityClass,
         private _actor: Actor) {
@@ -22,7 +22,6 @@ class DoesNotHaveTheAbility extends Error{
         return this._ability;
     }
 }
-
 
 export class DoesNotHave {
 

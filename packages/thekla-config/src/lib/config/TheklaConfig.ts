@@ -64,10 +64,10 @@ export interface CucumberOptions {
         snippetInterface?: "async-await" | "callback" | "generator" | "promise" | "synchronous";
         snippetSyntax?: string;
         rerun?: {
-            separator: string
+            separator: string;
         };
         colorsEnabled?: boolean;
-    }
+    };
 
     // cli option --require-module <module_name>
     requireModule?: string[];

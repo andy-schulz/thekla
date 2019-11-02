@@ -1,7 +1,8 @@
 import "jasmine"
+import {isElementOutsideOfView}                                              from "@thekla/support/dist";
 import {configure}                                                           from "log4js";
 import {WebElementWdio}                                                      from "../../wdio/WebElementWdio";
-import {BoundaryCheck, boundingRect}                                         from "@thekla/support";
+import {BoundaryCheck}                                                       from "@thekla/support";
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
 import {wait}                                                                from "@thekla/core";
@@ -86,10 +87,10 @@ describe(`When using the Browser object`, (): void => {
             const optionListNotFound = browser.element(By.css(`[data-test-id='DoesNotExistTestId-f1f7e78c']`));
 
             return optionListNotFound.click()
-                .then((): void => {
-                    expect(true).toBe(false, `The click Promise should not be fulfilled`)
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                }).catch((e: any): void => {
+                                     .then((): void => {
+                                         expect(true).toBe(false, `The click Promise should not be fulfilled`)
+                                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                                     }).catch((e: any): void => {
                     expect(e.toString()).toContain(`Did not find the Element:`)
                 });
 
@@ -155,24 +156,73 @@ describe(`When using the Browser object`, (): void => {
 
     describe(`and try to scroll an element into view`, (): void => {
         let lastTableRow: WebElementFinder;
+        let row50: WebElementFinder;
 
         beforeAll((): Promise<void> => {
             lastTableRow = browser.element(By.css(`[data-test-id='lastTableRow']`));
+            row50 = browser.element(By.css(`[data-test-id='50']`));
 
             return browser.get(`/tables`);
         });
 
         it(`it should scroll to the element 
         - (test case id: 8284b313-f35f-4841-931f-2927d848d138)`, async (): Promise<void> => {
-            const className = `lastTableRow`;
+            const selector = `.lastTableRow`;
 
-            const isOutOnfirstCheck: BoundaryCheck = await browser.executeScript(boundingRect, className) as BoundaryCheck;
-            expect(isOutOnfirstCheck.any).toBeTruthy();
+            const isOutOnfirstCheck: BoundaryCheck =
+                await browser.executeScript(isElementOutsideOfView, selector) as BoundaryCheck;
+            expect(isOutOnfirstCheck.anyOutside).toBeTruthy();
 
             await lastTableRow.scrollIntoView();
 
-            const isOutOnSecondCheck: BoundaryCheck = await browser.executeScript(boundingRect, className) as BoundaryCheck;
-            expect(isOutOnSecondCheck.any).toBeFalsy();
+            const isOutOnSecondCheck: BoundaryCheck =
+                await browser.executeScript(isElementOutsideOfView, selector) as BoundaryCheck;
+            expect(isOutOnSecondCheck.anyOutside).toBeFalsy();
+        });
+
+        it(`it should scroll the element to the viewports center
+        - (test case id: 6b59de22-1f6d-4c2f-9223-a37fc8d224cf)`, async (): Promise<void> => {
+            const row49Selector = `[data-test-id='49']`;
+            const row50Selector = `[data-test-id='50']`;
+            const row51Selector = `[data-test-id='51']`;
+
+            let isRow49OutsideView: BoundaryCheck =
+                await browser.executeScript(isElementOutsideOfView, row49Selector) as BoundaryCheck;
+            let isRow50OutsideView: BoundaryCheck =
+                await browser.executeScript(isElementOutsideOfView, row50Selector) as BoundaryCheck;
+            let isRow51OutsideView: BoundaryCheck =
+                await browser.executeScript(isElementOutsideOfView, row51Selector) as BoundaryCheck;
+
+            expect(isRow49OutsideView.anyOutside).toBeTruthy(`row 49 is not outside of view, but it should`);
+            expect(isRow50OutsideView.anyOutside).toBeTruthy(`row 50 is not outside of view, but it should`);
+            expect(isRow51OutsideView.anyOutside).toBeTruthy(`row 51 is not outside of view, but it should`);
+
+            await row50.scrollIntoView();
+
+            isRow49OutsideView =
+                await browser.executeScript(isElementOutsideOfView, row49Selector) as BoundaryCheck;
+            isRow50OutsideView =
+                await browser.executeScript(isElementOutsideOfView, row50Selector) as BoundaryCheck;
+            isRow51OutsideView =
+                await browser.executeScript(isElementOutsideOfView, row51Selector) as BoundaryCheck;
+
+            expect(isRow49OutsideView.anyOutside).toBeTruthy(
+                `row 49 should be outside of view, when row 50 is scrolled to the viewports top`);
+            expect(isRow50OutsideView.anyOutside).toBeFalsy(`row 50 is outside of view, but it shouldn't`);
+            expect(isRow51OutsideView.anyOutside).toBeFalsy(`row 51 is outside of view, but it shouldn't`);
+
+            await row50.scrollIntoView(true);
+
+            isRow49OutsideView =
+                await browser.executeScript(isElementOutsideOfView, row49Selector) as BoundaryCheck;
+            isRow50OutsideView =
+                await browser.executeScript(isElementOutsideOfView, row50Selector) as BoundaryCheck;
+            isRow51OutsideView =
+                await browser.executeScript(isElementOutsideOfView, row51Selector) as BoundaryCheck;
+
+            expect(isRow49OutsideView.anyOutside).toBeFalsy(`row 49 is outside of view, but it shouldn't`);
+            expect(isRow50OutsideView.anyOutside).toBeFalsy(`row 50 is outside of view, but it shouldn't`);
+            expect(isRow51OutsideView.anyOutside).toBeFalsy(`row 51 is outside of view, but it shouldn't`);
         });
     });
 
@@ -251,7 +301,7 @@ describe(`When using the Browser object`, (): void => {
         - (test case id: c004412c-9e79-4df4-8af6-ea079318769d)`, async (): Promise<void> => {
             expect(await enabledButton4000.isEnabled()).toEqual(false);
             await browser.wait(until((): Promise<boolean> => enabledButton4000.isEnabled()), 2000)
-                .catch((e): string => e);
+                         .catch((e): string => e);
             expect(await enabledButton4000.isEnabled()).toEqual(false);
 
         });

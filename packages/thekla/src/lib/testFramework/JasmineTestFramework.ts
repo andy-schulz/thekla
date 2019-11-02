@@ -4,17 +4,16 @@ import {TheklaReporter} from "../reporters/TheklaReporter";
 import {getLogger}      from "@log4js-node/log4js-api";
 
 export class JasmineTestFramework {
-    private logger = getLogger("JasmineTestFramework");
+    private logger = getLogger(`JasmineTestFramework`);
     constructor(private frameworkOptions: JasmineOptions) {
 
     }
 
     public run(specs: string[]): Promise<any> {
         this.logger.debug(`Starting Jasmine Tests.`);
-        const Jasmine = require('jasmine');
+        const Jasmine = require(`jasmine`);
         const jasminer = new Jasmine();
         const jasmineGlobal = jasmine;
-
 
         const reporter = new TheklaReporter();
         jasminer.addReporter(reporter);
@@ -34,10 +33,9 @@ export class JasmineTestFramework {
                 }
             });
 
-
             jasminer.configureDefaultReporter({});
             jasminer.projectBaseDir = path.resolve();
-            jasminer.specDir = '';
+            jasminer.specDir = ``;
             jasminer.addSpecFiles(specs);
             jasminer.execute();
         });

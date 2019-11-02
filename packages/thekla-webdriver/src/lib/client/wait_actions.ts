@@ -1,11 +1,11 @@
 import {Condition} from "../Condition";
-import { Logger }  from "@log4js-node/log4js-api";
+import {Logger}    from "@log4js-node/log4js-api";
 
 export const waitForCondition = (logger: Logger) => {
     return (
         condition: Condition,
-        timeout: number = 5000,
-        waitMessage: string = ``): Promise<string> => {
+        timeout = 5000,
+        waitMessage = ``): Promise<string> => {
 
         return new Promise((fulfill, reject): void => {
             const start = Date.now();
@@ -29,10 +29,10 @@ export const waitForCondition = (logger: Logger) => {
                 };
 
                 condition.check()
-                    .then(worker)
-                    // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
-                    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-                    .catch((e: any): void => worker(false, `${e.toString()} \n ${Error().stack}`))
+                         .then(worker)
+                         // eslint-disable-next-line @typescript-eslint/explicit-function-return-type
+                         // eslint-disable-next-line @typescript-eslint/no-explicit-any
+                         .catch((e: any): void => worker(false, `${e.toString()} \n ${Error().stack}`))
             };
             setTimeout(check, 300);
         })

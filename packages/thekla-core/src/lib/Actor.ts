@@ -68,7 +68,7 @@ export class Actor implements AnswersQuestions, PerformsTask, UsesAbilities{
      * @param abilities the ability the actor is able to use
      */
     public whoCan(...abilities: Ability[] | AbilitySet[]): Actor {
-        for(let element of abilities) {
+        for(const element of abilities) {
             if(element.isAbilityList()) {
                 this.whoCan(...element.getAbilities());
             }
@@ -106,7 +106,7 @@ export class Actor implements AnswersQuestions, PerformsTask, UsesAbilities{
     public attemptsTo<PT,RT>(...activities: Activity<any, any>[]): Promise<RT>
     {
 
-        let reducefn = (chain: Promise<PT>, activity: Activity<PT, RT>): Promise<RT> => {
+        const reducefn = (chain: Promise<PT>, activity: Activity<PT, RT>): Promise<RT> => {
             return chain.then((result: PT): Promise<RT> => {
                 return activity.performAs(this, result);
             })

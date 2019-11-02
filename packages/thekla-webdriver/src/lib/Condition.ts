@@ -19,8 +19,8 @@ function createConditionHelper(): ConditionElement {
         return new Condition(fn)
     }) as ConditionElement;
 
-    until.not = (fn: () => Promise<boolean>) => {
-        let invertFunc = (): Promise<boolean> => fn().then((state): boolean => !state);
+    until.not = (fn: () => Promise<boolean>): Condition => {
+        const invertFunc = (): Promise<boolean> => fn().then((state): boolean => !state);
         return new Condition(invertFunc);
     };
     return until;

@@ -3,26 +3,23 @@ interface TestResult {
 }
 
 export class CompletionReporter {
-    private completed: boolean = false;
+    private completed = false;
     private _onCompleteCallback: Function = () => {};
-    constructor() {
-
-    }
 
     onCompleteCallback(): Function {
         return this._onCompleteCallback;
     };
 
-    onComplete(callback: Function) {
+    onComplete(callback: Function): void {
         this._onCompleteCallback = callback;
     };
 
-    jasmineDone(result: TestResult) {
+    jasmineDone(result: TestResult): void {
         this.completed = true;
-        this._onCompleteCallback(result.overallStatus === 'passed');
+        this._onCompleteCallback(result.overallStatus === `passed`);
     };
 
-    isComplete() {
+    isComplete(): boolean {
         return this.completed;
     };
 };

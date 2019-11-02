@@ -5,7 +5,6 @@ import {By, ByType}                 from "../lib/element/Locator";
 import {funcToString}               from "../utils/Utils";
 import {ElementRefIO, WebElementIO} from "./wrapper/WebElementIO";
 
-
 export class LocatorWdio {
 
     private static getElementID = (element: ElementRefIO): string => {

@@ -22,7 +22,7 @@ export class Get implements Interaction<void, RestRequestResult>, MethodActions 
         return new Get(request);
     }
 
-    public withConfig(config: RestClientConfig) {
+    public withConfig(config: RestClientConfig): Get {
         this.config = config;
         return this;
     }

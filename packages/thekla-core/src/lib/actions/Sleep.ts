@@ -6,7 +6,7 @@ import {wait}          from "../utils/utils";
 
 export class Sleep implements Interaction<void, void> {
     private logger = getLogger(`Sleep`);
-    public sleepReason: string = ``;
+    public sleepReason = ``;
 
     @stepDetails<UsesAbilities, void, void>(`stop all actions for '<<sleepTime>>' ms<<sleepReason>>`)
     // parameter is needed for stepDetails typing

@@ -1,17 +1,11 @@
-import {getLogger}                                from "@log4js-node/log4js-api";
-import {Client}                                   from "webdriver"
-import {PointerActionSequence, PointerMoveAction} from "../../interface/Actions";
-import {TkWebElement}                             from "../../interface/TkWebElement";
-import {
-    ElementDimensions,
-    ElementLocationInView,
-    getCenterPoint,
-    Point
-}                                                 from "../../lib/element/ElementLocation";
-import {By}                                       from "../../lib/element/Locator";
-import {funcToString}                             from "../../utils/Utils";
-
-// @ts-ignore
+import {getLogger}                    from "@log4js-node/log4js-api";
+import {Client}                       from "webdriver"
+import {PointerActionSequence}        from "../../interface/Actions";
+import {TkWebElement}                 from "../../interface/TkWebElement";
+import {BoundingRect, ElementDimensions, ElementLocationInView, getCenterPoint, Point}
+    from "../../lib/element/ElementLocation";
+import {By}                           from "../../lib/element/Locator";
+import {funcToString}                 from "../../utils/Utils";
 import {isElementDisplayed}           from "../../lib/__client_side_scripts__/is_displayedness";
 import {LocatorWdio}                  from "../LocatorWdio";
 import {boundingRect, scrollIntoView} from "../../lib/__client_side_scripts__/scroll_page";
@@ -95,10 +89,10 @@ export class WebElementIO implements TkWebElement<Client> {
         return this.client.isElementEnabled(this.getElementId()) as unknown as Promise<boolean>
     }
 
-    public scrollIntoView = (): Promise<void> => {
+    public scrollIntoView = (center?: boolean): Promise<void> => {
 
-        return this.client.executeScript(funcToString(scrollIntoView), [this.htmlElement])
-            .then(() => this.htmlElement);
+        return this.client.executeScript(funcToString(scrollIntoView), [this.htmlElement, center])
+                   .then(() => this.htmlElement);
     };
 
     public getLocationInView = (): Promise<ElementLocationInView> => {
@@ -112,38 +106,38 @@ export class WebElementIO implements TkWebElement<Client> {
     }
 
     private moveToElement = (element: ElementRefIO): (client: Client) => Promise<Client> => {
-        return (client: Client) => {
+        return (client: Client): Promise<Client> => {
             return this.scrollIntoView()
-                .then(() => {
-                    return this.getCenterPointInView()
-                })
-                .then((centerPoint: Point) => {
-                    const actions = {
-                        type: `pointer`,
-                        id: `myMouse`,
-                        parameters: {"pointerType": `mouse`},
-                        actions: [{
-                            type: `pause`,
-                            duration: 500,
-                        }, {
-                            // bugfix for firefox
-                            // have to reset the pointer and then move to the element, otherwise the mouse pointer
-                            // is not moved to the correct location
-                            type: `pointerMove`,
-                            origin: `viewport`,
-                            x: 0,
-                            y: 0,
-                        }, {
-                            type: `pointerMove`,
-                            origin: `viewport`,
-                            x: centerPoint.x,
-                            y: centerPoint.y,
-                        }]
-                    };
-                    return [actions] as PointerActionSequence[];
-                })
-                .then((actions: PointerActionSequence[]): Promise<void> => client.performActions(actions) as unknown as Promise<void>)
-                .then(() => client);
+                       .then(() => {
+                           return this.getCenterPointInView()
+                       })
+                       .then((centerPoint: Point) => {
+                           const actions = {
+                               type: `pointer`,
+                               id: `myMouse`,
+                               parameters: {"pointerType": `mouse`},
+                               actions: [{
+                                   type: `pause`,
+                                   duration: 500
+                               }, {
+                                   // bugfix for firefox
+                                   // have to reset the pointer and then move to the element, otherwise the mouse pointer
+                                   // is not moved to the correct location
+                                   type: `pointerMove`,
+                                   origin: `viewport`,
+                                   x: 0,
+                                   y: 0
+                               }, {
+                                   type: `pointerMove`,
+                                   origin: `viewport`,
+                                   x: centerPoint.x,
+                                   y: centerPoint.y
+                               }]
+                           };
+                           return [actions] as PointerActionSequence[];
+                       })
+                       .then((actions: PointerActionSequence[]): Promise<void> => client.performActions(actions) as unknown as Promise<void>)
+                       .then(() => client);
         }
     };
 
@@ -153,13 +147,13 @@ export class WebElementIO implements TkWebElement<Client> {
 
     public getCenterPointInView(): Promise<Point> {
 
-        const getDimension = (location: ElementLocationInView) => {
+        const getDimension = (location: ElementLocationInView): BoundingRect => {
             return location.boundingRect
         };
 
         return this.getLocationInView()
-            .then(getDimension)
-            .then(getCenterPoint)
+                   .then(getDimension)
+                   .then(getCenterPoint)
     }
 
     public getCenterPoint(): Promise<Point> {

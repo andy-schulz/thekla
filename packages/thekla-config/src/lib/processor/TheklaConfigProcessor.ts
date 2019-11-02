@@ -9,7 +9,6 @@ import { TheklaConfig, CucumberOptions, JasmineOptions } from "../config/TheklaC
 export class TheklaConfigProcessor {
     private logger = getLogger(`TheklaConfigProcessor`);
 
-
     public mergeSpecs(specs: string | string[] | undefined, config: TheklaConfig): TheklaConfig {
         if (specs) {
             if (Array.isArray(specs)) {
@@ -23,10 +22,10 @@ export class TheklaConfigProcessor {
 
     public mergeTestframeworkOptions(fwk: any, config: TheklaConfig): TheklaConfig {
         if(!fwk) return config;
-        let c: {[key: string]: any} = {};
+        const c: {[key: string]: any} = {};
 
         const mergeTestframeworkName = curry((name: string | undefined, cnfg: TheklaConfig): TheklaConfig => {
-            const cn:{[key: string]: any} = {};
+            const configToSet: {[key: string]: any} = {};
             if(!name) return cnfg;
 
             if(!(name === `jasmine` || name === `cucumber`)) {
@@ -34,19 +33,19 @@ export class TheklaConfigProcessor {
                 this.logger.error(message);
                 throw new Error(message);
             } else {
-                cn.testFramework = {};
-                cn.testFramework.frameworkName = name;
+                configToSet.testFramework = {};
+                configToSet.testFramework.frameworkName = name;
             }
-            return  merge(cnfg,cn) as TheklaConfig;
+            return  merge(cnfg,configToSet) as TheklaConfig;
         });
 
         const mergeCucumberOptions = curry((ccOpts: CucumberOptions | undefined, cnfg: TheklaConfig): TheklaConfig => {
             if(!ccOpts) return cnfg;
-            const cn: any = {testFramework: {
+            const configToSet: any = {testFramework: {
                     cucumberOptions: {}
                 }};
 
-            const mergeAttributes = (index: string, format: string | string[] | undefined) => {
+            const mergeAttributes = (index: string, format: string | string[] | undefined): void => {
                 // remove the tags if --tags="" was passed as command line
                 if(format === `` && cnfg.testFramework && cnfg.testFramework.cucumberOptions && (cnfg.testFramework.cucumberOptions as {[key: string]: any})[index]) {
                     this.logger.debug(`...${index}="" was passed on command line. Removing all tags from config ...`);
@@ -55,13 +54,13 @@ export class TheklaConfigProcessor {
                 }
 
                 if(!format) return;
-                cn.testFramework.cucumberOptions[index] = Array.isArray(format) ? format : [format];
+                configToSet.testFramework.cucumberOptions[index] = Array.isArray(format) ? format : [format];
             };
 
-            const mergeWorldParameter = (worldParams: any) => {
+            const mergeWorldParameter = (worldParams: any): void => {
                 if(!worldParams) return;
                 if(typeof worldParams === `object` && {}.constructor == worldParams.constructor) {
-                    cn.testFramework.cucumberOptions.worldParameters  =  worldParams
+                    configToSet.testFramework.cucumberOptions.worldParameters  =  worldParams
                 } else {
                     throw new Error(`Can't parse the World Parameter ${worldParams}`)
                 }
@@ -72,8 +71,8 @@ export class TheklaConfigProcessor {
             mergeAttributes(`format`,ccOpts.format);
             mergeWorldParameter(ccOpts.worldParameters);
 
-            const overwriteMerge = (destinationArray: any[], sourceArray: any[], options: any) => sourceArray;
-            return merge(cnfg,cn, { arrayMerge: overwriteMerge });
+            const overwriteMerge = (destinationArray: any[], sourceArray: any[], options: any): any[] => sourceArray;
+            return merge(cnfg,configToSet, { arrayMerge: overwriteMerge });
         });
 
         const mergeJasmineOptions = curry((jsmOpts: JasmineOptions| undefined, cnfg: TheklaConfig) => {

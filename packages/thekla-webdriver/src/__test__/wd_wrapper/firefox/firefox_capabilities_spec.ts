@@ -1,8 +1,11 @@
-import {cloneDeep}                                                           from "lodash";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {ClientHelper, RunningBrowser, WindowSize, Browser}                   from "../../..";
-import {getUserAgent, windowSize}                                                        from "../../__client_side_scripts__/window";
+import {cloneDeep}                                         from "lodash";
+import {
+    getStandardTheklaServerConfig,
+    getStandardTheklaDesiredCapabilities
+}                                                          from "@thekla/support";
+import {ServerConfig, DesiredCapabilities}                 from "@thekla/config";
+import {ClientHelper, RunningBrowser, WindowSize, Browser} from "../../..";
+import {getUserAgent, windowSize}                          from "../../__client_side_scripts__/window";
 
 describe(`Starting a browser instance`, (): void => {
 
@@ -60,17 +63,17 @@ describe(`Starting a browser instance`, (): void => {
             };
 
             return RunningBrowser.startedOn(conf).withCapabilities(capa)
-                .get(`/`)
-                .then((): Promise<void> => {
-                    if (process.env.BROWSERSTACK === `enabled`)
-                        return Promise.resolve(); // browserstack ignores the binary option and just opens the browser
+                                 .get(`/`)
+                                 .then((): Promise<void> => {
+                                     if (process.env.BROWSERSTACK === `enabled`)
+                                         return Promise.resolve(); // browserstack ignores the binary option and just opens the browser
 
-                    return Promise.reject(`creating a browser with a not existing binary should throw an Error, but it doesnt`);
-                })
-                .catch((e: Error): void => {
-                    expect(e.toString()).toContain(`Failed to start browser`);
-                    expect(e.toString()).toContain(`C:\\DoesNotExist: no such file or directory`);
-                });
+                                     return Promise.reject(`creating a browser with a not existing binary should throw an Error, but it doesnt`);
+                                 })
+                                 .catch((e: Error): void => {
+                                     expect(e.toString()).toContain(`Failed to start browser`);
+                                     expect(e.toString()).toContain(`C:\\DoesNotExist: no such file or directory`);
+                                 });
         });
     });
 });

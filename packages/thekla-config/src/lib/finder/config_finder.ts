@@ -7,7 +7,7 @@ const defaultObjectMissingError = (
     searchForDefault: boolean,
     config: string,
     attribute: string,
-    configType: string) => `
+    configType: string): string => `
 Configuration does not contain a ${configType} object called '${searchForDefault ? defaultName : name}':
 
 Expected:
@@ -19,7 +19,7 @@ Expected:
 But got:
     ${attribute}: ${config}`;
 
-const defaultMissingError = (config: string, attribute: string, configType: string) => `
+const defaultMissingError = (config: string, attribute: string, configType: string): string => `
 Please specify a default config for type ${configType}:
 
 Expected:
@@ -76,7 +76,7 @@ const getCapabilities = (caps: CapabilitiesConfigSet | undefined): (name?: strin
         if (!caps)
             return {};
 
-        if (!('default' in caps))
+        if (!(`default` in caps))
             return caps as DesiredCapabilities;
 
         if (name) {
@@ -116,7 +116,7 @@ const getRestClientConfig = (config: RestClientConfigSet | undefined): (name?: s
         if (!config)
             return {};
 
-        if (!('default' in config))
+        if (!(`default` in config))
             return config as RestClientConfig;
 
         if (name) {
