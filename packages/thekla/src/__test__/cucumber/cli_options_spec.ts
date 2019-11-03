@@ -1,6 +1,5 @@
 import * as child       from "child_process";
 
-
 import fsExtra                            from 'fs-extra'
 import * as minimist                      from "minimist";
 import {Command}                          from "../../lib/command";
@@ -12,13 +11,12 @@ import {
     createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult
 }                                         from "../data/testFiles";
 
-
-describe('execute a basic cucumber feature file', () => {
+describe(`execute a basic cucumber feature file`, () => {
     let file1Result: CucumberTestFileResult;
     let theklaConfigResult: TheklaConfigFileResult;
 
     beforeEach(async () => {
-        file1Result = await createCucumberTestFiles("simple", "", "", "SpecOptionCli");
+        file1Result = await createCucumberTestFiles(`simple`, ``, ``, `SpecOptionCli`);
     });
 
     afterEach(async () => {
@@ -33,31 +31,31 @@ describe('execute a basic cucumber feature file', () => {
         }
 
         // reset result after deleting the test dir
-        theklaConfigResult = {baseDir: "", confFilePath: "", relativeConfFilePath: ""};
+        theklaConfigResult = {baseDir: ``, confFilePath: ``, relativeConfFilePath: ``};
     });
 
-    describe('and not specifying a feature file', () => {
+    describe(`and not specifying a feature file`, () => {
         let forked: child.ChildProcess;
 
         beforeEach(() => {
-            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: ['ignore', 'pipe', process.stderr, 'ipc']});
+            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
         });
 
         afterEach(() => {
             forked.kill();
         });
 
-        it('should display the help text when an empty spec Array is passed ' +
-            '- (test case id: ebfd78a6-c683-4227-ac3c-5304d6cdae57)', async () => {
+        it(`should display the help text when an empty spec Array is passed ` +
+            `- (test case id: ebfd78a6-c683-4227-ac3c-5304d6cdae57)`, async () => {
 
             const testConfig: TheklaConfig = {
                 specs: [],
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath]
@@ -67,9 +65,9 @@ describe('execute a basic cucumber feature file', () => {
                 args: args
             };
 
-            let output: string = "";
+            let output = ``;
 
-            forked.stdout.on("data", function (chunk) {
+            forked.stdout.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -77,7 +75,7 @@ describe('execute a basic cucumber feature file', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
+                    forked.on(`message`, (specResult: any) => {
                         expect(specResult).toEqual({});
                         expect(output.trim()).toEqual(menus.specs.trim());
                         resolve();
@@ -89,19 +87,19 @@ describe('execute a basic cucumber feature file', () => {
             });
         });
 
-        it('should display an error message when the specs are passed as an Array with a length greater than 1 ' +
-            '- (test case id: bbbfc97d-b4ba-4731-a774-2a0635f5d3f9)', async () => {
+        it(`should display an error message when the specs are passed as an Array with a length greater than 1 ` +
+            `- (test case id: bbbfc97d-b4ba-4731-a774-2a0635f5d3f9)`, async () => {
 
-            let output: string = "";
-            forked.stdout.on("data", function (chunk) { output = chunk.toString()});
+            let output = ``;
+            forked.stdout.on(`data`, function (chunk) { output = chunk.toString()});
 
             const testConfig: TheklaConfig = {
                 specs: [file1Result.relativeFeatureFilePath, file1Result.relativeFeatureFilePath],
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                 }
             };
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath]
@@ -112,7 +110,7 @@ describe('execute a basic cucumber feature file', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (result: TheklaTestResult) => {
+                    forked.on(`message`, (result: TheklaTestResult) => {
                         expect(result.specResult).toEqual(undefined);
                         expect(output.trim()).toEqual(menus.ccMultipleFeatureFiles.trim());
                         resolve();
@@ -125,30 +123,30 @@ describe('execute a basic cucumber feature file', () => {
         });
     });
 
-    describe('and specifying the feature files', () => {
+    describe(`and specifying the feature files`, () => {
         let forked: child.ChildProcess;
-        let output: string = "";
+        let output = ``;
 
         beforeEach(() => {
-            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: ['ignore', 'pipe', process.stderr, 'ipc']});
-            forked.stdout.on("data", function (chunk) { output = chunk.toString()});
+            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
+            forked.stdout.on(`data`, function (chunk) { output = chunk.toString()});
         });
 
         afterEach(() => {
             forked.kill();
-            output = "";
+            output = ``;
         });
 
         const cucumberSuccess = `1 scenario (1 passed)
 3 steps (3 passed)
 0m00.`;
 
-        const startTest = (args:minimist.ParsedArgs): Promise<any> => {
+        const startTest = (args: minimist.ParsedArgs): Promise<any> => {
             forked.send({ args: args });
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
+                    forked.on(`message`, (specResult: any) => {
                         resolve(specResult);
                     });
                 } catch (e) {
@@ -158,15 +156,15 @@ describe('execute a basic cucumber feature file', () => {
             });
         };
 
-        it('by passing via command line, it should execute the file ' +
-            '- (test case id: 8499d974-f712-49dc-a333-2b1e8a6d499d)', async () => {
+        it(`by passing via command line, it should execute the file ` +
+            `- (test case id: 8499d974-f712-49dc-a333-2b1e8a6d499d)`, async () => {
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleSpecCliOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `SingleSpecCliOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -181,16 +179,16 @@ describe('execute a basic cucumber feature file', () => {
                 })
         });
 
-        it('by passing them within the config file, it should execute the file ' +
-            '- (test case id: fcfac440-f13c-4dbd-be6b-f93eef045e57)', async () => {
+        it(`by passing them within the config file, it should execute the file ` +
+            `- (test case id: fcfac440-f13c-4dbd-be6b-f93eef045e57)`, async () => {
             const testConfig: TheklaConfig = {
                 specs: [file1Result.relativeFeatureFilePath],
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleSpecConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `SingleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath]
@@ -204,17 +202,16 @@ describe('execute a basic cucumber feature file', () => {
                 });
         });
 
-
-        it('should ignore empty specs array defined in config file when specs are passed via command line ' +
-            '- (test case id: 8cd2e0a6-e14d-435c-985d-29e635eae1bf)', async () => {
+        it(`should ignore empty specs array defined in config file when specs are passed via command line ` +
+            `- (test case id: 8cd2e0a6-e14d-435c-985d-29e635eae1bf)`, async () => {
             const testConfig: TheklaConfig = {
                 specs: [],
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -231,22 +228,22 @@ describe('execute a basic cucumber feature file', () => {
 
     });
 
-    describe('and specify the cucumber report', () => {
-        const reportPath = "_testData/report";
+    describe(`and specify the cucumber report`, () => {
+        const reportPath = `_testData/report`;
         const cwd = process.cwd();
         const fullReportPath = `${cwd}/${reportPath}`;
 
         let forked: child.ChildProcess;
-        let output: string = "";
+        let output = ``;
 
         beforeEach(() => {
-            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: ['ignore', 'pipe', process.stderr, 'ipc']});
-            forked.stdout.on("data", function (chunk) { output = chunk.toString()});
+            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
+            forked.stdout.on(`data`, function (chunk) { output = chunk.toString()});
         });
 
         afterEach(() => {
             forked.kill();
-            output = "";
+            output = ``;
         });
 
         beforeAll(() => {
@@ -258,12 +255,12 @@ describe('execute a basic cucumber feature file', () => {
             return fsExtra.remove(fullReportPath);
         });
 
-        const startTest = (args:minimist.ParsedArgs): Promise<any> => {
+        const startTest = (args: minimist.ParsedArgs): Promise<any> => {
             forked.send({ args: args });
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (specResult: any) => {
+                    forked.on(`message`, (specResult: any) => {
                         resolve(specResult);
                     });
                 } catch (e) {
@@ -273,21 +270,21 @@ describe('execute a basic cucumber feature file', () => {
             });
         };
 
-        it('it should generate the report ' +
-            '- (test case id: b8cdd200-2341-45a8-ae80-673d89e3e502)', async () => {
+        it(`it should generate the report ` +
+            `- (test case id: b8cdd200-2341-45a8-ae80-673d89e3e502)`, async () => {
             const baseName = `GenerateReportFromSimpleFeatureFile`;
 
             const reportFileName = `${baseName}RepotFile.json`;
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         format: [`json:${reportPath}/${reportFileName}`]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -302,20 +299,20 @@ describe('execute a basic cucumber feature file', () => {
                 });
         });
 
-        it('it should throw an error when the given folder does not exist - (test case id: 926989d3-3f5b-4ab6-8821-795cd2df68c1)', async () => {
+        it(`it should throw an error when the given folder does not exist - (test case id: 926989d3-3f5b-4ab6-8821-795cd2df68c1)`, async () => {
             const baseName = `ErorrMessageWhenDirDoesNotExist`;
 
             const reportFileName = `${baseName}RepotFile.json`;
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         format: [`json:doesNotExistFolder/${reportFileName}`]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],

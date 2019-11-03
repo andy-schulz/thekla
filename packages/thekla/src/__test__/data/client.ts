@@ -13,7 +13,7 @@ export interface TheklaTestResult {
 
 const proc = process;
 
-proc.on('message', async (testData: TheklaTestData) => {
+proc.on(`message`, async (testData: TheklaTestData) => {
     // const thekla = new Thekla();
     // const command = new Command(thekla, testData.args);
     // return  command.run()

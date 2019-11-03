@@ -63,7 +63,7 @@ Then(/^I should see 3 console logs$/, function() {
 });
 `;
 
-export const spec_timeout_wait_for_10000ms = `
+export const specTimeoutWaitFor10000ms = `
 "use strict";
 describe('timeout a spec', () => {
     it('in the master directory', (done) => {
@@ -97,16 +97,18 @@ export const baseRelativeJasmineTestDir = `_testData/jasmine/`;
 export const baseAbsoluteCucumberTestDir = `${cwd}/${baseRelativeCucumberTestDir}`;
 export const baseAbsoluteJasmineTestDir = `${cwd}/${baseRelativeJasmineTestDir}`;
 
+// eslint-disable-next-line
 export const getDynamicTestDir = (type: "cucumber" | "jasmine" = "cucumber") => {
   const date = new Date().getTime();
 
-  if(type === "cucumber") {
+  if(type === `cucumber`) {
       return {timeStampDir: `${date}`, absolute: `${baseAbsoluteCucumberTestDir}/${date}/`, relative: `${baseRelativeCucumberTestDir}/${date}/`};
   } else {
       return {timeStampDir: `${date}`, absolute: `${baseAbsoluteJasmineTestDir}/${date}/`, relative: `${baseRelativeJasmineTestDir}/${date}/`};
   }
 };
 
+// eslint-disable-next-line
 type TestFileType = "simple" | "example" | "worldParameter";
 
 const featureFileStdName = `FeatureTestFile.feature`;
@@ -114,21 +116,21 @@ const stepDefinitionFileStdName = `StepDefinitionFile.js`;
 const confFileStdName = `_conf.js`;
 
 const getFeatureFileContent = (fileType: string) => {
-    if(fileType === "simple") {
+    if(fileType === `simple`) {
         return simpleFeatureTestFileContent;
-    } else if (fileType === "example") {
+    } else if (fileType === `example`) {
         return exampleFeatureTestFileContent;
     } else {
         throw new Error(`File with TestFileType: ${fileType} does not exist.`);
     }
 };
 
-const getStepDefinitionFileContent = (fileType: string, param: string = "") => {
-  if(fileType === "simple") {
+const getStepDefinitionFileContent = (fileType: string, param = ``) => {
+  if(fileType === `simple`) {
     return simpleStepDefinitionFileContent;
-  } else if (fileType === "example") {
+  } else if (fileType === `example`) {
     return exampleStepDefinitionFileContent;
-  } else if (fileType === "worldParameter") {
+  } else if (fileType === `worldParameter`) {
       return worldParameterStepDefinitionFileContent(param);
   } else {
     throw new Error(`File with TestFileType: ${fileType} does not exist.`);
@@ -142,16 +144,15 @@ export interface JasmineTestFileResult {
 }
 
 export const createJasmineTestFiles = async function(name: string, path: string, content: string): Promise<JasmineTestFileResult> {
-    let result: JasmineTestFileResult;
 
-    const testPath = getDynamicTestDir("jasmine");
+    const testPath = getDynamicTestDir(`jasmine`);
 
     const specFileName = `${name}_specFile.js`;
     const absolutSpecFilePath = path ? `${testPath.absolute}/${path}/${specFileName}` : `${testPath.absolute}/${specFileName}`;
     const relativeSpecFilePath = path ? `${testPath.relative}/${path}/${specFileName}` : `${testPath.relative}/${specFileName}`;
     await fsExtra.outputFile(absolutSpecFilePath, content);
 
-    result = {
+    const result: JasmineTestFileResult = {
         baseDir: testPath.absolute,
         specFilePath: absolutSpecFilePath,
         relativeSpecFilePath: relativeSpecFilePath
@@ -169,19 +170,17 @@ export interface CucumberTestFileResult {
     relativeStepDefinitionFilePath: string;
 }
 
-
-
 export const createCucumberTestFiles = async (
     fileType: TestFileType,
     featurePath: string,
     stepPath: string,
     fileBaseName: string,
-    param: string = ""): Promise<CucumberTestFileResult> => {
+    param = ``): Promise<CucumberTestFileResult> => {
 
     const fileTypes: Map<TestFileType, TestFileType[]> = new Map();
-    fileTypes.set("simple", ["simple", "simple"]);
-    fileTypes.set("example", ["example", "example"]);
-    fileTypes.set("worldParameter", ["simple", "worldParameter"]);
+    fileTypes.set(`simple`, [`simple`, `simple`]);
+    fileTypes.set(`example`, [`example`, `example`]);
+    fileTypes.set(`worldParameter`, [`simple`, `worldParameter`]);
 
     const result: CucumberTestFileResult = {
         timeStampDir: ``,
@@ -213,7 +212,7 @@ export const createCucumberTestFiles = async (
         await fsExtra.outputFile(featureFileFullPath, getFeatureFileContent(ft[0]));
         await fsExtra.outputFile(stepDefinitionFileFullPath, getStepDefinitionFileContent(ft[1],param));
     } else {
-        Promise.reject("Error creating files.")
+        Promise.reject(`Error creating files.`)
     }
 
     return Promise.resolve(result);
@@ -232,7 +231,7 @@ export const createTheklaConfigFile = async (config: TheklaConfig, fileBaseName:
         relativeConfFilePath: ``
     };
 
-    const confContent: string = `exports.config = ${JSON.stringify(config, null, '\t')};`;
+    const confContent = `exports.config = ${JSON.stringify(config, null, `\t`)};`;
 
     const testPath = getDynamicTestDir();
     result.baseDir = testPath.absolute;

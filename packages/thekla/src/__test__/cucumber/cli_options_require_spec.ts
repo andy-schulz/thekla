@@ -8,15 +8,14 @@ import {
 }                     from "../data/testFiles";
 import fsExtra        from 'fs-extra'
 
-
-describe('Specifying support files', () => {
+describe(`Specifying support files`, () => {
     let file1Result: CucumberTestFileResult;
     let file2Result: CucumberTestFileResult;
     let theklaConfigResult: TheklaConfigFileResult;
 
     beforeEach(async () => {
-        file1Result = await createCucumberTestFiles("simple", "test1", "step1", "RequireOptionCli");
-        file2Result = await createCucumberTestFiles("example", "test2", "step2", "RequireOptionFramework");
+        file1Result = await createCucumberTestFiles(`simple`, `test1`, `step1`, `RequireOptionCli`);
+        file2Result = await createCucumberTestFiles(`example`, `test2`, `step2`, `RequireOptionFramework`);
     });
 
     afterEach(async () => {
@@ -30,21 +29,21 @@ describe('Specifying support files', () => {
         }
 
         // reset result after deleting the test dir
-        theklaConfigResult = {baseDir: "", confFilePath: "", relativeConfFilePath: ""};
+        theklaConfigResult = {baseDir: ``, confFilePath: ``, relativeConfFilePath: ``};
     });
 
-    describe('on command line only', () => {
+    describe(`on command line only`, () => {
 
-        it('as a single option, should find the support file ' +
-            '- (test case id: 0c7dab32-8f0d-4f98-8931-251636256503)', async () => {
+        it(`as a single option, should find the support file
+        - (test case id: 0c7dab32-8f0d-4f98-8931-251636256503)`, async () => {
 
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleCliOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `SingleCliOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -65,20 +64,20 @@ describe('Specifying support files', () => {
         });
     });
 
-    describe('only in the config file', () => {
-        it('as a single option, should find the support file' +
-            '- (test case id: dfcf68da-e41f-4669-9f48-c25cb475826d)', async () => {
+    describe(`only in the config file`, () => {
+        it(`as a single option, should find the support file
+        - (test case id: dfcf68da-e41f-4669-9f48-c25cb475826d)`, async () => {
 
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         require: [file1Result.relativeStepDefinitionFilePath]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `SingleConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -87,24 +86,24 @@ describe('Specifying support files', () => {
 
             const thekla = new Thekla();
             const command = new Command(thekla, args);
-            await command.run().then((specResult: any) => {
-                expect(specResult.success).toBeTruthy();
+            await command.run().then((specResult: unknown) => {
+                expect((specResult as {[key: string]: boolean}).success).toBeTruthy();
             });
         });
 
-        it('as a single option with multiple support files, it should execute multiple feature files' +
-            '- (test case id: c06b4331-2374-4904-ba96-0694eeaf2442)', async () => {
+        it(`as a single option with multiple support files, it should execute multiple feature files
+        - (test case id: c06b4331-2374-4904-ba96-0694eeaf2442)`, async () => {
 
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         require: [file1Result.relativeStepDefinitionFilePath, file2Result.relativeStepDefinitionFilePath]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleFeatureFilesConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleFeatureFilesConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -119,21 +118,21 @@ describe('Specifying support files', () => {
         });
     });
 
-    describe('on command line and config file', () => {
-        it('when loading the wrong support files with config option, the test passes ' +
-            '- (test case id: b77d6249-ea6e-4919-8b20-d453a1c895c1)', async () => {
+    describe(`on command line and config file`, () => {
 
+        it(`when loading the wrong support files with config option, the test passes
+        - (test case id: b77d6249-ea6e-4919-8b20-d453a1c895c1)`, async () => {
 
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         require: [file2Result.relativeStepDefinitionFilePath]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleCliAndConfOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `SingleCliAndConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -153,20 +152,19 @@ describe('Specifying support files', () => {
 
         });
 
-        it('when loading the wrong support files with cli option, the test fails ' +
-            '- (test case id: 2853cfa8-b1cb-4953-9364-27d32d420e97)', async () => {
-
+        it(`when loading the wrong support files with cli option, the test fails
+        - (test case id: 2853cfa8-b1cb-4953-9364-27d32d420e97)`, async () => {
 
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         require: [file1Result.relativeStepDefinitionFilePath]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "ErrorWithSingleCliOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `ErrorWithSingleCliOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -187,18 +185,18 @@ describe('Specifying support files', () => {
         });
     });
 
-    describe('not on command line and not in config file', () => {
+    describe(`not on command line and not in config file`, () => {
 
-        it('should fail the test ' +
-            '- (test case id: 6c3f3e1a-6d29-439b-9b57-29a55c48eacb)', async () => {
+        it(`should fail the test
+        - (test case id: 6c3f3e1a-6d29-439b-9b57-29a55c48eacb)`, async () => {
 
             const testConfig: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MissingRequireOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MissingRequireOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],

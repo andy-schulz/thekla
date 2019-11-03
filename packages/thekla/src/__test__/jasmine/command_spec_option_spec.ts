@@ -1,6 +1,6 @@
 import * as child                         from "child_process";
 import fsExtra                            from "fs-extra";
-import * as minimist                      from "minimist";
+import minimist                           from "minimist";
 import {TheklaTestData, TheklaTestResult} from "../data/client";
 
 const cwd = process.cwd();
@@ -8,7 +8,7 @@ const cwd = process.cwd();
 const specFinderRelativeDir = `_testData/command/specFinder`;
 const specFinderAbsoluteDir = `${cwd}/${specFinderRelativeDir}`;
 
-const jasmineConfContent =  `
+const jasmineConfContent = `
 exports.config = {
     browserName: "firefox",
 
@@ -61,21 +61,21 @@ describe(`Passing spec files`, () => {
     });
 
     beforeEach(() => {
-        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: "ignore"});
+        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: `ignore`});
     });
 
-    describe(`by command line`,() => {
+    describe(`by command line`, () => {
         it(`aaaaaas a glob, two files should be found - 
         (test case id: c206faab-c926-43b8-8e1a-a9cd6f151f94)`, async () => {
 
             const testArgsSpec = [
                 jasmineConfRelativeFilePath,
-                `--specs=_testData/command/specFinder/**/spec*.js`,
+                `--specs=_testData/command/specFinder/**/spec*.js`
             ];
-            const args: minimist.ParsedArgs = require(`minimist`)(testArgsSpec);
+            const args: minimist.ParsedArgs = minimist(testArgsSpec);
 
             const testData: TheklaTestData = {
-                args: args,
+                args: args
             };
 
             forked.send(testData);
@@ -100,12 +100,12 @@ describe(`Passing spec files`, () => {
         (test case id: db991b42-7cc6-43d7-a65d-2b3d12f12377)`, () => {
             const testArgsSpec = [
                 jasmineConfRelativeFilePath,
-                `--specs=dist/spec/_testData/doesNotExist/**/*.js`,
+                `--specs=dist/spec/_testData/doesNotExist/**/*.js`
             ];
-            const args: minimist.ParsedArgs = require(`minimist`)(testArgsSpec);
+            const args: minimist.ParsedArgs = minimist(testArgsSpec);
 
             const testData: TheklaTestData = {
-                args: args,
+                args: args
             };
 
             forked.send(testData);
@@ -128,12 +128,12 @@ describe(`Passing spec files`, () => {
             (test case id: 477b309b-a655-4a76-860f-871158b2ee95)`, async () => {
             const testArgsSpec = [
                 jasmineConfRelativeFilePath,
-                `--specs=_testData/command/specFinder/spec_master_finder.js`,
+                `--specs=_testData/command/specFinder/spec_master_finder.js`
             ];
-            const args: minimist.ParsedArgs = require(`minimist`)(testArgsSpec);
+            const args: minimist.ParsedArgs = minimist(testArgsSpec);
 
             const testData: TheklaTestData = {
-                args: args,
+                args: args
             };
 
             forked.send(testData);
@@ -157,12 +157,12 @@ describe(`Passing spec files`, () => {
         (test case id: 680c6c8c-0efe-42ee-9eb9-626cabbc086d)`, () => {
             const testArgsSpec = [
                 jasmineConfRelativeFilePath,
-                `--specs=_testData/command/specFinder/doesNotExist.js`,
+                `--specs=_testData/command/specFinder/doesNotExist.js`
             ];
-            const args: minimist.ParsedArgs = require(`minimist`)(testArgsSpec);
+            const args: minimist.ParsedArgs = minimist(testArgsSpec);
 
             const testData: TheklaTestData = {
-                args: args,
+                args: args
             };
 
             forked.send(testData);
@@ -188,10 +188,10 @@ describe(`Passing spec files`, () => {
                 `--specs=_testData/command/specFinder/doesNotExist1.js`,
                 `--specs=_testData/command/specFinder/doesNotExist2.js`
             ];
-            const args: minimist.ParsedArgs = require(`minimist`)(testArgsSpec);
+            const args: minimist.ParsedArgs = minimist(testArgsSpec);
 
             const testData: TheklaTestData = {
-                args: args,
+                args: args
             };
 
             forked.send(testData);
@@ -217,10 +217,10 @@ describe(`Passing spec files`, () => {
                 `--specs=_testData/command/specFinder/doesNotExist1.js`,
                 `--specs=_testData/command/specFinder/spec_master_finder.js`
             ];
-            const args: minimist.ParsedArgs = require(`minimist`)(testArgsSpec);
+            const args: minimist.ParsedArgs = minimist(testArgsSpec);
 
             const testData: TheklaTestData = {
-                args: args,
+                args: args
             };
 
             forked.send(testData);
@@ -247,10 +247,10 @@ describe(`Passing spec files`, () => {
                 `--specs=_testData/command/specFinder/spec_master_finder.js`,
                 `--specs=_testData/command/specFinder/spec_master_finder.js`
             ];
-            const args: minimist.ParsedArgs = require(`minimist`)(testArgsSpec);
+            const args: minimist.ParsedArgs = minimist(testArgsSpec);
 
             const testData: TheklaTestData = {
-                args: args,
+                args: args
             };
 
             forked.send(testData);
@@ -275,12 +275,12 @@ describe(`Passing spec files`, () => {
             const testArgsSpec = [
                 jasmineConfRelativeFilePath,
                 `--specs=_testData/command/specFinder/**/spec*.js`,
-                `--specs=_testData/command/specFinder/**/spec*.js`,
+                `--specs=_testData/command/specFinder/**/spec*.js`
             ];
-            const args: minimist.ParsedArgs = require(`minimist`)(testArgsSpec);
+            const args: minimist.ParsedArgs = minimist(testArgsSpec);
 
             const testData: TheklaTestData = {
-                args: args,
+                args: args
             };
 
             forked.send(testData);

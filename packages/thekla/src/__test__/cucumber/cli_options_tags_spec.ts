@@ -7,16 +7,14 @@ import fsExtra                                                                  
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
 
-describe('Specifying tags', () => {
+describe(`Specifying tags`, () => {
     let file1Result: CucumberTestFileResult;
     let file2Result: CucumberTestFileResult;
     let theklaConfigResult: TheklaConfigFileResult;
 
-
-
     beforeAll(async () => {
-        file1Result = await createCucumberTestFiles("simple", "test1", "step1", "RequireOptionCli");
-        file2Result = await createCucumberTestFiles("example", "test2", "step2", "RequireOptionFramework");
+        file1Result = await createCucumberTestFiles(`simple`, `test1`, `step1`, `RequireOptionCli`);
+        file2Result = await createCucumberTestFiles(`example`, `test2`, `step2`, `RequireOptionFramework`);
 
     });
 
@@ -32,19 +30,19 @@ describe('Specifying tags', () => {
         }
 
         // reset result after deleting the test dir
-        theklaConfigResult = {baseDir: "", confFilePath: "", relativeConfFilePath: ""};
+        theklaConfigResult = {baseDir: ``, confFilePath: ``, relativeConfFilePath: ``};
     });
 
-    describe('on command line', () => {
+    describe(`on command line`, () => {
 
         let forked: child.ChildProcess;
 
         beforeEach(() => {
-            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: ['ignore', 'pipe', process.stderr, 'ipc']});
+            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
         });
 
-        it('should execute 2 scenarios when no tags are set and an empty tag is set on command line' +
-            '- (test case id: b8945d08-36cf-42fa-9d1d-c4360c4db1af)', async () => {
+        it(`should execute 2 scenarios when no tags are set and an empty tag is set on command line` +
+            `- (test case id: b8945d08-36cf-42fa-9d1d-c4360c4db1af)`, async () => {
 
             const expectedResult = `2 scenarios (2 passed)
 6 steps (6 passed)
@@ -53,21 +51,20 @@ describe('Specifying tags', () => {
             const testConfig: TheklaConfig = {
                 specs: [`${file1Result.relativeFeatureFilePath}`, `${file2Result.relativeFeatureFilePath}`],
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         require: [`_testData/cucumber/+(${file1Result.timeStampDir}|${file2Result.timeStampDir})/**/*.js`]
                     }
                 }
             };
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
-
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
                 "specs": `_testData/cucumber/+(${file1Result.timeStampDir}|${file2Result.timeStampDir})/**/*.feature`,
                 testFramework: {
                     cucumberOptions: {
-                        tags: ""
+                        tags: ``
                     }
                 }
             };
@@ -76,9 +73,9 @@ describe('Specifying tags', () => {
                 args: args
             };
 
-            let output: string = "";
+            let output = ``;
 
-            forked.stdout.on("data", function (chunk) {
+            forked.stdout.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -86,7 +83,7 @@ describe('Specifying tags', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (result: TheklaTestResult) => {
+                    forked.on(`message`, (result: TheklaTestResult) => {
                         expect(result.specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
                         expect(output.trim()).toContain(expectedResult);
                         resolve();
@@ -98,8 +95,8 @@ describe('Specifying tags', () => {
             });
         });
 
-        it('should execute 2 scenarios when a tag is set in the config and its overwritten by an empty tag on command line' +
-            '- (test case id: cef48bfc-c124-40cc-b567-aaea53ab6ca2)', async () => {
+        it(`should execute 2 scenarios when a tag is set in the config and its overwritten by an empty tag on command line` +
+            `- (test case id: cef48bfc-c124-40cc-b567-aaea53ab6ca2)`, async () => {
 
             const expectedResult = `2 scenarios (2 passed)
 6 steps (6 passed)
@@ -108,23 +105,22 @@ describe('Specifying tags', () => {
             const testConfig: TheklaConfig = {
                 specs: [`${file1Result.relativeFeatureFilePath}`, `${file2Result.relativeFeatureFilePath}`],
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         require: [`_testData/cucumber/+(${file1Result.timeStampDir}|${file2Result.timeStampDir})/**/*.js`],
-                        tags: ["@Focus"]
+                        tags: [`@Focus`]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
-
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
                 "specs": `_testData/cucumber/+(${file1Result.timeStampDir}|${file2Result.timeStampDir})/**/*.feature`,
                 testFramework: {
                     cucumberOptions: {
-                        tags: ""
+                        tags: ``
                     }
                 }
             };
@@ -133,9 +129,9 @@ describe('Specifying tags', () => {
                 args: args
             };
 
-            let output: string = "";
+            let output = ``;
 
-            forked.stdout.on("data", function (chunk) {
+            forked.stdout.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -143,7 +139,7 @@ describe('Specifying tags', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (result: TheklaTestResult) => {
+                    forked.on(`message`, (result: TheklaTestResult) => {
                         expect(result.specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
                         expect(output.trim()).toContain(expectedResult);
                         resolve();
@@ -155,8 +151,8 @@ describe('Specifying tags', () => {
             });
         });
 
-        it('should execute 1 scenarios when a tag is set in the config file' +
-            '- (test case id: d6065772-739b-49f0-8712-da3c23f48c37)', async () => {
+        it(`should execute 1 scenarios when a tag is set in the config file` +
+            `- (test case id: d6065772-739b-49f0-8712-da3c23f48c37)`, async () => {
 
             const expectedResult = `1 scenario (1 passed)
 3 steps (3 passed)
@@ -165,16 +161,15 @@ describe('Specifying tags', () => {
             const testConfig: TheklaConfig = {
                 specs: [`${file1Result.relativeFeatureFilePath}`, `${file2Result.relativeFeatureFilePath}`],
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         require: [`_testData/cucumber/+(${file1Result.timeStampDir}|${file2Result.timeStampDir})/**/*.js`],
-                        tags: ["@Focus"]
+                        tags: [`@Focus`]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
-
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -187,9 +182,9 @@ describe('Specifying tags', () => {
                 args: args
             };
 
-            let output: string = "";
+            let output = ``;
 
-            forked.stdout.on("data", function (chunk) {
+            forked.stdout.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -197,7 +192,7 @@ describe('Specifying tags', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (result: TheklaTestResult) => {
+                    forked.on(`message`, (result: TheklaTestResult) => {
                         expect(result.specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
                         expect(output.trim()).toContain(expectedResult);
                         resolve();
@@ -209,8 +204,8 @@ describe('Specifying tags', () => {
             });
         });
 
-        it('should execute 1 scenarios when multiple tags are set in the config file and it is overwritten by command line' +
-            '- (test case id: 5d730927-b996-42df-bd74-5483cb06880e)', async () => {
+        it(`should execute 1 scenarios when multiple tags are set in the config file and it is overwritten by command line` +
+            `- (test case id: 5d730927-b996-42df-bd74-5483cb06880e)`, async () => {
 
             const expectedResult = `1 scenario (1 passed)
 3 steps (3 passed)
@@ -219,23 +214,22 @@ describe('Specifying tags', () => {
             const testConfig: TheklaConfig = {
                 specs: [`${file1Result.relativeFeatureFilePath}`, `${file2Result.relativeFeatureFilePath}`],
                 testFramework: {
-                    frameworkName: "cucumber",
+                    frameworkName: `cucumber`,
                     cucumberOptions: {
                         require: [`_testData/cucumber/+(${file1Result.timeStampDir}|${file2Result.timeStampDir})/**/*.js`],
-                        tags: ["@Example","@Focus"]
+                        tags: [`@Example`,`@Focus`]
                     }
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "MultipleSpecConfOption");
-
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `MultipleSpecConfOption`);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
                 "specs": `_testData/cucumber/+(${file1Result.timeStampDir}|${file2Result.timeStampDir})/**/*.feature`,
                 testFramework: {
                     cucumberOptions: {
-                        tags: ["@Focus"]
+                        tags: [`@Focus`]
                     }
                 }
             };
@@ -244,9 +238,9 @@ describe('Specifying tags', () => {
                 args: args
             };
 
-            let output: string = "";
+            let output = ``;
 
-            forked.stdout.on("data", function (chunk) {
+            forked.stdout.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -254,7 +248,7 @@ describe('Specifying tags', () => {
 
             return new Promise( (resolve, reject) => {
                 try {
-                    forked.on('message', (result: TheklaTestResult) => {
+                    forked.on(`message`, (result: TheklaTestResult) => {
                         expect(result.specResult.success).toBeTruthy(`Test should pass, but it doesn't`);
                         expect(output.trim()).toContain(expectedResult);
                         resolve();

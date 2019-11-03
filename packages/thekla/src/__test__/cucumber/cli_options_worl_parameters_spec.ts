@@ -10,7 +10,7 @@ import {
 }                     from "../data/testFiles";
 import * as minimist  from "minimist";
 
-describe('When Passing the World Parameters to the Cucumber Feature Files', () => {
+describe(`When Passing the World Parameters to the Cucumber Feature Files`, () => {
     let file1Result: CucumberTestFileResult;
     let theklaConfigResult: TheklaConfigFileResult;
 
@@ -27,32 +27,32 @@ describe('When Passing the World Parameters to the Cucumber Feature Files', () =
         }
 
         // reset result after deleting the test dir
-        theklaConfigResult = {baseDir: "", confFilePath: "", relativeConfFilePath: ""};
+        theklaConfigResult = {baseDir: ``, confFilePath: ``, relativeConfFilePath: ``};
     });
 
-    it('it should be accessible form "this".  ' +
-        '- (test case id: f93a221e-9e70-4791-849f-45924891aebe)', async () => {
+    it(`it should be accessible form "this".  ` +
+        `- (test case id: f93a221e-9e70-4791-849f-45924891aebe)`, async () => {
 
         const testWorldParameters = {
-            proxy: "test"
+            proxy: `test`
         };
 
-        file1Result = await createCucumberTestFiles("worldParameter",
-            "",
-            "",
-            "WorldParameter",
+        file1Result = await createCucumberTestFiles(`worldParameter`,
+            ``,
+            ``,
+            `WorldParameter`,
             JSON.stringify(testWorldParameters));
 
         const testConfig: TheklaConfig = {
             testFramework: {
-                frameworkName: "cucumber",
+                frameworkName: `cucumber`,
                 cucumberOptions: {
                     worldParameters: testWorldParameters
                 }
             }
         };
 
-        theklaConfigResult = await createTheklaConfigFile(testConfig, "SettingWorldParameter");
+        theklaConfigResult = await createTheklaConfigFile(testConfig, `SettingWorldParameter`);
 
         const args: minimist.ParsedArgs = {
             "_": [theklaConfigResult.relativeConfFilePath],
@@ -66,31 +66,31 @@ describe('When Passing the World Parameters to the Cucumber Feature Files', () =
         });
     });
 
-    it('and it is overwritten by an command line option, it should be accessible form "this".  ' +
-        '- (test case id: 3e59f251-40ab-4fa3-9724-0cb018266f9e)', async () => {
+    it(`and it is overwritten by an command line option, it should be accessible form "this".  ` +
+        `- (test case id: 3e59f251-40ab-4fa3-9724-0cb018266f9e)`, async () => {
 
         const testWorldParameters = {
-            proxy: "new Proxy"
+            proxy: `new Proxy`
         };
 
-        file1Result = await createCucumberTestFiles("worldParameter",
-            "",
-            "",
-            "WorldParameter",
+        file1Result = await createCucumberTestFiles(`worldParameter`,
+            ``,
+            ``,
+            `WorldParameter`,
             JSON.stringify(testWorldParameters));
 
         const testConfig: TheklaConfig = {
             testFramework: {
-                frameworkName: "cucumber",
+                frameworkName: `cucumber`,
                 cucumberOptions: {
                     worldParameters: {
-                        proxy: "test"
+                        proxy: `test`
                     }
                 }
             }
         };
 
-        theklaConfigResult = await createTheklaConfigFile(testConfig, "ReplacingWorldParameter");
+        theklaConfigResult = await createTheklaConfigFile(testConfig, `ReplacingWorldParameter`);
 
         const a = [
             theklaConfigResult.relativeConfFilePath,
@@ -98,7 +98,7 @@ describe('When Passing the World Parameters to the Cucumber Feature Files', () =
             `--testFramework.cucumberOptions.worldParameters.proxy=${testWorldParameters.proxy}`
         ];
 
-        const args: minimist.ParsedArgs = require('minimist')(a);
+        const args: minimist.ParsedArgs = require(`minimist`)(a);
 
         const thekla = new Thekla();
         const command = new Command(thekla, args);

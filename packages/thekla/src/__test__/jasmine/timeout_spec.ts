@@ -5,26 +5,24 @@ import {TheklaConfig} from "@thekla/config";
 import {
     createJasmineTestFiles,
     createTheklaConfigFile,
-    JasmineTestFileResult, spec_timeout_wait_for_10000ms,
+    JasmineTestFileResult, specTimeoutWaitFor10000ms,
     TheklaConfigFileResult
 }                     from "../data/testFiles";
 
-
 import {TheklaTestData, TheklaTestResult} from '../data/client';
 
-describe('Setting the Timeout', () => {
+describe(`Setting the Timeout`, () => {
     let forked: child.ChildProcess;
 
     let theklaConfigResult: TheklaConfigFileResult;
     let file1Result: JasmineTestFileResult;
 
-
     beforeEach(() => {
-        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: "ignore"});
+        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: `ignore`});
     });
 
     beforeEach(async () => {
-        file1Result = await createJasmineTestFiles("SimpleTimoutSpec","", spec_timeout_wait_for_10000ms);
+        file1Result = await createJasmineTestFiles(`SimpleTimoutSpec`, ``, specTimeoutWaitFor10000ms);
     });
 
     afterEach(() => {
@@ -40,20 +38,20 @@ describe('Setting the Timeout', () => {
         }
 
         // reset result after deleting the test dir
-        theklaConfigResult = {baseDir: "", confFilePath: "", relativeConfFilePath: ""};
+        theklaConfigResult = {baseDir: ``, confFilePath: ``, relativeConfFilePath: ``};
     });
 
-    it('to 1000ms the test case should time out after this time - (test case id: e1ae8747-345e-459d-89c3-8530d41423a6)', async () => {
+    it(`to 1000ms the test case should time out after this time - (test case id: e1ae8747-345e-459d-89c3-8530d41423a6)`, async () => {
         const testConfig: TheklaConfig =  {
             testFramework: {
-                frameworkName: "jasmine",
+                frameworkName: `jasmine`,
                 jasmineOptions: {
                     defaultTimeoutInterval: 1000
                 }
             }
         };
 
-        theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleSpecCliOption");
+        theklaConfigResult = await createTheklaConfigFile(testConfig, `SingleSpecCliOption`);
 
         const args: minimist.ParsedArgs = {
             "_": [theklaConfigResult.relativeConfFilePath],
@@ -68,7 +66,7 @@ describe('Setting the Timeout', () => {
 
         return new Promise((resolve, reject) => {
             try {
-                forked.on('message', (result: TheklaTestResult) => {
+                forked.on(`message`, (result: TheklaTestResult) => {
                     expect(result.specResult.failedCount).toEqual(1);
                     expect(result.specResult.specResults[0].duration).toBeGreaterThanOrEqual(1000);
                     expect(result.specResult.specResults[0].duration).toBeLessThanOrEqual(1100);
@@ -86,11 +84,11 @@ describe('Setting the Timeout', () => {
     (test case id: dee7aec0-06b5-4fee-acc8-48ba00b07887)`, async () => {
         const testConfig: TheklaConfig =  {
             testFramework: {
-                frameworkName: "jasmine",
+                frameworkName: `jasmine`,
             }
         };
 
-        theklaConfigResult = await createTheklaConfigFile(testConfig, "Wait5000msTestFile");
+        theklaConfigResult = await createTheklaConfigFile(testConfig, `Wait5000msTestFile`);
 
         const args: minimist.ParsedArgs = {
             "_": [theklaConfigResult.relativeConfFilePath],
@@ -105,7 +103,7 @@ describe('Setting the Timeout', () => {
 
         return new Promise((resolve, reject) => {
             try {
-                forked.on('message', (result: TheklaTestResult) => {
+                forked.on(`message`, (result: TheklaTestResult) => {
                     expect(result.specResult.failedCount).toEqual(1);
                     expect(result.specResult.specResults[0].duration).toBeGreaterThanOrEqual(5000);
                     expect(result.specResult.specResults[0].duration).toBeLessThanOrEqual(5100);

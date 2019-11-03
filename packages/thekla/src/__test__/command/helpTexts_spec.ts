@@ -3,15 +3,16 @@ import {mainMenu}         from "../../lib/commands/help";
 import * as minimist      from "minimist";
 import {TheklaTestResult} from "../data/client";
 
-describe('The Help Text', () => {
-    describe('on how to use thekla', () => {
+describe(`The Help Text`, () => {
+    describe(`on how to use thekla`, () => {
         let forked: child.ChildProcess;
         let output: string[] = [];
 
         beforeEach(() => {
-            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: ['ignore', 'pipe', process.stderr, 'ipc']});
+            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
-            forked.stdout.on("data", function (chunk) {
+            forked.stdout.on(`data`, function (chunk) {
                 output.push(chunk.toString())
             });
         });
@@ -26,7 +27,7 @@ describe('The Help Text', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (result: any) => {
+                    forked.on(`message`, (result: any) => {
                         resolve(result);
                     });
                 } catch (e) {
@@ -36,8 +37,8 @@ describe('The Help Text', () => {
             });
         };
 
-        it('shall be printed when no config file was specified' +
-            '- (test case id: 7333af32-6ea6-4c45-89ce-c1b53e0822a5)', async () => {
+        it(`shall be printed when no config file was specified` +
+            `- (test case id: 7333af32-6ea6-4c45-89ce-c1b53e0822a5)`, async () => {
             const args: minimist.ParsedArgs = {
                 "_": [],
             };
@@ -50,8 +51,8 @@ describe('The Help Text', () => {
                 });
         }, 10000);
 
-        it('shall be printed when no config file was specified' +
-            '- (test case id: 1c423511-c338-4a3c-892a-3e45b784b50c)', async () => {
+        it(`shall be printed when no config file was specified
+        - (test case id: 1c423511-c338-4a3c-892a-3e45b784b50c)`, async () => {
             const args: minimist.ParsedArgs = {
                 "_": [`_testData/fileDoesNotExist.js`],
             };
@@ -71,6 +72,6 @@ describe('The Help Text', () => {
                 }).catch((e: Error) => {
                     console.log(e);
                 });
-        }, 1000000);
+        });
     });
 });

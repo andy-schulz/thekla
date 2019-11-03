@@ -9,14 +9,14 @@ import {
 import {TheklaTestData, TheklaTestResult} from "../data/client";
 import * as minimist                      from "minimist";
 
-describe('The Thekla global object', () => {
+describe(`The Thekla global object`, () => {
     let forked: child.ChildProcess;
     let theklaConfigResult: TheklaConfigFileResult;
     let file1Result: JasmineTestFileResult;
-    let childOutput: any = "";
+    const childOutput: any = ``;
 
     beforeEach(async () => {
-        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: "ignore"});
+        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: `ignore`});
     });
 
     afterEach(() => {
@@ -24,7 +24,7 @@ describe('The Thekla global object', () => {
         // remove spec file
         if(file1Result) {
             fsExtra.remove(file1Result.baseDir);
-            file1Result = {baseDir: "", relativeSpecFilePath: "", specFilePath: ""};
+            file1Result = {baseDir: ``, relativeSpecFilePath: ``, specFilePath: ``};
         }
     });
 
@@ -35,31 +35,29 @@ describe('The Thekla global object', () => {
         }
 
         // reset result after deleting the test dir
-        theklaConfigResult = {baseDir: "", confFilePath: "", relativeConfFilePath: ""};
+        theklaConfigResult = {baseDir: ``, confFilePath: ``, relativeConfFilePath: ``};
     });
 
-    describe('thekla.config', () => {
-        it('should be accessible inside a jasmine test case - (test case id: 0cd3574c-2430-4bd9-a4d4-d115bb46264d)', async () => {
+    describe(`thekla.config`, () => {
+        it(`should be accessible inside a jasmine test case - (test case id: 0cd3574c-2430-4bd9-a4d4-d115bb46264d)`, async () => {
             const testConfig: TheklaConfig =  {
-                specs: [""],
+                specs: [``],
                 testFramework: {
-                    frameworkName: "jasmine",
+                    frameworkName: `jasmine`,
                     jasmineOptions: {
                         defaultTimeoutInterval: 1234
                     }
                 },
                 params: {
-                    testName: "new Test created"
+                    testName: `new Test created`
                 }
             };
 
-            theklaConfigResult = await createTheklaConfigFile(testConfig, "SingleSpecCliOption");
+            theklaConfigResult = await createTheklaConfigFile(testConfig, `SingleSpecCliOption`);
 
             const expected = testConfig;
             const expectedConf = createTheklaGlobalSpec(JSON.stringify(expected)) ;
-            file1Result = await createJasmineTestFiles("SimpleGlobalsSpec","", expectedConf);
-
-
+            file1Result = await createJasmineTestFiles(`SimpleGlobalsSpec`,``, expectedConf);
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
@@ -74,10 +72,10 @@ describe('The Thekla global object', () => {
 
             return new Promise((resolve, reject) => {
                 try {
-                    forked.on('message', (result: TheklaTestResult) => {
+                    forked.on(`message`, (result: TheklaTestResult) => {
                         expect(result.specResult.failedCount).toEqual(0);
                         expect(result.specResult.specResults[0].description)
-                            .toEqual("Thekla globals Should be accessible inside a spec");
+                            .toEqual(`Thekla globals Should be accessible inside a spec`);
                         resolve();
                     });
                 } catch (e) {
