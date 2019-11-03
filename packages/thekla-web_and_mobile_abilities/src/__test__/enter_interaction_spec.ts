@@ -11,18 +11,20 @@ describe(`Enter`, function () {
     const emailField = element(By.css(`[data-test-id='LoginExampleRow1'] [data-test-id='exampleEmail']`));
     const Emma = Actor.named(`Emma`);
 
-    const theBrowser = RunningBrowser.startedOn(conf).withCapabilities(capabilities);
-    Emma.whoCan(BrowseTheWeb.using(theBrowser));
-
     beforeAll(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
-    afterAll(() => {
-        RunningBrowser.cleanup();
-    });
-
     describe(`a value into a field`, function () {
+
+        beforeAll(() => {
+            const theBrowser = RunningBrowser.startedOn(conf).withCapabilities(capabilities);
+            Emma.whoCan(BrowseTheWeb.using(theBrowser));
+        });
+
+        afterAll((): Promise<void[]> => {
+            return RunningBrowser.cleanup();
+        });
 
         it(`should add the value into the input field
         test id: 734a6687-78c8-4da7-a654-cd8086ae4388`, async () => {
