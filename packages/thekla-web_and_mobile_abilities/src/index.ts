@@ -38,4 +38,4 @@ export {Status}                               from "./lib/questions/Status";
  *
  */
 
-export {UntilElement, By, RunningBrowser, Browser, ClientHelper, Key} from "@thekla/webdriver"
+export {UntilElement, By, RunningBrowser, Browser, ClientHelper, Key, BrowserScreenshotData} from "@thekla/webdriver"
