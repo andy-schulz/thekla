@@ -7,7 +7,7 @@
     "prepare": "npm run build",
     "build": "del-cli dist/**/* & tsc",
     "pretest": "tsc",
-    "test": "npm run test:wdio:ch",
+    "test": "jasmine --config=src/__test__/support/jasmine.json",
     "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine_wdio_coverage.json",
     "test:covp": "jasmine --config=src/__test__/support/jasmine_wdio_coverage.json",
     "test:all": "tsc & run-p -c --silent test:unit test:wdio:ff test:wdio:ch",

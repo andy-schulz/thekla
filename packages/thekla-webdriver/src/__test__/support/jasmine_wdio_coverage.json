@@ -2,13 +2,10 @@
   "spec_dir": "dist/__test__",
   "spec_files": [
       "./**/*[sS]pec.js"
-  ]
-  ,
+  ],
   "helpers": [
     "support/helpers/wdio_chrome.js"
-  ]
-  ,
-  "oneFailurePerSpec": false
-  ,
+  ],
+  "oneFailurePerSpec": false,
   "random": true
 }
