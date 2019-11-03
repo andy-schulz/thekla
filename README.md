@@ -4,7 +4,7 @@ thekla
 ***
 
 <p align="center">
-    <a href="https://circleci.com/gh/andy-schulz/thekla/tree/master">
+    <a href="https://circleci.com/gh/andy-schulz/thekla/">
         <img alt="Status" src="https://circleci.com/gh/andy-schulz/thekla/tree/master.svg?style=shield" alt="build status">
     </a>
     <a href="https://codecov.io/gh/andy-schulz/thekla">
