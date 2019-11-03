@@ -263,6 +263,7 @@ describe(`Using the See interaction`, (): void => {
     });
 
     describe(`with the otherwise method`, (): void => {
+
         it(`should throw the first error when the otherwise-tree is empty
         - (test case id: cd5b5dc9-a231-4f7c-9607-3f4fe0573f8d)`, async (): Promise<void> => {
             try {
@@ -328,6 +329,7 @@ describe(`Using the See interaction`, (): void => {
     });
 
     describe(`with a primitive String`, (): void => {
+
         it(`should pass the string to the matcher 
         - (test case id: e7007ed2-3a01-4c90-8c0e-dfbfb66737a5)`, (): Promise<void> => {
             const testString = `myString`;
@@ -360,6 +362,7 @@ describe(`Using the See interaction`, (): void => {
     });
 
     describe(`with the Result of the last Activity`, (): void => {
+
         it(`should succeed and pass the result to the Expected matcher 
         - (test case id: 782cbc05-aa9c-46ff-beac-639ba968547b)`, async (): Promise<void> => {
 
