@@ -3,6 +3,7 @@
   "version": "2.0.0",
   "description": "WebdriverIO wrapper providing the foundation for the SPP web and mobile abilities",
   "main": "dist/index.js",
+  "types": "dist/index.d.ts",
   "scripts": {
     "prepare": "npm run build",
     "build": "del-cli dist/**/* & tsc",

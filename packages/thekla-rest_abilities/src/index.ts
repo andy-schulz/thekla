@@ -7,6 +7,6 @@ export {Get} from "./spp/actions/Get"
 export {Post} from "./spp/actions/Post"
 export {Send} from "./spp/actions/Send"
 
-export {request} from "./spp/SppRestRequests"
+export {request, SppRestRequest} from "./spp/SppRestRequests"
 export {Response} from "./spp/questions/Response"
 
