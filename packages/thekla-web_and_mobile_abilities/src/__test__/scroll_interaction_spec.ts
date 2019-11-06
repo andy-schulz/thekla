@@ -15,19 +15,19 @@ describe(`Scroll`, (): void => {
     const Sam = Actor.named(`Sam`);
 
     const lastTableRow = element(By.css(`[data-test-id='lastTableRow']`))
-        .shallWait(UntilElement.is.visible().forAsLongAs(5000))
+        .shallWait(UntilElement.is.visible.forAsLongAs(5000))
         .called(`the last row element inside the large table`);
 
     const row49 = element(By.css(`[data-test-id='49']`))
-        .shallWait(UntilElement.is.visible().forAsLongAs(5000))
+        .shallWait(UntilElement.is.visible.forAsLongAs(5000))
         .called(`the 49th table row`);
 
     const row50 = element(By.css(`[data-test-id='50']`))
-        .shallWait(UntilElement.is.visible().forAsLongAs(5000))
+        .shallWait(UntilElement.is.visible.forAsLongAs(5000))
         .called(`the 50th table row`);
 
     const row51 = element(By.css(`[data-test-id='51']`))
-        .shallWait(UntilElement.is.visible().forAsLongAs(5000))
+        .shallWait(UntilElement.is.visible.forAsLongAs(5000))
         .called(`the 51th table row`);
 
     beforeAll((): void => {
@@ -54,7 +54,7 @@ describe(`Scroll`, (): void => {
                 await theBrowser.executeScript(isElementOutsideOfView, lastTableRow.locator.selector) as BoundaryCheck;
 
             expect(viewportCheck.elementOutside).toBeTruthy(
-                `Error: last row is not outside of view initially`);
+                `Error: last row is not outside of view initially -> ${JSON.stringify(viewportCheck)}`);
 
             await Scroll.toPosition(Page.bottom()).performAs(Sam);
 
@@ -62,7 +62,7 @@ describe(`Scroll`, (): void => {
                 await theBrowser.executeScript(isElementOutsideOfView, lastTableRow.locator.selector) as BoundaryCheck;
 
             expect(viewportCheck.elementOutside).toBeFalsy(
-                `Error: after trying to scroll to the bottom of the page the last row is not visible`);
+                `Error: after trying to scroll to the bottom of the page the last row is not visible -> ${JSON.stringify(viewportCheck)}`);
 
             await Scroll.toPosition(Page.top()).performAs(Sam);
 
@@ -70,7 +70,7 @@ describe(`Scroll`, (): void => {
                 await theBrowser.executeScript(isElementOutsideOfView, lastTableRow.locator.selector) as BoundaryCheck;
 
             expect(viewportCheck.elementOutside).toBeTruthy(
-                `Error: last row is not outside view after page was scrolled to the top again`);
+                `Error: last row is not outside view after page was scrolled to the top again -> ${JSON.stringify(viewportCheck)}`);
         });
     });
 

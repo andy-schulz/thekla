@@ -30,7 +30,7 @@ describe(`When locating an element,`, (): void => {
         it(`the button name should be found 
         - (test case id: 914ccdea-ff5f-446e-a7de-509bd1c5d30f)`, (): Promise<void> => {
             const button = element(By.xpath(`//button[contains(text(),'Danger!')]`))
-                .shallWait(UntilElement.is.visible());
+                .shallWait(UntilElement.is.visible);
 
             return john.attemptsTo(
                 Navigate.to(`/`),
@@ -43,7 +43,7 @@ describe(`When locating an element,`, (): void => {
         - (test case id: 9a383bbf-9db9-41c5-b903-7f8d61bea88a)`, async (): Promise<void | {}> => {
 
             const button = element(By.cssContainingText(`button`, `Danger!`))
-                .shallWait(UntilElement.is.visible());
+                .shallWait(UntilElement.is.visible);
 
             await john.attemptsTo(
                 Navigate.to(`/`),

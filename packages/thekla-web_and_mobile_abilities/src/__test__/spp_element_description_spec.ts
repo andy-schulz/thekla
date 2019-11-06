@@ -34,7 +34,7 @@ describe(`The description on an element`, (): void => {
         - (test case id: 161de6a4-2f53-4864-832a-2e291fc250d6)`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
-                    .shallWait(UntilElement.is.visible())
+                    .shallWait(UntilElement.is.visible)
                     .called(`Test Button description on level one`);
 
             expect(testButton.toString()).toEqual(`Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
@@ -45,7 +45,7 @@ describe(`The description on an element`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`)
-                    .shallWait(UntilElement.is.visible());
+                    .shallWait(UntilElement.is.visible);
 
             expect(testButton.toString()).toEqual(`Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
         });
@@ -55,7 +55,7 @@ describe(`The description on an element`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`)
-                    .shallWait(UntilElement.is.visible())
+                    .shallWait(UntilElement.is.visible)
                     .called(`The second description of the Test Button description on level one`);
 
             expect(testButton.toString()).toEqual(`Test Button description on level one -> The second description of the Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
@@ -67,7 +67,7 @@ describe(`The description on an element`, (): void => {
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`)
                     .element(By.css(`#doesNotExistOnLevelOne`))
-                    .shallWait(UntilElement.is.visible())
+                    .shallWait(UntilElement.is.visible)
                     .called(`The second description of the Test Button description on level one`);
 
             expect(testButton.toString()).toEqual(`Test Button description on level one -> The second description of the Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
@@ -79,7 +79,7 @@ describe(`The description on an element`, (): void => {
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`)
                     .element(By.css(`#doesNotExistOnLevelOne`))
-                    .shallWait(UntilElement.is.visible());
+                    .shallWait(UntilElement.is.visible);
 
             expect(testButton.toString()).toEqual(`Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
         });
@@ -159,7 +159,7 @@ describe(`The description on an element`, (): void => {
             const description = `Test Element description in case an error is thrown`;
             const button = element(By.css(`.elementDoesNotExist`))
                 .called(description)
-                .shallWait(UntilElement.is.visible());
+                .shallWait(UntilElement.is.visible);
 
             return checkErrorMessage(button);
         });

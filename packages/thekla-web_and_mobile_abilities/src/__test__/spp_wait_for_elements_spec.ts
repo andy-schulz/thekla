@@ -31,15 +31,15 @@ describe(`Waiting for SPP Elements`, (): void => {
 
         const appearingButton = element(By.css(`[data-test-id='AppearButtonBy4000']`))
             .called(`Test appearing element after 5 seconds`)
-            .shallWait(UntilElement.is.visible().forAsLongAs(20000));
+            .shallWait(UntilElement.is.visible.forAsLongAs(20000));
 
         const toBeEnabledButton = element(By.css(`[data-test-id='EnabledButtonBy4000']`))
             .called(`Test enabled element after 5 seconds`)
-            .shallWait(UntilElement.is.enabled().forAsLongAs(20000));
+            .shallWait(UntilElement.is.enabled.forAsLongAs(20000));
 
         const toBeDisabledButton = element(By.css(`[data-test-id='DisabledButtonBy4000']`))
             .called(`Test enabled element after 5 seconds`)
-            .shallWait(UntilElement.isNot.enabled().forAsLongAs(20000));
+            .shallWait(UntilElement.isNot.enabled.forAsLongAs(20000));
 
         it(`should be possible with wait actions on an element ` +
             `- (test case id: 7fd0c550-e31c-42fd-96f8-4ceb50e6cf3b)`, (): Promise<void> => {
@@ -87,7 +87,7 @@ describe(`Waiting for SPP Elements`, (): void => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/modals`),
                 See.if(Text.of(button)).is(Expected.toEqual(`Danger!`)),
-                Wait.for(modal).andCheck(UntilElement.isNot.visible().forAsLongAs(500)),
+                Wait.for(modal).andCheck(UntilElement.isNot.visible.forAsLongAs(500)),
             )
                 .then((): void => {
                     expect(true).toBe(false, `Action should time out after 500ms but it doesnt`)
@@ -103,7 +103,7 @@ describe(`Waiting for SPP Elements`, (): void => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/modals`),
                 See.if(Text.of(button)).is(Expected.toEqual(`Danger!`)),
-                Wait.for(modal).andCheck(UntilElement.isNot.visible().forAsLongAs(10000)),
+                Wait.for(modal).andCheck(UntilElement.isNot.visible.forAsLongAs(10000)),
             )
 
         });

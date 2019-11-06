@@ -17,15 +17,15 @@ describe(`Hover`, (): void => {
 
     describe(`over a web element`, (): void => {
         const userIcon = element(By.css(`[data-test-id='user-icon-no-hover']`))
-            .shallWait(UntilElement.is.visible().forAsLongAs(5000))
+            .shallWait(UntilElement.is.visible.forAsLongAs(5000))
             .called(`The user icon which displays an information box when hovered upon`);
 
         const userIconWithHoverInfo = element(By.css(`[data-test-id='usericon']`))
-            .shallWait(UntilElement.is.visible().forAsLongAs(5000))
+            .shallWait(UntilElement.is.visible.forAsLongAs(5000))
             .called(`The user icon which displays an information box when hovered upon`);
 
         const userName = element(By.css(`[data-test-id='hoverusername']`))
-        // .shallWait(UntilElement.is.visible().forAsLongAs(5000))
+        // .shallWait(UntilElement.is.visible.forAsLongAs(5000))
             .called(`the user name inside the hover information box`);
 
         const Howard = Actor.named(`Howard`);

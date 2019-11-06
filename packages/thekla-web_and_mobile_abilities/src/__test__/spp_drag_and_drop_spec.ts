@@ -27,7 +27,7 @@ describe(`Drag an Element`, (): void => {
         element1 = element(By.css(`[data-test-id='item-1']`)).called(`draggable item 1`);
         dragIndicator = element(By.css(`[data-text-id='EventDetails']`))
             .called(`The dragNDrop Indicator`)
-            .shallWait(UntilElement.is.visible());
+            .shallWait(UntilElement.is.visible);
     });
 
     afterAll((): Promise<void[]> => {
