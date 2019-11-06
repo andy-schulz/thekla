@@ -1,0 +1,15 @@
+{
+  "extends": "@istanbuljs/nyc-config-typescript",
+  "report-dir":"../../coverage/thekla-cucumber-junit-reporter",
+  "temp-dir": "../../coverage/.nyc_output",
+  "clean": false,
+  "exclude": [
+    "logs/**",
+    "src/__test__/**",
+    "node_modules/**"
+  ],
+  "reporter": [
+    "lcov",
+    "text"
+  ]
+}
