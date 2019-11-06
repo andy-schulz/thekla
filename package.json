@@ -8,6 +8,7 @@
     "test": "./node_modules/.bin/lerna run test",
     "test:annotator": "npm run pretest & lerna run test:annotator",
     "test:cov": "npm run pretest & npm run clean:cov & npx --no-install lerna run test:cov --parallel",
+    "test:cov:debug": " npx --no-install lerna run test:cov:debug --parallel",
     "test:cov:report": "./node_modules/.bin/nyc report",
     "pack": "./node_modules/.bin/lerna run pack",
     "clean:pack": "del-cli *.tgz",
