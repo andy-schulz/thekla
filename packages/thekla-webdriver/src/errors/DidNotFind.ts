@@ -11,7 +11,7 @@ export class DidNotFind extends Error {
         Did not find the Element: ${_element.toString()}.
         Try waiting before you interact with it:
             element(By.<<your selector>>)
-                .shallWait(UntilElement.is.visible())
+                .shallWait(UntilElement.is.visible)
         `);
         Error.captureStackTrace(this, DidNotFind)
     }

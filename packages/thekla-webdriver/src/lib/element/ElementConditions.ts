@@ -1,7 +1,8 @@
 import {WebElementFinder} from "../../interface/WebElements";
 
 export interface UntilElementCondition {
-    visible(): UntilElementCondition;
+    visible: UntilElementCondition;
+    enabled: UntilElementCondition;
 
     forAsLongAs(timeout: number): UntilElementCondition;
 
@@ -67,12 +68,12 @@ export class UntilElement implements UntilElementCondition {
         return new UntilElement(UntilElement.negate)
     }
 
-    public visible(): UntilElementCondition {
+    public get visible(): UntilElementCondition {
         this.waiter = new VisibilityCheck(this.modifierFunc);
         return this;
     }
 
-    public enabled(): UntilElementCondition {
+    public get enabled(): UntilElementCondition {
         this.waiter = new EnabledCheck(this.modifierFunc);
         return this;
     }

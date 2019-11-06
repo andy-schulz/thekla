@@ -45,9 +45,9 @@ describe(`drag an element`, (): void => {
         //     await browser.get(`https://jqueryui.com/resources/demos/droppable/default.html`);
         //
         //     const element0 = browser.element(By.css(`div#draggable`))
-        //         .shallWait(UntilElement.is.visible());
+        //         .shallWait(UntilElement.is.visible);
         //     const element1 = browser.element(By.css(`div#droppable`))
-        //         .shallWait(UntilElement.is.visible());
+        //         .shallWait(UntilElement.is.visible);
         //
         //     const rectElem0 = await element0.getCenterPoint();
         //     const rectElem1 = await element1.getCenterPoint();

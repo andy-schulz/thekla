@@ -17,7 +17,7 @@ describe(`Using Google Search to find an online calculator`, (): void => {
         beforeAll((): void => {
             b = ClientHelper.create(conf, capabilities);
             searchField = b.element(By.css(`[name='q']`))
-                .shallWait(UntilElement.is.visible().forAsLongAs(5000))
+                .shallWait(UntilElement.is.visible.forAsLongAs(5000))
                 .called(`The Google search field (describe)`);
 
             submitSearch = b.element(By.css(`.FPdoLc [name='btnK']`))
@@ -25,7 +25,7 @@ describe(`Using Google Search to find an online calculator`, (): void => {
 
             calculatorInput = b.element(By.css(`#cwos`))
                 .called(`Google calculator input field`)
-                .shallWait(UntilElement.is.visible().forAsLongAs(5000));
+                .shallWait(UntilElement.is.visible.forAsLongAs(5000));
         });
 
         it(`the google calculator should be loaded - (test case id: 09fb5738-86b1-4f12-8d33-91bcddcde106)`, async (): Promise<void> => {
