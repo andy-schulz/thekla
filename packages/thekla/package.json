@@ -1,6 +1,6 @@
 {
   "name": "thekla",
-  "version": "2.0.1",
+  "version": "2.1.0",
   "description": "cli for thekla-core",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,7 +33,7 @@
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
     "@thekla/config": "^2.0.1",
-    "@thekla/cucumber-junit-formatter": "^2.0.1",
+    "@thekla/cucumber-junit-formatter": "^2.1.0",
     "@types/cucumber": "^4.0.7",
     "@types/fs-extra": "^8.0.1",
     "@types/glob": "^7.1.1",
@@ -46,9 +46,9 @@
     "fs-extra": "^8.1.0",
     "glob": "^7.1.5",
     "jasmine": "^3.5.0",
+    "lodash": "^4.17.15",
     "minimist": "^1.2.0",
-    "request-promise-native": "^1.0.7",
-    "lodash": "^4.17.15"
+    "request-promise-native": "^1.0.7"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
