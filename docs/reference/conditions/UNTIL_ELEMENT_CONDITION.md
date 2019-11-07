@@ -27,7 +27,7 @@ The UntilElementCondition specifies the state an element can have. Right now 4 s
 ```typescript
 john.attemptsTo(
     Wait.for(MYELEMENT)
-        andCheck(UntilElement.is.visible())
+        andCheck(UntilElement.is.visible)
 )
 ```
 

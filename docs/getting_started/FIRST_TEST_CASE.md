@@ -51,7 +51,7 @@ describe('Search on Google with thekla', function () {
             // 2. name the element
             .called(`The Google search field`)
             // wait for the element if its not there right away
-            .shallWait(UntilElement.is.visible().forAsLongAs(1000));
+            .shallWait(UntilElement.is.visible.forAsLongAs(1000));
     });
 
     it('should fill the search field with a text', async function () {

@@ -126,7 +126,7 @@ to specify a wait condition during element specification.
 import {element, By, Click, UntilElement} from "thekla"
 
 const myNamedElement = element(By.css("#TheTotalyUnreadableId"))
-                        .shallWait(UntilElement.is.visible())
+                        .shallWait(UntilElement.is.visible)
 
 jonathan.attemptsTo(
     Click.on(myNamedElement)
@@ -142,7 +142,7 @@ Sometimes elements need longer to appear. You can specify a timeout like this:
 import {element, By, Click, UntilElement} from "thekla"
 
 const myNamedElement = element(By.css("#TheTotalyUnreadableId"))
-                        .shallWait(UntilElement.is.visible().forAsLongAs(30000));
+                        .shallWait(UntilElement.is.visible.forAsLongAs(30000));
 
 jonathan.attemptsTo(
     Click.on(myNamedElement)

@@ -48,7 +48,7 @@ Create an SppElement and wait until the status is met before interacting with th
 ```typescript
 const mySearchElement = element(By.css(`.googlesSerachField`))
     .called(`The name of the element`)
-    .shallWait(UntilElement.is.visible())
+    .shallWait(UntilElement.is.visible)
 ```
 
 Chain the element locators.
@@ -57,5 +57,5 @@ Chain the element locators.
 const mySearchElement = element(By.css(`.googlesSearchArea`))
     .element(By.css(`.googlesSerachField`))
     .called(`The name of the element`)
-    .shallWait(UntilElement.is.visible())
+    .shallWait(UntilElement.is.visible)
 ```

@@ -29,6 +29,6 @@ none
 Josh.attemptsTo(
     Wait
         .for(Googles.INPUT_FIELD)
-        .andCheck(UntilElement.is.visible())
+        .andCheck(UntilElement.is.visible)
 )
 ```
