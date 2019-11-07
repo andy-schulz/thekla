@@ -153,7 +153,7 @@ const createJUnitFile = (builder: any, folder: string, featureName: string, scen
 const createJUnitReportFile = curry(createJUnitFile);
 
 
-export class JUnitFormatter extends Formatter {
+export default class JUnitFormatter extends Formatter {
     private builder: any;
     public constructor(options: any) {
         super(options);
@@ -339,5 +339,9 @@ export class JUnitFormatter extends Formatter {
             name: tagData.name,
             line: tagData.location.line
         }))(obj.tags)
+    }
+
+    public static formatterLocation(): string {
+        return __filename;
     }
 };

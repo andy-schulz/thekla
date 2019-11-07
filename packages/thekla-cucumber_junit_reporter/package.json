@@ -1,7 +1,7 @@
 {
-  "name": "@thekla/cucumber-junit-reporter",
-  "version": "2.0.0",
-  "description": "a cucumber reporter to create a junit xml file",
+  "name": "@thekla/cucumber-junit-formatter",
+  "version": "2.0.1",
+  "description": "junit result formatter for cucumber",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "scripts": {

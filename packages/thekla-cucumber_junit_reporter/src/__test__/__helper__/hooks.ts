@@ -3,7 +3,7 @@
 const EventDataCollector = require(`cucumber/lib/formatter/helpers`).EventDataCollector;
 
 import EventEmitter   from "events";
-import {JUnitFormatter} from "../../JUnitFormatter";
+import JUnitFormatter from "../..";
 
 export const beforeFunc = (world: {[key: string]: any}) => {
 

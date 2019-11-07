@@ -1,1 +1,2 @@
-export {JUnitFormatter} from "./JUnitFormatter"
+import JUnitFormatter from "./JUnitFormatter";
+export default JUnitFormatter;
