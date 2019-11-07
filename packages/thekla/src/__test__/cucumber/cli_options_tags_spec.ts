@@ -149,7 +149,7 @@ describe(`Specifying tags`, () => {
                     reject(message);
                 }
             });
-        });
+        }, 1000000);
 
         it(`should execute 1 scenarios when a tag is set in the config file` +
             `- (test case id: d6065772-739b-49f0-8712-da3c23f48c37)`, async () => {

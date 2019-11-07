@@ -8,7 +8,7 @@ import {
     CucumberTestFileResult,
     TheklaConfigFileResult
 }                     from "../__fixtures__/testFiles";
-import * as minimist  from "minimist";
+import minimist  from "minimist";
 
 describe(`When Passing the World Parameters to the Cucumber Feature Files`, () => {
     let file1Result: CucumberTestFileResult;
@@ -66,8 +66,8 @@ describe(`When Passing the World Parameters to the Cucumber Feature Files`, () =
         });
     });
 
-    it(`and it is overwritten by an command line option, it should be accessible form "this".  ` +
-        `- (test case id: 3e59f251-40ab-4fa3-9724-0cb018266f9e)`, async () => {
+    it(`and it is overwritten by an command line option, it should be accessible form "this".  
+    - (test case id: 3e59f251-40ab-4fa3-9724-0cb018266f9e)`, async () => {
 
         const testWorldParameters = {
             proxy: `new Proxy`
@@ -98,7 +98,7 @@ describe(`When Passing the World Parameters to the Cucumber Feature Files`, () =
             `--testFramework.cucumberOptions.worldParameters.proxy=${testWorldParameters.proxy}`
         ];
 
-        const args: minimist.ParsedArgs = require(`minimist`)(a);
+        const args: minimist.ParsedArgs = minimist(a);
 
         const thekla = new Thekla();
         const command = new Command(thekla, args);
