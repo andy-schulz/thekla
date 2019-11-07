@@ -1,7 +1,7 @@
 import * as child         from "child_process";
 import {mainMenu}         from "../../lib/commands/help";
 import * as minimist      from "minimist";
-import {TheklaTestResult} from "../data/client";
+import {TheklaTestResult} from "../__fixtures__/client";
 
 describe(`The Help Text`, () => {
     describe(`on how to use thekla`, () => {
@@ -9,7 +9,7 @@ describe(`The Help Text`, () => {
         let output: string[] = [];
 
         beforeEach(() => {
-            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
+            forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             forked.stdout.on(`data`, function (chunk) {

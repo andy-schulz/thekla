@@ -7,9 +7,9 @@ import {
     createTheklaConfigFile,
     JasmineTestFileResult, specTimeoutWaitFor10000ms,
     TheklaConfigFileResult
-}                     from "../data/testFiles";
+}                     from "../__fixtures__/testFiles";
 
-import {TheklaTestData, TheklaTestResult} from '../data/client';
+import {TheklaTestData, TheklaTestResult} from '../__fixtures__/client';
 
 describe(`Setting the Timeout`, () => {
     let forked: child.ChildProcess;
@@ -18,7 +18,7 @@ describe(`Setting the Timeout`, () => {
     let file1Result: JasmineTestFileResult;
 
     beforeEach(() => {
-        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: `ignore`});
+        forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: `ignore`});
     });
 
     beforeEach(async () => {

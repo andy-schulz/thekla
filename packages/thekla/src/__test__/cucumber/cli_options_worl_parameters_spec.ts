@@ -7,7 +7,7 @@ import {
     createTheklaConfigFile,
     CucumberTestFileResult,
     TheklaConfigFileResult
-}                     from "../data/testFiles";
+}                     from "../__fixtures__/testFiles";
 import * as minimist  from "minimist";
 
 describe(`When Passing the World Parameters to the Cucumber Feature Files`, () => {

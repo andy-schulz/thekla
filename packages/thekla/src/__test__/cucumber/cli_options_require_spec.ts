@@ -5,7 +5,7 @@ import {Thekla}       from "../../lib/thekla";
 import {
     createCucumberTestFiles, createTheklaConfigFile,
     CucumberTestFileResult, TheklaConfigFileResult
-}                     from "../data/testFiles";
+}                     from "../__fixtures__/testFiles";
 import fsExtra        from 'fs-extra'
 
 describe(`Specifying support files`, () => {

@@ -5,8 +5,8 @@ import {
     createJasmineTestFiles,
     createTheklaConfigFile, createTheklaGlobalSpec, JasmineTestFileResult,
     TheklaConfigFileResult
-}                                         from "../data/testFiles";
-import {TheklaTestData, TheklaTestResult} from "../data/client";
+}                                         from "../__fixtures__/testFiles";
+import {TheklaTestData, TheklaTestResult} from "../__fixtures__/client";
 import * as minimist                      from "minimist";
 
 describe(`The Thekla global object`, () => {
@@ -16,7 +16,7 @@ describe(`The Thekla global object`, () => {
     const childOutput: any = ``;
 
     beforeEach(async () => {
-        forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: `ignore`});
+        forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: `ignore`});
     });
 
     afterEach(() => {

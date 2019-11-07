@@ -1,8 +1,8 @@
 import * as child                                                                                        from "child_process";
 import * as minimist                                                                                     from "minimist";
 import {TheklaConfig}                                                                                    from "@thekla/config";
-import {TheklaTestData, TheklaTestResult}                                                                from "../data/client";
-import {createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "../data/testFiles";
+import {TheklaTestData, TheklaTestResult}                                                                from "../__fixtures__/client";
+import {createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult} from "../__fixtures__/testFiles";
 import fsExtra                                                                                           from 'fs-extra'
 
 jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
@@ -38,7 +38,7 @@ describe(`Specifying tags`, () => {
         let forked: child.ChildProcess;
 
         beforeEach(() => {
-            forked = child.fork(`${__dirname}/../data/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
+            forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
         });
 
         it(`should execute 2 scenarios when no tags are set and an empty tag is set on command line` +
