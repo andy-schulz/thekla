@@ -1,61 +1,24 @@
-import {CucumberOptions} from "@thekla/config";
-import {getLogger}       from "@log4js-node/log4js-api";
+import {CucumberOptions}         from "@thekla/config";
+import {getLogger}               from "@log4js-node/log4js-api";
+import {processFrameworkOptions} from "./CucumberUtils";
 
 export class CucumberTestFramework {
     private readonly logger = getLogger(`CucumberTestFramework`);
     private ccOptionsList: string[] = [];
 
-    private formatOptions: string[] =  [];
+    private formatOptions: string[] = [];
+
     constructor(
         private frameworkOptions: CucumberOptions) {
 
-        if(frameworkOptions) {
-            this.processFrameworkOptions(frameworkOptions);
+        if (frameworkOptions) {
+            this.ccOptionsList = processFrameworkOptions(frameworkOptions);
         }
-    }
-
-    private processFrameworkOptions(frameworkOptions: CucumberOptions): void {
-
-        this.processOptions(frameworkOptions.require, `--require`);
-        this.processOptions(frameworkOptions.format, `--format`);
-        this.processOptions(frameworkOptions.tags, `--tags`);
-
-        this.processWorldParameters(frameworkOptions.worldParameters);
-    }
-
-    private processWorldParameters (worldParams: any): void {
-        if(!worldParams) return;
-
-        if(!(typeof worldParams === `object` && {}.constructor === worldParams.constructor)) {
-            const message = `The World Parameters in the config file cant be parsed: ${worldParams}`;
-            throw new Error(message);
-        }
-
-        this.ccOptionsList.push(`--world-parameters`);
-        this.ccOptionsList.push(JSON.stringify(worldParams));
-    }
-    private processOptions(confOptions: undefined | string[], optsString: string): void {
-        this.logger.debug(`processing ${optsString} option with CONF: ${confOptions}`);
-
-        const processOptions = (options: string[]): void => {
-            for(const opt of options) {
-                this.ccOptionsList.push(optsString);
-                this.ccOptionsList.push(opt);
-            }
-        };
-
-        if(confOptions) processOptions(confOptions);
     }
 
     public run(specs: string): Promise<any> {
         this.logger.debug(`Starting Cucumber tests`);
-
         return new Promise((resolve, reject) => {
-
-            const result = (res: any): void => {
-                this.logger.debug(`Cucumber: Result: ${JSON.stringify(res)}`);
-                resolve(res);
-            };
 
             const Cucumber = require(`cucumber`);
 
@@ -72,15 +35,20 @@ export class CucumberTestFramework {
 
             this.logger.debug(JSON.stringify(Cucumber, null, `\t`));
 
-            const opts =  {
+            const opts = {
                 argv: args,
                 cwd: cwd,
                 stdout: process.stdout
             };
 
+            const result = (res: any): void => {
+                this.logger.debug(`Cucumber: Result: ${JSON.stringify(res)}`);
+                resolve(res);
+            };
+
             new Cucumber.Cli(opts).run()
-                .then(result)
-                .catch(reject);
+                                  .then(result)
+                                  .catch(reject);
         });
     }
 }
