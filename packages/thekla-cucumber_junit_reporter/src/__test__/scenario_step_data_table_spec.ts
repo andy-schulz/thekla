@@ -19,7 +19,7 @@ describe(`JunitFormatter`, () => {
                 `      |aaa|b|c|\n` +
                 `      |d|e|ff|\n` +
                 `      |gg|h|iii|\n`,
-                `a.feature`
+                `feature/folder/a.feature`
             );
             events.map((event) => {
                 world.eventBroadcaster.emit(event.type, event);
@@ -31,12 +31,12 @@ describe(`JunitFormatter`, () => {
                     })
                 }
             });
-            world.testCase = {sourceLocation: {uri: `a.feature`, line: 2}};
+            world.testCase = {sourceLocation: {uri: `feature/folder/a.feature`, line: 2}};
             world.eventBroadcaster.emit(`test-case-prepared`, {
                 ...world.testCase,
                 steps: [
                     {
-                        sourceLocation: {uri: `a.feature`, line: 3},
+                        sourceLocation: {uri: `feature/folder/a.feature`, line: 3},
                         actionLocation: {uri: `steps.js`, line: 10}
                     }
                 ]
@@ -57,8 +57,8 @@ describe(`JunitFormatter`, () => {
             expect(world.output).toEqual(
 `<?xml version="1.0" encoding="UTF-8"?>
 <testsuites>
-  <testsuite name="master" tests="1" failures="0" errors="0" skipped="0">
-    <testcase classname="master.my_data_table_feature" name="my_scenario" time="0.001"/>
+  <testsuite name="feature-folder" tests="1" failures="0" errors="0" skipped="0">
+    <testcase classname="feature-folder.my_data_table_feature" name="my_scenario" time="0.001"/>
   </testsuite>
 </testsuites>`
             )
