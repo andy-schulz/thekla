@@ -37,10 +37,10 @@ describe(`The Help Text`, () => {
             });
         };
 
-        it(`shall be printed when no config file was specified` +
-            `- (test case id: 7333af32-6ea6-4c45-89ce-c1b53e0822a5)`, async () => {
+        it(`shall be printed when no config file was specified
+        - (test case id: 7333af32-6ea6-4c45-89ce-c1b53e0822a5)`, async () => {
             const args: minimist.ParsedArgs = {
-                "_": [],
+                "_": []
             };
 
             return startTest(args)
@@ -54,7 +54,7 @@ describe(`The Help Text`, () => {
         it(`shall be printed when no config file was specified
         - (test case id: 1c423511-c338-4a3c-892a-3e45b784b50c)`, async () => {
             const args: minimist.ParsedArgs = {
-                "_": [`_testData/fileDoesNotExist.js`],
+                "_": [`_testData/fileDoesNotExist.js`]
             };
 
             return startTest(args)

@@ -8,7 +8,7 @@ export interface TheklaTestData {
 
 export interface TheklaTestResult {
     specResult: any;
-    colorSupport: ColorSupport;
+    colorSupport: ColorSupport | false;
 }
 
 const proc = process;
@@ -25,12 +25,14 @@ proc.on(`message`, async (testData: TheklaTestData) => {
             };
 
             // send the results in case the call was successful, the result evaluation will be done by the test
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             proc.send(theklaResult);
 
         })
         .catch((e: any) => {
             // send the results in case the call was NOT successful, again ... the evaluation will be done by the test
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             proc.send({error: e});
         });

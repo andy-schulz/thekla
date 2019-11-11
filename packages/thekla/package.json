@@ -41,7 +41,7 @@
     "@types/lodash": "^4.14.145",
     "@types/minimist": "^1.2.0",
     "@types/node": "^10.14.22",
-    "chalk": "^2.4.2",
+    "chalk": "^3.0.0",
     "cucumber": "^5.1.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.5",

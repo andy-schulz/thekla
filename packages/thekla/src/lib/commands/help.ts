@@ -31,7 +31,7 @@ export const menus: { [key: string]: any } = {
 };
 
 export const mainMenu = (level: number) => {
-    const ctx = new chalk.constructor({level: level});
+    const ctx = new chalk.Instance({level: level});
 
     return menus.main(ctx);
 };
