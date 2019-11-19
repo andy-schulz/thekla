@@ -61,13 +61,13 @@ jobs:
 #    <<: *defaults
 #    steps:
 #      - attach_workspace:
-#          at: ~/thekla-core
+#          at: ~/thekla
 #      - run:
 #          name: Authenticate with registry
 #          command: echo "//registry.npmjs.org/:_authToken=$npm_TOKEN" > ~/thekla/.npmrc
 #      - run:
 #          name: Publish package
-#          command: npm publish
+#          command: lerna publish from-package --yes
 
 workflows:
   version: 2
