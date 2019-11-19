@@ -1,6 +1,6 @@
 {
   "name": "@thekla/rest-abilities",
-  "version": "2.1.0",
+  "version": "2.2.0",
   "description": "UseTheRestApi ability to write REST API tests in the screenplay pattern style",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,7 +33,7 @@
   },
   "dependencies": {
     "@thekla/config": "^2.0.1",
-    "@thekla/core": "^2.1.0",
+    "@thekla/core": "^2.2.0",
     "@types/lodash": "^4.14.144",
     "@types/request-promise-native": "^1.0.17",
     "deepmerge": "^4.2.1",
