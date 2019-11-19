@@ -43,19 +43,25 @@ export interface WebElementFinder
     movePointerTo(client: any): Promise<any>;
 }
 
+export interface VisibleElementsOptions {
+    returnSeparateValues: boolean;
+}
+
 export interface WebElementListFinder
     extends
     WebFinder,
     FinderDescription<WebElementListFinder>{
+    isVisible(options?: VisibleElementsOptions): Promise<boolean[] | boolean>;
+    isEnabled(options?: VisibleElementsOptions): Promise<boolean[] | boolean>;
     count(): Promise<number>;
-    getText(): Promise<string[]>;
+    click(): Promise<void>;
     filteredByText(text: string): WebElementListFinder;
+    getText(): Promise<string[]>;
 }
 
 export interface FrameElementFinder
     extends
     FrameFinder,
     WebFinder,
-    FinderDescription<FrameElementFinder>,
-    FinderWaiter<FrameElementFinder> {
+    FinderDescription<FrameElementFinder> {
 }

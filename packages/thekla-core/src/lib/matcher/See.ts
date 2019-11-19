@@ -3,6 +3,11 @@ import {Question}                       from "../questions/Question";
 import {Activity, Oracle}               from "../actions/Activities";
 import {stepDetails}                    from "../decorators/step_decorators";
 
+/**
+ * PT = Parameter Type, Type of parameter which could be passed to the interaction
+ * MPT = Matcher Parameter Type, type of parameter passed the the given matcher
+ */
+
 export class See<PT, MPT> implements Oracle<PT, void> {
     private matcher: (value: MPT) => boolean | Promise<boolean>;
     private repeater = 1;
@@ -28,7 +33,7 @@ export class See<PT, MPT> implements Oracle<PT, void> {
                     this.matcher(await (actor as AnswersQuestions).toAnswer(this.question, activityResult))
                 );
 
-            let promise;
+            let promise: Promise<boolean>;
             try {
                 const answer: MPT = (await (actor as AnswersQuestions).toAnswer(this.question, activityResult));
                 promise = Promise.resolve((

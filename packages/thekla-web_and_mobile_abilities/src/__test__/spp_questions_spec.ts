@@ -72,6 +72,19 @@ describe(`Using`, (): void => {
         });
 
         it(`with the visibility state should be not be successful, when the button is not displayed` +
+               `- (test case id: b4ebcb2f-3ab4-4d80-abbf-dee9ae8421aa)`, async (): Promise<void> => {
+            const delayedButton =
+                element(By.css(`[data-test-id='AppearButtonBy4000']`))
+                    .called(`button which appears after 5 seconds`);
+
+            await John.attemptsTo(
+                Navigate.to(`/delayed`),
+                See.if(Status.of(delayedButton))
+                   .is(Expected.notToBeVisible())
+            )
+        });
+
+        it(`with the visibility state should be not be successful, when the button is not displayed` +
             `- (test case id: 8e6db458-67a6-4ce6-84af-c0fcd251dc47)`, async (): Promise<void> => {
             const delayedButton =
                 element(By.css(`[data-test-id='DisappearButtonBy8000']`))

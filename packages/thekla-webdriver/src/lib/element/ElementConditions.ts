@@ -1,10 +1,12 @@
-import {WebElementFinder} from "../../interface/WebElements";
+import {DidNotFind, FrameElementFinder}         from "../..";
+import {WebElementFinder, WebElementListFinder} from "../../interface/WebElements";
 
 export interface UntilElementCondition {
     visible: UntilElementCondition;
     enabled: UntilElementCondition;
 
     forAsLongAs(timeout: number): UntilElementCondition;
+    waitFor(elements: WebElementFinder | WebElementListFinder): Promise<void>;
 
     readonly modifierFunc: LogicFunction<boolean>;
     readonly waiter: ElementCondition;
@@ -12,11 +14,24 @@ export interface UntilElementCondition {
     readonly conditionHelpText: string;
 }
 
+/**
+ * reduces the status array to a boolean value
+ * @param {boolean | boolean[]} status
+ * @returns {boolean}
+ */
+const reduceStatus = (status: boolean | boolean[]): boolean => {
+    if (Array.isArray(status))
+        return status.reduce((acc: boolean, value: boolean) => value && acc, true);
+
+    return status
+};
+
 abstract class ElementCondition {
     public abstract helpText: string;
     public elementText = ``;
 
-    abstract isFulfilledFor(element: WebElementFinder): () => Promise<boolean>;
+    abstract isFulfilledFor(element: WebElementFinder | WebElementListFinder): () => Promise<boolean>;
+
 }
 
 export class VisibilityCheck extends ElementCondition {
@@ -27,10 +42,14 @@ export class VisibilityCheck extends ElementCondition {
         super()
     }
 
-    public isFulfilledFor(element: WebElementFinder): () => Promise<boolean> {
+    public isFulfilledFor(element: WebElementFinder | WebElementListFinder): () => Promise<boolean> {
         this.elementText = `Waiting until element called '${element.description}'`;
+
         return (): Promise<boolean> => {
-            return element.isVisible().then(this.modifierFunc)
+
+            return element.isVisible()
+                          .then(reduceStatus)
+                          .then(this.modifierFunc)
         };
     }
 }
@@ -46,7 +65,9 @@ export class EnabledCheck extends ElementCondition {
     public isFulfilledFor(element: WebElementFinder): () => Promise<boolean> {
         const helpText = `${element.description}`;
         return (): Promise<boolean> => {
-            return element.isEnabled().then(this.modifierFunc);
+            return element.isEnabled()
+                          .then(reduceStatus)
+                          .then(this.modifierFunc);
         };
     }
 }
@@ -102,5 +123,27 @@ export class UntilElement implements UntilElementCondition {
         };
 
         return `condition until element is${this.modifierFunc(true) ? `` : ` not`} ${conditionType(this.waiter)}`
+    }
+
+    public waitFor(elements: WebElementFinder | WebElementListFinder): Promise<void> {
+
+        const startTime: number = Date.now();
+
+        return new Promise((resolve, reject) => {
+            const loop = (): void => {
+                const now = Date.now();
+
+                if(now - startTime > this._timeout)
+                    reject(DidNotFind.theElement(elements));
+
+                this.waiter.isFulfilledFor(elements)()
+                           .then((result: boolean) => {
+                               return !result ? setTimeout(loop, 300) : resolve()
+                           })
+                           .catch(() => setTimeout(loop, 300));
+            };
+
+            setTimeout(loop, 300)
+        });
     }
 }

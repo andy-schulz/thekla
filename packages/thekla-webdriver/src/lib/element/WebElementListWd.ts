@@ -1,12 +1,15 @@
-import {Browser}                                from "../../interface/Browser";
-import {ClientCtrls}                            from "../../interface/ClientCtrls";
-import {TkWebElement}                           from "../../interface/TkWebElement";
-import {WebElementFinder, WebElementListFinder} from "../../interface/WebElements";
-import {UntilElementCondition}                  from "./ElementConditions";
-import {By}                                     from "./Locator";
-import {waitForCondition}                       from "./shall_wait";
-import {WebElementWd}                           from "./WebElementWd";
-import {getLogger, Logger}                      from "@log4js-node/log4js-api";
+import {DidNotFind}            from "../..";
+import {ClientCtrls}           from "../../interface/ClientCtrls";
+import {TkWebElement}          from "../../interface/TkWebElement";
+import {
+    VisibleElementsOptions,
+    WebElementListFinder,
+    WebElementFinder
+}                              from "../../interface/WebElements";
+import {UntilElementCondition} from "./ElementConditions";
+import {By}                    from "./Locator";
+import {WebElementWd}          from "./WebElementWd";
+import {getLogger, Logger}     from "@log4js-node/log4js-api";
 
 /**
  * List object to wrap the location strategy for finding multiple elements with WebDriverJS
@@ -20,7 +23,7 @@ export class WebElementListWd<WD> implements WebElementListFinder {
         private _locator: By,
         public readonly browser: ClientCtrls<WD>,
         private createWebElementFromList: (elementList: WebElementListWd<WD>,
-            browser: ClientCtrls<WD>) => WebElementWd<WD>) {
+                                           browser: ClientCtrls<WD>) => WebElementWd<WD>) {
     }
 
     /**
@@ -66,16 +69,16 @@ export class WebElementListWd<WD> implements WebElementListFinder {
                 const elemsList: TkWebElement<WD>[] = await elem.findElements(locator);
                 return [...acc, ...elemsList];
             }, Promise.resolve([] as TkWebElement<WD>[]))
-                .then((elements: TkWebElement<WD>[]) => {
-                    this.logger.trace(`Found ${elements ? elements.length : 0} element(s) for locator '${locator}'`);
-                    return elements
-                });
+                           .then((elements: TkWebElement<WD>[]) => {
+                               this.logger.trace(`Found ${elements ? elements.length : 0} element(s) for locator '${locator}'`);
+                               return elements
+                           });
         };
         return new WebElementListWd(getElements, locator, this.browser, this.createWebElementFromList).called(this.description);
     }
 
     /**
-     * wait for
+     * wait for condition until interaction with element / element list
      * @param condition - the waiter condition to wait for
      */
     public shallWait(condition: UntilElementCondition): WebElementListFinder {
@@ -84,13 +87,8 @@ export class WebElementListWd<WD> implements WebElementListFinder {
         const getElements = async (): Promise<TkWebElement<WD>[]> => {
             this.logger.debug(`shallWait - Start getting elements from function chain: ${this._locator.toString()}`);
 
-            return waitForCondition(
-                this.browser as unknown as Browser,
-                this.getElements,
-                `${condition.conditionHelpText} ${this.toString()}`,
-                this._locator.toString(),
-                this.logger
-            )(condition)
+            return condition.waitFor(this)
+                            .then(() => this.getElements())
         };
 
         return new WebElementListWd(getElements, this._locator, this.browser, this.createWebElementFromList).called(this.description);
@@ -107,6 +105,58 @@ export class WebElementListWd<WD> implements WebElementListFinder {
         })
     }
 
+    public click(): Promise<void> {
+        return this.getElements()
+                   .then((elements: TkWebElement<WD>[]) => {
+                       if (elements.length === 0)
+                           return Promise.reject(DidNotFind.theElement(this));
+
+                       return elements.reduce((chain: Promise<void>, element: TkWebElement<WD>): Promise<void> => {
+                           return chain.then(() => {
+                               return element.click()
+                           })
+                       }, Promise.resolve())
+                   })
+    }
+
+    public isEnabled(options?: VisibleElementsOptions): Promise<boolean[] | boolean> {
+        return this.getElements()
+                   .then((elements: TkWebElement<WD>[]) => {
+                       return Promise.all(
+                           elements.map((elem: TkWebElement<WD>) => {
+                               return elem.isEnabled()
+                           })
+                       )
+                   })
+                   .then((elementStatus: boolean[]) => {
+                       return options?.returnSeparateValues ?
+                           elementStatus :
+                           elementStatus.reduce((acc: boolean, elem: boolean) => acc && elem, true);
+                   })
+    }
+
+    public isVisible(options?: VisibleElementsOptions): Promise<boolean[] | boolean> {
+        return this.getElements()
+                   .then((elements: TkWebElement<WD>[]) => {
+                       return Promise.all(
+                           elements.map((elem: TkWebElement<WD>) => {
+                               return elem.isDisplayed()
+                                          .then((result: boolean) => {
+                                              return result
+                                          })
+                           })
+                       )
+                   })
+                   .then((elementStatus: boolean[]) => {
+                       if (elementStatus.length === 0)
+                           return false;
+
+                       return options?.returnSeparateValues ?
+                           elementStatus :
+                           elementStatus.reduce((acc: boolean, elem: boolean) => acc && elem, true);
+                   })
+    }
+
     public getText(): Promise<string[]> {
         return new Promise((fulfill, reject): void => {
             this.getElements()
@@ -116,8 +166,8 @@ export class WebElementListWd<WD> implements WebElementListFinder {
                     ))
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 }).catch((e: any): void => {
-                    reject(e);
-                })
+                reject(e);
+            })
         })
     }
 
@@ -133,13 +183,13 @@ export class WebElementListWd<WD> implements WebElementListFinder {
             return acc.then((arr: TkWebElement<WD>[]): Promise<TkWebElement<WD>[]> => {
                 return new Promise((resolve, reject) => {
                     element.getText()
-                        .then((text: string) => {
-                            if (text.includes(searchText)) {
-                                arr.push(element);
-                            }
-                            resolve(arr);
-                        })
-                        .catch(reject);
+                           .then((text: string) => {
+                               if (text.includes(searchText)) {
+                                   arr.push(element);
+                               }
+                               resolve(arr);
+                           })
+                           .catch(reject);
                 })
             })
         };

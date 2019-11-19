@@ -33,9 +33,10 @@ export {Count}                                from "./lib/questions/Count";
 export {TheSites}                             from "./lib/questions/TheSites";
 export {Status}                               from "./lib/questions/Status";
 
+export {Expected}                             from "./lib/matcher/Expected"
+
 /**
  * Reexports from @thekla/webdriver
  *
  */
-
 export {UntilElement, By, RunningBrowser, Browser, ClientHelper, Key, BrowserScreenshotData} from "@thekla/webdriver"

@@ -142,7 +142,7 @@ export class SppElementList extends SppFinderRoot {
 /**
  * class representing a frame waiter
  */
-export class SppFrameElement implements SppFinder, SppFrameFinder, SppFinderWaiter<SppFrameElement> {
+export class SppFrameElement implements SppFinder, SppFrameFinder {
     public constructor(
         private locator: By,
         private switchFrame: (browser: Browser) => FrameElementFinder) {
@@ -167,13 +167,6 @@ export class SppFrameElement implements SppFinder, SppFrameFinder, SppFinderWait
             return this.switchFrame(browser).frame(locator);
         };
         return new SppFrameElement(locator, switchFrame);
-    }
-
-    public shallWait(condition: UntilElementCondition): SppFrameElement {
-        const waiter = (browser: Browser): FrameElementFinder => {
-            return this.switchFrame(browser).shallWait(condition);
-        };
-        return new SppFrameElement(this.locator, waiter);
     }
 
     public called(description: string): SppFrameElement {

@@ -1,6 +1,6 @@
-import {Client}       from "webdriver"
-import * as uuid      from "uuid"
-import {getLogger}    from "@log4js-node/log4js-api";
+import {Client}    from "webdriver"
+import * as uuid   from "uuid"
+import {getLogger} from "@log4js-node/log4js-api";
 
 import {
     displayMessage,
@@ -34,7 +34,7 @@ export class AnnotatorWdio {
      * @returns the Annotator instance for the driver
      */
     private static hl(driver: Client): AnnotatorWdio {
-        if(AnnotatorWdio.driverMap.has(driver))
+        if (AnnotatorWdio.driverMap.has(driver))
             return (AnnotatorWdio.driverMap.get(driver))!;
         else {
             const hl = new AnnotatorWdio();
@@ -45,69 +45,77 @@ export class AnnotatorWdio {
     }
 
     /**
-     * add a div in the browsers dom and displays the given test message
+     * add a div in the browsers dom and display the given test message
      *
      * @param driver the driver instance which has to be annotated
      * @param testMessage the message to display
      */
     private displayTM(driver: Client, testMessage: string): Promise<Client> {
         return this.promise = this.promise
-            .then(() => driver.executeScript(this.funcToString(displayMessage), [this.uuid, testMessage]))
-            .then(() => driver)
+                                  .then(() => driver.executeScript(this.funcToString(displayMessage), [this.uuid, testMessage]))
+                                  .then(() => driver)
+                                  .catch((e) => {
+                                      this.logger.warn(e.toString());
+                                      return driver
+                                  }) // in case of an error, dont stop
     }
 
     /**
-     *
+     * send request to hide test message banner
      * @param driver
      */
     private hideTM(driver: Client): Promise<Client> {
         return this.promise = this.promise
-            .then(() => driver.executeScript(this.funcToString(hideMessage),[this.uuid]))
-            .then(() => driver)
+                                  .then(() => driver.executeScript(this.funcToString(hideMessage), [this.uuid]))
+                                  .then(() => driver)
+                                  .catch((e) => {
+                                      this.logger.warn(e.toString());
+                                      return driver
+                                  }) // in case of an error, dont stop
     }
 
     /**
-     *
+     * send request to highlight the element
      * @param driver
      * @parm element
      */
     private hlight(driver: Client, element: object): Promise<string> {
         return this.promise = this.promise
-            .then(() => {
-                return new Promise((resolve, reject) => {
-                    driver.executeScript(this.funcToString(unHighlightElement),[this.elementBefore, this.styleBefore])
-                        .then(resolve, (e: Error) => {
-                            if(e.name === `stale element reference`) {
-                                this.logger.debug(`stale element reference error detected while unhighlighting an old element.
+                                  .then(() => {
+                                      return new Promise((resolve, reject) => {
+                                          driver.executeScript(this.funcToString(unHighlightElement), [this.elementBefore, this.styleBefore])
+                                                .then(resolve, (e: Error) => {
+                                                    if (e.name === `stale element reference`) {
+                                                        this.logger.debug(`stale element reference error detected while unhighlighting an old element.
                             I am going to ignore the error.`);
-                                resolve(e)
-                            }
-                            reject(e)
-                        })
-                })
-            })
-            .catch((e): Promise<void> => {
-                if(e.toString().includes(`StaleElementReferenceError`)) {
-                    return Promise.resolve(e);
-                }
-                return Promise.reject(e);
-            })
-            .then(() => {
-                return new Promise((resolve, reject) => {
-                    driver.executeScript(this.funcToString(highlightElement),[element])
-                        .then(resolve, reject)
-                })
-            })
-            .then((style: any) => {
-                this.elementBefore = element;
-                this.styleBefore = style === null ? undefined : style;
-                return `element highlighted`
-            })
-            .catch((e) => {
-                this.elementBefore = undefined;
-                this.logger.debug(e);
-                return e.toString();
-            })
+                                                        resolve(e)
+                                                    }
+                                                    reject(e)
+                                                })
+                                      })
+                                  })
+                                  .catch((e): Promise<void> => {
+                                      if (e.toString().includes(`StaleElementReferenceError`)) {
+                                          return Promise.resolve(e);
+                                      }
+                                      return Promise.reject(e);
+                                  })
+                                  .then(() => {
+                                      return new Promise((resolve, reject) => {
+                                          driver.executeScript(this.funcToString(highlightElement), [element])
+                                                .then(resolve, reject)
+                                      })
+                                  })
+                                  .then((style: any) => {
+                                      this.elementBefore = element;
+                                      this.styleBefore = style === null ? undefined : style;
+                                      return `element highlighted`
+                                  })
+                                  .catch((e) => {
+                                      this.elementBefore = undefined;
+                                      this.logger.debug(e);
+                                      return e.toString();
+                                  })
     }
 
     public reset(): void {
@@ -149,7 +157,7 @@ export class AnnotatorWdio {
      * @param driver
      * @param element
      */
-    public static highlight(element: {[key: string]: string}): (driver: Client) => Promise<string> {
+    public static highlight(element: { [key: string]: string }): (driver: Client) => Promise<string> {
         return (driver: Client): Promise<string> => {
             if (!element)
                 return Promise.reject(`cant annotate an empty element`);

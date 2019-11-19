@@ -3,16 +3,13 @@ import {ClientCtrls}                                                from "../../
 import {FrameElementFinder, WebElementFinder, WebElementListFinder} from "../../interface/WebElements";
 import {UntilElementCondition}                                      from "./ElementConditions";
 import {TkWebElement}                                               from "../../interface/TkWebElement";
-
-import {waitForCondition}                                           from "./shall_wait";
 import {WebElementListWd}                                           from "./WebElementListWd";
 import {WebElementWd}                                               from "./WebElementWd";
-import { By } from "./Locator";
-import { Browser } from "../../interface/Browser";
+import {By}                                                         from "./Locator";
 
 export type FrameCreator<WD> = (getFrames: () => Promise<TkWebElement<WD>[]>,
-    _locator: By,
-    browser: ClientCtrls<WD>) => FrameElementWd<WD>
+                                _locator: By,
+                                browser: ClientCtrls<WD>) => FrameElementWd<WD>
 
 export abstract class FrameElementWd<WD> implements FrameElementFinder {
     private _description = ``;
@@ -39,21 +36,21 @@ export abstract class FrameElementWd<WD> implements FrameElementFinder {
 
     private switchFrame(): Promise<void> {
         return this.getFrames()
-            .then((element: TkWebElement<WD>[]) => {
-                if (element.length === 0) {
-                    const message = `not Frame found for locator ${this._locator}! Abort Frame Switch.`;
-                    this.logger.debug(message);
-                    return Promise.reject(new Error(message))
-                }
-                return this.browser.getFrameWorkClient()
-                    .then((driver: WD): Promise<void> => {
-                        this.logger.trace(`SWITCH FRAME: trying to switch to element ${element[0]}`);
-                        return this.switchFrameDriver(driver, element[0].getFrWkElement());
-                    }).catch((e: Error): Promise<void> => {
-                        this.logger.trace(`Error switching to Frame.`);
-                        return Promise.reject(e);
-                    })
-            })
+                   .then((element: TkWebElement<WD>[]) => {
+                       if (element.length === 0) {
+                           const message = `not Frame found for locator ${this._locator}! Abort Frame Switch.`;
+                           this.logger.debug(message);
+                           return Promise.reject(new Error(message))
+                       }
+                       return this.browser.getFrameWorkClient()
+                                  .then((driver: WD): Promise<void> => {
+                                      this.logger.trace(`SWITCH FRAME: trying to switch to element ${element[0]}`);
+                                      return this.switchFrameDriver(driver, element[0].getFrWkElement());
+                                  }).catch((e: Error): Promise<void> => {
+                               this.logger.trace(`Error switching to Frame.`);
+                               return Promise.reject(e);
+                           })
+                   })
     }
 
     public all(
@@ -62,29 +59,12 @@ export abstract class FrameElementWd<WD> implements FrameElementFinder {
 
         const getElements = (): Promise<TkWebElement<WD>[]> => {
             return this.switchFrame()
-                .then(() => {
-                    return this.findElementsDriver(locator);
-                })
+                       .then(() => {
+                           return this.findElementsDriver(locator);
+                       })
         };
 
         return new WebElementListWd(getElements, locator, this.browser as any, this.createWebElement);
-    }
-
-    public shallWait(condition: UntilElementCondition): FrameElementFinder {
-
-        const getFrame = async (): Promise<TkWebElement<WD>[]> => {
-            this.logger.debug(`shallWait - Start getting elements from function chain: ${this._locator.toString()}`);
-
-            return waitForCondition(
-                this.browser as unknown as Browser,
-                this.getFrames,
-                `${condition.conditionHelpText} ${this.toString()}`,
-                this._locator.toString(),
-                this.logger
-            )(condition)
-        };
-
-        return this.createFrameElement(getFrame, this._locator, this.browser).called(this.description);
     }
 
     public frame(locator: By): FrameElementFinder {
@@ -92,9 +72,9 @@ export abstract class FrameElementWd<WD> implements FrameElementFinder {
 
         const getFrames = (): Promise<TkWebElement<WD>[]> => {
             return this.switchFrame()
-                .then(() => {
-                    return this.findElementsDriver(locator);
-                })
+                       .then(() => {
+                           return this.findElementsDriver(locator);
+                       })
         };
 
         return this.createFrameElement(getFrames, locator, this.browser);

@@ -48,6 +48,7 @@ describe(`Scroll`, (): void => {
         it(`should succeed when scrolled to the end of the page 
         - (test case id: 8fc292fe-883d-48ce-878e-11fcdff579df)`, async (): Promise<void> => {
 
+            await Navigate.to(`/`).performAs(Sam);
             await Navigate.to(`/tables`).performAs(Sam);
 
             let viewportCheck: BoundaryCheck =

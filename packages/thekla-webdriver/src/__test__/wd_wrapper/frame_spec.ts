@@ -35,9 +35,9 @@ describe(`The Frame`, (): void => {
 
         it(`should be found by css with an applied wait condition. 
         - (test case id: 189c9d59-c31a-4e9d-9c4e-e43dc0302868)`, async (): Promise<void> => {
-            const frame = browser.frame(By.css(`.frame-button-in-single-frame`))
-                .shallWait(UntilElement.is.visible.forAsLongAs(5000));
-            const button = frame.element(By.css(`.btn-secondary`));
+            const frame = browser.frame(By.css(`.frame-button-in-single-frame`));
+            const button = frame.element(By.css(`.btn-secondary`))
+                                .shallWait(UntilElement.is.visible.forAsLongAs(5000));
 
             await browser.get(`/nestedFrames`);
             expect(await button.getText()).toEqual(`Button inside single frame`);
@@ -46,27 +46,15 @@ describe(`The Frame`, (): void => {
 
         it(`should be found by css with TWO applied wait condition. 
         - (test case id: f5622a85-b3ac-4e51-8772-d72bcde4e96c)`, async (): Promise<void> => {
-            const frame = browser.frame(By.css(`.frame-button-in-single-frame`))
-                .shallWait(UntilElement.is.visible.forAsLongAs(10000))
-                .shallWait(UntilElement.is.enabled.forAsLongAs(10000));
+            const frame = browser.frame(By.css(`.frame-button-in-single-frame`));
             const button = frame.element(By.css(`.firstNestedButton `))
-                .shallWait(UntilElement.is.visible.forAsLongAs(10000));
+                                .shallWait(UntilElement.is.visible.forAsLongAs(500))
+                                .shallWait(UntilElement.is.visible.forAsLongAs(5000));
 
             await browser.get(`/nestedFrames`);
             expect(await button.getText()).toEqual(`Button inside single frame`);
         });
 
-        it(`should be found by css and applied wait conditions on the frame and the element. 
-        - (test case id: 6f5efcda-10d4-43f5-8465-13e8b6eff8a3)`, async (): Promise<void> => {
-            const frame = browser.frame(By.css(`.frame-button-in-single-frame`))
-                .shallWait(UntilElement.is.visible.forAsLongAs(10000));
-            const button = frame.element(By.css(`.firstNestedButton `))
-                .shallWait(UntilElement.is.visible.forAsLongAs(10000));
-
-            await browser.get(`/nestedFrames`);
-            expect(await button.getText()).toEqual(`Button inside single frame`);
-
-        });
     });
 
     describe(`on the second Level `, (): void => {
@@ -92,11 +80,11 @@ describe(`The Frame`, (): void => {
         - (test case id: 53675bf6-eea9-46f0-b487-b969a7629e27)`, async (): Promise<void> => {
             const frame1 = browser.frame(By.css(`.frame-button-in-single-frame`));
             const frame21 = browser.frame(By.css(`.button-in-two-frames`));
-            const frame22 = frame21.frame(By.css(`.frame-button-in-single-frame`))
-                .shallWait(UntilElement.is.visible);
+            const frame22 = frame21.frame(By.css(`.frame-button-in-single-frame`));
 
             const button1 = frame1.element(By.css(`.firstNestedButton`));
-            const button2 = frame22.element(By.css(`.btn-secondary`));
+            const button2 = frame22.element(By.css(`.btn-secondary`))
+                                   .shallWait(UntilElement.is.visible);
 
             await browser.get(`/nestedFrames`);
             expect(await button1.getText()).toEqual(`Button inside single frame`);
@@ -112,11 +100,11 @@ describe(`The Frame`, (): void => {
 
             const frame1 = browser.frame(By.css(`.frame-button-in-single-frame`));
             const frame21 = browser.frame(By.css(`.button-in-two-frames`));
-            const frame22 = frame21.frame(By.css(`.frame-button-in-single-frame`))
-                .shallWait(UntilElement.is.visible);
+            const frame22 = frame21.frame(By.css(`.frame-button-in-single-frame`));
 
             const button1 = frame1.element(By.css(`.firstNestedButton`));
-            const button2 = frame22.element(By.css(`.btn-secondary`));
+            const button2 = frame22.element(By.css(`.btn-secondary`))
+                                   .shallWait(UntilElement.is.visible);
 
             await browser.get(`/nestedFrames`);
             expect(await button.getText()).toEqual(`Button outside of Frame`);

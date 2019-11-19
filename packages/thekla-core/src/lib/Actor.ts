@@ -25,7 +25,7 @@ export interface LogsActivity {
 }
 
 export interface AnswersQuestions extends LogsActivity {
-    toAnswer<PT, RT>(question: Question<PT,RT>, activityResult: PT): Promise<RT>;
+    toAnswer<PT, RT>(question: Question<PT,RT>, activityResult?: PT): Promise<RT>;
 }
 
 // interface TaskPerfomer {

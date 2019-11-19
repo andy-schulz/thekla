@@ -1,11 +1,34 @@
 /**
  * Wait until a condition is met on a given element
  */
-import {UsesAbilities, Interaction, stepDetails} from "@thekla/core";
-import {WaitOnElements}                          from "../abilities/WaitOnElements";
-import {SppElement}                              from "../SppWebElements";
-import {getLogger}                               from "@log4js-node/log4js-api"
-import {UntilElementCondition}                   from "@thekla/webdriver";
+import {UsesAbilities, Interaction, stepDetails, AnswersQuestions, Question} from "@thekla/core";
+import {Oracle}                                                              from "@thekla/core/dist/lib/actions/Activities";
+import {UntilElementCondition}                                               from "@thekla/webdriver";
+import {WaitOnElements}                                                      from "../abilities/WaitOnElements";
+import {SppElement}                                                          from "../SppWebElements";
+import {getLogger}                                                           from "@log4js-node/log4js-api"
+
+class WaitUntil<PT, MPT> implements Oracle<PT, boolean> {
+
+    private matcher: (value: MPT) => boolean | Promise<boolean>;
+
+    public performAs(actor: AnswersQuestions, result: PT): Promise<boolean> {
+
+        return actor.toAnswer(this.question, result)
+                    .then((answer: MPT) => {
+                        return this.matcher(answer)
+                    })
+    }
+
+    public is(matcher: (text: MPT) => boolean | Promise<boolean>): WaitUntil<PT, MPT> {
+        this.matcher = matcher;
+        return this;
+    }
+
+    public constructor(private question: Question<PT, MPT>) {
+    }
+
+}
 
 export class Wait implements Interaction<void, void> {
     private logger = getLogger(`Wait`);
@@ -19,11 +42,11 @@ export class Wait implements Interaction<void, void> {
 
         return new Promise((resolve, reject): void => {
             WaitOnElements.as(actor).wait(this.condition, this.awaitingElement)
-                .then((message: string): void => {
-                    this.logger.debug(message);
-                    resolve();
-                })
-                .catch(reject)
+                          .then((message: string): void => {
+                              this.logger.debug(message);
+                              resolve();
+                          })
+                          .catch(reject)
         });
     }
 
@@ -33,6 +56,10 @@ export class Wait implements Interaction<void, void> {
      */
     public static for(awaitingElement: SppElement): Wait {
         return new Wait(awaitingElement);
+    }
+
+    public static until<PT, MPT>(question: Question<PT, MPT>): WaitUntil<PT, MPT> {
+        return new WaitUntil(question)
     }
 
     /**
