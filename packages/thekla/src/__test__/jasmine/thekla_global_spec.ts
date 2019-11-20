@@ -15,6 +15,10 @@ describe(`The Thekla global object`, () => {
     let file1Result: JasmineTestFileResult;
     const childOutput: any = ``;
 
+    beforeAll(() => {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+    });
+
     beforeEach(async () => {
         forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: `ignore`});
     });

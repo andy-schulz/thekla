@@ -16,6 +16,10 @@ describe(`Setting the Timeout`, () => {
 
     let theklaConfigResult: TheklaConfigFileResult;
     let file1Result: JasmineTestFileResult;
+    
+    beforeAll(() => {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 20000;
+    });
 
     beforeEach(() => {
         forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: `ignore`});
@@ -115,5 +119,5 @@ describe(`Setting the Timeout`, () => {
             }
 
         })
-    },10000);
+    });
 });
