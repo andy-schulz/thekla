@@ -1,23 +1,13 @@
-import {WebElementFinder, WebElementListFinder} from "../interface/WebElements";
+import {WebElementFinder, WebElementListFinder} from "..";
+import {DidNotFindElement}                      from "./DidNotFindElement";
+import {DidNotFindWindow}                       from "./DidNotFindWindow";
 
-export class DidNotFind extends Error {
-
-    public static theElement(element: WebElementFinder | WebElementListFinder): DidNotFind {
-        return new DidNotFind(element)
+export class DidNotFind {
+    public static theElement(element: WebElementFinder | WebElementListFinder): DidNotFindElement {
+        return new DidNotFindElement(element)
     }
 
-    private  constructor(private _element: WebElementFinder | WebElementListFinder) {
-        super(`
-        Did not find the Element: ${_element.toString()}.
-        Try waiting before you interact with it like:
-            element(By.<<your selector>>)
-                .shallWait(UntilElement.is.visible)
-        `);
-        this.name = `${DidNotFind.name}Element`;
-        Error.captureStackTrace(this, DidNotFind)
-    }
-
-    public get element(): WebElementFinder | WebElementListFinder {
-        return this._element;
+    public static theWindowWithTitle(title: string, foundWindowTitles: string[]): DidNotFindWindow  {
+        return new DidNotFindWindow(title, foundWindowTitles)
     }
 }

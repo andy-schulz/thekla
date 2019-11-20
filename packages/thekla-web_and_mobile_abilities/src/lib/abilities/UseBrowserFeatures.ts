@@ -37,4 +37,8 @@ export class UseBrowserFeatures implements Ability {
     public scrollTo({x, y}: { x: number; y: number }): Promise<void> {
         return this.client.scrollTo({x, y});
     }
+
+    public switchToWindowMatchingTheTitle(titlePart: string): Promise<void> {
+        return this.client.switchToWindowMatchingTheTitle(titlePart);
+    }
 }

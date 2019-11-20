@@ -102,33 +102,3 @@ export function cleanupClients(browserMap: Map<string, Browser>, browserToClean?
             return [];
         })
 }
-
-export function executeFnOnClient<T>(getClient: Function, func: string, params: any[] = []): Promise<T> {
-    return new Promise((resolve, reject): void => {
-        getClient()
-            .then((driver: any): void => {
-                driver[func](...params)
-                    .then((param: any) => {
-                        resolve(param)
-                    }, (e: Error) => {
-                        reject(e)
-                    })
-                // .then(fulfill, reject)
-            })
-            .catch(reject)
-    })
-}
-
-export const switchToMasterFrame = async (client: Client): Promise<Client> => {
-    // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-    // @ts-ignore is* Methods are not part of the typings
-    if(client.isMobile || client.isAndroid || client.isIOS) {
-        const context = await client.getContext();
-
-        if (context == `NATIVE_APP`)
-            return Promise.resolve(client);
-    }
-
-    return (client.switchToFrame(null) as unknown as Promise<void>)
-        .then((): Client => client)
-};

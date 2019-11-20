@@ -52,5 +52,17 @@ export interface Browser extends WebFinder, FrameFinder {
     executeScript(func: Function, ...funcArgs: any[]): Promise<{}>;
 
     getSession(): Promise<TkSession>;
+
+    getWindowHandles(): Promise<string[]>;
+
+    createWindow(): Promise<string>;
+
+    createTab(): Promise<string>;
+
+    closeWindow(): Promise<void>;
+
+    switchToWindow(handle: string): Promise<void>;
+
+    switchToWindowMatchingTheTitle(title: string): Promise<void>;
 }
 

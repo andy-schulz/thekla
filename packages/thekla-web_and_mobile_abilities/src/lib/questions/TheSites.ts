@@ -22,11 +22,11 @@ class SiteTitle implements Question<void, string> {
 }
 
 export class TheSites {
-    public static url(): SiteUrl {
+    public static get url(): SiteUrl {
         return new SiteUrl()
     }
 
-    public static title(): SiteTitle {
+    public static get title(): SiteTitle {
         return new SiteTitle()
     }
 }

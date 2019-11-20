@@ -38,7 +38,7 @@ describe(`Using`, (): void => {
             `- (test case id: 332e9252-aec9-44b5-b936-728561523e27)`, async (): Promise<void> => {
             await Joanna.attemptsTo(
                 Navigate.to(`/delayed`),
-                See.if(TheSites.url()).is(Expected.toEqual(`${testUrl}/delayed`))
+                See.if(TheSites.url).is(Expected.toEqual(`${testUrl}/delayed`))
             )
         });
 
@@ -46,7 +46,7 @@ describe(`Using`, (): void => {
             `- (test case id: 7974c013-4234-43e4-8330-6ec788512eb8)`, async (): Promise<void> => {
             await Joanna.attemptsTo(
                 Navigate.to(`/delayed`),
-                See.if(TheSites.url()).is(Expected.toEqual(`${testUrl}/delayed`))
+                See.if(TheSites.url).is(Expected.toEqual(`${testUrl}/delayed`))
             )
         });
     });

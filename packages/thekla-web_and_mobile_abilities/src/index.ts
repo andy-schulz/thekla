@@ -1,25 +1,26 @@
 /**
  * Screenplay Elements
  */
-export {element, all, frame, SppElement, SppElementList} from "./lib/SppWebElements";
+export {element, all, frame, SppElement, SppElementList}           from "./lib/SppWebElements";
 
 /**
  * Abilities
  */
-export {BrowseTheWeb}                                    from "./lib/abilities/BrowseTheWeb";
-export {OperateOnMobileDevice}                           from "./lib/abilities/OperateOnMobileDevice";
-export {Authenticate, AuthenticationInfo}                from "./lib/abilities/Authenticate";
+export {BrowseTheWeb}                                              from "./lib/abilities/BrowseTheWeb";
+export {OperateOnMobileDevice}                                     from "./lib/abilities/OperateOnMobileDevice";
+export {Authenticate, AuthenticationInfo}                          from "./lib/abilities/Authenticate";
 
 /**
  * Interactions
  */
-export {Click}                                           from "./lib/actions/Click";
-export {Hover}                                           from "./lib/actions/Hover";
-export {Enter}                                           from "./lib/actions/Enter";
-export {Navigate}                                        from "./lib/actions/Navigate";
-export {Wait}                                            from "./lib/actions/Wait";
-export {Scroll, Page}                                    from "./lib/actions/Scroll";
-export {Drag}                                            from "./lib/actions/Drag";
+export {Click}                                                     from "./lib/actions/Click";
+export {Hover}                                                     from "./lib/actions/Hover";
+export {Enter}                                                     from "./lib/actions/Enter";
+export {Navigate}                                                  from "./lib/actions/Navigate";
+export {Wait}                                                      from "./lib/actions/Wait";
+export {Scroll, Page}                                              from "./lib/actions/Scroll";
+export {Drag}                                                      from "./lib/actions/Drag";
+export {SwitchToWindow}                                            from "./lib/actions/SwitchToWindow";
 
 /**
  * Questions
@@ -33,7 +34,7 @@ export {Count}                                from "./lib/questions/Count";
 export {TheSites}                             from "./lib/questions/TheSites";
 export {Status}                               from "./lib/questions/Status";
 
-export {Expected}                             from "./lib/matcher/Expected"
+export {Expected}                                                                            from "./lib/matcher/Expected"
 
 /**
  * Reexports from @thekla/webdriver
