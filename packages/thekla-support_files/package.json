@@ -1,6 +1,6 @@
 {
   "name": "@thekla/support",
-  "version": "2.3.0",
+  "version": "2.3.1",
   "description": "support files for testing the thekla project",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -25,7 +25,7 @@
     "access": "public"
   },
   "dependencies": {
-    "@thekla/config": "^2.3.0",
+    "@thekla/config": "^2.3.1",
     "@types/lodash": "^4.14.149",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
