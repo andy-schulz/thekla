@@ -100,7 +100,7 @@ export class WebElementListWd<WD> implements WebElementListFinder {
                 fulfill(elems.length);
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
             }).catch((e: any): void => {
-                reject(e);
+                return reject(e);
             });
         })
     }
@@ -166,7 +166,7 @@ export class WebElementListWd<WD> implements WebElementListFinder {
                     ))
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 }).catch((e: any): void => {
-                reject(e);
+                return reject(e);
             })
         })
     }

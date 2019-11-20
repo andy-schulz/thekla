@@ -40,6 +40,8 @@ export interface ServerAddress {
 export type LogLevel =  "trace" | "debug" | "info" | "warn" | "error" | "silent";
 
 export interface AutomationFramework {
-    type?: "wdio";
     logLevel?: LogLevel;
+    headers?: object;
+    connectionRetryTimeout?: number;
+    connectionRetryCount?: number;
 }

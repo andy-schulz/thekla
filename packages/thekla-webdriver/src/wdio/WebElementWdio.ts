@@ -1,10 +1,10 @@
+import {AnnotatorWdio}      from "@thekla/annotator";
 import * as _               from "lodash";
+import {Client}             from "webdriver";
 import {ClientCtrls}        from "../interface/ClientCtrls";
 import {TkWebElement}       from "../interface/TkWebElement";
-import {AnnotatorWdio}      from "@thekla/annotator";
 import {WebElementWd}       from "../lib/element/WebElementWd";
 import {ClientWdio}         from "./ClientWdio";
-import {Client}             from "webdriver";
 import {WebElementListWdio} from "./WebElementListWdio";
 
 export class WebElementWdio extends WebElementWd<Client> {

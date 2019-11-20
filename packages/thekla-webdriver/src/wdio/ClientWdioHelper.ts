@@ -8,9 +8,9 @@ export function executeFnOnClient<T>(getClient: Function, func: string, params: 
             .then((driver: any): void => {
                 driver[func](...params)
                     .then((param: any) => {
-                        resolve(param)
+                        return resolve(param)
                     }, (e: Error) => {
-                        reject(e)
+                        return reject(e)
                     })
             })
             .catch(reject)

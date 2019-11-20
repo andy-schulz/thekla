@@ -134,7 +134,7 @@ export class UntilElement implements UntilElementCondition {
                 const now = Date.now();
 
                 if(now - startTime > this._timeout)
-                    reject(DidNotFind.theElement(elements));
+                    return reject(DidNotFind.theElement(elements));
 
                 this.waiter.isFulfilledFor(elements)()
                            .then((result: boolean) => {

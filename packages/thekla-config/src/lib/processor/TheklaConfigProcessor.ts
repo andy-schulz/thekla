@@ -120,12 +120,11 @@ export class TheklaConfigProcessor {
 
             const conf = config;
 
-            let m: RequestPromiseOptions;
-
             if(!(conf.restConfig as RestClientConfig).requestOptions) {
                 (conf.restConfig as RestClientConfig).requestOptions = {};
             }
-            m = (conf.restConfig as RestClientConfig).requestOptions as RequestPromiseOptions;
+            const m: RequestPromiseOptions =
+                (conf.restConfig as RestClientConfig).requestOptions as RequestPromiseOptions;
 
             const mergedOpts = merge(m, restClientOptions);
 

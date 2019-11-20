@@ -11,8 +11,8 @@ const resizeScreenshot = (data: string, size: ScreenshotSize): Promise<string> =
                     image.resize(size.width ? size.width : Jimp.AUTO, size.height ? size.height : Jimp.AUTO)
                         .getBase64(Jimp.MIME_PNG, (err,imageData) => {
                             if(err)
-                                reject();
-                            resolve(imageData.replace(`data:image/png;base64,`,``))
+                                return reject();
+                            return resolve(imageData.replace(`data:image/png;base64,`,``))
                         })
                 })
         });

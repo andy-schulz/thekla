@@ -20,20 +20,26 @@ const transformServerConfig = (serverConfig: ServerConfig): (option: Options) =>
         if (!serverConfig.serverAddress)
             return opts;
 
-        if (serverConfig.serverAddress.hostname !== undefined && serverConfig.serverAddress.hostname !== null)
+        if (serverConfig?.serverAddress?.hostname)
             opts.hostname = serverConfig.serverAddress.hostname;
 
-        if (serverConfig.serverAddress.protocol !== undefined && serverConfig.serverAddress.protocol !== null)
+        if (serverConfig?.serverAddress?.protocol)
             opts.protocol = serverConfig.serverAddress.protocol;
 
-        if (serverConfig.serverAddress.port !== undefined && serverConfig.serverAddress.port !== null)
+        if (serverConfig?.serverAddress?.port)
             opts.port = serverConfig.serverAddress.port;
 
-        if (serverConfig.serverAddress.path !== undefined && serverConfig.serverAddress.path !== null)
+        if (serverConfig?.serverAddress?.path)
             opts.path = serverConfig.serverAddress.path;
 
-        if (serverConfig.automationFramework && serverConfig.automationFramework.logLevel)
+        if (serverConfig?.automationFramework?.logLevel)
             opts.logLevel = serverConfig.automationFramework.logLevel;
+
+        if (serverConfig?.automationFramework?.connectionRetryCount)
+            opts.connectionRetryCount = serverConfig.automationFramework.connectionRetryCount;
+
+        if (serverConfig?.automationFramework?.connectionRetryTimeout)
+            opts.connectionRetryTimeout = serverConfig.automationFramework.connectionRetryTimeout;
 
         return opts;
     }
