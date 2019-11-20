@@ -26,10 +26,10 @@
   },
   "dependencies": {
     "@thekla/config": "^2.0.1",
-    "@types/lodash": "^4.14.144",
+    "@types/lodash": "^4.14.149",
     "lodash": "^4.17.15",
     "moment": "^2.24.0",
-    "webdriver": "^5.15.4"
+    "webdriver": "^5.16.7"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",

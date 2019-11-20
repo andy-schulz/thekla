@@ -29,7 +29,7 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "webdriver": "^5.15.4"
+    "webdriver": "^5.16.7"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",

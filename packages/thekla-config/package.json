@@ -28,11 +28,11 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@types/lodash": "^4.14.144",
+    "@types/lodash": "^4.14.149",
     "@types/request-promise-native": "^1.0.17",
-    "deepmerge": "^4.2.1",
-    "request-promise-native": "^1.0.7",
-    "webdriver": "^5.15.4"
+    "deepmerge": "^4.2.2",
+    "request-promise-native": "^1.0.8",
+    "webdriver": "^5.16.7"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",

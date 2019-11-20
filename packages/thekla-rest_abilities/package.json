@@ -34,11 +34,11 @@
   "dependencies": {
     "@thekla/config": "^2.0.1",
     "@thekla/core": "^2.2.0",
-    "@types/lodash": "^4.14.144",
+    "@types/lodash": "^4.14.149",
     "@types/request-promise-native": "^1.0.17",
-    "deepmerge": "^4.2.1",
+    "deepmerge": "^4.2.2",
     "lodash": "^4.17.15",
-    "request-promise-native": "^1.0.7"
+    "request-promise-native": "^1.0.8"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",

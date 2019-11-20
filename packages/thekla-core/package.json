@@ -31,11 +31,11 @@
     "@thekla/activity-log": "^2.0.1",
     "@thekla/config": "^2.0.1",
     "@types/deep-diff": "^1.0.0",
-    "@types/lodash": "^4.14.144",
-    "@types/node": "^10.14.21",
+    "@types/lodash": "^4.14.149",
+    "@types/node": "^10.17.5",
     "deep-diff": "^1.0.2",
     "lodash": "^4.17.15",
-    "webdriver": "^5.15.0"
+    "webdriver": "^5.16.7"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
