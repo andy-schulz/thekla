@@ -5,19 +5,40 @@ import {UsesAbilities, Interaction, stepDetails, AnswersQuestions, Question} fro
 import {Oracle}                                                              from "@thekla/core/dist/lib/actions/Activities";
 import {UntilElementCondition}                                               from "@thekla/webdriver";
 import {WaitOnElements}                                                      from "../abilities/WaitOnElements";
+import {NamedMatcherFunction}                                                from "../matcher/Expected";
 import {SppElement}                                                          from "../SppWebElements";
 import {getLogger}                                                           from "@log4js-node/log4js-api"
 
 class WaitUntil<PT, MPT> implements Oracle<PT, boolean> {
 
-    private matcher: (value: MPT) => boolean | Promise<boolean>;
+    private matcher: NamedMatcherFunction<MPT>;
+    private timeout = 5000;
 
     public performAs(actor: AnswersQuestions, result: PT): Promise<boolean> {
 
-        return actor.toAnswer(this.question, result)
-                    .then((answer: MPT) => {
-                        return this.matcher(answer)
-                    })
+        return new Promise((resolve, reject) => {
+            const start = Date.now();
+
+            const loop = (): void => {
+                const now = Date.now();
+                if(now - start > this.timeout)
+                    return reject(
+`Waiting until 
+${this.question.toString()} 
+which was expected ${this.matcher?.description} 
+timed out after ${this.timeout} ms.`);
+
+                actor.toAnswer(this.question, result)
+                     .then((answer: MPT) => {
+                         return this.matcher(answer)
+                     })
+                    .then(resolve)
+                    .catch(() => setTimeout(loop, 300))
+            };
+
+            setTimeout(loop, 0);
+
+        });
     }
 
     public is(matcher: (text: MPT) => boolean | Promise<boolean>): WaitUntil<PT, MPT> {
@@ -25,14 +46,20 @@ class WaitUntil<PT, MPT> implements Oracle<PT, boolean> {
         return this;
     }
 
-    public constructor(private question: Question<PT, MPT>) {
+    public forAsLongAs(timeout: number): WaitUntil<PT, MPT> {
+        this.timeout = timeout;
+        return this;
     }
 
+    public constructor(private question: Question<PT, MPT>) {
+    }
 }
 
 export class Wait implements Interaction<void, void> {
     private logger = getLogger(`Wait`);
     private condition: UntilElementCondition;
+    private ignoreError = false;
+    private ignoreReason = ``;
 
     /**
      * @ignore
@@ -46,7 +73,7 @@ export class Wait implements Interaction<void, void> {
                               this.logger.debug(message);
                               resolve();
                           })
-                          .catch(reject)
+                          .catch(this.ignoreError ? resolve : reject)
         });
     }
 
@@ -68,6 +95,12 @@ export class Wait implements Interaction<void, void> {
      */
     public andCheck(condition: UntilElementCondition): Wait {
         this.condition = condition;
+        return this;
+    }
+
+    public butContinueInCaseOfError(reason: string) {
+        this.ignoreReason = reason;
+        this.ignoreError = true;
         return this;
     }
 

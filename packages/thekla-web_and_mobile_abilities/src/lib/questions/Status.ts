@@ -52,6 +52,11 @@ export class StatusOfElement implements Question<void, ElementStatus> {
 
     public constructor(private element: SppElement | SppElementList) {
     }
+
+    public toString(): string {
+        return `Status of element 
+    called ${this.element.toString()}`
+    }
 }
 
 export class Status {

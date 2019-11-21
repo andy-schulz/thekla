@@ -106,7 +106,8 @@ export class SppElement extends SppFinderRoot implements SppFinderWaiter<SppElem
     }
 
     public toString(): string {
-        return `${this.getElements.description ? this.getElements.description() : `'SppElement'`} located by >>${this.locator.toString()}<<`;
+        return `'${this.getElements.description ? this.getElements.description() : `SppElement`}' 
+    located by >>${this.locator.toString()}<<`;
     }
 }
 

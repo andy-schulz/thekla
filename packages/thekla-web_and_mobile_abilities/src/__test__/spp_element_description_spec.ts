@@ -22,47 +22,51 @@ describe(`The description on an element`, (): void => {
     describe(`should be attached to the element`, (): void => {
 
         it(`by using the  
-        - (test case id: 161de6a4-2f53-4864-832a-2e291fc250d6)`, (): void => {
+        - (test case id: 11169720-8958-4086-a763-2373b1a7fd3d)`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`);
 
-            expect(testButton.toString()).toEqual(`Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
+            expect(testButton.toString()).toContain(`'Test Button description on level one'`);
+            expect(testButton.toString()).toContain(`located by >>byCss: #doesNotExistOnLevelOne<<`);
         });
 
         it(`with a wait stepDetails 
-        - (test case id: 161de6a4-2f53-4864-832a-2e291fc250d6)`, (): void => {
+        - (test case id: a2453169-ee48-4193-801d-36fe7eb0690d)`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .shallWait(UntilElement.is.visible)
                     .called(`Test Button description on level one`);
 
-            expect(testButton.toString()).toEqual(`Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
+            expect(testButton.toString()).toContain(`'Test Button description on level one'`);
+            expect(testButton.toString()).toContain(`located by >>byCss: #doesNotExistOnLevelOne<<`);
         });
 
         it(`with a wait stepDetails after the description is set 
-        - (test case id: 161de6a4-2f53-4864-832a-2e291fc250d6)`, (): void => {
+        - (test case id: 779db2dc-918f-41f7-9268-12aedd7fce67)`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`)
                     .shallWait(UntilElement.is.visible);
 
-            expect(testButton.toString()).toEqual(`Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
+            expect(testButton.toString()).toContain(`'Test Button description on level one'`);
+            expect(testButton.toString()).toContain(`located by >>byCss: #doesNotExistOnLevelOne<<`);
         });
 
         it(`with a wait stepDetails after the description is set 
-        - (test case id: 161de6a4-2f53-4864-832a-2e291fc250d6)`, (): void => {
+        - (test case id: 3dea1c2b-35b8-44ec-8bc3-e8ed0317136e)`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`)
                     .shallWait(UntilElement.is.visible)
                     .called(`The second description of the Test Button description on level one`);
 
-            expect(testButton.toString()).toEqual(`Test Button description on level one -> The second description of the Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
+            expect(testButton.toString()).toContain(`'Test Button description on level one -> The second description of the Test Button description on level one'`);
+            expect(testButton.toString()).toContain(`located by >>byCss: #doesNotExistOnLevelOne<<`);
         });
 
         it(`with a wait stepDetails after the description is set 
-        - (test case id: 161de6a4-2f53-4864-832a-2e291fc250d6)`, (): void => {
+        - (test case id: e87bae3d-4fd7-470c-8867-39ee281b2503)`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`)
@@ -70,18 +74,20 @@ describe(`The description on an element`, (): void => {
                     .shallWait(UntilElement.is.visible)
                     .called(`The second description of the Test Button description on level one`);
 
-            expect(testButton.toString()).toEqual(`Test Button description on level one -> The second description of the Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
+            expect(testButton.toString()).toContain(`'Test Button description on level one -> The second description of the Test Button description on level one'`);
+            expect(testButton.toString()).toContain(`located by >>byCss: #doesNotExistOnLevelOne<<`);
         });
 
         it(`with a wait stepDetails after the description is set 
-        - (test case id: 161de6a4-2f53-4864-832a-2e291fc250d6)`, (): void => {
+        - (test case id: e899c963-73d6-4efa-85fb-8a80a889955d)`, (): void => {
             const testButton =
                 element(By.css(`#doesNotExistOnLevelOne`))
                     .called(`Test Button description on level one`)
                     .element(By.css(`#doesNotExistOnLevelOne`))
                     .shallWait(UntilElement.is.visible);
 
-            expect(testButton.toString()).toEqual(`Test Button description on level one located by >>byCss: #doesNotExistOnLevelOne<<`)
+            expect(testButton.toString()).toContain(`'Test Button description on level one'`);
+            expect(testButton.toString()).toContain(`located by >>byCss: #doesNotExistOnLevelOne<<`);
         });
     });
 
