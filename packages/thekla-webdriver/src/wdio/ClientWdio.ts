@@ -433,19 +433,16 @@ export class ClientWdio implements Browser, ClientCtrls<Client>, WindowManager {
     }
 
     public takeScreenshot(options?: ScreenshotOptions): Promise<BrowserScreenshotData> {
-        return this.getFrameWorkClient()
-                   .then((client: Client): Promise<BrowserScreenshotData> => {
-                       return (client.takeScreenshot() as unknown as Promise<string>)
-                           .then(processScreenshot(options))
-                           .then((data: string): BrowserScreenshotData => {
+        return (executeFnOnClient<Promise<string>>(this.getFrameWorkClient, `takeScreenshot`) as unknown as Promise<string>)
+            .then(processScreenshot(options))
+            .then((data: string): BrowserScreenshotData => {
 
-                               const screenshotData: BrowserScreenshotData = {
-                                   browserName: this.browserName,
-                                   browserScreenshotData: data
-                               };
-                               return screenshotData;
-                           })
-                   })
+                const screenshotData: BrowserScreenshotData = {
+                    browserName: this.browserName,
+                    browserScreenshotData: data
+                };
+                return screenshotData;
+            })
     }
 
     public wait = waitForCondition(this.logger);
