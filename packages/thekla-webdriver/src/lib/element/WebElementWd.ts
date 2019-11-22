@@ -2,6 +2,7 @@ import {DidNotFind}                                                      from ".
 import {ClientCtrls}                                                     from "../../interface/ClientCtrls";
 import {TkWebElement}                                                    from "../../interface/TkWebElement";
 import {WebElementFinder, WebElementListFinder}                          from "../../interface/WebElements";
+import {staleCheck}                                                      from "../decorators/staleCheck";
 import {UntilElementCondition}                                           from "./ElementConditions";
 import {centerDistance, ElementDimensions, ElementLocationInView, Point} from "./ElementLocation";
 import {WebElementListWd}                                                from "./WebElementListWd";
@@ -42,8 +43,10 @@ export class WebElementWd<WD> implements WebElementFinder {
 
     protected parentGetWebElement = this.getWebElement;
 
+    @staleCheck<void>()
     public click(): Promise<void> {
-        return this.getWebElement().then((element: any): Promise<void> => element.click())
+        return this.getWebElement()
+                   .then((element: any): Promise<void> => element.click())
     }
 
     public movePointerTo = (client: WD): Promise<WD> => {
@@ -88,17 +91,20 @@ export class WebElementWd<WD> implements WebElementFinder {
                    });
     }
 
+    @staleCheck<void>()
     public sendKeys(keySequence: string): Promise<void> {
         return this.getWebElement()
                    .then((element: any): Promise<void> => element.sendKeys(keySequence))
     }
 
+    @staleCheck<string>()
     public getText(): Promise<string> {
         return this.getWebElement()
                    .then((element: any): Promise<string> => element.getText())
                    .then((text): string => text)
     }
 
+    @staleCheck<string>()
     public getAttribute(attributeName: string): Promise<string> {
         return this.getWebElement()
                    .then(async (element: TkWebElement<WD>): Promise<string> => {
@@ -107,6 +113,7 @@ export class WebElementWd<WD> implements WebElementFinder {
                    .then((text): string => text);
     }
 
+    @staleCheck<string>()
     public getProperty(propertyName: string): Promise<string> {
         return this.getWebElement()
                    .then((element: TkWebElement<WD>): Promise<string> => {
@@ -141,10 +148,12 @@ export class WebElementWd<WD> implements WebElementFinder {
         )();
     }
 
+    @staleCheck<boolean>()
     public isVisible(): Promise<boolean> {
         return this.isDisplayed()
     }
 
+    @staleCheck<boolean>()
     public isDisplayed(): Promise<boolean> {
         return this.getWebElement()
                    .then((element: any): TkWebElement<WD> => {
@@ -156,6 +165,7 @@ export class WebElementWd<WD> implements WebElementFinder {
                    .catch((): boolean => false)
     }
 
+    @staleCheck<boolean>()
     public isEnabled(): Promise<boolean> {
         return this.getWebElement()
                    .then((element: any): Promise<boolean> => element[`isEnabled`]())
