@@ -10,7 +10,7 @@ export const staleCheck = <RT>() => {
 
             return new Promise((resolve, reject) => {
                 if (!method)
-                    return reject(`stale check Decorator error: passed property descriptor value is undefined`);
+                    return reject(`stale check decorator error: passed property descriptor value is undefined`);
 
                 let counter = 0;
                 const applyMethod = (): void => {
@@ -26,7 +26,7 @@ export const staleCheck = <RT>() => {
                                      const eString: string = e.toString().toLowerCase();
 
                                      if (eString.includes(`stale`) && eString.includes(`reference`)) {
-                                         setTimeout(applyMethod,500)
+                                         return setTimeout(applyMethod,500)
                                      }
 
                                      // if its not a stale element error then just reject
