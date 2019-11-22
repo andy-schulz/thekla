@@ -87,8 +87,7 @@ export class WebElementWd<WD> implements WebElementFinder {
     public hover(): Promise<void> {
         return this.browser.getFrameWorkClient()
                    .then(this.movePointerTo)
-                   .then(() => {
-                   });
+                   .then(() => {});
     }
 
     @staleCheck<void>()
@@ -121,6 +120,7 @@ export class WebElementWd<WD> implements WebElementFinder {
                    })
     }
 
+    @staleCheck<ElementDimensions>()
     public getRect(): Promise<ElementDimensions> {
         return this.getWebElement()
                    .then((element: TkWebElement<WD>): Promise<ElementDimensions> => {
@@ -128,6 +128,7 @@ export class WebElementWd<WD> implements WebElementFinder {
                    })
     }
 
+    @staleCheck<Point>()
     public getCenterPoint(): Promise<Point> {
         return this.getWebElement()
                    .then((element: TkWebElement<WD>): Promise<Point> => {
@@ -140,7 +141,7 @@ export class WebElementWd<WD> implements WebElementFinder {
             return element.getLocationInView()
         })
     };
-
+    @staleCheck<ElementLocationInView>()
     public getElementLocationInView(): Promise<ElementLocationInView> {
         return fp.flow(
             this.getWebElement,
@@ -173,6 +174,7 @@ export class WebElementWd<WD> implements WebElementFinder {
                    .catch((): boolean => false)
     }
 
+    @staleCheck<void>()
     public scrollIntoView(center?: boolean): Promise<void> {
         return this.getWebElement()
                    .then((element): Promise<void> => {
@@ -180,6 +182,7 @@ export class WebElementWd<WD> implements WebElementFinder {
                    })
     }
 
+    @staleCheck<void>()
     public clear(): Promise<void> {
         return new Promise((resolve, reject): void => {
             this.getWebElement()
