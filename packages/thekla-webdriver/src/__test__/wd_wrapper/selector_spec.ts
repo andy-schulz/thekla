@@ -1,8 +1,11 @@
-import {configure, getLogger}                                                from "log4js";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {checkForFireFoxCyclicError}                                          from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {Browser, ClientHelper, By, RunningBrowser}                           from "../..";
+import {DesiredCapabilities, ServerConfig}         from "@thekla/config";
+import {
+    checkForFireFoxCyclicError,
+    getStandardTheklaDesiredCapabilities,
+    getStandardTheklaServerConfig
+}                                                  from "@thekla/support";
+import {configure, getLogger}                      from "log4js";
+import {Browser, By, ClientHelper, RunningBrowser} from "../..";
 
 
 configure(`src/__test__/__config__/log4js.json`);
@@ -30,18 +33,18 @@ describe(`Locating a waiter`, (): void => {
             await browser.get(`/`);
 
             await fourthElement.click()
-                .then(async (): Promise<string> => {
-                    return dropDown.getAttribute(`value`);
-                }).then((text: string): void => {
+                               .then(async (): Promise<string> => {
+                                   return dropDown.getAttribute(`value`);
+                               }).then((text: string): void => {
                     expect(text).toBe(`4`);
                 })
-                .catch((e: Error): Promise<void> => {
-                    return checkForFireFoxCyclicError(
-                        browser.capabilities.browserName,
-                        browser.capabilities.browserVersion, e,
-                        logger,
-                        `f5f57f3e-9cf5-45c2-a990-5014a1854844`);
-                });
+                               .catch((e: Error): Promise<void> => {
+                                   return checkForFireFoxCyclicError(
+                                       browser.capabilities.browserName,
+                                       browser.capabilities.browserVersion, e,
+                                       logger,
+                                       `f5f57f3e-9cf5-45c2-a990-5014a1854844`);
+                               });
         });
     });
 

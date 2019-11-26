@@ -1,12 +1,10 @@
-import "jasmine"
-import {isElementOutsideOfView}                                              from "@thekla/support/dist";
-import {configure}                                                           from "log4js";
-import {WebElementWdio}                                                      from "../../wdio/WebElementWdio";
-import {BoundaryCheck}                                                       from "@thekla/support";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {wait}                                                                from "@thekla/core";
-import {Browser, RunningBrowser, By, WebElementFinder, until}                from "../..";
+import {DesiredCapabilities, ServerConfig}                                                  from "@thekla/config";
+import {wait}                                                                               from "@thekla/core";
+import {BoundaryCheck, getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
+import {isElementOutsideOfView}                                                             from "@thekla/support/dist";
+import {configure}                                                                          from "log4js";
+import {Browser, By, RunningBrowser, until, WebElementFinder}                               from "../..";
+import {WebElementWdio}                                                                     from "../../wdio/WebElementWdio";
 
 configure(`src/__test__/__config__/log4js.json`);
 

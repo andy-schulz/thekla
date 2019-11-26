@@ -1,7 +1,7 @@
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {configure}                                                           from "log4js";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {Browser, ClientHelper, By, UntilElement}                             from "../..";
+import {Browser, By, ClientHelper, UntilElement}                             from "../..";
 
 configure(`src/__test__/__config__/log4js.json`);
 

@@ -1,6 +1,6 @@
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
 import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {Browser, ClientHelper}                                               from "../..";
-import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
 import {DidNotFindWindow}                                                    from "../../errors/DidNotFindWindow";
 
 describe(`A browser Window`, () => {
@@ -107,13 +107,13 @@ describe(`A browser Window`, () => {
         test id: 0c87c2e1-8d74-48a5-b780-ca943f11e158`, async () => {
             await browser.get(`/`);
             await browser.switchToWindowMatchingTheTitle(`DoesNotExist`)
-                .then(() => {
-                    expect(true).toBeFalsy(`switching to a non existing window should throw an error, but it doesn't`)
-                })
-                .catch((e: DidNotFindWindow) => {
-                    expect(e.name).toEqual(`DidNotFindWindow`);
-                    expect(e.foundWindowTitles).toEqual([`React App`])
-                });
+                         .then(() => {
+                             expect(true).toBeFalsy(`switching to a non existing window should throw an error, but it doesn't`)
+                         })
+                         .catch((e: DidNotFindWindow) => {
+                             expect(e.name).toEqual(`DidNotFindWindow`);
+                             expect(e.foundWindowTitles).toEqual([`React App`])
+                         });
         });
     });
 });

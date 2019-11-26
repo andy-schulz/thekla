@@ -52,9 +52,6 @@ describe(`drag an element`, (): void => {
         //     const rectElem0 = await element0.getCenterPoint();
         //     const rectElem1 = await element1.getCenterPoint();
         //
-        //     console.log(rectElem0);
-        //     console.log(rectElem1);
-        //
         //     await element0.dragToElement(element1);
         //
         //     await Utils.wait(10000);

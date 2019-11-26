@@ -1,6 +1,6 @@
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
 import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {Browser, By, ClientHelper, WebElementFinder, WebElementListFinder}   from "../..";
-import { ServerConfig, DesiredCapabilities }                                 from "@thekla/config";
 
 describe(`Click`, () => {
     let browser: Browser;
@@ -29,13 +29,13 @@ describe(`Click`, () => {
             await browser.get(`/`);
 
             return checkboxes.click()
-                .then(() => {
-                    expect(true)
-                        .toBeFalsy(`click on an not existing element should throw an error. But it doesnt.`)
-                })
-                .catch((e: Error) => {
-                    expect(e.name).toEqual(`DidNotFindElement`)
-                });
+                             .then(() => {
+                                 expect(true)
+                                     .toBeFalsy(`click on an not existing element should throw an error. But it doesnt.`)
+                             })
+                             .catch((e: Error) => {
+                                 expect(e.name).toEqual(`DidNotFindElement`)
+                             });
         });
 
         it(`the system should wait for a second 

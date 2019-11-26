@@ -1,7 +1,6 @@
-import {cloneDeep}                                                              from "lodash";
-import { getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities } from "@thekla/support";
-import { ServerConfig, DesiredCapabilities } from "@thekla/config";
-import { Browser, ClientHelper, By } from "../..";
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
+import {Browser, By, ClientHelper}                                           from "../..";
 
 describe(`a simple table`, (): void => {
 
