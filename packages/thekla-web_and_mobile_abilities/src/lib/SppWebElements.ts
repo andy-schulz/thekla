@@ -8,6 +8,7 @@ import {Browser, FrameElementFinder, WebElementFinder, WebElementListFinder, By,
 
 export interface SppFinderWaiter<T> {
     shallWait(condition: UntilElementCondition): T;
+    shallNotImplicitlyWait(): T;
 }
 
 /**
@@ -99,6 +100,15 @@ export class SppElement extends SppFinderRoot implements SppFinderWaiter<SppElem
     public shallWait(condition: UntilElementCondition): SppElement {
         const waiter = (browser: Browser): WebElementFinder => {
             return (this.getElements(browser) as WebElementFinder).shallWait(condition);
+        };
+        waiter.description = this.getElements.description;
+
+        return new SppElement(this.locator, waiter);
+    }
+
+    public shallNotImplicitlyWait(): SppElement {
+        const waiter = (browser: Browser): WebElementFinder => {
+            return (this.getElements(browser) as WebElementFinder).shallNotImplicitlyWait();
         };
         waiter.description = this.getElements.description;
 

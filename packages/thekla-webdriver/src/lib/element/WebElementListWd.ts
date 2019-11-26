@@ -1,29 +1,37 @@
-import {DidNotFind}            from "../..";
-import {ClientCtrls}           from "../../interface/ClientCtrls";
-import {TkWebElement}          from "../../interface/TkWebElement";
+import {getLogger, Logger}        from "@log4js-node/log4js-api";
+import {DidNotFind, UntilElement} from "../..";
+import {ClientCtrls}              from "../../interface/ClientCtrls";
+import {TkWebElement}             from "../../interface/TkWebElement";
 import {
-    VisibleElementsOptions,
-    WebElementListFinder,
-    WebElementFinder
-}                              from "../../interface/WebElements";
-import {UntilElementCondition} from "./ElementConditions";
-import {By}                    from "./Locator";
-import {WebElementWd}          from "./WebElementWd";
-import {getLogger, Logger}     from "@log4js-node/log4js-api";
+    ImplicitWaiter,
+    MultipleElementsOptions,
+    WebElementFinder,
+    WebElementListFinder
+}                                 from "../../interface/WebElements";
+import {UntilElementCondition}    from "./ElementConditions";
+import {By}                       from "./Locator";
+import {WebElementWd}             from "./WebElementWd";
 
 /**
  * List object to wrap the location strategy for finding multiple elements with WebDriverJS
  */
-export class WebElementListWd<WD> implements WebElementListFinder {
+export class WebElementListWd<WD> implements WebElementListFinder, ImplicitWaiter {
     private _description = ``;
     private logger: Logger = getLogger(`WebElementListWd`);
 
+    // the standard waiter waits for an element to be visible for 0 ms
+    // it can be overwritten by setting a standard visible timeout with setStandardWait().
+    private static shallWaitFor = 0;
+    private readonly standardWaiter: UntilElementCondition;
+
     public constructor(
-        public getElements: () => Promise<TkWebElement<WD>[]>,
+        private _getElements: () => Promise<TkWebElement<WD>[]>,
         private _locator: By,
         public readonly browser: ClientCtrls<WD>,
         private createWebElementFromList: (elementList: WebElementListWd<WD>,
-                                           browser: ClientCtrls<WD>) => WebElementWd<WD>) {
+                                           browser: ClientCtrls<WD>) => WebElementWd<WD>,
+        private shallImplicitlyWait: boolean = true) {
+        this.standardWaiter = UntilElement.is.visible.forAsLongAs(shallImplicitlyWait ? WebElementListWd.shallWaitFor : -1);
     }
 
     /**
@@ -37,6 +45,36 @@ export class WebElementListWd<WD> implements WebElementListFinder {
     //
     //     })
     // }
+
+    /**
+     * set the standard wait time for elements to be visible
+     * @param {number} timeout - the time to wait until the element is visible
+     */
+    public static setStandardWait(timeout: number): void {
+        WebElementListWd.shallWaitFor = timeout;
+    }
+
+    private getElements(): Promise<TkWebElement<WD>[]> {
+        return this.standardWaiter.waitFor(this)
+                   .then(() => this._getElements());
+    }
+
+    /**
+     * get the first element of elements list
+     * @returns {Promise<TkWebElement<WD>>} the first element
+     */
+    public getHeadOfElementList(): Promise<TkWebElement<WD>> {
+
+        const head = (elements: TkWebElement<WD>[]): Promise<TkWebElement<WD>> => {
+            if (elements.length === 0) return Promise.reject(DidNotFind.theElement(this));
+            if (elements.length > 1) {
+                this.logger.trace(`Found ${elements ? elements.length : 0} element(s) for ${this.locatorDescription}`)
+            }
+            return Promise.resolve(elements[0])
+        };
+
+        return this.getElements().then(head);
+    }
 
     /**
      * find sub elements relative to this current waiter
@@ -57,9 +95,9 @@ export class WebElementListWd<WD> implements WebElementListFinder {
     ): WebElementListFinder {
         this.logger.debug(`Chains all Elements: ${locator.toString()}`);
 
-        const getElements = async (): Promise<TkWebElement<WD>[]> => {
+        const allGetElements = async (): Promise<TkWebElement<WD>[]> => {
             this.logger.debug(`Getting ALL elements for locator ${locator.toString()}`);
-            const elements = await this.getElements();
+            const elements = await this._getElements();
             this.logger.debug(`Got ${elements.length} elements for locator ${locator.toString()}`);
 
             // TODO: Check if this can be done in parallel
@@ -74,24 +112,29 @@ export class WebElementListWd<WD> implements WebElementListFinder {
                                return elements
                            });
         };
-        return new WebElementListWd(getElements, locator, this.browser, this.createWebElementFromList).called(this.description);
+        return new WebElementListWd(allGetElements, locator, this.browser, this.createWebElementFromList).called(this.description);
     }
 
     /**
-     * wait for condition until interaction with element / element list
+     * wait for condi   tion until interaction with element / element list
      * @param condition - the waiter condition to wait for
      */
     public shallWait(condition: UntilElementCondition): WebElementListFinder {
         this.logger.debug(`Shall Wait for Element: ${this.toString()}`);
 
-        const getElements = async (): Promise<TkWebElement<WD>[]> => {
+        const waitGetElements = async (): Promise<TkWebElement<WD>[]> => {
             this.logger.debug(`shallWait - Start getting elements from function chain: ${this._locator.toString()}`);
 
             return condition.waitFor(this)
-                            .then(() => this.getElements())
+                            .then(() => this._getElements())
         };
 
-        return new WebElementListWd(getElements, this._locator, this.browser, this.createWebElementFromList).called(this.description);
+        return new WebElementListWd(waitGetElements, this._locator, this.browser, this.createWebElementFromList).called(this.description);
+    }
+
+    public shallNotImplicitlyWait(): WebElementListFinder {
+        return new WebElementListWd(this._getElements, this._locator, this.browser, this.createWebElementFromList, false)
+            .called(this.description);
     }
 
     public count(): Promise<number> {
@@ -119,42 +162,57 @@ export class WebElementListWd<WD> implements WebElementListFinder {
                    })
     }
 
-    public isEnabled(options?: VisibleElementsOptions): Promise<boolean[] | boolean> {
-        return this.getElements()
-                   .then((elements: TkWebElement<WD>[]) => {
-                       return Promise.all(
-                           elements.map((elem: TkWebElement<WD>) => {
-                               return elem.isEnabled()
-                           })
-                       )
-                   })
-                   .then((elementStatus: boolean[]) => {
-                       return options?.returnSeparateValues ?
-                           elementStatus :
-                           elementStatus.reduce((acc: boolean, elem: boolean) => acc && elem, true);
-                   })
+    public isEnabledWaiter(): Promise<boolean[] | boolean> {
+        return this.isEnabledPure(this._getElements());
     }
 
-    public isVisible(options?: VisibleElementsOptions): Promise<boolean[] | boolean> {
-        return this.getElements()
-                   .then((elements: TkWebElement<WD>[]) => {
-                       return Promise.all(
-                           elements.map((elem: TkWebElement<WD>) => {
-                               return elem.isDisplayed()
-                                          .then((result: boolean) => {
-                                              return result
-                                          })
-                           })
-                       )
-                   })
-                   .then((elementStatus: boolean[]) => {
-                       if (elementStatus.length === 0)
-                           return false;
+    private isEnabledPure(elements: Promise<TkWebElement<WD>[]>, options?: MultipleElementsOptions): Promise<boolean[] | boolean> {
+        return elements
+            .then((elements: TkWebElement<WD>[]) => {
+                return Promise.all(
+                    elements.map((elem: TkWebElement<WD>) => {
+                        return elem.isEnabled()
+                    })
+                )
+            })
+            .then((elementStatus: boolean[]) => {
+                return options?.returnSeparateValues ?
+                    elementStatus :
+                    elementStatus.reduce((acc: boolean, elem: boolean) => acc && elem, true);
+            })
+    }
 
-                       return options?.returnSeparateValues ?
-                           elementStatus :
-                           elementStatus.reduce((acc: boolean, elem: boolean) => acc && elem, true);
-                   })
+    public isEnabled(options?: MultipleElementsOptions): Promise<boolean[] | boolean> {
+        return this.isEnabledPure(this.getElements(), options)
+    }
+
+    public isVisibleWaiter(): Promise<boolean[] | boolean> {
+        return this.isDisplayedPure(this._getElements());
+    }
+
+    private isDisplayedPure(elements: Promise<TkWebElement<WD>[]>, options?: MultipleElementsOptions): Promise<boolean[] | boolean> {
+        return elements.then((elements: TkWebElement<WD>[]) => {
+            return Promise.all(
+                elements.map((elem: TkWebElement<WD>) => {
+                    return elem.isDisplayed()
+                               .then((result: boolean) => {
+                                   return result
+                               })
+                })
+            )
+        })
+                       .then((elementStatus: boolean[]) => {
+                           if (elementStatus.length === 0)
+                               return false;
+
+                           return options?.returnSeparateValues ?
+                               elementStatus :
+                               elementStatus.reduce((acc: boolean, elem: boolean) => acc && elem, true);
+                       })
+    }
+
+    public isVisible(options?: MultipleElementsOptions): Promise<boolean[] | boolean> {
+        return this.isDisplayedPure(this.getElements(), options);
     }
 
     public getText(): Promise<string[]> {
@@ -177,8 +235,6 @@ export class WebElementListWd<WD> implements WebElementListFinder {
 
     public filteredByText(searchText: string): WebElementListFinder {
 
-        const oldGetElements = this.getElements;
-
         const reducer = (acc: Promise<TkWebElement<WD>[]>, element: any): Promise<TkWebElement<WD>[]> => {
             return acc.then((arr: TkWebElement<WD>[]): Promise<TkWebElement<WD>[]> => {
                 return new Promise((resolve, reject) => {
@@ -194,12 +250,12 @@ export class WebElementListWd<WD> implements WebElementListFinder {
             })
         };
 
-        const getElements = async (): Promise<TkWebElement<WD>[]> => {
-            const elements = await oldGetElements();
+        const filteredElements = async (): Promise<TkWebElement<WD>[]> => {
+            const elements = await this.getElements();
             return elements.reduce(reducer, Promise.resolve([]));
         };
 
-        return new WebElementListWd(getElements, this._locator, this.browser, this.createWebElementFromList);
+        return new WebElementListWd(filteredElements, this._locator, this.browser, this.createWebElementFromList);
     }
 
     public called(description: string): WebElementListFinder {

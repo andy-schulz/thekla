@@ -1,6 +1,6 @@
-import {Ability, UsesAbilities}                                  from "@thekla/core";
-import {Browser, until, WebElementFinder, UntilElementCondition} from "@thekla/webdriver";
-import {SppElement}                                              from "../SppWebElements";
+import {Ability, UsesAbilities}                                from "@thekla/core";
+import {Browser, ImplicitWaiter, until, UntilElementCondition} from "@thekla/webdriver";
+import {SppElement}                                            from "../SppWebElements";
 
 export class WaitOnElements implements Ability {
 
@@ -25,8 +25,9 @@ export class WaitOnElements implements Ability {
     }
 
     public wait(condition: UntilElementCondition, element: SppElement): Promise<string> {
+
         return this.client.wait(
-            until(condition.waiter.isFulfilledFor(element.getElements(this.client) as WebElementFinder)),
+            until(condition.waiter.isFulfilledFor(element.getElements(this.client) as unknown as ImplicitWaiter)),
             condition.timeout,
             condition.conditionHelpText);
     }

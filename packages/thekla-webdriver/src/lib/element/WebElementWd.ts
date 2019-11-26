@@ -1,7 +1,6 @@
-import {DidNotFind}                                                      from "../../errors/DidNotFind";
 import {ClientCtrls}                                                     from "../../interface/ClientCtrls";
 import {TkWebElement}                                                    from "../../interface/TkWebElement";
-import {WebElementFinder, WebElementListFinder}                          from "../../interface/WebElements";
+import {ImplicitWaiter, WebElementFinder, WebElementListFinder}          from "../../interface/WebElements";
 import {staleCheck}                                                      from "../decorators/staleCheck";
 import {UntilElementCondition}                                           from "./ElementConditions";
 import {centerDistance, ElementDimensions, ElementLocationInView, Point} from "./ElementLocation";
@@ -10,7 +9,8 @@ import {getLogger, Logger}                                               from "l
 import fp                                                                from "lodash/fp"
 import {By}                                                              from "./Locator";
 
-export class WebElementWd<WD> implements WebElementFinder {
+export class
+WebElementWd<WD> implements WebElementFinder, ImplicitWaiter {
     private _description = ``;
     private logger: Logger = getLogger(`WebElementWd`);
 
@@ -28,17 +28,7 @@ export class WebElementWd<WD> implements WebElementFinder {
     };
 
     protected getWebElement = (): Promise<TkWebElement<WD>> => {
-
-        const head = (elements: TkWebElement<WD>[]): Promise<TkWebElement<WD>> => {
-            if (elements.length === 0) return Promise.reject(DidNotFind.theElement(this));
-            if (elements.length > 1) {
-                this.logger.trace(`Found ${elements ? elements.length : 0} element(s) for ${this.elementList.locatorDescription}`)
-            }
-            return Promise.resolve(elements[0])
-        };
-
-        return this.elementList.getElements()
-                   .then(head)
+        return this.elementList.getHeadOfElementList()
     };
 
     protected parentGetWebElement = this.getWebElement;
@@ -208,5 +198,17 @@ export class WebElementWd<WD> implements WebElementFinder {
 
     public shallWait(condition: UntilElementCondition): WebElementFinder {
         return (this.elementList.shallWait(condition) as WebElementListWd<WD>).toWebElement() as WebElementFinder;
+    }
+
+    public shallNotImplicitlyWait(): WebElementFinder {
+        return (this.elementList.shallNotImplicitlyWait() as WebElementListWd<WD>).toWebElement() as WebElementFinder;
+    }
+
+    public isVisibleWaiter(): Promise<boolean[] | boolean> {
+        return this.elementList.isVisibleWaiter();
+    }
+
+    public isEnabledWaiter(): Promise<boolean[] | boolean> {
+        return this.elementList.isEnabledWaiter();
     }
 }

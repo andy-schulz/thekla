@@ -12,6 +12,7 @@ export {By}                                    from "./lib/element/Locator";
 export {Key}                                   from "./lib/Key";
 export {until}                                 from "./lib/Condition";
 export {UntilElement, UntilElementCondition}   from "./lib/element/ElementConditions";
+export {ImplicitWaiter}                        from "./interface/WebElements";
 
 export {WindowSize, WindowRect}     from "./interface/BrowserWindow";
 

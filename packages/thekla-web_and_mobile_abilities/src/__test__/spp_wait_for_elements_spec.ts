@@ -1,4 +1,5 @@
 import {Browser}                                                             from "@thekla/webdriver";
+import {WebElementListWd}                                                    from "@thekla/webdriver/dist/lib/element/WebElementListWd";
 import {getLogger}                                                           from "log4js";
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
@@ -7,6 +8,7 @@ import {
     RunningBrowser, BrowseTheWeb, ClientHelper, By,
     element, UntilElement, Navigate, Text, Wait, Status
 }                                                                            from "..";
+import { ElementStatus } from "../lib/questions/Status";
 
 const logger = getLogger(`Spec: Spp wait for elements`);
 
@@ -30,7 +32,7 @@ describe(`Waiting for SPP Elements`, (): void => {
         return ClientHelper.cleanup()
     });
 
-    describe(`on the element itself`, (): void => {
+    describe(`explicitly on the element itself`, (): void => {
 
         const appearingButton = element(By.css(`[data-test-id='AppearButtonBy4000']`))
             .called(`Test appearing element after 5 seconds`)
@@ -43,14 +45,6 @@ describe(`Waiting for SPP Elements`, (): void => {
         const toBeDisabledButton = element(By.css(`[data-test-id='DisabledButtonBy4000']`))
             .called(`Test enabled element after 5 seconds`)
             .shallWait(UntilElement.isNot.enabled.forAsLongAs(20000));
-
-        it(`should be possible with wait actions on an element ` +
-               `- (test case id: 7fd0c550-e31c-42fd-96f8-4ceb50e6cf3b)`, (): Promise<void> => {
-            return walterTheWaiter.attemptsTo(
-                // Navigate.to(`/delayed`),
-                // See.if(Text.of(appearingButton)).is(Expected.toEqual(`Appeared after 4 seconds`)),
-            );
-        });
 
         it(`should be possible with wait actions on an element and a redirecting page ` +
                `- (test case id: 4406f09a-5b80-4106-b46a-9f2683faefc9)`, (): Promise<void> => {
@@ -74,6 +68,66 @@ describe(`Waiting for SPP Elements`, (): void => {
                 Navigate.to(`/delayed`),
                 See.if(Text.of(toBeDisabledButton)).is(Expected.toEqual(`Disabled after 4 seconds`))
             );
+        });
+    });
+
+    describe(`explicitly on the element itself`, (): void => {
+        const appearingButton = element(By.css(`[data-test-id='AppearButtonBy4000']`))
+            .called(`Test appearing element after 4 seconds`);
+
+        const disappearingButton = element(By.css(`[data-test-id='DisappearButtonBy4000']`))
+            .called(`Test disappearing element after 4 seconds`)
+            // .shallNotImplicitlyWait();
+
+        beforeAll(() => {
+
+        });
+
+        afterEach(() => {
+            WebElementListWd.setStandardWait(0);
+        });
+
+        it(`should find the element after it appears
+        test id: cc66501a-788e-40b6-a4a3-4093578c99ab`, async () => {
+            WebElementListWd.setStandardWait(6000);
+
+            await Navigate.to(`/delayed`).performAs(walterTheWaiter);
+            const status: ElementStatus = await Status.of(appearingButton).answeredBy(walterTheWaiter);
+            expect(status.visible).toBeTruthy();
+        });
+
+        it(`should wait until the element disappears
+        test id: 36053a0d-e598-4094-bb2f-0a6f5352fef3`, async () => {
+            WebElementListWd.setStandardWait(2000);
+
+            await Navigate.to(`/delayed`).performAs(walterTheWaiter);
+
+            const statusPresent: ElementStatus = await Status.of(disappearingButton).answeredBy(walterTheWaiter);
+            expect(statusPresent.visible).toBeTruthy();
+
+            await Wait.for(disappearingButton).andCheck(UntilElement.isNot.visible).performAs(walterTheWaiter);
+
+            const status: ElementStatus = await Status.of(disappearingButton).answeredBy(walterTheWaiter);
+            expect(status.visible).toBeFalsy();
+
+        });
+
+        it(`should wait until the element disappears when the element has no implicit wait
+        test id: e6ec6994-9cee-4711-95a3-0cd914b34c37`, async () => {
+            const disappear = disappearingButton.shallNotImplicitlyWait();
+
+            WebElementListWd.setStandardWait(6000);
+
+            await Navigate.to(`/delayed`).performAs(walterTheWaiter);
+
+            const statusPresent: ElementStatus = await Status.of(disappear).answeredBy(walterTheWaiter);
+            expect(statusPresent.visible).toBeTruthy();
+
+            await Wait.for(disappear).andCheck(UntilElement.isNot.visible).performAs(walterTheWaiter);
+
+            const status: ElementStatus = await Status.of(disappear).answeredBy(walterTheWaiter);
+            expect(status.visible).toBeFalsy();
+
         });
     });
 
@@ -122,7 +176,6 @@ describe(`Waiting for SPP Elements`, (): void => {
                 See.if(Text.of(button)).is(Expected.toEqual(`Danger!`)),
                 Wait.for(modal).andCheck(UntilElement.isNot.visible.forAsLongAs(10000))
             )
-
         });
     });
 

@@ -82,7 +82,11 @@ export class Wait implements Interaction<void, void> {
      * @param awaitingElement the elements to wait for
      */
     public static for(awaitingElement: SppElement): Wait {
-        return new Wait(awaitingElement);
+        // if waiting for an element disable the implicit waiting
+        // if you wait until it appears waiting two times does not make sense
+        // if you wait for an element to disappear will fail because right when it's gone
+        //      the implicit wait kicks in so its waiting to appear again
+        return new Wait(awaitingElement.shallNotImplicitlyWait());
     }
 
     public static until<PT, MPT>(question: Question<PT, MPT>): WaitUntil<PT, MPT> {

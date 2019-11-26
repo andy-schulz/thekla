@@ -27,14 +27,13 @@ export {SwitchToWindow}                                            from "./lib/a
  */
 
 // Web Questions
-export {Text}                                 from "./lib/questions/Text";
-export {Value}                                from "./lib/questions/Value";
-export {Attribute}                            from "./lib/questions/Attribute";
-export {Count}                                from "./lib/questions/Count";
-export {TheSites}                             from "./lib/questions/TheSites";
-export {Status}                               from "./lib/questions/Status";
-
-export {Expected}                                                                            from "./lib/matcher/Expected"
+export {Text}                                                from "./lib/questions/Text";
+export {Value}                                               from "./lib/questions/Value";
+export {Attribute}                                           from "./lib/questions/Attribute";
+export {Count}                                               from "./lib/questions/Count";
+export {TheSites}                                            from "./lib/questions/TheSites";
+export {Status, ElementStatus}                               from "./lib/questions/Status";
+export {Expected}                                            from "./lib/matcher/Expected"
 
 /**
  * Reexports from @thekla/webdriver

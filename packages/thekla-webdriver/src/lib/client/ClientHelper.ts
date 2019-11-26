@@ -1,9 +1,9 @@
 import {getLogger}                                         from "@log4js-node/log4js-api";
-import {Client}                                            from "webdriver";
 import {DesiredCapabilities, ServerConfig}                 from "@thekla/config";
 import {Browser, BrowserScreenshotData, ScreenshotOptions} from "../../interface/Browser";
 import {ClientWdio}                                        from "../../wdio/ClientWdio";
 import _                                                   from "lodash";
+import {WebElementListWd}                                  from "../element/WebElementListWd";
 
 export class ClientHelper {
 
@@ -12,6 +12,8 @@ export class ClientHelper {
     }
 
     public constructor(private config: ServerConfig) {
+        if(config?.automationFramework?.waitToBeVisibleForAsLongAs)
+            WebElementListWd.setStandardWait(config.automationFramework.waitToBeVisibleForAsLongAs)
     }
 
     public static create(conf: ServerConfig, capabilities: DesiredCapabilities, clientName?: string): Browser {

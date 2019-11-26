@@ -44,4 +44,6 @@ export interface AutomationFramework {
     headers?: object;
     connectionRetryTimeout?: number;
     connectionRetryCount?: number;
+
+    waitToBeVisibleForAsLongAs?: number;
 }

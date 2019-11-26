@@ -18,6 +18,7 @@ export interface FinderDescription<T> {
 
 export interface FinderWaiter<T> {
     shallWait(condition: UntilElementCondition): T;
+    shallNotImplicitlyWait(): T;
 }
 
 export interface WebElementFinder
@@ -43,16 +44,22 @@ export interface WebElementFinder
     movePointerTo(client: any): Promise<any>;
 }
 
-export interface VisibleElementsOptions {
+export interface MultipleElementsOptions {
     returnSeparateValues: boolean;
+}
+
+export interface ImplicitWaiter {
+    isVisibleWaiter(): Promise<boolean[] | boolean>;
+    isEnabledWaiter(): Promise<boolean[] | boolean>;
+    readonly description: string;
 }
 
 export interface WebElementListFinder
     extends
     WebFinder,
     FinderDescription<WebElementListFinder>{
-    isVisible(options?: VisibleElementsOptions): Promise<boolean[] | boolean>;
-    isEnabled(options?: VisibleElementsOptions): Promise<boolean[] | boolean>;
+    isVisible(options?: MultipleElementsOptions): Promise<boolean[] | boolean>;
+    isEnabled(options?: MultipleElementsOptions): Promise<boolean[] | boolean>;
     count(): Promise<number>;
     click(): Promise<void>;
     filteredByText(text: string): WebElementListFinder;
