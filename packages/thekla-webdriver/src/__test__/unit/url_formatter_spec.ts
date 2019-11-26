@@ -1,5 +1,5 @@
-import {getServerUrl}  from "../../lib/config/url_formatter";
 import {ServerAddress} from "@thekla/config"
+import {getServerUrl}  from "../../lib/config/url_formatter";
 
 describe(`creating the url`, (): void => {
 

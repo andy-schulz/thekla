@@ -1,6 +1,6 @@
+import {parseBrowserVersion} from "@thekla/support";
 import {ScreenshotOptions}   from "../../interface/Browser";
 import {processScreenshot}   from "../../lib/client/client_utils";
-import {parseBrowserVersion} from "@thekla/support";
 
 describe(`Using the client utils`, (): void => {
 
