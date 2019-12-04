@@ -1,6 +1,8 @@
 ---
-title: DelayedResult
-parent: Ref:Questions
+title: Questions
+parent: Core Abilities
+has_children: true
+nav_order: 1
 ---
 
 # DelayedResult
@@ -23,5 +25,6 @@ none
 
 ```typescript
 
-)
 ```
+
+# ReturnedResult

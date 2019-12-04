@@ -1,12 +1,12 @@
 ---
-title: Ref:Questions
+title: Questions
 has_children: true
 nav_order: 14
 ---
 
 # Questions
 
-Questions retrieve information from the device like text, attribute values or status information.
+Questions retrieve information from a device like text, attribute values or status information.
 
 Every question can be used by:
 - the `See` interaction to directly compare the retrieved value with an expectation, or
