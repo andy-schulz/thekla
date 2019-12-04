@@ -28,7 +28,7 @@ const aBrowser = RunningBrowser
 
 The configuration can be passed directly or can be used from the configuration file as it is done here.
 
-> See the [Configuration](../CONFIGURATION.md) section for more details
+> See the [Configuration](../../basics/CONFIGURATION.md) section for more details
 
 ## Example
 

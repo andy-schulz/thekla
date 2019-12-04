@@ -18,12 +18,12 @@ Possible `Questions` are:
 - Attribute.of(ELEMENT).called(ATTRIBUTE_NAME)
 - etc. 
 
-> See [Questions](../../QUESTIONS.md).
+> See [Questions](../../../basics/QUESTIONS.md).
 
 The `Matcher` is a function of type `(answer: <TYPE>) => boolean)`.
 You can provide you own function or choose one provided by see `Expected` module.
 
-> See [Matcher](../../MATCHER.md).
+> See [Matcher](../../../basics/MATCHER.md).
 
 ## Ability
 

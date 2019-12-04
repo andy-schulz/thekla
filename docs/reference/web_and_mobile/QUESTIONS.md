@@ -5,6 +5,7 @@ has_children: true
 nav_order: 10
 ---
 # Questions of Web and Mobile Abilities
+{: .no_toc }
 
 1. TOC
 {:toc}
@@ -14,10 +15,12 @@ nav_order: 10
 Get the value of a web elements attribute.
 
 ## Ability
+{: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
 ## Methods
+{: .no_toc }
 
 | name         | parameter             | description                                 |
 | :---         | :---                  | :---                                        |
@@ -25,6 +28,7 @@ Get the value of a web elements attribute.
 | `.called()*` | attributeName: string | the name of the attribute                   |
 
 ## Example
+{: .no_toc }
 
 Use the `See` interaction to check for the attributes value.
 
@@ -46,16 +50,19 @@ const classValue = await Attribute.of(element).called(`class`).answerdBy(john)
 Count the number of elements found by the given element selector.
 
 ## Ability
+{: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
 ## Methods
+{: .no_toc }
 
 | name     | parameter                | description                  |
 | :---     | :---                     | :---                         |
 | `.of()*` | elements: SppElementList | the element list to be found |
 
 ## Example
+{: .no_toc }
 
 Use the `See` interaction to check the number of elements
 
@@ -77,11 +84,13 @@ const text = await Count.of(elements).answerdBy(john)
 Get the visibiliy or enabled status of an element.
 
 ## Ability
+{: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
 ## Methods
+{: .no_toc }
 
 | name             | parameter           | description                                   |
 | :---             | :---                | :---                                          |
@@ -89,6 +98,7 @@ Get the visibiliy or enabled status of an element.
 | `.enable.of()*`  | element: SppElement | the element to get the enabled status from    |
 
 ## Example
+{: .no_toc }
 
 Use the `See` interaction to check the elements visible status.
 
@@ -110,17 +120,20 @@ const text = await Status.enable.of(element).answerdBy(john)
 Get the content / text of element.
 
 ## Ability
+{: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
 ## Methods
+{: .no_toc }
 
 | name     | parameter           | description                      |
 | :---     | :---                | :---                             |
 | `.of()*` | element: SppElement | the element to get the text from |
 
 ## Example
+{: .no_toc }
 
 Use the `See` interaction to check for a text
 
@@ -138,14 +151,17 @@ const text = await Text.of(element).answerdBy(john)
 ```
 
 # TheSites
+{: .no_toc }
 
 Get the title or the url of a site.
 
 ## Ability
+{: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
 ## Methods
+{: .no_toc }
 
 | name        | parameter | description     |
 | :---        | :---      | :---            |
@@ -153,6 +169,7 @@ Get the title or the url of a site.
 | `.title()*` | -         | the sites title |
 
 ## Example
+{: .no_toc }
 
 Use the `See` interaction to check the sites title.
 
@@ -174,16 +191,19 @@ const myUrl = await TheSites.url().answerdBy(john)
 Get the content of the value attribute.
 
 ## Ability
+{: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
 ## Methods
+{: .no_toc }
 
 | name         | parameter             | description                                 |
 | :---         | :---                  | :---                                        |
 | `.of()*`     | element: SppElement   | the element to get the content of the value attribute from |
 
 ## Example
+{: .no_toc }
 
 Use the `See` interaction to check the content of attribute 'value'.
 
