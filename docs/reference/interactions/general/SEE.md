@@ -8,10 +8,12 @@ has_children: false
 
 The See interaction executes a `Question` and checks if the answer matches a given state. 
 e.g.
+
 ```typescript
 See.if(Text.of(MYELEMENT))
     .is(Expected.toBe(`Total: $123.456`))
 ```
+
 Possible `Questions` are:
 - Text.of(ELEMENT)
 - Value.of(ELEMENT)
