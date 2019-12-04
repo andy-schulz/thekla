@@ -1,7 +1,7 @@
 ---
-title: Web and Mobile Abilities
+title: Rest Abilities
 has_children: true
-nav_order: 10
+nav_order: 120
 ---
 
 # Web and Mobile Abilities

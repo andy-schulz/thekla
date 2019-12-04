@@ -31,7 +31,7 @@ Interactions are the basic elements provided by an ability.
  ## Tasks
  
  Tasks are the building blocks of work flows and consists of:
- - [interactions](reference/INTERACTIONS.md) and
+ - [interactions](basics/INTERACTIONS.md) and
  - tasks
  
   for example:
@@ -52,7 +52,7 @@ Interactions are the basic elements provided by an ability.
  It is always used in combination with an Interaction like `See`, which uses the Question to check if a condition is met.
  
 > See section 
-> - [`Questions`](reference/QUESTIONS.md) and
+> - [`Questions`](basics/QUESTIONS.md) and
 > - [`See` Interaction](reference/interactions/general/SEE.md) 
  
 for example:

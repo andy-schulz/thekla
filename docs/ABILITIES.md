@@ -1,5 +1,5 @@
 ---
-title: --- Abilities ---
+title: --- ABILITIES ---
 has_children: true
-nav_order: 20
+nav_order: 100
 ---

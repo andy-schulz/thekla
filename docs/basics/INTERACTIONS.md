@@ -15,11 +15,11 @@ If you want to `Click` on a web page element, you actor needs the `BrowseTheWeb`
 click on it.
 
 ```typescript
-const bernd = Actor.named(`Bernd`);
+const Bernd = Actor.named(`Bernd`);
 
-bernd.whoCan(BrowseTheWeb.using(aBrowser));
+Bernd.whoCan(BrowseTheWeb.using(aBrowser));
 
-bernd.attemptsTo(
+Bernd.attemptsTo(
     Click.on(MyElement)
 )
 ```
