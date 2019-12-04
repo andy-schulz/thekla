@@ -1,33 +1,36 @@
 ---
-title: Sleep
-parent: Ref:Interactions
-has_children: false
+title: Questions
+parent: Basic Abilities
+has_children: true
+nav_order: 10
 ---
 
-# SLEEP
+# Basic Questions
+{: .no_toc }
 
-Sleep will pause the interaction execution flow. Only the execution is paused, the generation of the interaction and 
-task objects is not interrupted and will be finished first.
+1. TOC
+{:toc}
+
+# DelayedResult
 
 ## Ability
+{: .no_toc }
 
 none
 
 ## Methods
+{: .no_toc }
 
 | name         | parameter           | description                                           |
 | :---         | :---                | :---                                                  |
 | `.for()`*    | sleepTime: number   | sleep for the amount of time in ms                    |
 | `.because()` | sleepReason: string | reason to use the sleep, will be used in activity log |
 
-
-In later versions Sleep will only be used in debug mode and will be automatically deactivated during test execution. 
-So please be careful when using it.
-
 ## Example
+{: .no_toc }
 
 ```typescript
-Josh.attemptsTo(
-    Sleep.for(5000)
-)
+
 ```
+
+# ReturnedResult

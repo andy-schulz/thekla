@@ -1,19 +1,29 @@
 ---
-title: BrowseTheWeb
-parent: Ref:Abilities
+title: Abilities
+parent: Web and Mobile Abilities
+has_children: true
+nav_order: 10
 ---
+
+# Abilities of Web and Mobile Abilities
+{: .no_toc }
+
+1. TOC
+{:toc}
 
 # BrowseTheWeb
 
 Acors ability to use a browser and interact with it.
 
 ## Methods
+{: .no_toc }
 
 | name        | parameter                 | description                      |
 | :---        | :---                      | :---                             |
 | `.using()`* | browser: Browser / Client | returns an ability instance with |
 
 ## Creating a browser
+{: .no_toc }
 
 To create a browser object which can be assigned to the ability, call the helper object `RunningBrowser` as follows:
 
@@ -31,6 +41,7 @@ The configuration can be passed directly or can be used from the configuration f
 > See the [Configuration](../../basics/CONFIGURATION.md) section for more details
 
 ## Example
+{: .no_toc }
 
 Pass the ability to actor `Jonathan`.
 
@@ -49,3 +60,23 @@ jonathan.attemptsTo(
 ````
 
 > Find the details to locate an element in section [Element](../elements/ELEMENT.md).
+
+# OperateOnMobileDevice
+
+Acors ability to operate an app on a mobile device.
+
+## Methods
+{: .no_toc }
+
+| name        | parameter                 | description                                     |
+| :---        | :---                      | :---                                            |
+| `.using()`* | client: Client | returns an ability instance with                |
+
+## Example
+{: .no_toc }
+
+Pass the ability to an actor.
+
+```typescript
+const jonathan = Actor.named("Jonathan");
+jonathan.can(OperateOnMobileDevice.using(aClient));

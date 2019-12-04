@@ -14,3 +14,7 @@ Thekla can be configured by a single configuration file with the following parts
 - testing framework to use, you can choose between
     - jasmine and
     - cucumber
+    
+# Configure thekla to use cucumber
+
+# Configure thekla to use jasmine
