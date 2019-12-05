@@ -15,10 +15,10 @@ e.g.
 - [use a rest API](../reference/rest/ABILITIES.md)
 
 ````typescript
-const abby = Actor.named(`Abby`)
+import {UseAnAbility} from "theoreticalAbilities";
+import {Actor} from "@thekla/core";
 
-const theAbility = 
-
-abby.can()
+const abby = Actor.named(`Abby`);
+abby.whoCan(UseAnAbility);
 ````
 
