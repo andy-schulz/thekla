@@ -6,11 +6,19 @@ nav_order: 12
 
 # Abilities
 
-An ability provides specific capabilities to an actor. 
+An ability provides specific capabilities to an actor.
 
-BrowseTheWeb and OperateOnMobileDevice are wrappers around the 
-[webdriverio](https://www.npmjs.com/package/webdriver) client, whereas UseTheRestApi is a wrapper
-around the [request](https://www.npmjs.com/package/request) client.
+e.g.
 
-As of now the following abilities are implemented:
+- [use a browser](../reference/web_and_mobile/ABILITIES.md)
+- [user a mobile device](../reference/web_and_mobile/ABILITIES.md)
+- [use a rest API](../reference/rest/ABILITIES.md)
+
+````typescript
+const abby = Actor.named(`Abby`)
+
+const theAbility = 
+
+abby.can()
+````
 
