@@ -5,7 +5,7 @@ has_children: true
 nav_order: 10
 ---
 
-# Abilities of Web and Mobile Abilities
+# Web and Mobile Abilities
 {: .no_toc }
 
 1. TOC
