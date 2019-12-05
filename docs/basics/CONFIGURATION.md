@@ -5,6 +5,10 @@ nav_order: 11
 ---
 
 # Configuration
+{: .no_toc }
+
+1. TOC
+{:toc}
 
 Thekla can be configured by a single configuration file with the following parts:
 
