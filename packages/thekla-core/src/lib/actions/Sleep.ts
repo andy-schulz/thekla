@@ -1,23 +1,25 @@
-import {Interaction}   from "./Activities";
-import {UsesAbilities} from "../Actor";
-import {getLogger}     from "@log4js-node/log4js-api"
-import {stepDetails}   from "../decorators/step_decorators";
-import {wait}          from "../utils/utils";
+import {getLogger}      from "@log4js-node/log4js-api"
+import {UsesAbilities}  from "../Actor";
+import {stepDetails}    from "../decorators/step_decorators";
+import {DurationResult} from "../utils/Duration";
+import {wait}           from "../utils/utils";
+import {Interaction}    from "./Activities";
 
 export class Sleep implements Interaction<void, void> {
     private logger = getLogger(`Sleep`);
     public sleepReason = ``;
+    private sleepTimeInMs: number;
 
-    @stepDetails<UsesAbilities, void, void>(`stop all actions for '<<sleepTime>>' ms<<sleepReason>>`)
+    @stepDetails<UsesAbilities, void, void>(`stop all actions for '<<sleepTimeInMs>>' ms<<sleepReason>>`)
     // parameter is needed for stepDetails typing
     // eslint-disable-next-line @typescript-eslint/no-unused-vars
     public performAs(actor: UsesAbilities): Promise<void> {
-        return wait(this.sleepTime).then((): void => {
-            return this.logger.trace(`Slept for ${this.sleepTime}`);
+        return wait(this.sleepTimeInMs).then((): void => {
+            return this.logger.trace(`Slept for ${this.sleepTimeInMs}`);
         });
     }
 
-    public static for(sleepTime: number): Sleep {
+    public static for(sleepTime: number | DurationResult): Sleep {
         return new Sleep(sleepTime);
     }
 
@@ -26,7 +28,8 @@ export class Sleep implements Interaction<void, void> {
         return this;
     }
 
-    private constructor(private sleepTime: number) {
+    private constructor(sleepTime: number | DurationResult) {
+        this.sleepTimeInMs = typeof sleepTime === `number` ? sleepTime : sleepTime.inMs
     }
 
 }

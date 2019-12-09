@@ -1,5 +1,5 @@
-import {Actor, PerformsTask, Task, Sleep, step, SkipTask} from "../..";
-import {ActivityLogNode}                                  from "@thekla/activity-log"
+import {Actor, PerformsTask, Task, Sleep, step, SkipTask, Duration} from "../..";
+import {ActivityLogNode}                                            from "@thekla/activity-log"
 
 interface MyNewData {
     theData: string;
@@ -269,7 +269,7 @@ describe(`The ActivityLog`, (): void => {
             const logan = Actor.named(`Logan`);
 
             await logan.attemptsTo(
-                Sleep.for(1),
+                Sleep.for(Duration.in.milliSeconds(1)),
                 MyFailingTask.startsNow()
             ).catch((e: Error) => {
                 // catch the failing Task
@@ -422,22 +422,3 @@ describe(`The ActivityLog`, (): void => {
     });
 
 });
-
-// const styleFile = fs.readFileSync(`${__dirname}/../../../../res/styles/ActivityLog.css`);
-//
-// const expectEmbeddedStyle = `
-// <style>
-// ${styleFile.toString()}
-// </style>`;
-//
-// const functionHtml = `<script>
-// var toggler = document.getElementsByClassName("task");
-// var i;
-//
-// for (i = 0; i < toggler.length; i++) {
-//   toggler[i].addEventListener("click", function() {
-//     this.parentElement.querySelector(".nested").classList.toggle("active");
-//     this.classList.toggle("task-open");
-//   });
-// }
-// </script>`;
