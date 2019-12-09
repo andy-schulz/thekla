@@ -50,8 +50,12 @@ export class WebElementListWd<WD> implements WebElementListFinder, ImplicitWaite
      * set the standard wait time for elements to be visible
      * @param {number} timeout - the time to wait until the element is visible
      */
-    public static setStandardWait(timeout: number): void {
+    public static set implicitlyWaitFor(timeout: number) {
         WebElementListWd.shallWaitFor = timeout;
+    }
+
+    public static get implicitlyWaitFor(): number {
+        return WebElementListWd.shallWaitFor;
     }
 
     private getElements(): Promise<TkWebElement<WD>[]> {

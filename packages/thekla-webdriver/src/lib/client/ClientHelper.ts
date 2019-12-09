@@ -13,7 +13,7 @@ export class ClientHelper {
 
     public constructor(private config: ServerConfig) {
         if(config?.automationFramework?.waitToBeVisibleForAsLongAs)
-            WebElementListWd.setStandardWait(config.automationFramework.waitToBeVisibleForAsLongAs)
+            WebElementListWd.implicitlyWaitFor = config.automationFramework.waitToBeVisibleForAsLongAs;
     }
 
     public static create(conf: ServerConfig, capabilities: DesiredCapabilities, clientName?: string): Browser {

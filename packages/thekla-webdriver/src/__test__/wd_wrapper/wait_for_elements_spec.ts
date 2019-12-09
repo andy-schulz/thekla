@@ -1,8 +1,9 @@
-import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
-import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
-import {configure}                                                           from "log4js";
-import {Browser, By, ClientHelper, until, UntilElement, WebElementFinder}    from "../..";
-import {WebElementListWd}                                                    from "../../lib/element/WebElementListWd";
+import {DesiredCapabilities, ServerConfig}                                                from "@thekla/config";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig}              from "@thekla/support";
+import {cloneDeep, set}                                                                        from "lodash"
+import {configure}                                                                        from "log4js";
+import {Browser, By, ClientHelper, RunningBrowser, until, UntilElement, WebElementFinder} from "../..";
+import {WebElementListWd}                                                                 from "../../lib/element/WebElementListWd";
 
 configure(`src/__test__/__config__/log4js.json`);
 
@@ -56,12 +57,22 @@ describe(`Waiting for WD Elements`, (): void => {
     describe(`and try to implicitly wait for an Element`, (): void => {
 
         afterEach(() => {
-            WebElementListWd.setStandardWait(0);
+            WebElementListWd.implicitlyWaitFor = 0;
+        });
+
+        it(`should set the default timeout to the WebElementList class
+        test id: ac0d8c97-7fe7-4d44-8a50-43626900ad41`, () => {
+            const confWait: ServerConfig = cloneDeep(conf);
+            set(confWait,`automationFramework.waitToBeVisibleForAsLongAs`,1000);
+
+            RunningBrowser.startedOn(confWait);
+
+            expect(WebElementListWd.implicitlyWaitFor).toEqual(1000);
         });
 
         it(`the system should wait for a second and dont find the visible element
         - (test case id: da251005-5d54-45f4-98cd-983ceac32591)`, async (): Promise<void> => {
-            WebElementListWd.setStandardWait(1000);
+            WebElementListWd.implicitlyWaitFor = 1000;
             appearButton4000ShallWait = browser.element(By.css(`[data-test-id='AppearButtonBy4000']`));
 
             await browser.get(`/delayed`);
@@ -71,7 +82,7 @@ describe(`Waiting for WD Elements`, (): void => {
 
         it(`the system should wait for the element to be visible
         - (test case id: 9cb0891c-6c3e-43fc-9ead-24e7da07da42)`, async (): Promise<void> => {
-            WebElementListWd.setStandardWait(5000);
+            WebElementListWd.implicitlyWaitFor = 5000;
             appearButton4000ShallWait = browser.element(By.css(`[data-test-id='AppearButtonBy4000']`));
 
             await browser.get(`/delayed`);
@@ -81,7 +92,7 @@ describe(`Waiting for WD Elements`, (): void => {
 
         it(`the system should wait for the element to be visible
         - (test case id: 6a54bd71-1451-4ec4-8069-6608f147c3d0)`, async (): Promise<void> => {
-            WebElementListWd.setStandardWait(5000);
+            WebElementListWd.implicitlyWaitFor = 5000;
             const disappearButton4000 = browser.element(By.css(`[data-test-id='DisappearButtonBy4000']`))
                                                .shallNotImplicitlyWait();
 
@@ -98,7 +109,7 @@ describe(`Waiting for WD Elements`, (): void => {
 
         it(`the system should wait for element to be visible after redirect 
         - (test case id: 7f5d0233-b68d-465c-a97b-2b91c336de00)`, async (): Promise<void> => {
-            WebElementListWd.setStandardWait(11000);
+            WebElementListWd.implicitlyWaitFor = 11000;
             appearButton4000ShallWait = browser.element(By.css(`[data-test-id='AppearButtonBy4000']`));
 
             await browser.get(`/redirectToDelayed`);
