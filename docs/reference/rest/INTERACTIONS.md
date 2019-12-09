@@ -13,6 +13,8 @@ nav_order: 10
 
 # Delete
 
+Delete the specified resource.
+
 ## Ability
 {: .no_toc }
 
@@ -21,10 +23,16 @@ nav_order: 10
 ## Methods
 {: .no_toc }
 
+| name     | parameter           | description              |
+| :---     | :---                | :---                     |
+| `.on()`* | element: SppElement | the element to click on. |
+
 ## Example
 {: .no_toc }
 
 # Get
+
+Get the resource.
 
 ## Ability
 {: .no_toc }
