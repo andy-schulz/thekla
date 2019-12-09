@@ -65,7 +65,7 @@ describe(`execute a basic cucumber feature file`, () => {
 
             let output = ``;
 
-            forked.stdout.on(`data`, function (chunk) {
+            forked?.stdout?.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -89,7 +89,7 @@ describe(`execute a basic cucumber feature file`, () => {
             `- (test case id: bbbfc97d-b4ba-4731-a774-2a0635f5d3f9)`, async () => {
 
             let output = ``;
-            forked.stdout.on(`data`, function (chunk) { output = chunk.toString()});
+            forked?.stdout?.on(`data`, function (chunk) { output = chunk.toString()});
 
             const testConfig: TheklaConfig = {
                 specs: [file1Result.relativeFeatureFilePath, file1Result.relativeFeatureFilePath],
@@ -127,7 +127,7 @@ describe(`execute a basic cucumber feature file`, () => {
 
         beforeEach(() => {
             forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
-            forked.stdout.on(`data`, function (chunk) { output = chunk.toString()});
+            forked?.stdout?.on(`data`, function (chunk) { output = chunk.toString()});
         });
 
         afterEach(() => {

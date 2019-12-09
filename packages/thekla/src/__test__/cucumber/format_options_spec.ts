@@ -1,13 +1,15 @@
-import * as child       from "child_process";
-
+import {CucumberOptions, TheklaConfig} from "@thekla/config";
+import * as child                      from "child_process";
 import fsExtra                         from 'fs-extra'
 import * as minimist                   from "minimist";
 import {Command}                       from "../../lib/command";
-import {CucumberOptions, TheklaConfig} from "@thekla/config";
 import {processFrameworkOptions}       from "../../lib/testFramework/CucumberUtils";
 import {Thekla}                        from "../../lib/thekla";
 import {
-    createCucumberTestFiles, createTheklaConfigFile, CucumberTestFileResult, TheklaConfigFileResult
+    createCucumberTestFiles,
+    createTheklaConfigFile,
+    CucumberTestFileResult,
+    TheklaConfigFileResult
 }                                      from "../__fixtures__/testFiles";
 
 describe(`Specifying the formatter`, () => {
@@ -25,10 +27,10 @@ describe(`Specifying the formatter`, () => {
 
     afterEach(() => {
         // remove config files
-        if(!theklaConfigResult)
+        if (!theklaConfigResult)
             return;
 
-        if(theklaConfigResult.baseDir) {
+        if (theklaConfigResult.baseDir) {
             fsExtra.remove(theklaConfigResult.baseDir);
         }
 
@@ -94,7 +96,9 @@ describe(`Specifying the formatter`, () => {
 
         beforeEach(() => {
             forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: [`ignore`, `pipe`, process.stderr, `ipc`]});
-            forked.stdout.on(`data`, function (chunk) { output = chunk.toString()});
+            forked?.stdout?.on(`data`, function (chunk) {
+                output = chunk.toString()
+            });
         });
 
         afterEach(() => {
@@ -112,9 +116,9 @@ describe(`Specifying the formatter`, () => {
         });
 
         const startTest = (args: minimist.ParsedArgs): Promise<any> => {
-            forked.send({ args: args });
+            forked.send({args: args});
 
-            return new Promise( (resolve, reject) => {
+            return new Promise((resolve, reject) => {
                 try {
                     forked.on(`message`, (specResult: any) => {
                         resolve(specResult);
@@ -144,7 +148,7 @@ describe(`Specifying the formatter`, () => {
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
-                "specs": `${file1Result.relativeFeatureFilePath}`,
+                "specs": `${file1Result.relativeFeatureFilePath}`
             };
 
             return startTest(args)
@@ -173,7 +177,7 @@ describe(`Specifying the formatter`, () => {
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
-                "specs": `${file1Result.relativeFeatureFilePath}`,
+                "specs": `${file1Result.relativeFeatureFilePath}`
             };
 
             return startTest(args)
@@ -202,15 +206,15 @@ describe(`Specifying the formatter`, () => {
 
             const args: minimist.ParsedArgs = {
                 "_": [theklaConfigResult.relativeConfFilePath],
-                "specs": `${file1Result.relativeFeatureFilePath}`,
+                "specs": `${file1Result.relativeFeatureFilePath}`
             };
 
             const thekla = new Thekla();
             const command = new Command(thekla, args);
-            return  command.run()
-                           .then(() => {
-                               expect(true).toBeFalsy(`The spec should not run successful as the report folder does not exist`);
-                           }).catch((e: any) => {
+            return command.run()
+                          .then(() => {
+                              expect(true).toBeFalsy(`The spec should not run successful as the report folder does not exist`);
+                          }).catch((e: any) => {
                     expect(e.toString()).toContain(`no such file or directory, open`);
                     expect(e.toString()).toContain(`${reportFileName}`);
                 });

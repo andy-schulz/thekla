@@ -75,7 +75,7 @@ describe(`Specifying tags`, () => {
 
             let output = ``;
 
-            forked.stdout.on(`data`, function (chunk) {
+            forked?.stdout?.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -131,7 +131,7 @@ describe(`Specifying tags`, () => {
 
             let output = ``;
 
-            forked.stdout.on(`data`, function (chunk) {
+            forked?.stdout?.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -184,7 +184,7 @@ describe(`Specifying tags`, () => {
 
             let output = ``;
 
-            forked.stdout.on(`data`, function (chunk) {
+            forked?.stdout?.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
@@ -240,7 +240,7 @@ describe(`Specifying tags`, () => {
 
             let output = ``;
 
-            forked.stdout.on(`data`, function (chunk) {
+            forked?.stdout?.on(`data`, function (chunk) {
                 output = chunk.toString();
             });
 
