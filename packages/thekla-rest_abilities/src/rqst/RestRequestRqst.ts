@@ -1,30 +1,34 @@
-import {RestClientConfig}  from "@thekla/config";
+import {RequestOptions}    from "@thekla/config";
+import merge               from "deepmerge";
+import * as rp             from "request-promise-native";
 import {RestRequest}       from "../interface/RestRequest";
 import {RestRequestResult} from "../interface/RestRequestResult";
-import * as rp             from "request-promise-native";
-import merge               from "deepmerge";
 
 export class RestRequestRqst implements RestRequest {
 
     public constructor(
         private resource: string,
-        private clientConfig: RestClientConfig) {
+        private requestOptions: RequestOptions) {
     }
 
-    public get(clientConfig: RestClientConfig = {}): Promise<RestRequestResult> {
-        return this.send(rp.get, clientConfig);
+    public get(): Promise<RestRequestResult> {
+        return this.send(rp.get);
     }
 
-    public patch(clientConfig: RestClientConfig = {}): Promise<RestRequestResult> {
-        return this.send(rp.patch, clientConfig);
+    public patch(): Promise<RestRequestResult> {
+        return this.send(rp.patch);
     }
 
-    public post(clientConfig: RestClientConfig = {}): Promise<RestRequestResult> {
-        return this.send(rp.post, clientConfig);
+    public put(): Promise<RestRequestResult> {
+        return this.send(rp.put);
     }
 
-    public delete(clientConfig: RestClientConfig = {}): Promise<RestRequestResult> {
-        return this.send(rp.delete, clientConfig);
+    public post(): Promise<RestRequestResult> {
+        return this.send(rp.post);
+    }
+
+    public delete(): Promise<RestRequestResult> {
+        return this.send(rp.delete);
     }
 
     /**
@@ -32,18 +36,17 @@ export class RestRequestRqst implements RestRequest {
      * @param orig
      * @param merger
      */
-    protected mergeClientConfig(orig: RestClientConfig, merger: RestClientConfig): RestClientConfig {
+    protected mergeClientConfig(orig: RequestOptions, merger: RequestOptions): RequestOptions {
         return merge(orig, merger);
     }
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private send(fn: any, clientConfig: RestClientConfig = {}): Promise<RestRequestResult> {
-        const conf: RestClientConfig = this.mergeClientConfig(this.clientConfig, clientConfig);
-        return new Promise((fulfill, reject): void => {
-            fn(this.resource, conf.requestOptions)
+    private send(fn: any): Promise<RestRequestResult> {
+        return new Promise((resolve, reject): void => {
+            fn(this.resource, this.requestOptions)
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 .then((response: any): void => {
-                    fulfill(response);
+                    resolve(response);
                 })
                 // eslint-disable-next-line @typescript-eslint/no-explicit-any
                 .catch((e: any): void => {
@@ -53,6 +56,6 @@ export class RestRequestRqst implements RestRequest {
     }
 
     public toString(): string {
-        return `resource: ${this.resource} with configuration: ${JSON.stringify(this.clientConfig)}`
+        return `resource: ${this.resource} with configuration: ${JSON.stringify(this.requestOptions)}`
     }
 }

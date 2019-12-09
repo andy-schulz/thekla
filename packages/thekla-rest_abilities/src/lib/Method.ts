@@ -3,30 +3,36 @@ import {RestRequest}       from "../interface/RestRequest";
 import {RestRequestResult} from "../interface/RestRequestResult";
 
 export interface RequestMethod {
-    send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult>;
+    send(request: RestRequest): Promise<RestRequestResult>;
 }
 
 export class MethodGet implements RequestMethod{
-    public send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult> {
-        return request.get(clientConfig)
+    public send(request: RestRequest): Promise<RestRequestResult> {
+        return request.get()
     }
 }
 
 export class MethodPost implements RequestMethod{
-    public send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult> {
-        return request.post(clientConfig)
+    public send(request: RestRequest): Promise<RestRequestResult> {
+        return request.post()
     }
 }
 
 export class MethodDelete implements RequestMethod{
-    public send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult> {
-        return request.delete(clientConfig)
+    public send(request: RestRequest): Promise<RestRequestResult> {
+        return request.delete()
     }
 }
 
 export class MethodPatch implements RequestMethod{
-    public send(request: RestRequest, clientConfig?: RestClientConfig): Promise<RestRequestResult> {
-        return request.patch(clientConfig)
+    public send(request: RestRequest): Promise<RestRequestResult> {
+        return request.patch()
+    }
+}
+
+export class MethodPut implements RequestMethod{
+    public send(request: RestRequest): Promise<RestRequestResult> {
+        return request.put()
     }
 }
 

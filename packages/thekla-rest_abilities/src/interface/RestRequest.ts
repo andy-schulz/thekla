@@ -1,12 +1,13 @@
-import {RestClientConfig}  from "@thekla/config";
 import {RestRequestResult} from "./RestRequestResult";
 
 export interface RestRequest {
-    get(clientConfig?: RestClientConfig): Promise<RestRequestResult>;
+    get(): Promise<RestRequestResult>;
 
-    post(clientConfig?: RestClientConfig): Promise<RestRequestResult>;
+    post(): Promise<RestRequestResult>;
 
-    patch(clientConfig?: RestClientConfig): Promise<RestRequestResult>;
+    patch(): Promise<RestRequestResult>;
 
-    delete(clientConfig?: RestClientConfig): Promise<RestRequestResult>;
+    put(): Promise<RestRequestResult>;
+
+    delete(): Promise<RestRequestResult>;
 }

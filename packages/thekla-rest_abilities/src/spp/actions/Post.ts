@@ -1,43 +1,22 @@
-import {RestClientConfig}                                           from "@thekla/config";
-import {RestRequestResult}                                          from "../../interface/RestRequestResult";
-import {Interaction, UsesAbilities, stepDetails}                    from "@thekla/core";
-import {UseTheRestApi}                                              from "../abilities/UseTheRestApi";
-import {SppRestRequest}                                             from "../SppRestRequests";
-import {catchAndSaveOnError, MethodActions, saveResponse, SaveToFn} from "./0_helper";
+import {stepDetails, UsesAbilities} from "@thekla/core";
+import {RestRequestResult}          from "../../interface/RestRequestResult";
+import {UseTheRestApi}              from "../abilities/UseTheRestApi";
+import {SppRestRequest}             from "../SppRestRequests";
+import {continueOnError}            from "./0_helper";
+import {MethodBasics}               from "./MethodBasics";
 
-export class Post implements Interaction<void, RestRequestResult>, MethodActions {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    private saveTo: (result: any) => void;
-    private catchError =  false;
-    private config: RestClientConfig | undefined;
-
+export class Post extends MethodBasics{
     @stepDetails<UsesAbilities, void, RestRequestResult>(`send a post request for: '<<request>>'`)
     public performAs(actor: UsesAbilities): Promise<RestRequestResult> {
-        return UseTheRestApi.as(actor).send(this.request).post(this.config)
-            .then(saveResponse(this.saveTo))
-            .catch(catchAndSaveOnError(this.saveTo, this.catchError))
+        return UseTheRestApi.as(actor).send(this.request).post()
+                            .catch(continueOnError(this.catchError))
     }
 
     public static to(request: SppRestRequest): Post {
         return new Post(request);
     }
 
-    public withConfig(config: RestClientConfig): Post {
-        this.config = config;
-        return this;
-    }
-
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    public andSaveResponse(saveTo: SaveToFn): Post {
-        this.saveTo = saveTo;
-        return this;
-    }
-
-    public dontFailInCaseOfAnError(): Post {
-        this.catchError = true;
-        return this;
-    }
-
-    private constructor(private request: SppRestRequest) {
+    private constructor(request: SppRestRequest) {
+        super(request)
     }
 }

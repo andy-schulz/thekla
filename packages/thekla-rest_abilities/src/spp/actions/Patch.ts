@@ -5,16 +5,15 @@ import {SppRestRequest}             from "../SppRestRequests";
 import {continueOnError}            from "./0_helper";
 import {MethodBasics}               from "./MethodBasics";
 
-export class Delete extends MethodBasics {
-
-    @stepDetails<UsesAbilities, void, RestRequestResult>(`send a delete request for: '<<request>>'`)
+export class Patch extends MethodBasics{
+    @stepDetails<UsesAbilities, void, RestRequestResult>(`send a post request for: '<<request>>'`)
     public performAs(actor: UsesAbilities): Promise<RestRequestResult> {
-        return UseTheRestApi.as(actor).send(this.request).delete()
+        return UseTheRestApi.as(actor).send(this.request).patch()
                             .catch(continueOnError(this.catchError))
     }
 
-    public static from(request: SppRestRequest): Delete {
-        return new Delete(request);
+    public static to(request: SppRestRequest): Patch {
+        return new Patch(request);
     }
 
     private constructor(request: SppRestRequest) {

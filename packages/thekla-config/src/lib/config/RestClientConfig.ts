@@ -5,5 +5,7 @@ export interface RestClientConfig {
 
     // eslint-disable-next-line quotes
     restClientName?: "request";
-    requestOptions?: RequestPromiseOptions;
+    requestOptions?: RequestOptions;
 }
+
+export type RequestOptions = RequestPromiseOptions;

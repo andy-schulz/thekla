@@ -1,35 +1,62 @@
-import {RestClientConfig} from "@thekla/config";
-import {RestClient}       from "../interface/RestClient";
-import {RestRequest}      from "../interface/RestRequest";
-import {On}               from "../lib/Ressource";
+import {RequestOptions, RestClientConfig} from "@thekla/config";
+import merge                              from "deepmerge";
+import {RestClient}                       from "../interface/RestClient";
+import {RestRequest}                      from "../interface/RestRequest";
+import {On}                               from "../lib/Ressource";
 
 export interface RequestHelper extends Function {
-    (restClient: RestClient, clientConfig: RestClientConfig): RestRequest;
-    description: string;
+    (restClient: RestClient, requestOptions: RequestOptions): RestRequest;
+
+    resource: string;
+    options: object;
 }
 
-export class SppRestRequest{
-    private clientConfig: RestClientConfig = {};
+/**
+ * the rest request instance
+ */
+export class SppRestRequest {
 
     public constructor(
         public resource: On,
         public sender: RequestHelper) {
-
     }
 
-    public using(clientConfig: RestClientConfig): SppRestRequest {
-        this.clientConfig = clientConfig;
+    /**
+     * returns a new request instance, the passed client config will be merged with the current config
+     *
+     * @param {RestClientConfig} clientConfig - the new partial client config
+     * @returns {SppRestRequest} a new request instance
+     */
+    public using(requestOptions: RequestOptions): SppRestRequest {
 
-        this.sender.description = `${this.sender.description} using client config: ${JSON.stringify(clientConfig)}`;
-        return this
+        if(!requestOptions)
+            throw new Error(`passing empty request options not allowed`);
+
+        const sender: RequestHelper = (restClient: RestClient, rqstOptns: RequestOptions = {}): RestRequest => {
+            const opts = merge(rqstOptns, requestOptions);
+            return this.sender(restClient, opts)
+        };
+        sender.resource = this.sender.resource;
+        sender.options = merge(this.sender.options, requestOptions);
+
+        return new SppRestRequest(this.resource, sender);
     }
 
+    /**
+     * execute the request
+     * @param {RestClient} restClient
+     * @returns {RestRequest}
+     */
     public send(restClient: RestClient): RestRequest {
-        return this.sender(restClient, this.clientConfig);
+        return this.sender(restClient, {});
     }
 
+    /**
+     * return the request description string
+     * @returns {string} the request description
+     */
     public toString(): string {
-        return this.sender.description;
+        return `ressource: ${this.sender.resource} with options: ${JSON.stringify(this.sender.options, null, `\t`)}`;
     }
 }
 
@@ -42,10 +69,13 @@ export class SppRestRequestResult {
  * @param resource - resource the request is going to
  */
 export function request(resource: On): SppRestRequest {
-    const send: RequestHelper = (restClient: RestClient, clientConfig: RestClientConfig = {}): RestRequest => {
+
+    const send: RequestHelper = (restClient: RestClient, clientConfig: RequestOptions = {}): RestRequest => {
         return restClient.request(resource, clientConfig);
     };
 
-    send.description = `resource: ${resource}`;
+    send.resource = `${resource}`;
+    send.options = {};
+
     return new SppRestRequest(resource, send);
 }

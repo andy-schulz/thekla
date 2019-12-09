@@ -4,6 +4,6 @@ import {RestClientRqst}   from "../rqst/RestClientRqst";
 
 export class ExecutingRestClient {
     public static from(conf: RestClientConfig): RestClient {
-        return RestClientRqst.from(conf)
+        return RestClientRqst.with(conf.requestOptions)
     }
 }
