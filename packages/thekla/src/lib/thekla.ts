@@ -1,8 +1,8 @@
-import {printHelpText}             from "./commands/help";
+import {getLogger}                               from "@log4js-node/log4js-api";
 import {getConfiguredTheklaGlobal, TheklaConfig} from "@thekla/config";
-import {getLogger}                 from "@log4js-node/log4js-api";
-import {CucumberTestFramework}     from "./testFramework/CucumberTestFramework";
-import {JasmineTestFramework}      from "./testFramework/JasmineTestFramework";
+import {printHelpText}                           from "./commands/help";
+import {CucumberTestFramework}                   from "./testFramework/CucumberTestFramework";
+import {JasmineTestFramework}                    from "./testFramework/JasmineTestFramework";
 
 export interface TheklaCliOpts {
     require?: string | string[];

@@ -11,6 +11,7 @@ export class JasmineTestFramework {
 
     public run(specs: string[]): Promise<any> {
         this.logger.debug(`Starting Jasmine Tests.`);
+        // eslint-disable-next-line @typescript-eslint/no-var-requires
         const Jasmine = require(`jasmine`);
         const jasminer = new Jasmine();
         const jasmineGlobal = jasmine;

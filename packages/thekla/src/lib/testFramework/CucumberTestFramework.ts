@@ -20,6 +20,7 @@ export class CucumberTestFramework {
         this.logger.debug(`Starting Cucumber tests`);
         return new Promise((resolve, reject) => {
 
+            // eslint-disable-next-line @typescript-eslint/no-var-requires
             const Cucumber = require(`cucumber`);
 
             const cwd = process.cwd();
