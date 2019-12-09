@@ -12,7 +12,8 @@
     "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
     "test:cov:thekla": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
     "pack": "npm pack",
-    "clean:pack": "del-cli *.tgz"
+    "clean:pack": "npx del-cli *.tgz",
+    "clean:all": "npx del-cli dist & npx del-cli node_modules"
   },
   "homepage": "https://andy-schulz.github.io/thekla/",
   "repository": {

@@ -16,7 +16,8 @@
     "test:wdio:ff": "jasmine --config=src/__test__/support/jasmine_wdio_firefox.json",
     "test:wdio:ch": "jasmine --config=src/__test__/support/jasmine_wdio_chrome.json",
     "pack": "npm pack",
-    "clean:pack": "del-cli *.tgz"
+    "clean:pack": "del-cli *.tgz",
+    "clean:all": "npx del-cli dist & npx del-cli node_modules"
   },
   "homepage": "https://andy-schulz.github.io/thekla/",
   "repository": {

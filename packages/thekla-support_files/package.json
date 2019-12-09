@@ -9,7 +9,8 @@
     "pretest": "tsc",
     "build": "del-cli dist/**/* & tsc",
     "pack": "npm pack",
-    "clean:pack": "del-cli *.tgz"
+    "clean:pack": "del-cli *.tgz",
+    "clean:all": "npx del-cli dist & npx del-cli node_modules"
   },
   "homepage": "https://andy-schulz.github.io/thekla/",
   "repository": {
