@@ -84,12 +84,12 @@ describe(`Waiting for SPP Elements`, (): void => {
         });
 
         afterEach(() => {
-            WebElementListWd.setStandardWait(0);
+            WebElementListWd.implicitlyWaitFor = 0;
         });
 
         it(`should find the element after it appears
         test id: cc66501a-788e-40b6-a4a3-4093578c99ab`, async () => {
-            WebElementListWd.setStandardWait(6000);
+            WebElementListWd.implicitlyWaitFor = 6000;
 
             await Navigate.to(`/delayed`).performAs(walterTheWaiter);
             const status: ElementStatus = await Status.of(appearingButton).answeredBy(walterTheWaiter);
@@ -98,7 +98,7 @@ describe(`Waiting for SPP Elements`, (): void => {
 
         it(`should wait until the element disappears
         test id: 36053a0d-e598-4094-bb2f-0a6f5352fef3`, async () => {
-            WebElementListWd.setStandardWait(2000);
+            WebElementListWd.implicitlyWaitFor = 2000;
 
             await Navigate.to(`/delayed`).performAs(walterTheWaiter);
 
@@ -116,7 +116,7 @@ describe(`Waiting for SPP Elements`, (): void => {
         test id: e6ec6994-9cee-4711-95a3-0cd914b34c37`, async () => {
             const disappear = disappearingButton.shallNotImplicitlyWait();
 
-            WebElementListWd.setStandardWait(6000);
+            WebElementListWd.implicitlyWaitFor = 6000;
 
             await Navigate.to(`/delayed`).performAs(walterTheWaiter);
 
