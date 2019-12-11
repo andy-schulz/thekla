@@ -10,11 +10,13 @@
     "test:cov": "npm run pretest & npm run clean:cov & npx --no-install lerna run test:cov --parallel",
     "test:cov:report": "./node_modules/.bin/nyc report",
     "test:cov:thekla": " npx --no-install lerna run test:cov:thekla --parallel",
+    "test:cov:rest": " npx --no-install lerna run test:cov:rest --parallel",
     "pack": "./node_modules/.bin/lerna run pack",
     "clean:pack": "del-cli *.tgz",
     "examples:01": "lerna run 01",
     "examples:02": "lerna run 02",
-    "examples:10": "lerna run 10"
+    "examples:10": "lerna run 10",
+    "create:release:notes": "git log --pretty=\"%h - %s\" v2.5.0..HEAD --grep=FEATURE --grep=FIX --grep=REFACTORING"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
