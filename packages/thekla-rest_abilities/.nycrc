@@ -3,6 +3,7 @@
   "report-dir":"../../coverage/thekla-rest_abilities",
   "temp-dir": "../../coverage/.nyc_output",
   "clean": false,
+  "all": false,
   "exclude": [
     "coverage/**",
     "src/__test__/**",

@@ -56,6 +56,6 @@ export class RestRequestRqst implements RestRequest {
     }
 
     public toString(): string {
-        return `resource: ${this.resource} with configuration: ${JSON.stringify(this.requestOptions)}`
+        return `resource: ${this.resource} with options: ${JSON.stringify(this.requestOptions)}`
     }
 }

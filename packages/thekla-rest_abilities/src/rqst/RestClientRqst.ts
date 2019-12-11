@@ -2,7 +2,7 @@ import {RequestOptions}  from "@thekla/config";
 import merge             from "deepmerge";
 import {RestClient}      from "../interface/RestClient";
 import {RestRequest}     from "../interface/RestRequest";
-import {On}              from "../lib/Ressource";
+import {On}              from "../lib/Resource";
 import {RestRequestRqst} from "./RestRequestRqst";
 
 export class RestClientRqst implements RestClient {
@@ -11,7 +11,7 @@ export class RestClientRqst implements RestClient {
         return new RestClientRqst(baseRequestOptions);
     }
 
-    public request(resource: On, requestOptions: RequestOptions = {}): RestRequest {
+    public request(resource: On, requestOptions: RequestOptions): RestRequest {
         const opts: RequestOptions = merge(this.baseRequestOptions, requestOptions);
         return new RestRequestRqst(resource.resource, opts)
     }

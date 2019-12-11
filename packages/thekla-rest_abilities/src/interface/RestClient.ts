@@ -1,5 +1,5 @@
 import {RequestOptions} from "@thekla/config";
-import {On}             from "../lib/Ressource";
+import {On}             from "../lib/Resource";
 import {RestRequest}    from "./RestRequest";
 
 export interface RestClient {

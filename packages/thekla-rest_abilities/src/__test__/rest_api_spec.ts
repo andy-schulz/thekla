@@ -1,6 +1,5 @@
-import {RequestOptions, RestClientConfig} from "@thekla/config";
-import {Actor, See}                       from "@thekla/core";
-
+import {RequestOptions, RestClientConfig}                                                   from "@thekla/config";
+import {Actor, See}                                                                         from "@thekla/core";
 import {curry}                                                                              from "lodash";
 import fp                                                                                   from "lodash/fp";
 import {ExecutingRestClient, Get, Method, On, Post, request, Response, Send, UseTheRestApi} from ".."
@@ -11,30 +10,22 @@ describe(`Trying to Add two numbers by the mathjs API`, (): void => {
     const a = 5;
     const b = -3;
     const calculationResult = 2;
-    let restConfig: RestClientConfig;
 
-    // let statusCode: number | undefined;
-    // let extractor: (request: any) => any;
-    let Richard: Actor;
+    // rest client config
+    const restConfig: RestClientConfig = {
+        restClientName: `request`,
+        requestOptions: {
+            baseUrl: `http://api.mathjs.org/v4`,
+            resolveWithFullResponse: true,
+            proxy: process.env.MY_PROXY
+        }
+    };
+
+    const Richard: Actor = Actor.named(`Richard`);
+    Richard.whoCan(UseTheRestApi.with(ExecutingRestClient.from(restConfig)));
 
     beforeAll((): void => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 10000;
-        restConfig = {
-            restClientName: `request`,
-            requestOptions: {
-                baseUrl: `http://api.mathjs.org/v4`,
-                resolveWithFullResponse: true
-            }
-        };
-
-        if (process.env.MY_PROXY) {
-            if (!restConfig.requestOptions)
-                restConfig.requestOptions = {};
-            (restConfig.requestOptions).proxy = process.env.MY_PROXY;
-        }
-
-        Richard = Actor.named(`Richard`);
-        Richard.whoCan(UseTheRestApi.with(ExecutingRestClient.from(restConfig)));
     });
 
     describe(`using two simple integers,`, (): void => {
@@ -199,7 +190,7 @@ describe(`Trying to Add two numbers by the mathjs API`, (): void => {
             const req = request(On.resource(`/`))
                 .using(opts);
 
-            const result = await Post.to(req).performAs(Richard) as unknown as any;
+            const result: RestRequestResult = await Post.to(req).performAs(Richard);
             expect(result.result[0]).toEqual(`2`);
         });
     });
@@ -225,5 +216,4 @@ describe(`Trying to Add two numbers by the mathjs API`, (): void => {
             );
         });
     });
-})
-;
+});

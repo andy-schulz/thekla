@@ -10,6 +10,7 @@
     "pretest": "tsc",
     "test": "jasmine --config=src/__test__/support/jasmine.json",
     "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
+    "test:cov:rest": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
     "pack": "npm pack",
     "clean:pack": "del-cli *.tgz",
     "clean:all": "npx del-cli dist & npx del-cli node_modules"

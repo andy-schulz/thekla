@@ -1,8 +1,8 @@
 import {RequestOptions, RestClientConfig} from "@thekla/config";
 import merge                              from "deepmerge";
 import {RestClient}                       from "../interface/RestClient";
-import {RestRequest}                      from "../interface/RestRequest";
-import {On}                               from "../lib/Ressource";
+import {RestRequest} from "../interface/RestRequest";
+import {On}          from "../lib/Resource";
 
 export interface RequestHelper extends Function {
     (restClient: RestClient, requestOptions: RequestOptions): RestRequest;
@@ -32,7 +32,7 @@ export class SppRestRequest {
         if(!requestOptions)
             throw new Error(`passing empty request options not allowed`);
 
-        const sender: RequestHelper = (restClient: RestClient, rqstOptns: RequestOptions = {}): RestRequest => {
+        const sender: RequestHelper = (restClient: RestClient, rqstOptns: RequestOptions): RestRequest => {
             const opts = merge(rqstOptns, requestOptions);
             return this.sender(restClient, opts)
         };
@@ -56,7 +56,7 @@ export class SppRestRequest {
      * @returns {string} the request description
      */
     public toString(): string {
-        return `ressource: ${this.sender.resource} with options: ${JSON.stringify(this.sender.options, null, `\t`)}`;
+        return `resource: ${this.sender.resource} with options: ${JSON.stringify(this.sender.options, null, `\t`)}`;
     }
 }
 
@@ -70,7 +70,7 @@ export class SppRestRequestResult {
  */
 export function request(resource: On): SppRestRequest {
 
-    const send: RequestHelper = (restClient: RestClient, clientConfig: RequestOptions = {}): RestRequest => {
+    const send: RequestHelper = (restClient: RestClient, clientConfig: RequestOptions): RestRequest => {
         return restClient.request(resource, clientConfig);
     };
 

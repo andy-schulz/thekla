@@ -46,6 +46,10 @@ export class Method {
         return new MethodPost()
     }
 
+    public static put(): RequestMethod {
+        return new MethodPut()
+    }
+
     public static delete(): RequestMethod {
         return new MethodDelete()
     }
