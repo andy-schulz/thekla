@@ -1,4 +1,4 @@
-import {Duration} from "../../lib/utils/Duration";
+import {Duration} from "../..";
 
 describe(`Setting the duration`, () => {
 
