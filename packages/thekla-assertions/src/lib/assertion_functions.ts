@@ -1,7 +1,7 @@
-import assert from "assert"
+import assert              from "assert"
 import {FailedExpectation} from "../error/FailedExpectation";
-import {ExecuteAssertion} from "../interfaces/TheklaAssertion";
-import {AssertionImpl} from "./Assert";
+import {ExecuteAssertion}  from "../interfaces/TheklaAssertion";
+import {AssertionImpl}     from "./Assert";
 
 type AssertionFunc = ((actual: any) => boolean)[];
 

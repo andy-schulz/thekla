@@ -1,4 +1,4 @@
-import { TheklaAssertionOptions } from "../interfaces/TheklaAssertionOptions";
+import {TheklaAssertionOptions} from "../interfaces/TheklaAssertionOptions";
 
 class AssertionError extends Error {
 
@@ -15,8 +15,8 @@ export const assert = (
     options: TheklaAssertionOptions
 ): boolean => {
 
-    if(!expression)
-        if(options.not)
+    if (!expression)
+        if (options.not)
             throw new AssertionError(negatedFailMessage);
         else
             throw new AssertionError(failMessage);

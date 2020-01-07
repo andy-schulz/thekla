@@ -1,6 +1,6 @@
-import {Expected as E} from "../interfaces/Expected";
-import {ExecuteAssertion, TheklaAssertion} from "../interfaces/TheklaAssertion";
-import {TheklaAssertionOptions} from "../interfaces/TheklaAssertionOptions";
+import {Expected as E}                                                   from "../interfaces/Expected";
+import {ExecuteAssertion, TheklaAssertion}                               from "../interfaces/TheklaAssertion";
+import {TheklaAssertionOptions}                                          from "../interfaces/TheklaAssertionOptions";
 import {assertAll, deepEqual, notDeepEqual, notStrictEqual, strictEqual} from "./assertion_functions";
 
 export class AssertionImpl implements TheklaAssertion {
@@ -35,11 +35,11 @@ export class AssertionImpl implements TheklaAssertion {
 
         const opts = this.options;
 
-        const func = opts.deep ?
+        const equal = opts.deep ?
             (opts.not ? notDeepEqual : deepEqual) :
             (opts.not ? notStrictEqual : strictEqual);
 
-        this.assertions.push(func(expected, message));
+        this.assertions.push(equal(expected, message));
 
         return assertAll(this.assertions);
     }
