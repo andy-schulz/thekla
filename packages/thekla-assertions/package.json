@@ -1,0 +1,41 @@
+{
+  "name": "@thekla/assertion",
+  "version": "2.5.0",
+  "description": "the SPP (ScreenPlay Pattern) assertion library",
+  "main": "dist/index.js",
+  "types": "dist/index.d.ts",
+  "scripts": {
+    "prepare": "npm run build",
+    "build": "del-cli dist/**/* & tsc",
+    "pretest": "tsc",
+    "test": "npx --no-install jasmine --config=src/__test__/support/jasmine.json",
+    "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
+    "pack": "npm pack",
+    "clean:pack": "del-cli *.tgz",
+    "clean:all": "npx del-cli dist & npx del-cli node_modules"
+  },
+  "homepage": "https://andy-schulz.github.io/thekla/",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/andy-schulz/thekla.git"
+  },
+  "bugs": {
+    "url": "https://github.com/andy-schulz/thekla/issues"
+  },
+  "author": "Andy Schulz <andy.schulz@test-steps.de>",
+  "license": "MIT",
+  "publishConfig": {
+    "access": "public"
+  },
+  "dependencies": {
+    "@log4js-node/log4js-api": "^1.0.2",
+    "@types/deep-diff": "^1.0.0",
+    "@types/node": "^10.17.5",
+    "deep-diff": "^1.0.2"
+  },
+  "devDependencies": {
+    "del-cli": "^3.0.0",
+    "nyc": "^14.1.1"
+  },
+  "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
+}

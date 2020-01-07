@@ -1,0 +1,9 @@
+{
+  "extends": "../../tsconfig.json",
+  "compilerOptions": {
+    "outDir": "dist",
+    "rootDir": "src",
+    "experimentalDecorators": true,       /* Enables experimental support for ES7 decorators. */
+    "emitDecoratorMetadata": true         /* Enables experimental support for emitting type metadata for decorators. */
+  }
+}
