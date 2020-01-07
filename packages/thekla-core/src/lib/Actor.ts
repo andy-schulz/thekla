@@ -19,6 +19,8 @@ import {Activity}                          from "./actions/Activities";
 import {DoesNotHave}                       from "./errors/DoesNotHave";
 import {Question}                          from "./questions/Question";
 
+type A<P,R> = Activity<P, R>
+
 export interface LogsActivity {
     readonly name: string;
     readonly activityLog: ActivityLog;
@@ -28,21 +30,8 @@ export interface AnswersQuestions extends LogsActivity {
     toAnswer<PT, RT>(question: Question<PT,RT>, activityResult?: PT): Promise<RT>;
 }
 
-// interface TaskPerfomer {
-//     <P,R1>(
-//         a1: Activity<P,R1>): Promise<R1>;
-//     <P,R1,R2>(
-//         a1: Activity<P,R1>,
-//         a2: Activity<R1,R2>): Promise<R2>;
-//     // <P,R1,R2,R3>(
-//     //     a1: Activity<P,R1>,
-//     //     a2: Activity<R1,R2>,
-//     //     a3: Activity<R2,R3>): Promise<R2>;
-// }
-
 export interface PerformsTask extends LogsActivity {
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
-    attemptsTo<PT,RT>(...activities: Activity<any, any>[]): Promise<RT>;
+    attemptsTo<PT,RT>(...activities: Activity<PT, RT>[]): Promise<RT>;
 }
 
 export interface UsesAbilities extends LogsActivity {
@@ -81,38 +70,28 @@ export class Actor implements AnswersQuestions, PerformsTask, UsesAbilities{
 
     /**
      * Executes the given Tasks
-     * @param activities a list of tasks to execute
+     * @param a1
      */
-
-    // public attemptsTo<PT,RT>(...activities: Activity<PT, RT>[]): Promise<RT>{
-    // public attemptsTo<P,R1, R2>(
-    //     a1: Activity<P, R1>
-    // ): Promise<R2>;
-    // public attemptsTo<P,R1,R2>(
-    //     a1: Activity<P, R1>,
-    //     a2: Activity<R1, R2>
-    // ): Promise<R2>;
-    // public attemptsTo<P,R1,R2, R3>(
-    //     a1: Activity<P, R1>,
-    //     a2: Activity<R1, R2>,
-    //     a3: Activity<R2, R3>
-    // ): Promise<R3>;
-    // public attemptsTo<P,R1,R2>(
-    //     result: P,
-    //     a1: Activity<P, R1>,
-    //     a2: Activity<R1, R2>,
-    // ): Promise<R2>
-    // eslint-disable-next-line @typescript-eslint/no-explicit-any
+    public attemptsTo<P,R1>(a1?: A<P, R1>): Promise<R1>;
+    public attemptsTo<P,R1,R2>(a1: A<P,R1>, a2: A<R1,R2>): Promise<R2>;
+    public attemptsTo<P,R1,R2, R3>(a1: A<P,R1>,a2: A<R1,R2>,a3: A<R2,R3>): Promise<R3>;
+    public attemptsTo<P,R1,R2, R3, R4>(a1: A<P,R1>,a2: A<R1, R2>,a3: A<R2,R3>,a4: A<R3,R4>,): Promise<R4>;
+    public attemptsTo<P,R1,R2, R3, R4, R5>(a1: A<P,R1>,a2: A<R1,R2>,a3: A<R2,R3>,a4: A<R3,R4>, a5: A<R4,R5>): Promise<R5>;
+    public attemptsTo<P,R1,R2, R3, R4, R5, R6>(a1: A<P,R1>,a2: A<R1, R2>,a3: A<R2,R3>,a4: A<R3,R4>, a5: A<R4,R5>, a6: A<R5,R6>): Promise<R6>;
+    public attemptsTo<P,R1,R2, R3, R4, R5, R6, R7>(a1: A<P,R1>,a2: A<R1,R2>,a3: A<R2,R3>,a4: A<R3,R4>, a5: A<R4,R5>, a6: A<R5,R6>, a7: A<R6,R7>): Promise<R7>;
+    public attemptsTo<P,R1,R2, R3, R4, R5, R6, R7, R8>(a1: A<P,R1>,a2: A<R1,R2>,a3: A<R2,R3>,a4: A<R3,R4>, a5: A<R4,R5>, a6: A<R5,R6>, a7: A<R6,R7>, a8: A<R7,R8>): Promise<R8>;
+    public attemptsTo<P,R1,R2, R3, R4, R5, R6, R7, R8, R9>(a1: A<P,R1>,a2: A<R1,R2>,a3: A<R2,R3>,a4: A<R3,R4>, a5: A<R4,R5>, a6: A<R5,R6>, a7: A<R6,R7>, a8: A<R7,R8>, a9: A<R8,R9>): Promise<R9>;
+    public attemptsTo<P,R1,R2, R3, R4, R5, R6, R7, R8, R9, R10>(a1: A<P,R1>,a2: A<R1,R2>,a3: A<R2,R3>,a4: A<R3,R4>, a5: A<R4,R5>, a6: A<R5,R6>, a7: A<R6,R7>, a8: A<R7,R8>, a9: A<R8,R9>, a10: A<R9,R10>): Promise<R10>;
+    public attemptsTo<P,R1,R2, R3, R4, R5, R6, R7, R8, R9, R10>(a1: A<P,R1>,a2: A<R1,R2>,a3: A<R2,R3>,a4: A<R3,R4>, a5: A<R4,R5>, a6: A<R5,R6>, a7: A<R6,R7>, a8: A<R7,R8>, a9: A<R8,R9>, a10: A<R9,R10>, ...activities: A<any, any>[]): Promise<any>;
     public attemptsTo<PT,RT>(...activities: Activity<any, any>[]): Promise<RT>
     {
 
-        const reducefn = (chain: Promise<PT>, activity: Activity<PT, RT>): Promise<RT> => {
+        const reducefn = (chain: Promise<any>, activity: Activity<any, any>): Promise<any> => {
             return chain.then((result: PT): Promise<RT> => {
                 return activity.performAs(this, result);
             })
         };
 
-        // @ts-ignore
         return activities.reduce(reducefn, Promise.resolve())
 
     }
