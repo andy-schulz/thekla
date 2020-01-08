@@ -10,6 +10,11 @@ type ExpectedType = {
     [key: string]: Function;
 }
 
+/**
+ * @deprecated since version 2.0
+ * Please use the @thekla/assertion lib
+ * @type {{toEqual: any; toBe: any; toMatch: any; toContain: any}}
+ */
 export const Expected: ExpectedType = {
 
     // eslint-disable-next-line @typescript-eslint/no-explicit-any
