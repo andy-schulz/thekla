@@ -29,9 +29,9 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@types/deep-diff": "^1.0.0",
+    "@types/chai": "^4.2.7",
     "@types/node": "^10.17.5",
-    "deep-diff": "^1.0.2"
+    "chai": "^4.2.0"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",

@@ -1,7 +1,8 @@
-import assert              from "assert"
-import {FailedExpectation} from "../error/FailedExpectation";
-import {ExecuteAssertion}  from "../interfaces/TheklaAssertion";
-import {AssertionImpl}     from "./Assert";
+import assert                 from "assert"
+import {assert as chaiAssert} from "chai";
+import {FailedExpectation}    from "../error/FailedExpectation";
+import {ExecuteAssertion}     from "../interfaces/TheklaAssertion";
+import {AssertionImpl}        from "./Assert";
 
 type AssertionFunc = ((actual: any) => boolean)[];
 
@@ -52,7 +53,7 @@ export const strictEqual = <AT>(expected: AT, message = `missed strict equality`
 };
 
 /**
- * check for not strict equality on values
+ * @function check for not strict equality on values
  * @param expected the expected value
  * @param message
  */
@@ -65,7 +66,7 @@ export const notStrictEqual = <AT>(expected: AT, message = `missed not strict eq
 };
 
 /**
- * check for deep equality on values
+ * @function check for deep equality on values
  * @param expected the expected value
  * @param message
  */
@@ -77,13 +78,37 @@ export const deepEqual = <AT>(expected: AT, message = `missed deep equality`): (
 };
 
 /**
- * check for not deep equality on values
+ * @function check for not deep equality on values
  * @param expected the expected value
  * @param message
  */
 export const notDeepEqual = <AT>(expected: AT, message = `missed not deep equality`): (actual: AT) => boolean => {
     return (actual: AT): boolean => {
         assert.notDeepStrictEqual(actual, expected, message);
+        return true;
+    }
+};
+
+/**
+ * @function check for value to be true
+ * @param {string} message to be used in case of an error
+ * @returns {(actual: boolean) => boolean} actual value matcher function
+ */
+export const truthy = (message = `missed true assertion`): (actual: boolean) => boolean => {
+    return (actual: boolean): boolean => {
+        chaiAssert.isTrue(actual, message);
+        return true;
+    }
+};
+
+/**
+ * @function check value not to be true
+ * @param {string} message to be used in case of an error
+ * @returns {(actual: boolean) => boolean} actual value matcher function
+ */
+export const notTruthy = (message = `missed not truthy assertion`): (actual: boolean) => boolean => {
+    return (actual: boolean): boolean => {
+        chaiAssert.isNotTrue(actual, message);
         return true;
     }
 };
