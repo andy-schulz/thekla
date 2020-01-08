@@ -16,7 +16,7 @@
     "examples:01": "lerna run 01",
     "examples:02": "lerna run 02",
     "examples:10": "lerna run 10",
-    "create:release:notes": "git log --pretty=\"%h - %s\" v2.5.0..HEAD --grep=FEATURE --grep=FIX --grep=REFACTORING"
+    "git:release:notes": "git log $(git describe --tags --abbrev=0)..HEAD --pretty=format:\"%s\" -i -E --grep=\"^feat:|^docs:\""
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^0.1.3",
