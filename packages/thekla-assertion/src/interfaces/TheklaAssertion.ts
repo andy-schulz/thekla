@@ -1,9 +1,21 @@
+import {ArrayTypes} from "../lib/assertion_include_spec";
+
 export interface TheklaAssertion extends LanguageCandy, AssertionFlags {
     equal: <AT>(expected: AT, message?: string) => ExecuteAssertion<AT>;
+    truthy: (message?: string) => ExecuteAssertion<boolean>;
+    falsy: (message?: string) => ExecuteAssertion<boolean>;
+    match: (expected: RegExp, message?: string) => ExecuteAssertion<string>;
+
+    // include(needle: string, message?: string): ExecuteAssertion<string>;
+    // include<T extends object>(needle: T, message?: string): ExecuteAssertion<WeakSet<T> | ArrayTypes<T> | T>;
+    // include<T>(needle: Partial<T>, message?: string): ExecuteAssertion<ArrayTypes<T> | T>;
+    include(needle: any, message?: string): ExecuteAssertion<any>;
 }
 
 export interface LanguageCandy {
     to: TheklaAssertion;
+    be: TheklaAssertion;
+    have: TheklaAssertion;
 }
 
 /**

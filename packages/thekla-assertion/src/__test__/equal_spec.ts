@@ -37,7 +37,7 @@ describe(`Expect`, function () {
             expect(
                 () =>
                     Expected.to.equal({a: 2}, `myMessage`)({a: 3})
-            ).toThrowError(`myMessage: {"a":3} === {"a":2}`);
+            ).toThrowError(/myMessage: {"a":3} (===|strictEqual) {"a":2}/);
         });
 
         it(`should pass the deep equal assertion on objects
@@ -79,7 +79,9 @@ describe(`Expect`, function () {
                 () =>
                     Expected.to.equal(`3`)
                         .and.to.equal(`2`)(`3`)
-            ).toThrowError(`missed strict equality: "3" === "2"`)
+            ).toThrowError(/missed strict equality: "3" (===|strictEqual) "2"/)
+            // node < 12 uses === as assertion text
+            // node >= 23 uses strictEqual as assertion text
         });
 
         it(`should fail the chained strict equal assertion with a message
@@ -88,7 +90,7 @@ describe(`Expect`, function () {
                 () =>
                     Expected.to.equal(3)
                         .and.to.equal(2, `myMessage`)(3)
-            ).toThrowError(`myMessage: 3 === 2`)
+            ).toThrowError(/myMessage: 3 (===|strictEqual) 2/)
         });
 
         it(`should fail all chained strict equal assertion with a message
@@ -97,8 +99,7 @@ describe(`Expect`, function () {
                 () =>
                     Expected.to.equal(1, `myFirstMessage`)
                         .and.to.equal(2, `mySecondMessage`)(3)
-            ).toThrowError(`myFirstMessage: 3 === 1
-mySecondMessage: 3 === 2`)
+            ).toThrowError(/myFirstMessage: 3 (===|strictEqual) 1([\s\S]*?)mySecondMessage: 3 (===|strictEqual) 2/)
         });
     });
 

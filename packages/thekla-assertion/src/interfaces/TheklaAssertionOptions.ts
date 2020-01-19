@@ -5,4 +5,8 @@ export interface TheklaAssertionOptions {
     // if expression shall be negated the attribute is set to true
     // default: false
     not: boolean;
+
+    own: boolean;
+
+    nested: boolean;
 }
