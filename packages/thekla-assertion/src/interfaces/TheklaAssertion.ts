@@ -24,6 +24,8 @@ export interface LanguageCandy {
 export interface AssertionFlags {
     not: TheklaAssertion;
     deep: TheklaAssertion;
+    nested: TheklaAssertion;
+    own: TheklaAssertion;
 }
 
 /**

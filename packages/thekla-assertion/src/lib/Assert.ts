@@ -1,9 +1,23 @@
+import {FailedOwnAndNestedChaining}                           from "../error/FailedOwnAndNestedChaining";
 import {Expected as E}                                        from "../interfaces/Expected";
 import {ExecuteAssertion, TheklaAssertion}                    from "../interfaces/TheklaAssertion";
 import {TheklaAssertionOptions}                               from "../interfaces/TheklaAssertionOptions";
 import {deepEqual, notDeepEqual, notStrictEqual, strictEqual} from "./assertion_equal_functions";
 import {assertAll}                                            from "./assertion_helper_functions";
-import {ArrayTypes, include}                                  from "./assertion_include_spec";
+import {
+    deepInclude,
+    deepNestedInclude,
+    deepOwnInclude,
+    include,
+    nestedInclude,
+    notDeepInclude,
+    notDeepNestedInclude,
+    notDeepOwnInclude,
+    notInclude,
+    notNestedInclude,
+    notOwnInclude,
+    ownInclude
+}                                                             from "./assertion_include_spec";
 import {match, notMatch}                                      from "./assertion_match_regexp_function";
 import {falsy, notFalsy, notTruthy, truthy}                   from "./assertion_truthy_falsy_functions";
 
@@ -14,7 +28,6 @@ export class AssertionImpl implements TheklaAssertion {
         deep: false,
         own: false,
         nested: false
-
     };
 
     public constructor(private assertions: ((actual: any) => boolean)[]) {
@@ -39,6 +52,16 @@ export class AssertionImpl implements TheklaAssertion {
 
     get deep(): AssertionImpl {
         this.options.deep = true;
+        return this;
+    }
+
+    get own(): AssertionImpl {
+        this.options.own = true;
+        return this;
+    }
+
+    get nested(): AssertionImpl {
+        this.options.nested = true;
         return this;
     }
 
@@ -126,62 +149,30 @@ export class AssertionImpl implements TheklaAssertion {
         const own = this.options.own;
         const nested = this.options.nested;
 
-        const bitMask =
-            (not ? 0b0001 << 0 : 0b0000) |
-            (deep ? 0b0001 << 1 : 0b0000) |
-            (own ? 0b0001 << 2 : 0b0000) |
-            (nested ? 0b0001 << 3 : 0b0000);
+        const map = new Map();
+        //[not,deep,own,nested]
+        map.set([false, false, false, false].toString(), include);
+        map.set([true, false, false, false].toString(), notInclude);
+        map.set([false, true, false, false].toString(), deepInclude);
+        map.set([true, true, false, false].toString(), notDeepInclude);
+        map.set([false, false, true, false].toString(), ownInclude);
+        map.set([true, false, true, false].toString(), notOwnInclude);
+        map.set([false, true, true, false].toString(), deepOwnInclude);
+        map.set([true, true, true, false].toString(), notDeepOwnInclude);
+        map.set([false, false, false, true].toString(), nestedInclude);
+        map.set([true, false, false, true].toString(), notNestedInclude);
+        map.set([false, true, false, true].toString(), deepNestedInclude);
+        map.set([true, true, false, true].toString(), notDeepNestedInclude);
+        map.set([false, false, true, true].toString(),
+                () => {throw FailedOwnAndNestedChaining.for(`include`)});
+        map.set([true, false, true, true].toString(),
+                () => {throw FailedOwnAndNestedChaining.for(`include`)});
+        map.set([false, true, true, true].toString(),
+                () => {throw FailedOwnAndNestedChaining.for(`include`)});
+        map.set([true, true, true, true].toString(),
+                () => {throw FailedOwnAndNestedChaining.for(`include`)});
 
-        let checkInclude = include;
-
-        switch (bitMask) {
-            case 0b0000 : // All flags not set
-                // do nothing include is already set
-                break;
-            case 0b0001 : //not flag set
-                checkInclude = notInclude;
-                break;
-            case 0b0010 : //deep flag set
-                console.log(``);
-                break;
-            case 0b0011 : // not and deep flag set
-                console.log(``);
-                break;
-            case 0b0100 : // own flag set
-                console.log(``);
-                break;
-            case 0b0101 : // own and not flag set
-                console.log(``);
-                break;
-            case 0b0110 : // own and deep flag set
-                console.log(``);
-                break;
-            case 0b0111 : // own, deep and not flag set
-                console.log(``);
-                break;
-            case 0b1000 : // nested flag set
-                console.log(``);
-                break;
-            case 0b1001 : // nested and not flag set
-                console.log(``);
-                break;
-            case 0b1010 : // nested and deep flag set
-                console.log(``);
-                break;
-            case 0b1011 : // nested, deep and not flag set
-                console.log(``);
-                break;
-            case 0b1100 : // ERROR own and nested flag set
-            case 0b1101 : // ERROR own and nested flag set
-            case 0b1110 : // ERROR own and nested flag set
-            case 0b1111 : // ERROR own and nested flag set
-                throw new Error(`own and nested cant be used in combination for include`);
-                break;
-            default:
-                throw new Error(`Error when evaluation the flags for include`)
-        }
-
-
+        const checkInclude = map.get([not, deep, own, nested].toString());
 
         return this.assert(checkInclude(needle, message))
     }
