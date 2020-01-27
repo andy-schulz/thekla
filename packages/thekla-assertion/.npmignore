@@ -1,0 +1,8 @@
+/**
+
+!dist/error/**
+!dist/interfaces/**
+!dist/lib/**
+!dist/utils/**
+
+!dist/index.*
