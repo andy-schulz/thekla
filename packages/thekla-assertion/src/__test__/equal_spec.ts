@@ -61,6 +61,23 @@ describe(`Expect`, function () {
             ).toThrowError(`myMessage: {"a":3} deepStrictEqual {"a":2}`)
         });
 
+        it(`should pass the not deep equal assertion on objects
+        test id: 43d13c19-1210-40c3-a26c-1b8c0a7c327e`, () => {
+            expect(Expected.to.not.deep.equal({a: 2})({a: 3})).toBeTruthy()
+        });
+
+        it(`should fail the not deep equal assertion on objects
+        test id: b80afa1e-fcad-4a4a-982f-a519ccedf98a`, () => {
+            expect(() => Expected.to.not.deep.equal({a: 2})({a: 2}))
+                .toThrowError(`missed not deep equality: {"a":2} notDeepStrictEqual {"a":2}`);
+        });
+
+        it(`should fail the not deep equal assertion with custom message
+        test id: edda55c9-9acb-4bdd-b308-625ea34ce62e`, () => {
+            expect(() => Expected.to.not.deep.equal({a: 2}, `myMessage`)({a: 2}))
+                .toThrowError(`myMessage: {"a":2} notDeepStrictEqual {"a":2}`);
+        });
+
     });
 
     describe(`chained assertions`, function () {
@@ -69,7 +86,7 @@ describe(`Expect`, function () {
             - (test case id: 0ba8e85c-883f-4138-a2d7-694fc79b853b)`, (): void => {
             expect(
                 Expected.to.equal(`2`)
-                    .and.to.equal(`2`)(`2`)
+                        .and.to.equal(`2`)(`2`)
             ).toBeTruthy()
         });
 
@@ -78,7 +95,7 @@ describe(`Expect`, function () {
             expect(
                 () =>
                     Expected.to.equal(`3`)
-                        .and.to.equal(`2`)(`3`)
+                            .and.to.equal(`2`)(`3`)
             ).toThrowError(/missed strict equality: "3" (===|strictEqual) "2"/)
             // node < 12 uses === as assertion text
             // node >= 23 uses strictEqual as assertion text
@@ -89,7 +106,7 @@ describe(`Expect`, function () {
             expect(
                 () =>
                     Expected.to.equal(3)
-                        .and.to.equal(2, `myMessage`)(3)
+                            .and.to.equal(2, `myMessage`)(3)
             ).toThrowError(/myMessage: 3 (===|strictEqual) 2/)
         });
 
@@ -98,7 +115,7 @@ describe(`Expect`, function () {
             expect(
                 () =>
                     Expected.to.equal(1, `myFirstMessage`)
-                        .and.to.equal(2, `mySecondMessage`)(3)
+                            .and.to.equal(2, `mySecondMessage`)(3)
             ).toThrowError(/myFirstMessage: 3 (===|strictEqual) 1([\s\S]*?)mySecondMessage: 3 (===|strictEqual) 2/)
         });
     });
