@@ -1,6 +1,6 @@
 {
   "name": "@thekla/webdriver",
-  "version": "2.7.0",
+  "version": "2.7.1",
   "description": "WebdriverIO wrapper providing the foundation for the SPP web and mobile abilities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -47,9 +47,9 @@
   "devDependencies": {
     "@thekla/support": "^2.7.0",
     "del-cli": "^3.0.0",
+    "jasmine": "^3.5.0",
     "npm-run-all": "^4.1.5",
-    "nyc": "^14.1.1",
-    "jasmine": "^3.5.0"
+    "nyc": "^14.1.1"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }
