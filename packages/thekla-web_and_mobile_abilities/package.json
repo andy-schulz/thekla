@@ -1,6 +1,6 @@
 {
   "name": "@thekla/web-and-mobile-abilities",
-  "version": "2.5.0",
+  "version": "2.7.0",
   "description": "BrowserTheWeb and OperateOnMobileDevice abilities to write e2e tests in the screenplay pattern style",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,16 +33,16 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@thekla/core": "^2.5.0",
-    "@thekla/webdriver": "^2.5.0"
+    "@thekla/core": "^2.7.0",
+    "@thekla/webdriver": "^2.7.0"
   },
   "devDependencies": {
-    "@thekla/config": "^2.5.0",
-    "@thekla/support": "^2.5.0",
-    "@thekla/assertion": "^2.5.0",
+    "@thekla/assertion": "^2.7.0",
+    "@thekla/config": "^2.7.0",
+    "@thekla/support": "^2.7.0",
     "del-cli": "^3.0.0",
-    "nyc": "^14.1.1",
-    "jasmine": "^3.5.0"
+    "jasmine": "^3.5.0",
+    "nyc": "^14.1.1"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }

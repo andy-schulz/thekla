@@ -1,6 +1,6 @@
 {
   "name": "@thekla/assertion",
-  "version": "2.5.0",
+  "version": "2.7.0",
   "description": "the SPP (ScreenPlay Pattern) assertion library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,8 +35,8 @@
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
-    "nyc": "^14.1.1",
-    "jasmine": "^3.5.0"
+    "jasmine": "^3.5.0",
+    "nyc": "^14.1.1"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }
