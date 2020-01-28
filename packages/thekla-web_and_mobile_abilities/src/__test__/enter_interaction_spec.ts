@@ -1,7 +1,7 @@
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
 import {Actor}                                                               from "@thekla/core";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {element, By, BrowseTheWeb, RunningBrowser, Enter, Navigate, Value}   from "..";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
+import {BrowseTheWeb, By, element, Enter, Navigate, RunningBrowser, Value}   from "..";
 
 describe(`Enter`, function () {
 
@@ -70,7 +70,26 @@ describe(`Enter`, function () {
 
             await Enter.value(undefined).into(emailField).performAs(Emma);
 
-            expect(text).toEqual(`Enter Test`);
+            const secondText = await Value.of(emailField).answeredBy(Emma);
+
+            expect(secondText).toEqual(`Enter Test`);
+        });
+
+        it(`should clear the field before a new value is entered
+        id: 21355df0-04e0-45a6-b1bc-1bc7e8e6e931`, async () => {
+            await Navigate.to(`/`).performAs(Emma);
+
+            await Enter.value(`First Text`).into(emailField).performAs(Emma);
+            const firstText = await Value.of(emailField).answeredBy(Emma);
+            expect(firstText).toEqual(`First Text`);
+
+            await Enter.value(`Second Text`).into(emailField).performAs(Emma);
+            const secondText = await Value.of(emailField).answeredBy(Emma);
+            expect(secondText).toEqual(`First TextSecond Text`);
+
+            await Enter.value(`Third Text`).into.empty(emailField).performAs(Emma);
+            const thirdText = await Value.of(emailField).answeredBy(Emma);
+            expect(thirdText).toEqual(`Third Text`);
         });
     });
 });
