@@ -44,7 +44,8 @@
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
-    "nyc": "^14.1.1"
+    "nyc": "^14.1.1",
+    "jasmine": "^3.5.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }
