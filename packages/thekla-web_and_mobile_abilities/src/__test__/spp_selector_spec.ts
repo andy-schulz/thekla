@@ -1,11 +1,12 @@
 import {configure, getLogger}                                                from "log4js";
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {Actor, See, Expected}                                                from "@thekla/core";
+import {Actor, See}                                                from "@thekla/core";
 import {
     Browser, RunningBrowser, BrowseTheWeb, element, By, UntilElement, Navigate, Click, Text
 }                                                                            from "..";
 import {checkForFireFoxCyclicError}                                          from "@thekla/support";
+import { Expected } from "@thekla/assertion";
 
 configure(`src/__test__/__config__/log4js.json`);
 
@@ -34,7 +35,7 @@ describe(`When locating an element,`, (): void => {
 
             return john.attemptsTo(
                 Navigate.to(`/`),
-                See.if(Text.of(button)).is(Expected.toEqual(`Danger!`)),
+                See.if(Text.of(button)).is(Expected.to.equal(`Danger!`)),
                 Click.on(button),
             );
         });
@@ -59,7 +60,7 @@ describe(`When locating an element,`, (): void => {
                 `9a383bbf-9db9-41c5-b903-7f8d61bea88a`)
                 .catch(() => {
                     return john.attemptsTo(
-                        See.if(Text.of(button)).is(Expected.toEqual(`Danger!`)),
+                        See.if(Text.of(button)).is(Expected.to.equal(`Danger!`)),
                         Click.on(button)
                     )
                 });

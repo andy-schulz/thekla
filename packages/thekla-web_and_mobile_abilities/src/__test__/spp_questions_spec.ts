@@ -1,10 +1,23 @@
+import {Expected}                                                            from "@thekla/assertion";
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
+import {Actor, Extract, See}                                                 from "@thekla/core";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {configure}                                                           from "log4js";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {Actor, See, Expected, Extract}                                       from "@thekla/core";
 import {
-    Browser, RunningBrowser, BrowseTheWeb, Navigate, TheSites, By,
-    element, Status, all, Count, Attribute, Click, Text
+    all,
+    Attribute,
+    Browser,
+    BrowseTheWeb,
+    By,
+    Click,
+    Count,
+    element,
+    Navigate,
+    RunningBrowser,
+    Status,
+    Expected as WebExpected,
+    Text,
+    TheSites
 }                                                                            from "..";
 
 configure(`src/__test__/__config__/log4js.json`);
@@ -38,7 +51,7 @@ describe(`Using`, (): void => {
                `- (test case id: 332e9252-aec9-44b5-b936-728561523e27)`, async (): Promise<void> => {
             await Joanna.attemptsTo(
                 Navigate.to(`/delayed`),
-                See.if(TheSites.url).is(Expected.toEqual(`${testUrl}/delayed`))
+                See.if(TheSites.url).is(Expected.to.equal(`${testUrl}/delayed`))
             )
         });
 
@@ -46,7 +59,7 @@ describe(`Using`, (): void => {
                `- (test case id: 7974c013-4234-43e4-8330-6ec788512eb8)`, async (): Promise<void> => {
             await Joanna.attemptsTo(
                 Navigate.to(`/delayed`),
-                See.if(TheSites.url).is(Expected.toEqual(`${testUrl}/delayed`))
+                See.if(TheSites.url).is(Expected.to.equal(`${testUrl}/delayed`))
             )
         });
     });
@@ -67,7 +80,7 @@ describe(`Using`, (): void => {
             await John.attemptsTo(
                 Navigate.to(`/delayed`),
                 See.if(Status.visible.of(delayedButton))
-                   .is(Expected.toBe(false))
+                   .is(Expected.to.be.falsy())
             )
         });
 
@@ -80,7 +93,7 @@ describe(`Using`, (): void => {
             await John.attemptsTo(
                 Navigate.to(`/delayed`),
                 See.if(Status.of(delayedButton))
-                   .is(Expected.notToBeVisible())
+                   .is(WebExpected.notToBeVisible())
             )
         });
 
@@ -93,7 +106,7 @@ describe(`Using`, (): void => {
             await John.attemptsTo(
                 Navigate.to(`/delayed`),
                 See.if(Status.visible.of(delayedButton))
-                   .is(Expected.toBe(true))
+                   .is(Expected.to.be.truthy())
             )
         });
 
@@ -106,7 +119,7 @@ describe(`Using`, (): void => {
             await John.attemptsTo(
                 Navigate.to(`/delayed`),
                 See.if(Status.visible.of(delayedButton))
-                   .is(Expected.toBe(false))
+                   .is(Expected.to.be.falsy())
                    .repeatFor(6, 1000)
             )
         });
@@ -126,7 +139,7 @@ describe(`Using`, (): void => {
 
             await Jonathan.attemptsTo(
                 Navigate.to(`/tables`),
-                See.if(Count.of(tableRows)).is(Expected.toEqual(107))
+                See.if(Count.of(tableRows)).is(Expected.to.equal(107))
             );
         });
     });

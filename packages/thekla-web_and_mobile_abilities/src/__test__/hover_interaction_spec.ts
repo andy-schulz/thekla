@@ -1,8 +1,9 @@
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {UntilElement, By, RunningBrowser}                                    from "@thekla/webdriver"
-import {element, BrowseTheWeb, Navigate, Status, Hover, Text}                from "..";
-import {Actor, See, Expected}                                                from "@thekla/core";
+import {Expected}                                                            from "@thekla/assertion";
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
+import {Actor, See}                                                          from "@thekla/core";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
+import {By, RunningBrowser, UntilElement}                                    from "@thekla/webdriver"
+import {BrowseTheWeb, element, Hover, Navigate, Status, Text}                from "..";
 
 describe(`Hover`, (): void => {
 
@@ -25,7 +26,7 @@ describe(`Hover`, (): void => {
             .called(`The user icon which displays an information box when hovered upon`);
 
         const userName = element(By.css(`[data-test-id='hoverusername']`))
-        // .shallWait(UntilElement.is.visible.forAsLongAs(5000))
+            // .shallWait(UntilElement.is.visible.forAsLongAs(5000))
             .called(`the user name inside the hover information box`);
 
         const Howard = Actor.named(`Howard`);
@@ -39,10 +40,10 @@ describe(`Hover`, (): void => {
         - (test case id: f45a3fa4-896c-47d7-bc2f-d77d07a046d3)`, (): Promise<void> => {
             return Howard.attemptsTo(
                 Navigate.to(`${testUrl}/pointeractions`),
-                See.if(Status.visible.of(userName)).is(Expected.toBe(false)),
+                See.if(Status.visible.of(userName)).is(Expected.to.be.falsy()),
                 Hover.over(userIconWithHoverInfo),
-                See.if(Status.visible.of(userName)).is(Expected.toBe(true)),
-                See.if(Text.of(userName)).is(Expected.toBe(`Name: User Name`))
+                See.if(Status.visible.of(userName)).is(Expected.to.be.truthy()),
+                See.if(Text.of(userName)).is(Expected.to.equal(`Name: User Name`))
             )
         });
 
@@ -51,14 +52,14 @@ describe(`Hover`, (): void => {
             return Howard.attemptsTo(
                 Navigate.to(`${testUrl}/pointeractions`),
                 See.if(Status.visible.of(userName))
-                    .is(Expected.toBe(false)),
+                   .is(Expected.to.be.falsy()),
                 Hover.over(userIconWithHoverInfo),
                 See.if(Status.visible.of(userName))
-                    .is(Expected.toBe(true))
-                    .repeatFor(3, 1000),
-                See.if(Text.of(userName)).is(Expected.toBe(`Name: User Name`)),
+                   .is(Expected.to.be.truthy())
+                   .repeatFor(3, 1000),
+                See.if(Text.of(userName)).is(Expected.to.equal(`Name: User Name`)),
                 Hover.over(userIcon),
-                See.if(Status.visible.of(userName)).is(Expected.toBe(false)),
+                See.if(Status.visible.of(userName)).is(Expected.to.be.falsy())
             )
         }, 50000); // dont change the timeout, the url resolve via proxy takes a while
 

@@ -39,6 +39,7 @@
   "devDependencies": {
     "@thekla/config": "^2.5.0",
     "@thekla/support": "^2.5.0",
+    "@thekla/assertion": "^2.5.0",
     "del-cli": "^3.0.0",
     "nyc": "^14.1.1",
     "jasmine": "^3.5.0"

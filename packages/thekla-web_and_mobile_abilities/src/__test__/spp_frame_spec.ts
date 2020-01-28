@@ -1,8 +1,9 @@
 import {configure}                                                                      from "log4js";
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities}            from "@thekla/support";
 import {ServerConfig, DesiredCapabilities}                                              from "@thekla/config";
-import {Actor, See, Expected}                                                           from "@thekla/core";
+import {Actor, See}                                                           from "@thekla/core";
 import {BrowseTheWeb, RunningBrowser, element, By, frame, Text, UntilElement, Navigate} from "..";
+import { Expected } from "@thekla/assertion";
 
 configure(`src/__test__/__config__/log4js.json`);
 
@@ -36,11 +37,11 @@ describe(`Locating Elements inside Frames`, (): void => {
 
         await Francine.attemptsTo(
             Navigate.to(`/nestedFrames`),
-            See.if(Text.of(button)).is(Expected.toEqual(`Button outside of Frame`)),
-            See.if(Text.of(button1)).is(Expected.toEqual(`Button inside single frame`)),
-            See.if(Text.of(button)).is(Expected.toEqual(`Button outside of Frame`)),
-            See.if(Text.of(button2)).is(Expected.toEqual(`Button nested inside frame of frame`)),
-            See.if(Text.of(button)).is(Expected.toEqual(`Button outside of Frame`))
+            See.if(Text.of(button)).is(Expected.to.equal(`Button outside of Frame`)),
+            See.if(Text.of(button1)).is(Expected.to.equal(`Button inside single frame`)),
+            See.if(Text.of(button)).is(Expected.to.equal(`Button outside of Frame`)),
+            See.if(Text.of(button2)).is(Expected.to.equal(`Button nested inside frame of frame`)),
+            See.if(Text.of(button)).is(Expected.to.equal(`Button outside of Frame`))
         );
 
     });
@@ -60,11 +61,11 @@ describe(`Locating Elements inside Frames`, (): void => {
 
         await Francine.attemptsTo(
             Navigate.to(`/nestedFrames`),
-            See.if(Text.of(button)).is(Expected.toEqual(`Button outside of Frame`)),
-            See.if(Text.of(button1)).is(Expected.toEqual(`Button inside single frame`)),
-            See.if(Text.of(button)).is(Expected.toEqual(`Button outside of Frame`)),
-            See.if(Text.of(button2)).is(Expected.toEqual(`Button nested inside frame of frame`)),
-            See.if(Text.of(button)).is(Expected.toEqual(`Button outside of Frame`))
+            See.if(Text.of(button)).is(Expected.to.equal(`Button outside of Frame`)),
+            See.if(Text.of(button1)).is(Expected.to.equal(`Button inside single frame`)),
+            See.if(Text.of(button)).is(Expected.to.equal(`Button outside of Frame`)),
+            See.if(Text.of(button2)).is(Expected.to.equal(`Button nested inside frame of frame`)),
+            See.if(Text.of(button)).is(Expected.to.equal(`Button outside of Frame`))
         );
 
     });

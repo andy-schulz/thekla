@@ -1,14 +1,24 @@
+import {Expected}                                                            from "@thekla/assertion";
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
+import {Actor, See}                                                          from "@thekla/core";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {Browser}                                                             from "@thekla/webdriver";
 import {WebElementListWd}                                                    from "@thekla/webdriver/dist/lib/element/WebElementListWd";
 import {getLogger}                                                           from "log4js";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {Actor, See, Expected}                                                from "@thekla/core";
 import {
-    RunningBrowser, BrowseTheWeb, ClientHelper, By,
-    element, UntilElement, Navigate, Text, Wait, Status
+    BrowseTheWeb,
+    By,
+    ClientHelper,
+    element,
+    Expected as WebExpected,
+    Navigate,
+    RunningBrowser,
+    Status,
+    Text,
+    UntilElement,
+    Wait
 }                                                                            from "..";
-import { ElementStatus } from "../lib/questions/Status";
+import {ElementStatus}                                                       from "../lib/questions/Status";
 
 const logger = getLogger(`Spec: Spp wait for elements`);
 
@@ -50,7 +60,7 @@ describe(`Waiting for SPP Elements`, (): void => {
                `- (test case id: 4406f09a-5b80-4106-b46a-9f2683faefc9)`, (): Promise<void> => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/redirectToDelayed`),
-                See.if(Text.of(appearingButton)).is(Expected.toEqual(`Appeared after 4 seconds`))
+                See.if(Text.of(appearingButton)).is(Expected.to.equal(`Appeared after 4 seconds`))
             );
         });
 
@@ -58,7 +68,7 @@ describe(`Waiting for SPP Elements`, (): void => {
                `- (test case id: 8419865d-b444-459d-8101-7e6912af1e08)`, (): Promise<void> => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/delayed`),
-                See.if(Text.of(toBeEnabledButton)).is(Expected.toEqual(`Enabled after 4 seconds`))
+                See.if(Text.of(toBeEnabledButton)).is(Expected.to.equal(`Enabled after 4 seconds`))
             );
         });
 
@@ -66,7 +76,7 @@ describe(`Waiting for SPP Elements`, (): void => {
                `- (test case id: a0899cd4-6548-4f15-ab19-579bd6ca1ccd)`, (): Promise<void> => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/delayed`),
-                See.if(Text.of(toBeDisabledButton)).is(Expected.toEqual(`Disabled after 4 seconds`))
+                See.if(Text.of(toBeDisabledButton)).is(Expected.to.equal(`Disabled after 4 seconds`))
             );
         });
     });
@@ -76,8 +86,8 @@ describe(`Waiting for SPP Elements`, (): void => {
             .called(`Test appearing element after 4 seconds`);
 
         const disappearingButton = element(By.css(`[data-test-id='DisappearButtonBy4000']`))
-            .called(`Test disappearing element after 4 seconds`)
-            // .shallNotImplicitlyWait();
+            .called(`Test disappearing element after 4 seconds`);
+        // .shallNotImplicitlyWait();
 
         beforeAll(() => {
 
@@ -143,7 +153,7 @@ describe(`Waiting for SPP Elements`, (): void => {
                `- (test case id: 5812e00b-580d-4330-899c-9f62cedc0a6e)`, (): Promise<void> => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/modals`),
-                See.if(Text.of(button)).is(Expected.toEqual(`Danger!`)),
+                See.if(Text.of(button)).is(Expected.to.equal(`Danger!`)),
                 Wait.for(modal).andCheck(UntilElement.isNot.visible.forAsLongAs(500))
             ).then((): void => {
                 expect(true).toBe(false, `Action should time out after 500ms but it doesnt`)
@@ -157,7 +167,7 @@ describe(`Waiting for SPP Elements`, (): void => {
                `- (test case id: a9cd8aac-9a38-47f3-ad1e-4d23430a7d4be)`, (): Promise<void> => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/modals`),
-                See.if(Text.of(button)).is(Expected.toEqual(`Danger!`)),
+                See.if(Text.of(button)).is(Expected.to.equal(`Danger!`)),
                 Wait.for(modal)
                     .andCheck(UntilElement.isNot.visible.forAsLongAs(500))
                     .butContinueInCaseOfError(`to test if it works`)
@@ -173,7 +183,7 @@ describe(`Waiting for SPP Elements`, (): void => {
                `- (test case id: c93f9af5-b5ea-49d2-99ba-45e7b31018b0)`, (): Promise<void> => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/modals`),
-                See.if(Text.of(button)).is(Expected.toEqual(`Danger!`)),
+                See.if(Text.of(button)).is(Expected.to.equal(`Danger!`)),
                 Wait.for(modal).andCheck(UntilElement.isNot.visible.forAsLongAs(10000))
             )
         });
@@ -194,7 +204,7 @@ describe(`Waiting for SPP Elements`, (): void => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/modals`),
                 Wait.until(Status.of(modal))
-                    .is(Expected.notToBeVisible())
+                    .is(WebExpected.notToBeVisible())
                     .forAsLongAs(500)
             ).then((): void => {
                 expect(true).toBe(false, `Action should time out after 5000 ms but it doesnt`)
@@ -211,13 +221,13 @@ timed out after 500 ms.`)
         });
 
         it(`should wait for the modal element to disappear
-        - (test case id: 2faab3b4-54b0-43cf-a616-71995c4f0440)`, async (): Promise<void> => {
+        - (test case id: 0c65d10b-6ee2-47be-8bd5-c55fefd77f5e)`, async (): Promise<void> => {
 
             const start = Date.now();
 
             return walterTheWaiter.attemptsTo(
                 Wait.until(Status.of(modal))
-                    .is(Expected.notToBeVisible())
+                    .is(WebExpected.notToBeVisible())
                     .forAsLongAs(7000)
             ).then((): void => {
                 const end = Date.now();

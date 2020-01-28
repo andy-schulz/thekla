@@ -2,8 +2,9 @@ import {
     SppElement, BrowseTheWeb, element, Browser, RunningBrowser, By, UntilElement, Navigate, Drag, Text
 }                                                                            from "..";
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {Actor, See, Expected}                                                from "@thekla/core";
+import {Actor, See}                                                from "@thekla/core";
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
+import { Expected } from "@thekla/assertion";
 
 describe(`Drag an Element`, (): void => {
 
@@ -47,7 +48,7 @@ describe(`Drag an Element`, (): void => {
             // await Drag.element(element0).toElement(element1).performAs(Donnie);
 
             await See.if(Text.of(dragIndicator))
-                .is(Expected.toBe(`Element item-0 was moved from position 0 to position 1`))
+                .is(Expected.to.equal(`Element item-0 was moved from position 0 to position 1`))
                 .repeatFor(5, 1000)
                 .performAs(Donnie)
         });

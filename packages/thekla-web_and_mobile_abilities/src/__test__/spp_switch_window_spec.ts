@@ -1,8 +1,9 @@
 import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {Actor, Expected, See}                                                from "@thekla/core";
+import {Actor, See}                                                from "@thekla/core";
 import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {Browser, RunningBrowser}                                             from "@thekla/webdriver";
 import {BrowseTheWeb, SwitchToWindow, TheSites}                              from "..";
+import { Expected } from "@thekla/assertion";
 
 describe(`Switching Window`, () => {
 
@@ -44,7 +45,7 @@ describe(`Switching Window`, () => {
         it(`should switch to the new tab if the title exists
         test id: 267efd80-b373-4598-9ff3-529465df885c`, async () => {
             await SwitchToWindow.matchingTheTitle(`React`).performAs(Janine);
-            await See.if(TheSites.title).is(Expected.toBe(`React App`)).performAs(Janine);
+            await See.if(TheSites.title).is(Expected.to.equal(`React App`)).performAs(Janine);
         });
 
         it(`should throw an error if the title does not exist
