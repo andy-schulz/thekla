@@ -5,6 +5,8 @@ import fp                                                                       
 import {ExecutingRestClient, Get, Method, On, Post, request, Response, Send, UseTheRestApi} from ".."
 import {RestRequestResult}                                                                  from "../interface/RestRequestResult";
 
+const {MY_PROXY} = process.env;
+
 describe(`Trying to Add two numbers by the mathjs API`, (): void => {
 
     const a = 5;
@@ -17,7 +19,7 @@ describe(`Trying to Add two numbers by the mathjs API`, (): void => {
         requestOptions: {
             baseUrl: `http://api.mathjs.org/v4`,
             resolveWithFullResponse: true,
-            proxy: process.env.MY_PROXY
+            proxy: MY_PROXY
         }
     };
 

@@ -2,13 +2,15 @@ import {RestClientConfig}                   from "@thekla/config";
 import {Actor}                              from "@thekla/core";
 import {ExecutingRestClient, UseTheRestApi} from "..";
 
+const {REST_BASE_PORT, REST_BASE_URL, MY_PROXY} = process.env;
+
 describe(`Using ability UseTheRestApi `, () => {
 
     const restClientConfig: RestClientConfig = {
         requestOptions: {
-            baseUrl: `${process.env.BASEURL}:8443`,
+            baseUrl: `${REST_BASE_URL}:${REST_BASE_PORT ?? 8443}`,
             resolveWithFullResponse: true,
-            proxy: process.env.MY_PROXY
+            proxy: MY_PROXY
         }
     };
 

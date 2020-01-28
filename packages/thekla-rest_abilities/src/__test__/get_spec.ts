@@ -2,13 +2,15 @@ import {RestClientConfig}                                                       
 import {Actor}                                                                   from "@thekla/core";
 import {ExecutingRestClient, Get, On, request, RestRequestResult, UseTheRestApi} from "..";
 
+const {REST_BASE_PORT, REST_BASE_URL, MY_PROXY} = process.env;
+
 describe(`Using the GET method`, () => {
 
     const restClientConfig: RestClientConfig = {
         requestOptions: {
-            baseUrl: `${process.env.BASEURL}:8443`,
+            baseUrl: `${REST_BASE_URL}:${REST_BASE_PORT ?? 8443}`,
             resolveWithFullResponse: true,
-            proxy: process.env.MY_PROXY
+            proxy: MY_PROXY
         }
     };
 
@@ -20,11 +22,18 @@ describe(`Using the GET method`, () => {
         test id: 15bae575-4ac9-4fee-adb8-b69e909706a7`, async () => {
             const getReq = request(On.resource(`/get`));
 
-            const result = await Get.from(getReq).performAs(Richard);
+            let result;
+            try {
+                result = await Get.from(getReq).performAs(Richard);
+            } catch (e) {
+                console.log(e);
+                throw e;
+            }
+
             expect(result.request.method).toEqual(`GET`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(process?.env?.BASEURL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
         });
     });
 

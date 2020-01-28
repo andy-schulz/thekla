@@ -2,13 +2,15 @@ import {RestClientConfig}                                                       
 import {Actor}                                                                                  from "@thekla/core";
 import {ExecutingRestClient, Method, On, Post, request, RestRequestResult, Send, UseTheRestApi} from "..";
 
+const {REST_BASE_PORT, REST_BASE_URL, MY_PROXY} = process.env;
+
 describe(`Using the POST method`, () => {
 
     const restClientConfig: RestClientConfig = {
         requestOptions: {
-            baseUrl: `${process.env.BASEURL}:8443`,
+            baseUrl: `${REST_BASE_URL}:${REST_BASE_PORT ?? 8443}`,
             resolveWithFullResponse: true,
-            proxy: process.env.MY_PROXY
+            proxy: MY_PROXY
         }
     };
 
@@ -21,12 +23,18 @@ describe(`Using the POST method`, () => {
         test id: b9efe29f-1b13-4db0-8556-be581c5c73c6`, async () => {
             const postReq = request(On.resource(`/post`));
 
-            const result = await Post.to(postReq).performAs(Richard);
+            let result;
+            try {
+                result = await Post.to(postReq).performAs(Richard);
+            } catch (e) {
+                console.log(e);
+                throw e;
+            }
 
             expect(result.request.method).toEqual(`POST`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(process?.env?.BASEURL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
         });
 
         it(`with the general Send interaction should return status code 200
@@ -38,7 +46,7 @@ describe(`Using the POST method`, () => {
             expect(result.request.method).toEqual(`POST`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(process?.env?.BASEURL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
         });
     });
 

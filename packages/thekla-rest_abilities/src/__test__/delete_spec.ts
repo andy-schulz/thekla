@@ -3,13 +3,15 @@ import {Actor}                                                                  
 import {ExecutingRestClient, Method, On, request, RestRequestResult, Send, UseTheRestApi} from "..";
 import {Delete}                                                                           from "../spp/actions/Delete";
 
+const {REST_BASE_PORT, REST_BASE_URL, MY_PROXY} = process.env;
+
 describe(`Using the DELETE method`, () => {
 
     const restClientConfig: RestClientConfig = {
         requestOptions: {
-            baseUrl: `${process.env.BASEURL}:8443`,
+            baseUrl: `${REST_BASE_URL}:${REST_BASE_PORT ?? 8443}`,
             resolveWithFullResponse: true,
-            proxy: process.env.MY_PROXY
+            proxy: MY_PROXY
         }
     };
 
@@ -22,24 +24,36 @@ describe(`Using the DELETE method`, () => {
         test id: c8c693c0-56c6-4ad1-bb87-fe03a5bdde95`, async () => {
             const deleteReq = request(On.resource(`/delete`));
 
-            const result = await Delete.from(deleteReq).performAs(Richard);
+            let result;
+            try {
+                result = await Delete.from(deleteReq).performAs(Richard);
+            } catch (e) {
+                console.log(e);
+                throw e;
+            }
 
             expect(result.request.method).toEqual(`DELETE`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(process?.env?.BASEURL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
         });
 
         it(`with the general Send interaction should return status code 200
         test id: c8268867-120a-4641-aa0e-83fe4c251ff7`, async () => {
             const deleteReq = request(On.resource(`/delete`));
 
-            const result = await Send.the(deleteReq).as(Method.delete()).performAs(Richard);
+            let result;
+            try {
+                result = await Send.the(deleteReq).as(Method.delete()).performAs(Richard);
+            } catch (e) {
+                console.log(e);
+                throw e;
+            }
 
             expect(result.request.method).toEqual(`DELETE`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(process?.env?.BASEURL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
         });
     });
 
@@ -52,8 +66,8 @@ describe(`Using the DELETE method`, () => {
             const result = await Delete.from(getReq).performAs(Richard)
                                        .catch((result: RestRequestResult) => result);
 
-            expect(result.request.method).toEqual(`DELETE`);
             expect(result.statusCode).toEqual(405);
+            expect(result.request.method).toEqual(`DELETE`);
             const body = result.body;
             expect(body).toContain(`405 Method Not Allowed`)
         });

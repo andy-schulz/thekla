@@ -2,13 +2,15 @@ import {RestClientConfig}                                                       
 import {Actor}                                                                                   from "@thekla/core";
 import {ExecutingRestClient, Method, On, Patch, request, RestRequestResult, Send, UseTheRestApi} from "..";
 
+const {REST_BASE_PORT, REST_BASE_URL, MY_PROXY} = process.env;
+
 describe(`Using the PATCH method`, () => {
 
     const restClientConfig: RestClientConfig = {
         requestOptions: {
-            baseUrl: `${process.env.BASEURL}:8443`,
+            baseUrl: `${REST_BASE_URL}:${REST_BASE_PORT ?? 8443}`,
             resolveWithFullResponse: true,
-            proxy: process.env.MY_PROXY
+            proxy: MY_PROXY
         }
     };
 
@@ -25,7 +27,7 @@ describe(`Using the PATCH method`, () => {
             expect(result.request.method).toEqual(`PATCH`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(process?.env?.BASEURL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
         });
 
         it(`with the general Send interaction should return status code 200
@@ -37,7 +39,7 @@ describe(`Using the PATCH method`, () => {
             expect(result.request.method).toEqual(`PATCH`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(process?.env?.BASEURL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
         });
     });
 
