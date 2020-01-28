@@ -15,6 +15,8 @@ describe(`Using Google Search to find an online calculator`, (): void => {
         let calculatorInput: WebElementFinder;
 
         beforeAll((): void => {
+            jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+
             b = ClientHelper.create(conf, capabilities);
             searchField = b.element(By.css(`[name='q']`))
                            .shallWait(UntilElement.is.visible.forAsLongAs(5000))
@@ -35,7 +37,7 @@ describe(`Using Google Search to find an online calculator`, (): void => {
             await submitSearch.click();
             expect(await calculatorInput.isVisible()).toBe(true,
                                                            `Google calculator input field not found`)
-        }, 20000);
+        });
     });
 
     afterAll(async (): Promise<void[]> => {
