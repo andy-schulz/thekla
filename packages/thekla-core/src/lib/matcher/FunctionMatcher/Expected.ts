@@ -11,8 +11,8 @@ type ExpectedType = {
 }
 
 /**
- * @deprecated since version 2.0
- * Please use the @thekla/assertion lib
+ * @deprecated since version 2.6 - please use the @thekla/assertion lib
+ * the package will be removed in version 3.0
  * @type {{toEqual: any; toBe: any; toMatch: any; toContain: any}}
  */
 export const Expected: ExpectedType = {
