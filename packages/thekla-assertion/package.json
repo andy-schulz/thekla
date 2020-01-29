@@ -30,13 +30,13 @@
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
     "@types/chai": "^4.2.7",
-    "@types/node": "^10.17.5",
+    "@types/node": "^10.17.14",
     "chai": "^4.2.0"
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
     "jasmine": "^3.5.0",
-    "nyc": "^14.1.1"
+    "nyc": "^15.0.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }

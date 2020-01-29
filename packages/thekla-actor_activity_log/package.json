@@ -33,7 +33,7 @@
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
-    "nyc": "^14.1.1"
+    "nyc": "^15.0.0"
   },
   "gitHead": "953cabdef048e106a4ccfb463f2d904b2c5ea3f1"
 }
