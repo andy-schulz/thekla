@@ -24,7 +24,7 @@ export abstract class Task<PT,RT> implements Activity<PT,RT> {
     abstract performAs(actor: PerformsTask, result: PT): Promise<RT>;
 }
 
-export class BasicTaskPerfomer<P> implements Activity<P,P> {
+export class BasicTaskPerformer<P> implements Activity<P,P> {
     public performAs(actor: PerformsTask, result: P): Promise<P> {
         return Promise.resolve(result);
     }
