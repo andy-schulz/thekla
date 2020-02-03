@@ -30,6 +30,7 @@
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
     "@thekla/activity-log": "^2.7.0",
+    "@thekla/assertion": "^2.7.0",
     "@thekla/config": "^2.7.0",
     "@types/deep-diff": "^1.0.0",
     "@types/lodash": "^4.14.149",
@@ -40,7 +41,8 @@
   },
   "devDependencies": {
     "del-cli": "^3.0.0",
-    "nyc": "^15.0.0"
+    "nyc": "^15.0.0",
+    "jasmine": "^3.5.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }

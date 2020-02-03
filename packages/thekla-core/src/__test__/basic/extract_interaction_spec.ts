@@ -1,4 +1,4 @@
-import {Actor, Extract, DelayedResult} from "../..";
+import {Actor, Extract, Result} from "../..";
 
 describe(`Extract`, function () {
 
@@ -11,8 +11,7 @@ describe(`Extract`, function () {
             const field: string[] = [];
 
             await Emma.attemptsTo(
-
-                Extract.the(DelayedResult.returnsValue(`Extract Test`).after(0))
+                Extract.the(Result.of(`Extract Test`))
                        .by((text: string) => field.push(text))
             );
 

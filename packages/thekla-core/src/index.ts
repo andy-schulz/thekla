@@ -27,8 +27,7 @@ export {Extract}  from "./lib/matcher/Extract";
 export {Question} from "./lib/questions/Question";
 
 // Basic Questions
-export {ReturnedResult} from "./lib/questions/ReturnedResult";
-export {DelayedResult}  from "./lib/questions/DelayedResult";
+export {Result}        from "./lib/questions/Result";
 
 // Errors
 export {DoesNotHave}          from "./lib/errors/DoesNotHave";

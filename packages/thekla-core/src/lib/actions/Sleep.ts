@@ -1,9 +1,9 @@
 import {getLogger}      from "@log4js-node/log4js-api"
 import {UsesAbilities}  from "../Actor";
 import {stepDetails}    from "../decorators/step_decorators";
-import {DurationResult} from "../utils/Duration";
 import {wait}           from "../utils/utils";
 import {Interaction}    from "./Activities";
+import { Duration } from "../utils/Duration";
 
 export class Sleep implements Interaction<void, void> {
     private logger = getLogger(`Sleep`);
@@ -19,7 +19,7 @@ export class Sleep implements Interaction<void, void> {
         });
     }
 
-    public static for(sleepTime: number | DurationResult): Sleep {
+    public static for(sleepTime: number | Duration): Sleep {
         return new Sleep(sleepTime);
     }
 
@@ -28,7 +28,7 @@ export class Sleep implements Interaction<void, void> {
         return this;
     }
 
-    private constructor(sleepTime: number | DurationResult) {
+    private constructor(sleepTime: number | Duration) {
         this.sleepTimeInMs = typeof sleepTime === `number` ? sleepTime : sleepTime.inMs
     }
 

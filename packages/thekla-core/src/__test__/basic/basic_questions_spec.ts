@@ -1,14 +1,5 @@
-import {
-    ReturnTaskValue,
-    See,
-    ReturnedResult,
-    Actor,
-    Expected,
-    DelayedResult
-} from "../..";
-
-// import {configure}   from "log4js";
-// configure(`res/config/log4js.json`);
+import {Expected}                                      from "@thekla/assertion";
+import {Actor, Duration, Result, ReturnTaskValue, See} from "../..";
 
 describe(`Using the See interaction`, (): void => {
     const Josh = Actor.named(`Josh`);
@@ -17,14 +8,14 @@ describe(`Using the See interaction`, (): void => {
         const John: Actor = Actor.named(`John`);
 
         it(`should throw an error when the repeater 'times' value is 0. ` +
-            `- (test case id: e0e5340d-294f-4795-ab31-08a3a71c58a4)`, async (): Promise<void> => {
+               `- (test case id: e0e5340d-294f-4795-ab31-08a3a71c58a4)`, async (): Promise<void> => {
             const testString = `e0e5340d-294f-4795-ab31-08a3a71c58a4`;
 
             try {
                 await John.attemptsTo(
-                    See.if(DelayedResult.returnsValue(testString).after(10000))
-                        .is(Expected.toEqual(testString))
-                        .repeatFor(0,500)
+                    See.if(Result.of(testString).delayedBy(Duration.in.milliSeconds(10000)))
+                       .is(Expected.to.equal(testString))
+                       .repeatFor(0, 500)
                 )
             } catch (e) {
                 expect(e.toString()).toContain(`The repeat 'times' value should be between 1 and 1000. But its: 0`)
@@ -37,9 +28,9 @@ describe(`Using the See interaction`, (): void => {
 
             try {
                 await John.attemptsTo(
-                    See.if(DelayedResult.returnsValue(`Error`).after(10000))
-                        .is(Expected.toEqual(testString))
-                        .repeatFor(-1,1000)
+                    See.if(Result.of(`Error`).delayedBy(Duration.in.seconds(10)))
+                       .is(Expected.to.equal(testString))
+                       .repeatFor(-1, 1000)
                 )
             } catch (e) {
                 expect(e.toString()).toContain(`The repeat 'times' value should be between 1 and 1000. But its: -1`)
@@ -52,9 +43,9 @@ describe(`Using the See interaction`, (): void => {
 
             try {
                 await John.attemptsTo(
-                    See.if(DelayedResult.returnsValue(`Error`).after(10000))
-                        .is(Expected.toEqual(testString))
-                        .repeatFor(1001,1000)
+                    See.if(Result.of(`Error`).delayedBy(Duration.in.milliSeconds(10000)))
+                       .is(Expected.to.equal(testString))
+                       .repeatFor(1001, 1000)
                 )
             } catch (e) {
                 expect(e.toString()).toContain(`The repeat 'times' value should be between 1 and 1000. But its: 1001`)
@@ -66,9 +57,9 @@ describe(`Using the See interaction`, (): void => {
             const testString = `0676e29a-529e-474c-8413-da4c29897ab5`;
             try {
                 await John.attemptsTo(
-                    See.if(DelayedResult.returnsValue(`Error`).after(10000))
-                        .is(Expected.toEqual(testString))
-                        .repeatFor(2,-1)
+                    See.if(Result.of(`Error`).delayedBy(Duration.in.milliSeconds(10000)))
+                       .is(Expected.to.equal(testString))
+                       .repeatFor(2, -1)
                 )
             } catch (e) {
                 expect(e.toString()).toContain(`The interval value should be between 1 and 60000 ms (1 minute). But its: -1`)
@@ -80,9 +71,9 @@ describe(`Using the See interaction`, (): void => {
             const testString = `17b6dc70-44bd-4f6f-b051-b1bce4776c4c`;
             try {
                 await John.attemptsTo(
-                    See.if(DelayedResult.returnsValue(`Error`).after(10000))
-                        .is(Expected.toEqual(testString))
-                        .repeatFor(6,60001)
+                    See.if(Result.of(`Error`).delayedBy(Duration.in.milliSeconds(10000)))
+                       .is(Expected.to.equal(testString))
+                       .repeatFor(6, 60001)
                 )
             } catch (e) {
                 expect(e.toString()).toContain(`The interval value should be between 1 and 60000 ms (1 minute). But its: 60001`)
@@ -90,21 +81,21 @@ describe(`Using the See interaction`, (): void => {
         });
 
         it(`should pass without a repeater action` +
-            `- (test case id: 6458382e-d95d-49b6-972c-56fa68bede94)`, async (): Promise<void> => {
+               `- (test case id: 6458382e-d95d-49b6-972c-56fa68bede94)`, async (): Promise<void> => {
             await John.attemptsTo(
-                See.if(ReturnedResult.ofDirectValue(`12345`))
-                    .is(Expected.toEqual(`12345`))
+                See.if(Result.of(`12345`))
+                   .is(Expected.to.equal(`12345`))
             )
         });
 
         it(`should poll the status until the value is set` +
-            `- (test case id: 0d5c98b2-9975-4c30-a81f-5a8ef862a0aa)`, async (): Promise<void> => {
+               `- (test case id: 0d5c98b2-9975-4c30-a81f-5a8ef862a0aa)`, async (): Promise<void> => {
             const testString = `0d5c98b2-9975-4c30-a81f-5a8ef862a0aa`;
 
             await John.attemptsTo(
-                See.if(DelayedResult.returnsValue(testString).after(1000))
-                    .is(Expected.toEqual(testString))
-                    .repeatFor(12,100)
+                See.if(Result.of(testString).delayedBy(Duration.in.milliSeconds(1000)))
+                   .is(Expected.to.equal(testString))
+                   .repeatFor(12, 100)
             )
         });
 
@@ -114,33 +105,31 @@ describe(`Using the See interaction`, (): void => {
 
             try {
                 await John.attemptsTo(
-                    See.if(DelayedResult.returnsValue(testString).after(1000))
-                        .is(Expected.toEqual(testString))
-                        .repeatFor(5,100)
+                    See.if(Result.of(testString).delayedBy(Duration.in.milliSeconds(1000)))
+                       .is(Expected.to.equal(testString))
+                       .repeatFor(5, 100)
                 );
                 expect(true).toBeFalsy(`call should have thrown an error. But it did not.`);
             } catch (e) {
-                expect(e.toString()).toContain(`AssertionError [ERR_ASSERTION]:`);
-                expect(e.toString()).toContain(`'Default value. Timeout of 1000 ms not reached. Second value not set yet.'`);
-                expect(e.toString()).toContain(`'b1afa0cd-bb66-432a-b6d3-755b422d6506'`);
+                expect(e.toString()).toContain(testString);
+                expect(e.toString()).toContain(`undefined`);
             }
 
         });
 
         it(`should throw an error on first 
         - (test case id: 29bbbf6f-4741-48fb-9c44-7ecec23d1240)`, async (): Promise<void> => {
-            const testString =`29bbbf6f-4741-48fb-9c44-7ecec23d1240`;
+            const testString = `29bbbf6f-4741-48fb-9c44-7ecec23d1240`;
             try {
                 await John.attemptsTo(
-                    See.if(DelayedResult.returnsValue(testString).after(1000))
-                        .is(Expected.toEqual(testString))
+                    See.if(Result.of(testString).delayedBy(Duration.in.milliSeconds(1000)))
+                       .is(Expected.to.equal(testString))
                 );
                 expect(true).toBeFalsy(`call should have thrown an error. But it did not.`)
 
             } catch (e) {
-                expect(e.toString()).toContain(`AssertionError [ERR_ASSERTION]:`);
-                expect(e.toString()).toContain(`Default value. Timeout of 1000 ms not reached. Second value not set yet.`);
-                expect(e.toString()).toContain(`29bbbf6f-4741-48fb-9c44-7ecec23d1240`)
+                expect(e.toString()).toContain(testString);
+                expect(e.toString()).toContain(`undefined`)
             }
 
         });
@@ -149,11 +138,11 @@ describe(`Using the See interaction`, (): void => {
     describe(`with the then method`, (): void => {
 
         it(`should be rejected if matcher returns false
-            - (test case id: 18ef8895-a0a2-4e5b-a3b6-60068378b54f)`,(): Promise<void | {}> => {
+            - (test case id: 18ef8895-a0a2-4e5b-a3b6-60068378b54f)`, (): Promise<void | {}> => {
             const testString = `18ef8895-a0a2-4e5b-a3b6-60068378b54f`;
             return Josh.attemptsTo(
                 See
-                    .if(DelayedResult.returnsValue(testString).after(0))
+                    .if(Result.of(testString))
                     .is((): boolean => {
                         return false;
                     })
@@ -167,17 +156,17 @@ describe(`Using the See interaction`, (): void => {
         });
 
         it(`should be resolved if matcher returns false and otherwise actions are given
-            - (test case id: 18ef8895-a0a2-4e5b-a3b6-60068378b54f)`,(): Promise<void | {}> => {
+            - (test case id: 18ef8895-a0a2-4e5b-a3b6-60068378b54f)`, (): Promise<void | {}> => {
             const testString = `18ef8895-a0a2-4e5b-a3b6-60068378b54f`;
             return Josh.attemptsTo(
                 See
-                    .if(DelayedResult.returnsValue(testString).after(0))
+                    .if(Result.of(testString))
                     .is((): boolean => {
                         return false;
                     })
                     .otherwise(
                         See
-                            .if(DelayedResult.returnsValue(testString).after(0))
+                            .if(Result.of(testString))
                             .is((): boolean => {
                                 return true;
                             })
@@ -186,12 +175,12 @@ describe(`Using the See interaction`, (): void => {
         });
 
         it(`should be reject if matcher throws an error
-            - (test case id: b206bc37-59c1-4bb8-b04d-eb1a7517ba19)`,(): Promise<void | {}> => {
+            - (test case id: b206bc37-59c1-4bb8-b04d-eb1a7517ba19)`, (): Promise<void | {}> => {
             const testString = `b206bc37-59c1-4bb8-b04d-eb1a7517ba19`;
 
             return Josh.attemptsTo(
                 See
-                    .if(DelayedResult.returnsValue(testString).after(0))
+                    .if(Result.of(testString).delayedBy(Duration.in.seconds(0)))
                     .is((): boolean => {
                         throw new Error(`found a bug on See interaction`)
                     })
@@ -204,12 +193,12 @@ describe(`Using the See interaction`, (): void => {
         });
 
         it(`should be resolved if matcher returns true
-            - (test case id: 95d87af1-7376-4268-9d78-7a26a4ee15cf)`,(): Promise<void | {}> => {
+            - (test case id: 95d87af1-7376-4268-9d78-7a26a4ee15cf)`, (): Promise<void | {}> => {
             const testString = `95d87af1-7376-4268-9d78-7a26a4ee15cf`;
 
             return Josh.attemptsTo(
                 See
-                    .if(DelayedResult.returnsValue(testString).after(0))
+                    .if(Result.of(testString))
                     .is((): boolean => {
                         return true;
                     })
@@ -217,46 +206,45 @@ describe(`Using the See interaction`, (): void => {
         });
 
         it(`should not throw an error on success in "then-tree"` +
-            `- (test case id: b8d1361b-a9cc-4569-9009-ed8a71084fcd)`,(): Promise<void> => {
+               `- (test case id: b8d1361b-a9cc-4569-9009-ed8a71084fcd)`, (): Promise<void> => {
             const testString = `b8d1361b-a9cc-4569-9009-ed8a71084fcd`;
             try {
                 return Josh.attemptsTo(
                     See
-                        .if(DelayedResult.returnsValue(testString).after(0))
-                        .is(Expected.toEqual(testString))
+                        .if(Result.of(testString).delayedBy(Duration.in.minutes(0)))
+                        .is(Expected.to.equal(testString))
                         .then(
                             See
-                                .if(DelayedResult.returnsValue(testString).after(0))
-                                .is(Expected.toEqual(testString))
+                                .if(Result.of(testString))
+                                .is(Expected.to.equal(testString))
                         )
                 );
 
             } catch (e) {
-                console.error(e.toString());
                 expect(true).toBeFalsy(`should not throw an error, but it did`);
                 return Promise.resolve(e)
             }
         });
 
         it(`should throw error raised in "then-tree"` +
-            `- (test case id: c8141330-3c00-43e2-828b-e574ccc366c2)`, async (): Promise<void> => {
+               `- (test case id: c8141330-3c00-43e2-828b-e574ccc366c2)`, async (): Promise<void> => {
             const testString = `c8141330-3c00-43e2-828b-e574ccc366c2`;
             try {
                 await Josh.attemptsTo(
                     See
-                        .if(ReturnedResult.ofDirectValue(testString))
-                        .is(Expected.toEqual(testString))
+                        .if(Result.of(testString))
+                        .is(Expected.to.equal(testString))
                         .then(
                             See
-                                .if(ReturnedResult.ofDirectValue(`Should: throw: `))
-                                .is(Expected.toEqual(`Expectation error in then tree`))
+                                .if(Result.of(`Static Result`))
+                                .is(Expected.to.equal(`STATIC RESULT`))
                         )
                 );
                 expect(true).toBeFalsy(`should throw an error, but it didn't`);
 
             } catch (e) {
-                expect(e.toString()).toContain(`'Should: throw: '`);
-                expect(e.toString()).toContain(`Expectation error in then tree'`);
+                expect(e.toString()).toContain(`Static Result`);
+                expect(e.toString()).toContain(`STATIC RESULT`);
             }
         });
 
@@ -269,16 +257,16 @@ describe(`Using the See interaction`, (): void => {
             try {
                 await Josh.attemptsTo(
                     See
-                        .if(ReturnedResult.ofDirectValue(`Thrown error: `))
-                        .is(Expected.toEqual(`in first See interaction`))
+                        .if(Result.of(`Static Result`))
+                        .is(Expected.to.equal(`STATIC RESULT`))
                         .otherwise(
                         )
                 );
                 expect(true).toBeFalsy(`call should have thrown an error. But it didn't.`)
 
             } catch (e) {
-                expect(e.toString()).toContain(`'Thrown error: '`);
-                expect(e.toString()).toContain(`in first See interaction'`);
+                expect(e.toString()).toContain(`Static Result`);
+                expect(e.toString()).toContain(`STATIC RESULT`);
             }
 
         });
@@ -288,36 +276,36 @@ describe(`Using the See interaction`, (): void => {
             try {
                 await Josh.attemptsTo(
                     See
-                        .if(ReturnedResult.ofDirectValue(`Error thrown: `))
-                        .is(Expected.toEqual(`in first see interaction tree`))
+                        .if(Result.of(`Error thrown: `))
+                        .is(Expected.to.equal(`in first see interaction tree`))
                         .otherwise(
                             See
-                                .if(ReturnedResult.ofDirectValue(`Error thrown:`))
-                                .is(Expected.toEqual(`in otherwise tree`))
+                                .if(Result.of(`Static Result`))
+                                .is(Expected.to.equal(`STATIC RESULT`))
                         )
                 );
 
                 expect(true).toBeFalsy(`should throw an error, but it didn't`);
 
             } catch (e) {
-                expect(e.toString()).toContain(`'Error thrown:'`);
-                expect(e.toString()).toContain(`in otherwise tree'`);
+                expect(e.toString()).toContain(`Static Result`);
+                expect(e.toString()).toContain(`STATIC RESULT`);
             }
         });
 
         it(`should succeed when otherwise tree is not throwing an error` +
-            `- (test case id: 77f977ee-d79d-4b8f-9890-a6e173659e01)`, async (): Promise<void> => {
+               `- (test case id: 77f977ee-d79d-4b8f-9890-a6e173659e01)`, async (): Promise<void> => {
             const testString = `77f977ee-d79d-4b8f-9890-a6e173659e01`;
 
             try {
                 await Josh.attemptsTo(
                     See
-                        .if(ReturnedResult.ofDirectValue(`Error thrown: `))
-                        .is(Expected.toEqual(`in first See interaction`))
+                        .if(Result.of(`Error thrown: `))
+                        .is(Expected.to.equal(`in first See interaction`))
                         .otherwise(
                             See
-                                .if(ReturnedResult.ofDirectValue(testString))
-                                .is(Expected.toEqual(testString))
+                                .if(Result.of(testString))
+                                .is(Expected.to.equal(testString))
                         )
                 );
 
@@ -335,7 +323,7 @@ describe(`Using the See interaction`, (): void => {
             const testString = `myString`;
             return Josh.attemptsTo(
                 See
-                    .if(ReturnedResult.ofDirectValue(testString))
+                    .if(Result.of(testString))
                     .is((actual: string): boolean => {
                         expect(actual).toBe(testString);
                         return true;
@@ -349,10 +337,10 @@ describe(`Using the See interaction`, (): void => {
                 val1: `a`,
                 val2: `b`
             };
-            
+
             return Josh.attemptsTo(
                 See
-                    .if(ReturnedResult.ofDirectValue(testObject))
+                    .if(Result.of(testObject))
                     .is((actual: {}): boolean => {
                         expect(actual).toEqual(testObject);
                         return true;
@@ -367,12 +355,12 @@ describe(`Using the See interaction`, (): void => {
         - (test case id: 782cbc05-aa9c-46ff-beac-639ba968547b)`, async (): Promise<void> => {
 
             await Josh.attemptsTo(
-                ReturnTaskValue.of({a:1}),
+                ReturnTaskValue.of({a: 1}),
                 See
-                    .if(ReturnedResult.ofLastActivity())
+                    .if(Result.ofLastActivity())
                     // eslint-disable-next-line @typescript-eslint/no-explicit-any
                     .is((actual: any): boolean => {
-                        expect(actual).toEqual({a:1});
+                        expect(actual).toEqual({a: 1});
                         return true;
                     })
             )
