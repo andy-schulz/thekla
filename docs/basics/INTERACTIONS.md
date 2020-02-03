@@ -7,7 +7,7 @@ nav_order: 40
 
 Interactions are the basic building blocks of work flows and are bound to an ability.
 
-An example for an interaction is the [`Click`](../reference/web_and_mobile/INTERACTIONS.md/#click) interaction.
+An example for an interaction is the [`Click`](docs/features/web_and_mobile/INTERACTIONS.md/#click) interaction.
 
 An actor can execute an interaction with his `.attemptsTo()` method.
 

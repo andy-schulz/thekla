@@ -73,11 +73,11 @@ If the field contains already a value, the new value will be appended.
 ## Methods
 {: .no_toc }
 
-| name                         | parameter           | description                                                                                      |
-| :---                         | :---                | :---                                                                                             |
-| `.value()`*                  | value: string       | the string value which will be entered into the element                                          |
-| `.into()`                    | element: SppElement | the input field or text area the value shall be entered into                                     |
-| `.butClearsTheFieldBefore()` | -                   | remove all text from the field before entering the new value, otherwise the value will be append |
+| name            | parameter           | description                                                  |
+| :---            | :---                | :---                                                         |
+| `.value()`*     | value: string       | the string value which will be entered into the element      |
+| `.into()`       | element: SppElement | the input field or text area the value shall be entered into |
+| `.into.empty()` | element: SppElement | remove all text from the field before entering the new value |
 
 ## Example
 {: .no_toc }
@@ -92,14 +92,13 @@ Josh.attemptsTo(
 )
 ```
 
-Clear the field before entering a new value.
+Enter the text into the emptied field.
 
 ```typescript
 Josh.attemptsTo(
     Enter
         .value("Software Test Automation extreme")
-        .into(Googles.SEARCH_FIELD)
-        .butClearsTheFieldBefore()
+        .into.empty(Googles.SEARCH_FIELD)
 )
 ```
 

@@ -1,6 +1,6 @@
 ---
 title: Interactions
-parent: Basic Abilities
+parent: Core Features
 has_children: true
 nav_order: 10
 ---

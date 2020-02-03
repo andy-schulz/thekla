@@ -1,5 +1,5 @@
 ---
-title: Basic Abilities
+title: Core Features
 has_children: true
 nav_order: 101
 ---

@@ -19,11 +19,11 @@ An Acto
 
 Interactions are the basic elements provided by an ability.
  e.g.
- - [`Sleep`](reference/interactions/general/SLEEP.md) for an amount of time
- - [`Click`](reference/interactions/web/CLICK.md) on an element
- - [`Enter`](reference/interactions/web/ENTER.md) a text into a text field or area
- - [`See`](reference/interactions/general/SEE.md) if a `Question` matches a specified state
- - [`Post`](reference/interactions/rest/POST.md) a rest request
+ - [`Sleep`](docs/features/interactions/general/SLEEP.md) for an amount of time
+ - [`Click`](docs/features/interactions/web/CLICK.md) on an element
+ - [`Enter`](docs/features/interactions/web/ENTER.md) a text into a text field or area
+ - [`See`](docs/features/interactions/general/SEE.md) if a `Question` matches a specified state
+ - [`Post`](docs/features/interactions/rest/POST.md) a rest request
  
  There are interactions which execute user actions on an device like `Click` or `Enter`
  and there are interactions which query the status of an device like `See`.
@@ -53,7 +53,7 @@ Interactions are the basic elements provided by an ability.
  
 > See section 
 > - [`Questions`](basics/QUESTIONS.md) and
-> - [`See` Interaction](reference/interactions/general/SEE.md) 
+> - [`See` Interaction](docs/features/interactions/general/SEE.md) 
  
 for example:
  ```typescript

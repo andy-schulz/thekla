@@ -15,8 +15,8 @@ Thekla can be configured by a single configuration file with the following parts
 - testing framework to use, you can choose between
     - jasmine or
     - cucumber
-- [web and mobile configuration](../reference/web_and_mobile/CONFIGURATION.md)
-- [rest configuration](../reference/rest/CONFIGURATION.md)
+- [web and mobile configuration](docs/features/web_and_mobile/CONFIGURATION.md)
+- [rest configuration](docs/features/rest/CONFIGURATION.md)
 
 ## The config file
 
