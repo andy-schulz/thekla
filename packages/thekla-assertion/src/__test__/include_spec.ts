@@ -7,10 +7,14 @@ describe(`Expect`, () => {
         it(`to pass
         test id: 9771761b-64c5-4c6b-96bc-5accaf14aafe`, () => {
             expect(Expected.to.include(1)([1, 2, 3, 4])).toBeTruthy();
+
             expect(Expected.to.include(`1`)(`1234`)).toBeTruthy();
+
+            expect(Expected.to.include({a: 1})({a: 1, b: 2, c: 3})).toBeTruthy();
 
             const obj = {a: 1};
             expect(Expected.to.include(obj)([obj, {b: 2}])).toBeTruthy()
+
         });
 
         it(`to fail
@@ -25,7 +29,10 @@ describe(`Expect`, () => {
                 .toThrowError(`does not strict include: expected '1234' to include '5'`);
 
             expect(() => Expected.to.include({a: 1})([{a: 1}, {b: 2}]))
-                .toThrowError(`does not strict include: expected [ { a: 1 }, { b: 2 } ] to include { a: 1 }`)
+                .toThrowError(`does not strict include: expected [ { a: 1 }, { b: 2 } ] to include { a: 1 }`);
+
+            expect(() => Expected.to.include({a: {b: 1}})({a: {b: 1}, b: 2, c: 3}))
+                .toThrowError(`does not strict include: expected { a: { b: 1 }, b: 2, c: 3 } to have property 'a' of { b: 1 }, but got { b: 1 }`)
         });
 
         it(`to pass when negated
