@@ -49,7 +49,7 @@ actor.attemptsTo(
 For more information please consult the 
 [Chai Assertion Style](https://www.chaijs.com/api/assert/) documentation.
 
-# Usage
+## Usage
 
 ````bash
 npm install @thekla/assertion --save
@@ -59,7 +59,7 @@ npm install @thekla/assertion --save
 import {Expected} from "@thekla/assertion"
 ````
 
-# language candy
+## language candy
 
 To improve readability the following language chains are available.
 
@@ -80,8 +80,9 @@ or:
 See.if(Result.of(`my expected value`))
    .is(Expected.to.be.equal(`my expected value`))
 ````
+## Flags
 
-# not flag
+### not
 
 The ``not`` flag is used to negate all assertions:
 
@@ -92,7 +93,7 @@ See.if(Result.of(`The Result`))
    .is(Expected.not.to.equal(`my expected value`))
 ````
 
-# ``equal``
+## equal
 
 Example:
 
@@ -101,7 +102,8 @@ See.if(Result.of(`1234`))
    .is(Expected.to.equal(`1234`))
 ````
 
-## strict (===)
+### strict (===)
+{: .no_toc }
 
 The equality assertion always checks for strict equality 
 (See [Equality comparisons and sameness](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Equality_comparisons_and_sameness)).
@@ -113,9 +115,10 @@ The equality assertion always checks for strict equality
 * {a: 1} === {a: 1} // false
 * `` const foo = {a: 1}}; foo === foo`` // true
 
-## deep
+### deep
+{: .no_toc }
 
-If you want to check for deep equality you can use the ``deep`` flag, then content of arrays
+If you want to check for deep equality you can use the ``deep`` flag, the content of arrays
 and objects is tested for strict equality.
 
 ````typescript
@@ -130,7 +133,7 @@ See.if(Result.of([{a:1}]))
 * {a: 1} === {a: 1} // true
 * const foo = {a: 1}}; foo ``deep equal`` foo // true
 
-# ```truthy / falsy```
+## truthy / falsy
 
 The ``truthy / falsy`` assertion checks for equality to the corresponding boolean value.
 
@@ -148,7 +151,7 @@ See.if(Result.of(false))
    .is(Expected.to.be.falsy)
 ````
 
-# ```match```
+## match
 
 To check a questions result with a regular expression, you can use the match assertion.
 
@@ -157,7 +160,7 @@ See.if(Result.of(`Checked by RegExp`))
    .is(Expected.to.match(/RegExp/))
 ````
 
-# ```include```
+## include
 
 Example:
 
@@ -166,7 +169,8 @@ See.if(Result.of(`abcde`))
    .is(Expected.to.include(`a`))
 ````
 
-## strict
+### strict
+{: .no_toc }
 
 Per default include checks for strict equality:
 
@@ -180,10 +184,10 @@ See.if(Result.of([{a: 1}, {b: 1}])).is(Expected.to.include({a: 1})); // false
 See.if(Result.of({a: 1, b: 2})).is(Expected.to.include({a: 1})); // true
 
 See.if(Result.of({a: {b: 2}, c: 2})).is(Expected.to.include({a: {b: 2}})); // false
-
 ````
 
-## deep
+### deep
+{: .no_toc }
 
 for deep quality use the deep flag
 
@@ -192,7 +196,8 @@ See.if(Result.of([{a: 1}, {b: 1}])).is(Expected.to.deep.include({a: 1})); // tru
 See.if(Result.of({a: {b: 2}, c: 2})).is(Expected.to.deep.include({a: {b: 2}})); // true
 ````
 
-## nested
+### nested
+{: .no_toc }
 
 to check for nested includes (objects inside objects) you can use the nested flag.
 
@@ -203,13 +208,14 @@ See.if(Result.of({a: {b: {c: 1}}}))
 
 Check [the chai examples](https://www.chaijs.com/api/bdd/) for details.
 
-## own
+### own
+{: .no_toc }
 
 The own flag causes the assertion to inherited properties.
 
 Check [the chai examples](https://www.chaijs.com/api/bdd/) for details.
 
-# Chain multiple Assertions
+## Chain multiple Assertions
 
 To use multiple assertions on the same questions you can chain the assertions with ``and``
 
