@@ -9,6 +9,7 @@
     "build": "del-cli dist/**/* & tsc",
     "pretest": "tsc",
     "test": "jasmine --config=src/__test__/support/jasmine.json",
+    "test:rest": "jasmine --config=src/__test__/support/jasmine.json",
     "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
     "test:cov:rest": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
     "pack": "npm pack",

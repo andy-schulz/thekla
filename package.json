@@ -6,7 +6,6 @@
     "clean:cov": "del-cli coverage/.nyc_output",
     "pretest": "node src/prepare.js",
     "test": "./node_modules/.bin/lerna run test",
-    "test:annotator": "npm run pretest & lerna run test:annotator",
     "test:cov": "npm run pretest & npm run clean:cov & npx --no-install lerna run test:cov --parallel",
     "test:cov:report": "./node_modules/.bin/nyc report",
     "test:cov:thekla": " npx --no-install lerna run test:cov:thekla --parallel",
