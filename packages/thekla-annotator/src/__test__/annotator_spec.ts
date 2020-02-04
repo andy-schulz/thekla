@@ -12,8 +12,9 @@ describe(`Using the Annotator`, (): void => {
     // conf.annotateElement = true;
 
     // setBrowserStackSessionName(capabilities, `annotator_spec.ts`);
-    jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
+
     beforeAll(async (): Promise<void> => {
+        jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
         client = await WebDriver.newSession(conf);
     });
 
@@ -31,12 +32,12 @@ describe(`Using the Annotator`, (): void => {
             let emptyElement: any;
             // await client.navigateTo(baseUrl);
             await AnnotatorWdio.highlight(emptyElement)(client)
-                .then(() => {
-                    expect(false).toBeTruthy(`AnnotatorWdio.highlight() should reject the promise in case an empty element is passed, but it doesn't`)
-                })
-                .catch((e) => {
-                    expect(e.toString()).toEqual(`cant annotate an empty element`);
-                })
+                               .then(() => {
+                                   expect(false).toBeTruthy(`AnnotatorWdio.highlight() should reject the promise in case an empty element is passed, but it doesn't`)
+                               })
+                               .catch((e) => {
+                                   expect(e.toString()).toEqual(`cant annotate an empty element`);
+                               })
         });
 
         it(`should set and unset the style
@@ -158,9 +159,9 @@ describe(`Using the Annotator`, (): void => {
             await client.navigateTo(baseUrl);
 
             await AnnotatorWdio.hideTestMessage(client)
-                .catch((e: Error) => {
-                    expect(false).toBeTruthy(`hiding a non existing test message should not throw an error, but it does`)
-                });
+                               .catch((e: Error) => {
+                                   expect(false).toBeTruthy(`hiding a non existing test message should not throw an error, but it does`)
+                               });
         });
     });
 });
