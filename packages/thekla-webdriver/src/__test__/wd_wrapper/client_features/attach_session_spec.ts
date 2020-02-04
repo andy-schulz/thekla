@@ -2,6 +2,8 @@ import {ServerConfig, DesiredCapabilities}                                   fro
 import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
 import {Browser, ClientHelper, RunningBrowser}                               from "../../..";
 
+const {SERVER_PORT} = process.env;
+
 describe(`using the browser instance`, (): void => {
 
     const conf: ServerConfig = getStandardTheklaServerConfig();
@@ -10,7 +12,7 @@ describe(`using the browser instance`, (): void => {
     if (conf.serverAddress) {
         conf.serverAddress.path = `/wd/hub/`;
         conf.serverAddress.protocol = `http`;
-        conf.serverAddress.port = 4444;
+        conf.serverAddress.port = SERVER_PORT ? parseInt(SERVER_PORT) :  4444;
     }
 
     let origBrowser: Browser;
@@ -32,7 +34,7 @@ describe(`using the browser instance`, (): void => {
             return ClientHelper.cleanup([], true)
         });
 
-        it(`should open a new URL an the existing session 
+        it(`should open a new URL using the existing session 
         - (test case id: cc3ff7b5-13c8-4870-9aed-545ad389a887)`, async (): Promise<void> => {
             const testUrl = `https://www.google.de/`;
             await origBrowser.get(testUrl);
