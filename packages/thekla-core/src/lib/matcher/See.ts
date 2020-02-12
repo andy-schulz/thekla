@@ -21,6 +21,7 @@ export class See<PT, MPT> implements Oracle<PT, void> {
 
         const loop = async (counter: number): Promise<boolean> => {
             const nextLoop = (): Promise<boolean> => {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore setTimeout is taken from node and not from window -> type mismatch
                 return new Promise((resolve): number => setTimeout(resolve, this.ms))
                     .then((): Promise<boolean> => {
