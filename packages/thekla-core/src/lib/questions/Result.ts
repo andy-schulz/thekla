@@ -54,8 +54,8 @@ class DelayedDurationResult<PT> implements Question<PT, PT> {
         return this;
     }
 
-    public resolvesAtCheck(check: number) {
-        return new DelayedQueriedResult(this.value, check)
+    public resolvesAtQuery(number: number) {
+        return new DelayedQueriedResult(this.value, number)
     }
 
     public constructor(private value: PT) {

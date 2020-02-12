@@ -40,7 +40,7 @@ describe(`Repeating activities`, () => {
 
             return Richard.attemptsTo(
                 Repeat.activities(Sleep.for(1))
-                      .until(Result.of(true).resolvesAtCheck(6))
+                      .until(Result.of(true).resolvesAtQuery(6))
                       .is(Expected.to.be.truthy())
                       .retryFor(6, Duration.in.milliSeconds(1))
             )
@@ -51,7 +51,7 @@ describe(`Repeating activities`, () => {
 
             return Richard.attemptsTo(
                 Repeat.activities(Sleep.for(1))
-                      .until(Result.of(true).resolvesAtCheck(6))
+                      .until(Result.of(true).resolvesAtQuery(6))
                       .is(Expected.to.be.truthy())
                       .retryFor(6, Duration.in.milliSeconds(1))
             )
@@ -62,7 +62,7 @@ describe(`Repeating activities`, () => {
 
             return Richard.attemptsTo(
                 Repeat.activities(Sleep.for(1))
-                      .until(Result.of(true).resolvesAtCheck(3))
+                      .until(Result.of(true).resolvesAtQuery(3))
                       .is(Expected.to.be.truthy())
                       .retryFor(3)
             )
@@ -73,7 +73,7 @@ describe(`Repeating activities`, () => {
 
             return Richard.attemptsTo(
                 Repeat.activities(Sleep.for(1))
-                      .until(Result.of(true).resolvesAtCheck(6))
+                      .until(Result.of(true).resolvesAtQuery(6))
                       .is(Expected.to.be.truthy())
                       .retryFor(5, Duration.in.milliSeconds(1))
             ).then(() => {
