@@ -8,7 +8,7 @@ export class Repeat<PT, QPT, QRT> extends Task<PT, PT> {
     private expected: (text: QRT) => boolean | Promise<boolean>;
 
     private retries = 1;
-    private durationBetweenRetries = Duration.in.milliSeconds(1);
+    private durationBetweenRetries = Duration.in.seconds(1);
 
     private lastError: Error;
 
