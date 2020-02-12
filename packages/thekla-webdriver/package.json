@@ -1,6 +1,6 @@
 {
   "name": "@thekla/webdriver",
-  "version": "2.7.1",
+  "version": "2.8.0",
   "description": "WebdriverIO wrapper providing the foundation for the SPP web and mobile abilities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -35,9 +35,9 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@thekla/annotator": "^2.7.0",
-    "@thekla/config": "^2.7.0",
-    "@thekla/core": "^2.7.0",
+    "@thekla/annotator": "^2.8.0",
+    "@thekla/config": "^2.8.0",
+    "@thekla/core": "^2.8.0",
     "@types/fs-extra": "^8.0.1",
     "@types/lodash": "^4.14.149",
     "fs-extra": "^8.1.0",
@@ -46,7 +46,7 @@
     "webdriver": "^5.18.6"
   },
   "devDependencies": {
-    "@thekla/support": "^2.7.0",
+    "@thekla/support": "^2.8.0",
     "del-cli": "^3.0.0",
     "jasmine": "^3.5.0",
     "npm-run-all": "^4.1.5",
