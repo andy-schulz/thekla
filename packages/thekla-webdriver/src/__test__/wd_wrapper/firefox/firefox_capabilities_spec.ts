@@ -7,7 +7,7 @@ import {ServerConfig, DesiredCapabilities}                 from "@thekla/config"
 import {ClientHelper, RunningBrowser, WindowSize, Browser} from "../../..";
 import {getUserAgent, windowSize}                          from "../../__client_side_scripts__/window";
 
-describe(`Starting a browser instance`, (): void => {
+fdescribe(`Starting a browser instance`, (): void => {
 
     const conf: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`firefox_capabilities_spec.ts`);
@@ -44,6 +44,7 @@ describe(`Starting a browser instance`, (): void => {
             (capa)[`moz:firefoxOptions`] = {
                 args: [`--width=2200`, `--height=2200`]
             };
+            capa[`goog:chromeOptions`] = undefined; // when chrome options are set, ff ignores the moz: options
 
             const browserInitialResize = ClientHelper.create(conf, capa);
             const data = await browserInitialResize.executeScript(windowSize);
@@ -61,6 +62,7 @@ describe(`Starting a browser instance`, (): void => {
             capa[`moz:firefoxOptions`] = {
                 binary: `C:\\DoesNotExist`
             };
+            capa[`goog:chromeOptions`] = undefined; // when chrome options are set, ff ignores the moz: options
 
             return RunningBrowser.startedOn(conf).withCapabilities(capa)
                                  .get(`/`)
