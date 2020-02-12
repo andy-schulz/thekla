@@ -19,7 +19,7 @@ class DelayedQueriedResult<PT> implements Question<PT, PT> {
     };
 
     public toString(): string {
-        return `${this.constructor.name}: returns expected value after it was queried for '${this.iterator}' times.`
+        return `${this.constructor.name}: returns "${this.value}" after it was queried for '${this.iterator}' times.`
     }
 
     public constructor(private value: PT, private iterator: number) {
@@ -62,7 +62,7 @@ class DelayedDurationResult<PT> implements Question<PT, PT> {
     };
 
     public toString(): string {
-        return `${this.constructor.name}: returns expected value after timeout of '${this.duration.inMs}' ms is reached.`
+        return `${this.constructor.name}: returns "${this.value}" after timeout of '${this.duration.inMs}' ms is reached.`
     }
 }
 

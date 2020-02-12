@@ -149,7 +149,7 @@ describe(`Using the See interaction`, (): void => {
             ).then((): void => {
                 expect(true).toBeFalsy(`Promise should be rejected but it wasn't`);
             }).catch((e): Promise<void> => {
-                expect(e.toString()).toContain(`See interaction with question 'DelayedDurationResult: returns expected value after timeout of '0' ms is reached.' and matcher`);
+                expect(e.toString()).toContain(`See interaction with question 'DelayedDurationResult: returns "42218802-2317-4c1d-8bed-08efe0074f5e" after timeout of '0' ms is reached.' and matcher`);
                 expect(e.toString()).toContain(`returned false. No 'otherwise' activities were given`);
                 return Promise.resolve();
             })

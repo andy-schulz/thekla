@@ -7,7 +7,7 @@ export class Repeat<PT, QPT, QRT> extends Task<PT, PT> {
     private question: Question<QPT, QRT>;
     private expected: (text: QRT) => boolean | Promise<boolean>;
 
-    private retries = 1;
+    private retries = 3;
     private durationBetweenRetries = Duration.in.seconds(1);
 
     private lastError: Error;
