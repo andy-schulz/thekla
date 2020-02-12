@@ -91,6 +91,7 @@ none
 | `.retryFor()`    | retries: number, duration: Duration | query the question for # of 'retries' and wait for 'duration' between retries |
 
 ### Examples
+{: .no_toc }
 
 To wait for a status change by pressing a refresh button you could do:
 
