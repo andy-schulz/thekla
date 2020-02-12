@@ -69,6 +69,12 @@ const standardWdioConfig: WebDriver.Options = {
         } : {
 
             proxyType: `system`
+        },
+        "goog:chromeOptions": {
+            args: [
+                `--disable-notifications`,
+                `--no-sandbox`
+            ]
         }
     }
 };
