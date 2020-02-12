@@ -1,9 +1,9 @@
+import {Expected}                                                                       from "@thekla/assertion";
+import {DesiredCapabilities, ServerConfig}                                              from "@thekla/config";
+import {Actor, See}                                                                     from "@thekla/core";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig}            from "@thekla/support";
 import {configure}                                                                      from "log4js";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities}            from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                              from "@thekla/config";
-import {Actor, See}                                                           from "@thekla/core";
-import {BrowseTheWeb, RunningBrowser, element, By, frame, Text, UntilElement, Navigate} from "..";
-import { Expected } from "@thekla/assertion";
+import {BrowseTheWeb, By, element, frame, Navigate, RunningBrowser, Text, UntilElement} from "..";
 
 configure(`src/__test__/__config__/log4js.json`);
 

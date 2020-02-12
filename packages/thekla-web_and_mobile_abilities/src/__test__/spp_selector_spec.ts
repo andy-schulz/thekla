@@ -1,12 +1,19 @@
-import {configure, getLogger}                                                from "log4js";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {Actor, See}                                                from "@thekla/core";
+import {Expected}                                                                                from "@thekla/assertion";
 import {
-    Browser, RunningBrowser, BrowseTheWeb, element, By, UntilElement, Navigate, Click, Text
-}                                                                            from "..";
-import {checkForFireFoxCyclicError}                                          from "@thekla/support";
-import { Expected } from "@thekla/assertion";
+    DesiredCapabilities,
+    ServerConfig
+}                                                                                                from "@thekla/config";
+import {
+    Actor,
+    See
+}                                                                                                from "@thekla/core";
+import {
+    checkForFireFoxCyclicError,
+    getStandardTheklaDesiredCapabilities,
+    getStandardTheklaServerConfig
+}                                                                                                from "@thekla/support";
+import {configure, getLogger}                                                                    from "log4js";
+import {Browser, BrowseTheWeb, By, Click, element, Navigate, RunningBrowser, Text, UntilElement} from "..";
 
 configure(`src/__test__/__config__/log4js.json`);
 
@@ -36,7 +43,7 @@ describe(`When locating an element,`, (): void => {
             return john.attemptsTo(
                 Navigate.to(`/`),
                 See.if(Text.of(button)).is(Expected.to.equal(`Danger!`)),
-                Click.on(button),
+                Click.on(button)
             );
         });
 
@@ -47,7 +54,7 @@ describe(`When locating an element,`, (): void => {
                 .shallWait(UntilElement.is.visible);
 
             await john.attemptsTo(
-                Navigate.to(`/`),
+                Navigate.to(`/`)
             );
 
             // check for firefox problem

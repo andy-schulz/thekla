@@ -1,9 +1,9 @@
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {Actor, See}                                                from "@thekla/core";
+import {Expected}                                                            from "@thekla/assertion";
+import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
+import {Actor, See}                                                          from "@thekla/core";
 import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {Browser, RunningBrowser}                                             from "@thekla/webdriver";
 import {BrowseTheWeb, SwitchToWindow, TheSites}                              from "..";
-import { Expected } from "@thekla/assertion";
 
 describe(`Switching Window`, () => {
 

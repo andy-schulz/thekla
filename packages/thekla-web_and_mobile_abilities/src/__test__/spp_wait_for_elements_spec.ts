@@ -89,10 +89,6 @@ describe(`Waiting for SPP Elements`, (): void => {
             .called(`Test disappearing element after 4 seconds`);
         // .shallNotImplicitlyWait();
 
-        beforeAll(() => {
-
-        });
-
         afterEach(() => {
             WebElementListWd.implicitlyWaitFor = 0;
         });

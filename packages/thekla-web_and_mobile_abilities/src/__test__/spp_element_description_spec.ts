@@ -1,10 +1,12 @@
-import {getLogger}                                                           from "log4js";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {Actor, See, Expected}                                                from "@thekla/core";
+import {Expected}                                                                                 from "@thekla/assertion";
+import {DesiredCapabilities, ServerConfig}                                                        from "@thekla/config";
+import {Actor, See}                                                                               from "@thekla/core";
 import {
-    element, By, UntilElement, BrowseTheWeb, RunningBrowser, SppElement, Navigate, all, Text
-}                                                                            from "..";
+    getStandardTheklaDesiredCapabilities,
+    getStandardTheklaServerConfig
+}                                                                                                 from "@thekla/support";
+import {getLogger}                                                                                from "log4js";
+import {all, BrowseTheWeb, By, element, Navigate, RunningBrowser, SppElement, Text, UntilElement} from "..";
 
 const logger = getLogger(`Spec: SppElementDescription`);
 
@@ -114,7 +116,7 @@ describe(`The description on an element`, (): void => {
 
             await Edward.attemptsTo(
                 Navigate.to(`/`),
-                See.if(Text.of(elem)).is(Expected.toEqual(`There is no waiter to test`)),
+                See.if(Text.of(elem)).is(Expected.to.equal(`There is no waiter to test`))
             ).catch(callback.catchfn);
 
             expect(callback.catchfn).toHaveBeenCalled();

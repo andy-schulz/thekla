@@ -1,10 +1,8 @@
-import {
-    SppElement, BrowseTheWeb, element, Browser, RunningBrowser, By, UntilElement, Navigate, Drag, Text
-}                                                                            from "..";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {Actor, See}                                                from "@thekla/core";
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import { Expected } from "@thekla/assertion";
+import {Expected}                                                               from "@thekla/assertion";
+import {DesiredCapabilities, ServerConfig}                                      from "@thekla/config";
+import {Actor, See}                                                             from "@thekla/core";
+import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig}    from "@thekla/support";
+import {Browser, BrowseTheWeb, By, Drag, element, Navigate, RunningBrowser, SppElement, Text, UntilElement} from "..";
 
 describe(`Drag an Element`, (): void => {
 
@@ -48,9 +46,9 @@ describe(`Drag an Element`, (): void => {
             // await Drag.element(element0).toElement(element1).performAs(Donnie);
 
             await See.if(Text.of(dragIndicator))
-                .is(Expected.to.equal(`Element item-0 was moved from position 0 to position 1`))
-                .repeatFor(5, 1000)
-                .performAs(Donnie)
+                     .is(Expected.to.equal(`Element item-0 was moved from position 0 to position 1`))
+                     .repeatFor(5, 1000)
+                     .performAs(Donnie)
         });
     });
 });

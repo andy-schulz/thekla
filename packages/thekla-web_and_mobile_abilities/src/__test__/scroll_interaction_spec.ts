@@ -1,10 +1,9 @@
-import {getStandardTheklaServerConfig, getStandardTheklaDesiredCapabilities} from "@thekla/support";
-import {BoundaryCheck}                                                       from "@thekla/support";
-import {ServerConfig, DesiredCapabilities}                                   from "@thekla/config";
-import {isElementOutsideOfView}                                              from "@thekla/support/dist";
-import {UntilElement, By, Browser, RunningBrowser}                           from "@thekla/webdriver";
-import {element, BrowseTheWeb, Scroll, Navigate, Page}                       from "..";
-import {Actor}                                                               from "@thekla/core";
+import {DesiredCapabilities, ServerConfig}                                                  from "@thekla/config";
+import {Actor}                                                                              from "@thekla/core";
+import {BoundaryCheck, getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
+import {isElementOutsideOfView}                                                             from "@thekla/support/dist";
+import {Browser, By, RunningBrowser, UntilElement}                                          from "@thekla/webdriver";
+import {BrowseTheWeb, element, Navigate, Page, Scroll}                                      from "..";
 
 describe(`Scroll`, (): void => {
 
