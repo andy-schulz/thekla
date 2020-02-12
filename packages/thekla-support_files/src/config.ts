@@ -37,7 +37,13 @@ const standardTheklaCapabilities: DesiredCapabilities = {
         sslProxy: PROXY_SERVER
     } : {
         proxyType: `system`
-    }
+    },
+    "goog:chromeOptions": {
+        args: [
+            `--disable-notifications`,
+            `--no-sandbox`
+        ]
+    },
 };
 
 export const getStandardTheklaDesiredCapabilities = (browserstackSessionName?: string): DesiredCapabilities => {
