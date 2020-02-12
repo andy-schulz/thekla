@@ -105,7 +105,7 @@ describe(`Using the See interaction`, (): void => {
 
             try {
                 await John.attemptsTo(
-                    See.if(Result.of(testString).delayedBy(Duration.in.milliSeconds(1000)))
+                    See.if(Result.of(testString).delayedBy(Duration.in.milliSeconds(2000)))
                        .is(Expected.to.equal(testString))
                        .repeatFor(5, 100)
                 );

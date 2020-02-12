@@ -7,7 +7,7 @@ import {ServerConfig, DesiredCapabilities}                 from "@thekla/config"
 import {ClientHelper, RunningBrowser, WindowSize, Browser} from "../../..";
 import {getUserAgent, windowSize}                          from "../../__client_side_scripts__/window";
 
-fdescribe(`Starting a browser instance`, (): void => {
+describe(`Starting a browser instance`, (): void => {
 
     const conf: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`firefox_capabilities_spec.ts`);

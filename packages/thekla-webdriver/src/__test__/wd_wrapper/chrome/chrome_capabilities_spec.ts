@@ -41,7 +41,7 @@ describe(`Starting a browser instance`, (): void => {
         - (test case id: 3286d22d-3ba7-4201-acd6-503a39bc555c)`, async (): Promise<void> => {
             const capa: DesiredCapabilities = cloneDeep(capabilities);
             capa[`goog:chromeOptions`] = {
-                args: [`--window-size=500,500`]
+                args: [`--window-size=500,500`, `--no-sandbox`]
             };
 
             const browserInitialResize = ClientHelper.create(conf, capa);
