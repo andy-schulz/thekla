@@ -2,6 +2,7 @@ import {AnswersQuestions, PerformsTask} from "../Actor";
 import {Question}                       from "../questions/Question";
 import {Activity, Oracle}               from "../actions/Activities";
 import {stepDetails}                    from "../decorators/step_decorators";
+import { Duration } from "../..";
 
 /**
  * PT = Parameter Type, Type of parameter which could be passed to the interaction
@@ -11,7 +12,7 @@ import {stepDetails}                    from "../decorators/step_decorators";
 export class See<PT, MPT> implements Oracle<PT, void> {
     private matcher: (value: MPT) => boolean | Promise<boolean>;
     private repeater = 1;
-    private ms = 1000;
+    private duration = Duration.in.milliSeconds(1000);
 
     private thenActivities: Activity<PT, void>[] = [];
     private otherwiseActivities: Activity<PT, void>[] = [];
@@ -23,7 +24,7 @@ export class See<PT, MPT> implements Oracle<PT, void> {
             const nextLoop = (): Promise<boolean> => {
                 // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore setTimeout is taken from node and not from window -> type mismatch
-                return new Promise((resolve): number => setTimeout(resolve, this.ms))
+                return new Promise((resolve): number => setTimeout(resolve, this.duration.inMs))
                     .then((): Promise<boolean> => {
                         return loop(counter -1);
                     });
@@ -96,16 +97,18 @@ export class See<PT, MPT> implements Oracle<PT, void> {
         return this;
     }
 
-    public repeatFor(times: number, interval = 1000): See<PT,MPT> {
+    public repeatFor(times: number, duration: number | Duration = Duration.in.milliSeconds(1000)): See<PT,MPT> {
+        this.duration = (typeof duration === `number`) ?
+            Duration.in.milliSeconds(duration) :
+            duration
 
         if(times < 1 || times > 1000)
             throw new Error(`The repeat 'times' value should be between 1 and 1000. But its: ${times}`);
 
-        if(interval < 0 || interval > 60000)
-            throw new Error(`The interval value should be between 1 and 60000 ms (1 minute). But its: ${interval}`);
+        if(this.duration.inMs < 0 || this.duration.inMs > 60000)
+            throw new Error(`The interval value should be between 1 and 60000 ms (1 minute). But its: ${duration}`);
 
         this.repeater = times;
-        this.ms = interval;
         return this;
     }
 

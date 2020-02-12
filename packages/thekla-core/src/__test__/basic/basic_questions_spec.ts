@@ -62,7 +62,7 @@ describe(`Using the See interaction`, (): void => {
                        .repeatFor(2, -1)
                 )
             } catch (e) {
-                expect(e.toString()).toContain(`The interval value should be between 1 and 60000 ms (1 minute). But its: -1`)
+                expect(e.toString()).toContain(`CanNotCreateDuration: Can't create a duration of '-1' ms, as it is smaller than 0.`)
             }
         });
 
