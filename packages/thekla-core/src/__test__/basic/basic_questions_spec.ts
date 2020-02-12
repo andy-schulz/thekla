@@ -138,8 +138,8 @@ describe(`Using the See interaction`, (): void => {
     describe(`with the then method`, (): void => {
 
         it(`should be rejected if matcher returns false
-            - (test case id: 18ef8895-a0a2-4e5b-a3b6-60068378b54f)`, (): Promise<void | {}> => {
-            const testString = `18ef8895-a0a2-4e5b-a3b6-60068378b54f`;
+            - (test case id: 42218802-2317-4c1d-8bed-08efe0074f5e)`, (): Promise<void | {}> => {
+            const testString = `42218802-2317-4c1d-8bed-08efe0074f5e`;
             return Josh.attemptsTo(
                 See
                     .if(Result.of(testString))
@@ -149,7 +149,7 @@ describe(`Using the See interaction`, (): void => {
             ).then((): void => {
                 expect(true).toBeFalsy(`Promise should be rejected but it wasn't`);
             }).catch((e): Promise<void> => {
-                expect(e.toString()).toContain(`See interaction with question 'delayed result with timeout of '0 ms'' and matcher`);
+                expect(e.toString()).toContain(`See interaction with question 'DelayedDurationResult: returns expected value after timeout of '0' ms is reached.' and matcher`);
                 expect(e.toString()).toContain(`returned false. No 'otherwise' activities were given`);
                 return Promise.resolve();
             })
