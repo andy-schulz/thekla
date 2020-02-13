@@ -1,6 +1,6 @@
 {
   "name": "@thekla/annotator",
-  "version": "2.8.0",
+  "version": "2.8.1",
   "description": "helper functions to annotate web elements during testing sessions.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -36,8 +36,8 @@
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@thekla/support": "^2.8.0",
     "del-cli": "^3.0.0",
-    "nyc": "^15.0.0",
-    "jasmine": "^3.5.0"
+    "jasmine": "^3.5.0",
+    "nyc": "^15.0.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }
