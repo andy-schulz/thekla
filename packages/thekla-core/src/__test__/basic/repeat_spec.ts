@@ -1,6 +1,6 @@
 import {Expected}                       from "@thekla/assertion";
 import {Actor, Duration, Result, Sleep} from "../..";
-import {Repeat}                         from "../../lib/actions/Repeat";
+import {Repeat}                         from "../../";
 
 describe(`Repeating activities`, () => {
 

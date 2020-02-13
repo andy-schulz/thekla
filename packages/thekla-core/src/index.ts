@@ -17,6 +17,7 @@ export {Activity, Task, Interaction} from "./lib/actions/Activities";
 // Interactions
 export {SkipTask} from "./lib/actions/SkipTask";
 export {Sleep}    from "./lib/actions/Sleep";
+export {Repeat}    from "./lib/actions/Repeat";
 export {See}      from "./lib/matcher/See";
 export {Extract}  from "./lib/matcher/Extract";
 
