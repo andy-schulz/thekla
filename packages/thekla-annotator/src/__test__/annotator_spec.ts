@@ -16,7 +16,7 @@ describe(`Using the Annotator`, (): void => {
     beforeAll(async (): Promise<void> => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 30000;
         client = await WebDriver.newSession(conf);
-    });
+    }, 60000); // high timeout for browserstack tests, sometimes it takes a looooonnggg time to create the browser
 
     afterAll(async (): Promise<void> => {
         await client.deleteSession()
