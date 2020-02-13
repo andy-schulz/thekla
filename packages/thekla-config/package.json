@@ -9,7 +9,9 @@
     "build": "del-cli dist/**/* & tsc",
     "pretest": "tsc",
     "test": "jasmine --config=src/__test__/support/jasmine.json",
+    "test:config": "jasmine --config=src/__test__/support/jasmine.json",
     "test:cov": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
+    "test:cov:config": "npm run pretest & nyc jasmine --config=src/__test__/support/jasmine.json",
     "pack": "npm pack",
     "clean:pack": "del-cli *.tgz",
     "clean:all": "npx del-cli dist & npx del-cli node_modules"
@@ -36,7 +38,9 @@
     "webdriver": "^5.18.6"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "del-cli": "^3.0.0",
+    "jasmine": "^3.5.0",
     "nyc": "^15.0.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"

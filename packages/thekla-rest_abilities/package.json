@@ -44,6 +44,7 @@
     "request-promise-native": "^1.0.8"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "del-cli": "^3.0.0",
     "jasmine": "^3.5.0",
     "nyc": "^15.0.0"

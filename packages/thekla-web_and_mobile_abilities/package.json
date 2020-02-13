@@ -37,6 +37,7 @@
     "@thekla/webdriver": "^2.8.1"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@thekla/assertion": "^2.8.0",
     "@thekla/config": "^2.8.0",
     "@thekla/support": "^2.8.0",

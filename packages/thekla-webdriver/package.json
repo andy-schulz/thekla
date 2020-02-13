@@ -46,6 +46,7 @@
     "webdriver": "^5.18.6"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "@thekla/support": "^2.8.0",
     "del-cli": "^3.0.0",
     "jasmine": "^3.5.0",
