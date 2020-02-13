@@ -46,13 +46,14 @@
     "cucumber": "^5.1.0",
     "fs-extra": "^8.1.0",
     "glob": "^7.1.6",
-    "jasmine": "^3.5.0",
     "lodash": "^4.17.15",
     "minimist": "^1.2.0",
     "request-promise-native": "^1.0.8"
   },
   "devDependencies": {
+    "@istanbuljs/nyc-config-typescript": "^1.0.1",
     "del-cli": "^3.0.0",
+    "jasmine": "^3.5.0",
     "nyc": "^15.0.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"

@@ -7,7 +7,7 @@
     "coverage/**",
     "docs/**",
     "logs/**",
-    "src/__test__/**",
+    "**/__test__/**",
     "node_modules/**"
   ],
   "reporter": [

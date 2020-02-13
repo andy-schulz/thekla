@@ -6,7 +6,7 @@
   "all": false,
   "exclude": [
     "coverage/**",
-    "src/__test__/**",
+    "**/__test__/**",
     "node_modules/**"
   ],
   "reporter": [

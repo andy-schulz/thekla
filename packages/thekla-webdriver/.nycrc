@@ -7,7 +7,7 @@
     "coverage/**",
     "docs/**",
     "logs/**",
-    "src/__test__/**",
+    "**/__test__/**",
     "node_modules/**",
 
     "src/__test__/__client_side_scripts__/**",

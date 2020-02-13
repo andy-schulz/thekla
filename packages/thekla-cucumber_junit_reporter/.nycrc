@@ -5,7 +5,7 @@
   "clean": false,
   "exclude": [
     "logs/**",
-    "src/__test__/**",
+    "**/__test__/**",
     "node_modules/**"
   ],
   "reporter": [
