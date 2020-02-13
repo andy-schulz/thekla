@@ -1,6 +1,6 @@
 {
   "name": "thekla",
-  "version": "2.8.2",
+  "version": "2.8.3",
   "description": "screenplay pattern implementation using typescript and webdriver",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -33,8 +33,8 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@thekla/config": "^2.8.2",
-    "@thekla/cucumber-junit-formatter": "^2.8.2",
+    "@thekla/config": "^2.8.3",
+    "@thekla/cucumber-junit-formatter": "^2.8.3",
     "@types/cucumber": "^4.0.7",
     "@types/fs-extra": "^8.0.1",
     "@types/glob": "^7.1.1",
