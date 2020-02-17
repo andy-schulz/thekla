@@ -116,14 +116,14 @@ describe(`Using`, (): void => {
         });
 
         it(`should return the visibility status true of a single button` +
-                `- (test case id: dbd31ad2-ae19-4bf4-bf78-b5b957915945)`, async (): Promise<void> => {
+               `- (test case id: dbd31ad2-ae19-4bf4-bf78-b5b957915945)`, async (): Promise<void> => {
 
             expect(await Status.visible.of(disappearButton).answeredBy(John)).toBeTrue();
             expect(await Status.of(disappearButton).answeredBy(John)).toEqual({visible: true, enabled: true});
         });
 
         it(`should return the enabled status of a single button` +
-                `- (test case id: c9543656-f5a0-4f8d-9fbc-335bd9a600bb)`, async (): Promise<void> => {
+               `- (test case id: c9543656-f5a0-4f8d-9fbc-335bd9a600bb)`, async (): Promise<void> => {
 
             expect(await Status.enable.of(beingDisabledButton).answeredBy(John)).toBeTrue();
             expect(await Status.enable.of(beingEnabledButton).answeredBy(John)).toBeFalse();
@@ -293,13 +293,21 @@ describe(`Using`, (): void => {
         it(`should return an error when the file does not exist
         test id: 415eae82-ffff-49d0-8c8b-da9ca5093d14`, async () => {
             const file = `${__dirname}/../../__fixtures__/doesNotExist.log`;
-            return RemoteFileLocation.of(file).answeredBy(Jonathan)
-                                     .then(() => {
-                                         expect(true).toBeFalsy(`should throw an error but is doesnt`)
-                                     })
-                                     .catch((e) => {
-                                         expect(e.toString()).toContain(`no such file or directory`)
-                                     });
+
+            try {
+                return RemoteFileLocation.of(file).answeredBy(Jonathan)
+                                         .then(() => {
+                                             expect(true).toBeFalsy(`should throw an error but is doesnt`)
+                                         }, (e) => {
+                                             expect(e.toString()).toContain(`no such file or directory`)
+                                         })
+                                         .catch((e) => {
+                                             expect(e.toString()).toContain(`no such file or directory`)
+                                         });
+            } catch (e) {
+                expect(e.toString()).toContain(`no such file or directory`)
+            }
+
         });
     });
 });
