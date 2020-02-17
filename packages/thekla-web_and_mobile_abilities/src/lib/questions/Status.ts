@@ -33,24 +33,19 @@ export interface ElementStatus {
     enabled?: boolean | boolean[];
 }
 
-export class StatusOfElement implements Question<void, ElementStatus> {
+class StatusOfElement implements Question<void, ElementStatus> {
 
     public answeredBy(actor: UsesAbilities): Promise<ElementStatus> {
-        return new Promise(async (resolve, reject) => {
+        return new Promise(async (resolve) => {
             const status: ElementStatus = {};
-            if(this.element instanceof SppElement) {
-                    status.visible = await FindElements.as(actor).findElement(this.element).isVisible();
-                    status.enabled = await FindElements.as(actor).findElement(this.element).isEnabled();
-            } else {
-                status.visible = await FindElements.as(actor).findElements(this.element).isVisible();
-                status.enabled = await FindElements.as(actor).findElements(this.element).isEnabled();
-            }
+            status.visible = await FindElements.as(actor).findElement(this.element).isVisible();
+            status.enabled = await FindElements.as(actor).findElement(this.element).isEnabled();
 
             resolve(status);
         })
     }
 
-    public constructor(private element: SppElement | SppElementList) {
+    public constructor(private element: SppElement) {
     }
 
     public toString(): string {
@@ -59,10 +54,40 @@ export class StatusOfElement implements Question<void, ElementStatus> {
     }
 }
 
+class StatusOfMultipleElements implements Question<void, ElementStatus> {
+
+    public answeredBy(actor: UsesAbilities): Promise<ElementStatus> {
+        return new Promise(async (resolve) => {
+            const status: ElementStatus = {};
+
+            status.visible = await FindElements.as(actor)
+                                               .findElements(this.elements)
+                                               .isVisible({returnSeparateValues: this.options.all});
+            status.enabled = await FindElements.as(actor)
+                                               .findElements(this.elements)
+                                               .isEnabled({returnSeparateValues: this.options.all});
+
+            resolve(status);
+        })
+    }
+
+    public constructor(private elements: SppElementList, private options = {all: false}) {
+    }
+
+    public toString(): string {
+        return `Status of multiple elements
+    called ${this.elements.toString()}`
+    }
+}
+
 export class Status {
 
-    public static of(elements: SppElement | SppElementList) {
-        return new StatusOfElement(elements);
+    public static of(element: SppElement): StatusOfElement {
+        return new StatusOfElement(element);
+    }
+
+    public static ofAll(elements: SppElementList, options = {all: false}): StatusOfMultipleElements {
+        return new StatusOfMultipleElements(elements, options);
     }
 
     public static visible = {

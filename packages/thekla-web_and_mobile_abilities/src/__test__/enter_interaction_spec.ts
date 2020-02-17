@@ -1,5 +1,5 @@
 import {DesiredCapabilities, ServerConfig}                                   from "@thekla/config";
-import {Actor}                                                               from "@thekla/core";
+import {Actor, Result}                                                       from "@thekla/core";
 import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {BrowseTheWeb, By, element, Enter, Navigate, RunningBrowser, Value}   from "..";
 
@@ -13,18 +13,15 @@ describe(`Enter`, function () {
 
     beforeAll(() => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
+        const theBrowser = RunningBrowser.startedOn(conf).withCapabilities(capabilities);
+        Emma.whoCan(BrowseTheWeb.using(theBrowser));
+    });
+
+    afterAll((): Promise<void[]> => {
+        return RunningBrowser.cleanup();
     });
 
     describe(`a value into a field`, function () {
-
-        beforeAll(() => {
-            const theBrowser = RunningBrowser.startedOn(conf).withCapabilities(capabilities);
-            Emma.whoCan(BrowseTheWeb.using(theBrowser));
-        });
-
-        afterAll((): Promise<void[]> => {
-            return RunningBrowser.cleanup();
-        });
 
         it(`should add the value into the input field
         test id: 734a6687-78c8-4da7-a654-cd8086ae4388`, async () => {
@@ -49,8 +46,7 @@ describe(`Enter`, function () {
             expect(first).toEqual(`onetwo`);
 
             await Enter.value(`cleared`)
-                       .into(emailField)
-                       .butClearsTheFieldBefore()
+                       .into.empty(emailField)
                        .performAs(Emma);
 
             const second = await Value.of(emailField).answeredBy(Emma);
@@ -90,6 +86,40 @@ describe(`Enter`, function () {
             await Enter.value(`Third Text`).into.empty(emailField).performAs(Emma);
             const thirdText = await Value.of(emailField).answeredBy(Emma);
             expect(thirdText).toEqual(`Third Text`);
+        });
+    });
+
+    describe(`a questions result into a field`, () => {
+
+        it(` should add the questions result into the field
+        test id: 4c7a1783-b09f-4857-ae40-23ef83d4d19e`, async () => {
+            await Navigate.to(`/`).performAs(Emma);
+
+            await Enter.resultOf(Result.of(`Enter question result`))
+                       .into(emailField).performAs(Emma);
+
+            const text = await Value.of(emailField).answeredBy(Emma);
+
+            expect(text).toEqual(`Enter question result`);
+        });
+
+        it(`should clear the value before entering the questions result
+        test id: 5bee27bb-36f1-43bd-9844-e7f3240121bb`, async () => {
+            await Navigate.to(`/`).performAs(Emma);
+            await Enter.value(`one`).into(emailField).performAs(Emma);
+            await Enter.value(`two`).into(emailField).performAs(Emma);
+
+            const first = await Value.of(emailField).answeredBy(Emma);
+
+            expect(first).toEqual(`onetwo`);
+
+            await Enter.resultOf(Result.of(`my questions result`))
+                       .into.empty(emailField)
+                       .performAs(Emma);
+
+            const second = await Value.of(emailField).answeredBy(Emma);
+
+            expect(second).toEqual(`my questions result`)
         });
     });
 });

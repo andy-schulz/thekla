@@ -41,4 +41,8 @@ export class UseBrowserFeatures implements Ability {
     public switchToWindowMatchingTheTitle(titlePart: string): Promise<void> {
         return this.client.switchToWindowMatchingTheTitle(titlePart);
     }
+
+    public uploadFile(file: string) {
+        return this.client.uploadFile(file);
+    }
 }

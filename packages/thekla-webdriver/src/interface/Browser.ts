@@ -64,5 +64,7 @@ export interface Browser extends WebFinder, FrameFinder {
     switchToWindow(handle: string): Promise<void>;
 
     switchToWindowMatchingTheTitle(title: string): Promise<void>;
+
+    uploadFile(filePath: string): Promise<string>;
 }
 

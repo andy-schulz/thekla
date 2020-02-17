@@ -8,27 +8,28 @@ import WebDriver, {Client, WindowHandle}                                 from 'w
 import deepmerge                                                         from "deepmerge";
 import {PointerActionSequence}                                           from "../interface/Actions";
 import {Browser, BrowserScreenshotData, CreateClient, ScreenshotOptions} from "../interface/Browser";
-import {BrowserWindow, WindowManager}                                    from "../interface/BrowserWindow";
-import {ClientCtrls}                                                     from "../interface/ClientCtrls";
-import {TkSession}                                                       from "../interface/TkSession";
-import {TkWebElement}                                                    from "../interface/TkWebElement";
-import {FrameElementFinder, WebElementFinder, WebElementListFinder}      from "../interface/WebElements";
-import {cleanupClients}                                                  from "../lib/client/ClientHelper";
-import {checkClientName}                                                 from "../lib/client/checks";
-import {formatNavigateToUrl}                                             from "../lib/client/url_formatter";
-import {waitForCondition}                                                from "../lib/client/wait_actions";
-import {scrollTo}                                                        from "../lib/__client_side_scripts__/scroll_page";
-import {Point}                                                           from "../lib/element/ElementLocation";
-import {funcToString}                                                    from "../utils/Utils";
+import {BrowserWindow, WindowManager}                               from "../interface/BrowserWindow";
+import {ClientCtrls}                                                from "../interface/ClientCtrls";
+import {TkSession}                                                  from "../interface/TkSession";
+import {TkWebElement}                                               from "../interface/TkWebElement";
+import {FrameElementFinder, WebElementFinder, WebElementListFinder} from "../interface/WebElements";
+import {cleanupClients}                                             from "../lib/client/ClientHelper";
+import {checkClientName}                                            from "../lib/client/checks";
+import {formatNavigateToUrl}                                        from "../lib/client/url_formatter";
+import {waitForCondition}                                           from "../lib/client/wait_actions";
+import {scrollTo}                                                   from "../lib/__client_side_scripts__/scroll_page";
+import {Point}                                                      from "../lib/element/ElementLocation";
+import uploadFile                                                   from "../utils/uploadFile";
+import {funcToString}                                               from "../utils/Utils";
 import {
     switchToMasterFrame,
     switchToWindowMatchingTheTitle,
     executeFnOnClient
-}                                                                        from "./ClientWdioHelper";
-import {FrameElementWdio}                                                from "./FrameElementWdio";
-import {LocatorWdio}                                                     from "./LocatorWdio";
-import {SessionIO}                                                       from "./wrapper/SessionIO";
-import {WebElementListWdio}                                              from "./WebElementListWdio";
+}                                                                   from "./ClientWdioHelper";
+import {FrameElementWdio}                                           from "./FrameElementWdio";
+import {LocatorWdio}                                                from "./LocatorWdio";
+import {SessionIO}                                                  from "./wrapper/SessionIO";
+import {WebElementListWdio}                                         from "./WebElementListWdio";
 import {BrowserWindowWdio}                                               from "./BrowserWindowWdio";
 import {takeScreenshots, saveScreenshots}                                from "../lib/client/screenshots";
 import {processScreenshot}                                               from "../lib/client/client_utils";
@@ -450,5 +451,10 @@ export class ClientWdio implements Browser, ClientCtrls<Client>, WindowManager {
     public getSession(): Promise<TkSession> {
         return this.getFrameWorkClient()
                    .then(SessionIO.create)
+    }
+
+    public async uploadFile(filePath: string): Promise<string> {
+        const clnt = await this.getFrameWorkClient();
+        return uploadFile(filePath, clnt);
     }
 }
