@@ -38,12 +38,10 @@ describe(`Upload a file`, () => {
                          .then(() => {
                              expect(true).toBeFalsy(`uploadFile should throw an error but it doesnt`)
                          }, (e) => {
-                             console.log(`then failure branch`);
                              expect(e.toString()).toContain(`no such file or directory`);
                              return Promise.resolve();
                          })
                          .catch((e) => {
-                             console.log(`catch failure branch`);
                              expect(e.toString()).toContain(`no such file or directory`);
                              return Promise.resolve();
                          })
