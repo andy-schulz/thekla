@@ -1,6 +1,6 @@
 {
   "name": "@thekla/webdriver",
-  "version": "2.9.9",
+  "version": "2.9.10",
   "description": "WebdriverIO wrapper providing the foundation for the SPP web and mobile abilities",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
