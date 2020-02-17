@@ -1,6 +1,6 @@
 {
   "name": "thekla",
-  "version": "2.9.0",
+  "version": "2.9.2",
   "description": "screenplay pattern implementation using typescript and webdriver",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
