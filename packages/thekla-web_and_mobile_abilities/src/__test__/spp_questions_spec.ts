@@ -290,7 +290,7 @@ describe(`Using`, (): void => {
             expect(fileLocation).toContain(`upload.test`);
         });
 
-        fit(`should return an error when the file does not exist
+        it(`should return an error when the file does not exist
         test id: 415eae82-ffff-49d0-8c8b-da9ca5093d14`, () => {
             const file = `${__dirname}/../../__fixtures__/doesNotExist.log`;
 
