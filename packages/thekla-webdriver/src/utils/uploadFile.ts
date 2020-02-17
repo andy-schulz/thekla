@@ -29,9 +29,10 @@ export default async function uploadFile(localPath: string, client: Client): Pro
 
         const zipData: Uint8Array[] = [];
         const source = fs.createReadStream(localPath);
+        source.on(`error`, reject);
 
         archiver(`zip`)
-            .on(`error`, (err: string) => reject(err))
+            .on(`error`, reject)
             .on(`data`, (data: Uint8Array) => zipData.push(data))
             .on(`end`, () => (client.file(Buffer.concat(zipData).toString(`base64`)) as unknown as Promise<string>).then((filePath: string) => resolve(filePath), reject))
             .append(source, {name: path.basename(localPath)})
