@@ -298,10 +298,12 @@ describe(`Using`, (): void => {
                                      .then(() => {
                                          expect(true).toBeFalsy(`should throw an error but is doesnt`);
                                      }, (e) => {
+                                         console.log(`then failure branch`);
                                          expect(e.toString()).toContain(`no such file or directory`);
                                          return Promise.resolve();
                                      })
                                      .catch((e) => {
+                                         console.log(`catch failure branch`);
                                          expect(e.toString()).toContain(`no such file or directory`);
                                          return Promise.resolve();
                                      });
