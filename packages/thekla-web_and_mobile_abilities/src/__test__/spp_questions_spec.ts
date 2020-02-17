@@ -23,7 +23,7 @@ import {RemoteFileLocation}                                                  fro
 
 configure(`src/__test__/__config__/log4js.json`);
 
-describe(`Using`, (): void => {
+fdescribe(`Using`, (): void => {
 
     const seleniumConfig: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`spp_questions_spec.ts`);
@@ -129,15 +129,18 @@ describe(`Using`, (): void => {
             expect(await Status.enable.of(beingEnabledButton).answeredBy(John)).toBeFalse();
         });
 
-        it(`should return the Status of multiple elements as single value` +
+        it(`should return the Status of multiple not visible elements as single value` +
                `- (test case id: a3fcc0e7-d963-4676-aeeb-c6b74d546f73)`, async (): Promise<void> => {
 
             expect(await Status.ofAll(multipleAppearButtons).answeredBy(John))
                 .toEqual({visible: false, enabled: true});
+        });
+
+        it(`should return the Status of multiple visible elements as single value
+        test id: b4f802d7-d27f-4f6d-9da8-2bfdd053cd39`, async () => {
 
             expect(await Status.ofAll(multipleDisappearButtons).answeredBy(John))
                 .toEqual({visible: true, enabled: true});
-
         });
 
         it(`should return the Status of an element list, as separate values` +
