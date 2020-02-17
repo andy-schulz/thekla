@@ -1,6 +1,6 @@
 {
   "name": "@thekla/web-and-mobile-abilities",
-  "version": "2.9.4",
+  "version": "2.9.5",
   "description": "BrowserTheWeb and OperateOnMobileDevice abilities to write e2e tests in the screenplay pattern style",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -34,7 +34,7 @@
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
     "@thekla/core": "^2.8.4",
-    "@thekla/webdriver": "^2.9.1"
+    "@thekla/webdriver": "^2.9.5"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
