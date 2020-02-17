@@ -23,7 +23,7 @@ import {RemoteFileLocation}                                                  fro
 
 configure(`src/__test__/__config__/log4js.json`);
 
-fdescribe(`Using`, (): void => {
+describe(`Using`, (): void => {
 
     const seleniumConfig: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`spp_questions_spec.ts`);
