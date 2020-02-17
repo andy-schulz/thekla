@@ -10,16 +10,16 @@ nav_order: 10
 1. TOC
 {:toc}
 
-# Attribute
+## Attribute
 
 Get the value of a web elements attribute.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name         | parameter             | description                                 |
@@ -27,7 +27,7 @@ Get the value of a web elements attribute.
 | `.of()*`     | element: SppElement   | the element to get the attribute value from |
 | `.called()*` | attributeName: string | the name of the attribute                   |
 
-## Example
+### Example
 {: .no_toc }
 
 Use the `See` interaction to check for the attributes value.
@@ -45,23 +45,23 @@ Save the attributes value to a variable.
 const classValue = await Attribute.of(element).called(`class`).answerdBy(john)
 ```
 
-# Count
+## Count
 
 Count the number of elements found by the given element selector.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name     | parameter                | description                  |
 | :---     | :---                     | :---                         |
 | `.of()*` | elements: SppElementList | the element list to be found |
 
-## Example
+### Example
 {: .no_toc }
 
 Use the `See` interaction to check the number of elements
@@ -79,60 +79,111 @@ Save the number of elements to a variable
 const text = await Count.of(elements).answerdBy(john)
 ```
 
-# Status
+## RemoteFileLocation
+
+Upload a file to the selenium server and ret the remote file location. This location
+can then be entered into the 
+### Ability
+{: .no_toc }
+
+- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+
+### Methods
+{: .no_toc }
+
+| name     | parameter    | description                                    |
+| :---     | :---         | :---                                           |
+| `.of()*` | file: string | the file to be uploaded to the selenium server |
+
+### Example
+{: .no_toc }
+
+````typescript
+const fileLocation = await RemoteFileLocation.of(`<MY_FOLDER>/myFile.log`).answeredBy(john)
+// fileLocation: <SOME_REMOTE_FOLDER>/myFile.log
+````
+
+Use the RemoteFileLocation question to upload a file
+
+````typescript
+john.attemptsTo(
+    Enter.resultOf(RemoteFileLocation.of(`<MY_FOLDER>/myFile.log`))
+        .into(UPLOAD_INPUT_FIELD),
+    Click.on(UPLOAD_FILE_BUTTON)
+)
+````
+
+## Status
 
 Get the visibiliy or enabled status of an element.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
-| name             | parameter           | description                                   |
-| :---             | :---                | :---                                          |
-| `.visible.of()*` | element: SppElement | the element to get the visibility status from |
-| `.enable.of()*`  | element: SppElement | the element to get the enabled status from    |
+| name             | parameter                                                        | description                                                                                                                           |
+| :---             | :---                                                             | :---                                                                                                                                  |
+| `.visible.of()*` | element: SppElement                                              | the element to get the visibility status from                                                                                         |
+| `.enable.of()*`  | element: SppElement                                              | the element to get the enabled status from                                                                                            |
+| `.of()*`         | element: SppElement                                              | the element to get the visibility or enabled status from                                                                              |
+| `.ofAll()*`      | elements: SppElementList, options: {all: true / false (default)} | the element list to get the visibility or enabled status from. If all is set to true, the status is all elements is returned as array |
 
-## Example
+### Example
 {: .no_toc }
 
-Use the `See` interaction to check the elements visible status.
+Use the `See` interaction to check if the elements is visible.
 
 ````typescript
 john.attemptsTo(
     See.if(Status.visible.of(element))
-        .is(Expected.toBe(true))
+        .is(Expected.to.be.truthy())
 )
 ````
 
 Save the elements enable status to a variable.
 
 ```typescript
-const text = await Status.enable.of(element).answerdBy(john)
+const status = await Status.enable.of(element).answerdBy(john)
+// status: true | false
 ```
 
-# Text
+get the Status of multiple elements as a single value
+
+````typescript
+const status = await Status.enable.ofAll(elementList).answerdBy(john)
+// status: {visible: true | false, enabled: true | false}
+````
+
+get the Status of multiple elements as separate values
+
+````typescript
+const status = await Status.enable.ofAll(elementList, {all: true}).answerdBy(john)
+// status: {visible: [boolean], enabled: [boolean]}
+````
+
+## Text
 
 Get the content / text of element.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name     | parameter           | description                      |
 | :---     | :---                | :---                             |
 | `.of()*` | element: SppElement | the element to get the text from |
 
-## Example
+### Example
 {: .no_toc }
 
 Use the `See` interaction to check for a text
@@ -150,17 +201,17 @@ Save the text to a variable.
 const text = await Text.of(element).answerdBy(john)
 ```
 
-# TheSites
+## TheSites
 {: .no_toc }
 
 Get the title or the url of a site.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name        | parameter | description     |
@@ -168,7 +219,7 @@ Get the title or the url of a site.
 | `.url()*`   | -         | the sites url   |
 | `.title()*` | -         | the sites title |
 
-## Example
+### Example
 {: .no_toc }
 
 Use the `See` interaction to check the sites title.
@@ -186,23 +237,23 @@ Save the elements enable status to a variable.
 const myUrl = await TheSites.url().answerdBy(john)
 ```
 
-# Value
+## Value
 
 Get the content of the value attribute.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
-| name         | parameter             | description                                 |
-| :---         | :---                  | :---                                        |
-| `.of()*`     | element: SppElement   | the element to get the content of the value attribute from |
+| name     | parameter           | description                                                |
+| :---     | :---                | :---                                                       |
+| `.of()*` | element: SppElement | the element to get the content of the value attribute from |
 
-## Example
+### Example
 {: .no_toc }
 
 Use the `See` interaction to check the content of attribute 'value'.
