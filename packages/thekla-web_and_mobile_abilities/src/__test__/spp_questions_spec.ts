@@ -285,9 +285,9 @@ describe(`Using`, (): void => {
 
         it(`should return the remote file location
         test id: 415eae82-ffff-49d0-8c8b-da9ca5093d14`, async () => {
-            const file = `${__dirname}/../../__fixtures__/upload.log`;
+            const file = `${__dirname}/../../__fixtures__/upload.test`;
             const fileLocation = await RemoteFileLocation.of(file).answeredBy(Jonathan);
-            expect(fileLocation).toContain(`upload.log`);
+            expect(fileLocation).toContain(`upload.test`);
         });
 
         it(`should return an error when the file does not exist

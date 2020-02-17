@@ -2,7 +2,6 @@ import {DesiredCapabilities, ServerConfig}                                   fro
 import {getStandardTheklaDesiredCapabilities, getStandardTheklaServerConfig} from "@thekla/support";
 import {Browser, ClientHelper}                                               from "../../..";
 
-
 describe(`Upload a file`, () => {
 
     const conf: ServerConfig = getStandardTheklaServerConfig();
@@ -27,9 +26,9 @@ describe(`Upload a file`, () => {
         it(`should return the local file path
         test id: 30804244-30cd-414d-9bf7-86c938f28df8`, async () => {
 
-            const fileName = await browser.uploadFile(`${__dirname}/../../../../__fixtures__/upload.log`);
+            const fileName = await browser.uploadFile(`${__dirname}/../../../../__fixtures__/upload.test`);
             expect(typeof fileName).toEqual(`string`);
-            expect(fileName).toContain(`upload.log`);
+            expect(fileName).toContain(`upload.test`);
         });
 
         it(`should fail when the file does not exist`, async () => {

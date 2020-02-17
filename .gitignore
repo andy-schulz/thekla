@@ -96,3 +96,6 @@ _testData
 _archive
 
 .build
+
+### add test fixtures
+!packages/**/__fixtures__
