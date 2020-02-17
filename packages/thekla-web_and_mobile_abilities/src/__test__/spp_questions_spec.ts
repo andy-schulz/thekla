@@ -294,24 +294,14 @@ describe(`Using`, (): void => {
         test id: 415eae82-ffff-49d0-8c8b-da9ca5093d14`, async () => {
             const file = `${__dirname}/../../__fixtures__/doesNotExist.log`;
 
-            try {
-                return RemoteFileLocation.of(file).answeredBy(Jonathan)
-                                         .then(() => {
-                                             console.log(`then block`);
-                                             expect(true).toBeFalsy(`should throw an error but is doesnt`)
-                                         }, (e) => {
-                                             console.log(`then error block`);
-                                             expect(e.toString()).toContain(`no such file or directory`)
-                                         })
-                                         .catch((e) => {
-                                             console.log(`catch Promise block`);
-                                             expect(e.toString()).toContain(`no such file or directory`)
-                                         });
-            } catch (e) {
-                console.log(`try catch block`);
-                expect(e.toString()).toContain(`no such file or directory`)
-            }
-
+            return RemoteFileLocation.of(file).answeredBy(Jonathan)
+                                     .then(() => {
+                                         expect(true).toBeFalsy(`should throw an error but is doesnt`);
+                                     })
+                                     .catch((e) => {
+                                         expect(e.toString()).toContain(`no such file or directory`);
+                                         return Promise.resolve();
+                                     });
         });
     });
 });

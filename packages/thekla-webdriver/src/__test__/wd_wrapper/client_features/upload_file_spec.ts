@@ -12,8 +12,8 @@ describe(`Upload a file`, () => {
         jasmine.DEFAULT_TIMEOUT_INTERVAL = 60000;
     });
 
-    afterAll((): void => {
-        ClientHelper.cleanup();
+    afterAll((): Promise<void[]> => {
+        return ClientHelper.cleanup();
     });
 
     describe(`to the selenium server`, () => {
@@ -31,14 +31,16 @@ describe(`Upload a file`, () => {
             expect(fileName).toContain(`upload.test`);
         });
 
-        it(`should fail when the file does not exist`, async () => {
+        it(`should fail when the file does not exist
+        test id: 76c8ac17-5b92-4ff9-89d6-f660a360ff5e`, () => {
 
-            await browser.uploadFile(`doesNotExist.log`)
+            return browser.uploadFile(`doesNotExist.log`)
                          .then(() => {
                              expect(true).toBeFalsy(`uploadFile should throw an error but it doesnt`)
                          })
                          .catch((e) => {
-                             expect(e.toString()).toContain(`no such file or directory`)
+                             expect(e.toString()).toContain(`no such file or directory`);
+                             return Promise.resolve();
                          })
         })
     });

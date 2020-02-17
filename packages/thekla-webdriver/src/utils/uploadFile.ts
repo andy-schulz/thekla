@@ -9,27 +9,27 @@ import path      from 'path'
 import {Client} from 'webdriver';
 
 export default async function uploadFile(localPath: string, client: Client): Promise<string> {
-    if (!client)
-        throw new Error(`number or type of arguments don't agree with uploadFile command`);
-
-    /**
-     * parameter check
-     */
-    if (typeof localPath !== `string`) {
-        throw new Error(`number or type of arguments don't agree with uploadFile command`)
-    }
-
-    /**
-     * check if command is available
-     */
-    if (typeof client.file !== `function`) {
-        throw new Error(`The uploadFile command is not available in ${(client as unknown as any).capabilities}`)
-    }
-
-    const zipData: Uint8Array[] = [];
-    const source = fs.createReadStream(localPath);
-
     return new Promise((resolve, reject) => {
+        if (!client)
+            return reject(`number or type of arguments don't agree with uploadFile command`);
+
+        /**
+         * parameter check
+         */
+        if (typeof localPath !== `string`) {
+            return reject(`number or type of arguments don't agree with uploadFile command`)
+        }
+
+        /**
+         * check if command is available
+         */
+        if (typeof client.file !== `function`) {
+            return reject(`The uploadFile command is not available in ${(client as unknown as any).capabilities}`)
+        }
+
+        const zipData: Uint8Array[] = [];
+        const source = fs.createReadStream(localPath);
+
         archiver(`zip`)
             .on(`error`, (err: string) => reject(err))
             .on(`data`, (data: Uint8Array) => zipData.push(data))
