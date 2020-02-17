@@ -37,6 +37,9 @@ describe(`Upload a file`, () => {
             return browser.uploadFile(`doesNotExist.log`)
                          .then(() => {
                              expect(true).toBeFalsy(`uploadFile should throw an error but it doesnt`)
+                         }, (e) => {
+                             expect(e.toString()).toContain(`no such file or directory`);
+                             return Promise.resolve();
                          })
                          .catch((e) => {
                              expect(e.toString()).toContain(`no such file or directory`);

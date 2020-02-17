@@ -290,13 +290,16 @@ describe(`Using`, (): void => {
             expect(fileLocation).toContain(`upload.test`);
         });
 
-        it(`should return an error when the file does not exist
-        test id: 415eae82-ffff-49d0-8c8b-da9ca5093d14`, async () => {
+        fit(`should return an error when the file does not exist
+        test id: 415eae82-ffff-49d0-8c8b-da9ca5093d14`, () => {
             const file = `${__dirname}/../../__fixtures__/doesNotExist.log`;
 
             return RemoteFileLocation.of(file).answeredBy(Jonathan)
                                      .then(() => {
                                          expect(true).toBeFalsy(`should throw an error but is doesnt`);
+                                     }, (e) => {
+                                         expect(e.toString()).toContain(`no such file or directory`);
+                                         return Promise.resolve();
                                      })
                                      .catch((e) => {
                                          expect(e.toString()).toContain(`no such file or directory`);
