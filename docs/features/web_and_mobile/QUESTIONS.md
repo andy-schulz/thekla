@@ -81,8 +81,9 @@ const text = await Count.of(elements).answerdBy(john)
 
 ## RemoteFileLocation
 
-Upload a file to the selenium server and ret the remote file location. This location
-can then be entered into the 
+the question uploads a file to the selenium server and returns the remote file location. This location
+can then be entered into an input field to test the upload functionality of a site.
+
 ### Ability
 {: .no_toc }
 
@@ -103,12 +104,14 @@ const fileLocation = await RemoteFileLocation.of(`<MY_FOLDER>/myFile.log`).answe
 // fileLocation: <SOME_REMOTE_FOLDER>/myFile.log
 ````
 
-Use the RemoteFileLocation question to upload a file
+Use the RemoteFileLocation question to test a sites upload functionality.
 
 ````typescript
 john.attemptsTo(
+
     Enter.resultOf(RemoteFileLocation.of(`<MY_FOLDER>/myFile.log`))
         .into(UPLOAD_INPUT_FIELD),
+
     Click.on(UPLOAD_FILE_BUTTON)
 )
 ````
