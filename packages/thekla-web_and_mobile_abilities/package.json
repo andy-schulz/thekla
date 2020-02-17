@@ -1,6 +1,6 @@
 {
   "name": "@thekla/web-and-mobile-abilities",
-  "version": "2.9.3",
+  "version": "2.9.4",
   "description": "BrowserTheWeb and OperateOnMobileDevice abilities to write e2e tests in the screenplay pattern style",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
