@@ -1,6 +1,6 @@
 import {getLogger, Logger}    from "@log4js-node/log4js-api";
-import {Activity}             from "../../index";
 import {ActivityLogEntryType} from "@thekla/activity-log";
+import {Activity}             from "../../index";
 import {LogsActivity}         from "../Actor";
 import {stringReplace}        from "./decoratorStrings";
 
@@ -22,10 +22,12 @@ const createLogTask = <U extends LogsActivity, PT, RT>(
         propertyDescriptor.value = function (actor: U, param?: PT): Promise<RT> {
 
             const logEntry = actor.activityLog.addActivityLogEntry(target.constructor.name,
-                `${this.toString()}`,
-                activityType, `running`);
+                                                                   `${this.toString()}`,
+                                                                   activityType, `running`);
+            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore
             if (typeof logger.stepdetails == `function`) {
+                // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
                 // @ts-ignore
                 logger.stepdetails(`${actor.name} ${activityDetails} ${this.toString()}`);
             } else {
@@ -33,15 +35,15 @@ const createLogTask = <U extends LogsActivity, PT, RT>(
             }
             const arg = [actor, param];
             return method.apply(this, arg as [])
-                .then((value: RT): RT => {
-                    logEntry.status = `passed`;
-                    actor.activityLog.reset(logEntry);
-                    return value;
-                })
-                .catch((e: Error) => {
-                    logEntry.status = `failed`;
-                    return Promise.reject(e)
-                });
+                         .then((value: RT): RT => {
+                             logEntry.status = `passed`;
+                             actor.activityLog.reset(logEntry);
+                             return value;
+                         })
+                         .catch((e: Error) => {
+                             logEntry.status = `failed`;
+                             return Promise.reject(e)
+                         });
         };
 
         return propertyDescriptor;

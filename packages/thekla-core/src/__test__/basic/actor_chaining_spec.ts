@@ -1,4 +1,5 @@
 import {Actor, PerformsTask, Task} from "../.."
+import {Dbg, Debug}                from "../../lib/utils/DebugActivity";
 
 class Start extends Task<void, string> {
     private constructor(private param: string) {
@@ -55,11 +56,11 @@ class TaskNtoN extends Task<number, number> {
     }
 }
 
-describe(``, function () {
+describe(`Chaining Activities`, function () {
 
-    describe(``, function () {
+    describe(`and passing values`, function () {
 
-        it(`chains tasks
+        it(`should propagate the the results
         - (test case id: f89c3d05-faec-4db4-aa29-b9ee41ed561b)`, async (): Promise<void> => {
             const chris = Actor.named(`Chris`);
 
@@ -68,6 +69,37 @@ describe(``, function () {
                 TaskStoS.use(),
                 TaskStoN.use(),
                 TaskNtoN.use(),
+                TaskNtoS.use()
+            );
+
+            expect(value).toEqual(`2`);
+        });
+
+        it(`should examine the values when debugged
+        test id: f5c304c2-0417-4947-8b76-07b5af3b20bf`, async () => {
+            const chris = Actor.named(`Chris`);
+
+            const value = await chris.attemptsTo(
+                Start.with(`2`),
+                TaskStoS.use(),
+                TaskStoN.use(),
+                Debug.by(result => expect(result).toEqual(2)),
+                Dbg(TaskNtoN.use()).debug(result => expect(result).toEqual(2)),
+                TaskNtoS.use()
+            );
+
+            expect(value).toEqual(`2`);
+        });
+
+        it(`should pass the values for the default debug function
+        test id: f5c304c2-0417-4947-8b76-07b5af3b20bf`, async () => {
+            const chris = Actor.named(`Chris`);
+
+            const value = await chris.attemptsTo(
+                Start.with(`2`),
+                TaskStoS.use(),
+                TaskStoN.use(),
+                Dbg(TaskNtoN.use()),
                 TaskNtoS.use()
             );
 
