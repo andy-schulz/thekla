@@ -28,6 +28,7 @@ export {SwitchToWindow}                                            from "./lib/a
 
 // Web Questions
 export {Text}                                                from "./lib/questions/Text";
+export {RemoteFileLocation}                                  from "./lib/questions/RemoteFileLocation";
 export {Value}                                               from "./lib/questions/Value";
 export {Attribute}                                           from "./lib/questions/Attribute";
 export {Count}                                               from "./lib/questions/Count";

@@ -13,17 +13,17 @@ import {
     Count,
     element,
     Navigate,
+    RemoteFileLocation,
     RunningBrowser,
     Status,
     Text,
     TheSites,
     Value
 }                                                                            from "..";
-import {RemoteFileLocation}                                                  from "../lib/questions/RemoteFileLocation";
 
 configure(`src/__test__/__config__/log4js.json`);
 
-describe(`Using`, (): void => {
+fdescribe(`Using`, (): void => {
 
     const seleniumConfig: ServerConfig = getStandardTheklaServerConfig();
     const capabilities: DesiredCapabilities = getStandardTheklaDesiredCapabilities(`spp_questions_spec.ts`);
