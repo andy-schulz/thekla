@@ -8,9 +8,6 @@ nav_order: 30
 # Configuration of Web and Mobile Abilities
 {: .no_toc }
 
-1. TOC
-{:toc}
-
 # ServerConfig
 
 # DesiredCapabilities

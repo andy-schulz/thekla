@@ -8,9 +8,6 @@ nav_order: 50
 # Interactions of Web and Mobile Abilities
 {: .no_toc }
 
-1. TOC
-{:toc}
-
 ## Click
 
 Clicks on the given browser element (mobile / desktop) or an app element (mobile). 

@@ -8,9 +8,6 @@ nav_order: 10
 # Web and Mobile Abilities
 {: .no_toc }
 
-1. TOC
-{:toc}
-
 # BrowseTheWeb
 
 Acors ability to use a browser and interact with it.

@@ -7,9 +7,6 @@ nav_order: 40
 # Creating web elements and web element lists
 {: .no_toc }
 
-1. TOC
-{:toc}
-
 # SppElement
 
 An `SppElement` can be created by calling the `element()` function.

@@ -8,9 +8,6 @@ nav_order: 70
 # Web And Mobile Conditions
 {: .no_toc }
 
-1. TOC
-{:toc}
-
 # UntilElementCondition
 
 The UntilElementCondition specifies the state an element can have. Right now 4 states are implemented:

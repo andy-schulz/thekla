@@ -7,9 +7,6 @@ nav_order: 60
 # Questions of Web and Mobile Abilities
 {: .no_toc }
 
-1. TOC
-{:toc}
-
 ## Attribute
 
 Get the value of a web elements attribute.
