@@ -2,7 +2,7 @@
 title: Interactions
 parent: Web and Mobile Abilities
 has_children: true
-nav_order: 10
+nav_order: 50
 ---
 
 # Interactions of Web and Mobile Abilities
@@ -173,11 +173,12 @@ Josh.attemptsTo(
 ### Methods
 {: .no_toc }
 
-| name                     | parameter              | description                                                                           |
-| :---                     | :---                   | :---                                                                                  |
-| `.to()`*                 | element: SppElement    | scroll the element to the top of the viewport                                         |
-| `.atTheViewportCenter()` |                        | if scrolled to an element position the element at the center of the visible view port |
-| `.toPosition()`*         | position: PagePosition | scroll to a pages position, currently implemented are Page.bottom() and Page.top()    |
+| name                     | parameter              | description                                                                       |
+| :---                     | :---                   | :---                                                                              |
+| `.to()`*                 | element: SppElement    | scroll the element to the top of the viewport                                     |
+| `.to.centered()`*        | element: SppElement    | scroll the element to the viewports center position                               |
+| `.atTheViewportCenter()` |                        | DEPRECATED                                                                        |
+| `.toPosition()`*         | position: PagePosition | scroll to a page position, currently implemented are Page.bottom() and Page.top() |
 
 ### Example
 {: .no_toc }
