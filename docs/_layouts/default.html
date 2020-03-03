@@ -26,6 +26,10 @@ layout: table_wrappers
         </div>
         <footer class="site-footer">
             <p class="text-small text-grey-dk-000 mb-4">This site uses <a href="https://github.com/pmarsceill/just-the-docs">Just the Docs</a>, a documentation theme for Jekyll.</p>
+            <div class="toggle_dark_mode">
+                <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
+                <script type="text/javascript" src="{{ \"/assets/js/dark-mode-preview.js\" | absolute_url }}"></script>
+            </div>
         </footer>
     </div>
     <div class="main-content-wrap js-main-content" tabindex="0">
@@ -47,10 +51,6 @@ layout: table_wrappers
                     {% endfor %}
                 </ul>
                 {% endif %}
-                <div class="toggle_dark_mode">
-                    <button class="btn js-toggle-dark-mode">Preview dark color scheme</button>
-                    <script type="text/javascript" src="{{ \"/assets/js/dark-mode-preview.js\" | absolute_url }}"></script>
-                </div>
             </div>
             <div class="page">
                 {% unless page.url == "/" %}

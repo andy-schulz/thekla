@@ -1,0 +1,52 @@
+{% assign tabs = include.html %}
+
+{% assign sections = tabs | split: "``END SECTION``" %}
+
+{% capture test%}
+{% increment tab_group %}
+{% endcapture %}
+
+<div class="tabs">
+    {% assign checked = "checked" %}
+
+    {% for section in sections %}
+
+        {% assign trimmed_section = section | lstrip | rstrip %}
+        {% assign section_size = trimmed_section | size %}
+
+        {% if section_size > 0 %}
+
+            {% capture test%}
+            {% increment tab_counter %}
+            {% endcapture %}
+
+            {% assign headers = section | lstrip | rstrip |  split: "``SECTION:" %}
+            {% assign replaced_string = "``SECTION:" %}
+
+            {% for header in headers %}
+
+                {% assign header_size = header | size %}
+
+                {% if header_size > 0 %}
+                    {% assign unstripped_title = header | split: "``" | first %}
+                    {% assign replaced_string = replaced_string | append: unstripped_title | append: "``"%}
+
+                    {%assign final_section = section | replace_first: replaced_string, ""%}
+
+                    {% assign title = unstripped_title | lstrip | rstrip %}
+                    {% break %}
+                {% endif %}
+
+            {% endfor %}
+
+            <input type="radio" name="tab-group-{{tab_group}}" id="tab-{{tab_group}}{{tab_counter}}" {{checked}}>
+            <label for="tab-{{tab_group}}{{tab_counter}}">{{title}}</label>
+            <div class="tab">
+                {{ final_section | markdownify }}
+            </div>
+
+            {% assign checked = "" %}
+        {% endif %}
+
+    {% endfor %}
+</div>
