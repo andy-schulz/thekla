@@ -1,6 +1,6 @@
 ---
 title: Interactions
-parent: Web and Mobile Abilities
+parent: Web and Mobile Features
 has_children: true
 nav_order: 50
 ---
