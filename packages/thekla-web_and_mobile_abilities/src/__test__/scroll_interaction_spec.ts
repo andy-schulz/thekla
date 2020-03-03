@@ -94,7 +94,7 @@ describe(`Scroll`, (): void => {
             expect(isOutsideView.anyOutside).toBeFalsy()
         });
 
-        it(`should move the element into the viewports center
+        it(`should move the element into the viewports center (deprecated)
         - (test case id: fc96865f-7be8-4c3e-aa4b-757f5462b0cc)`, async (): Promise<void> => {
 
             await Navigate.to(`/tables`).performAs(Sam);
@@ -113,6 +113,42 @@ describe(`Scroll`, (): void => {
             expect(row51isOutsideView.anyOutside).toBeTruthy(`row 51 is inside view, but it should be outside`);
 
             await Scroll.to(row50).atTheViewportCenter()
+                        .performAs(Sam);
+
+            row49IsOutsideView =
+                await theBrowser.executeScript(isElementOutsideOfView, row49.locator.selector) as BoundaryCheck;
+
+            row50isOutsideView =
+                await theBrowser.executeScript(isElementOutsideOfView, row50.locator.selector) as BoundaryCheck;
+
+            row51isOutsideView =
+                await theBrowser.executeScript(isElementOutsideOfView, row51.locator.selector) as BoundaryCheck;
+
+            expect(row49IsOutsideView.anyOutside).toBeFalsy(`row 49 is outside view, but it should be inside`);
+            expect(row50isOutsideView.anyOutside).toBeFalsy(`row 50 is outside view, but it should be inside`);
+            expect(row51isOutsideView.anyOutside).toBeFalsy(`row 51 is outside view, but it should be inside`);
+
+        });
+
+        it(`should move the element into the viewports center
+        - (test case id: d3b91050-bb8e-44d6-8c27-e92129deef4c)`, async (): Promise<void> => {
+
+            await Navigate.to(`/tables`).performAs(Sam);
+
+            let row49IsOutsideView: BoundaryCheck =
+                await theBrowser.executeScript(isElementOutsideOfView, row49.locator.selector) as BoundaryCheck;
+
+            let row50isOutsideView: BoundaryCheck =
+                await theBrowser.executeScript(isElementOutsideOfView, row50.locator.selector) as BoundaryCheck;
+
+            let row51isOutsideView: BoundaryCheck =
+                await theBrowser.executeScript(isElementOutsideOfView, row51.locator.selector) as BoundaryCheck;
+
+            expect(row49IsOutsideView.anyOutside).toBeTruthy(`row 49 is inside view, but it should be outside`);
+            expect(row50isOutsideView.anyOutside).toBeTruthy(`row 50 is inside view, but it should be outside`);
+            expect(row51isOutsideView.anyOutside).toBeTruthy(`row 51 is inside view, but it should be outside`);
+
+            await Scroll.to.centered(row50)
                         .performAs(Sam);
 
             row49IsOutsideView =

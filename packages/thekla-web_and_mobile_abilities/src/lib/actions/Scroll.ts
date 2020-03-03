@@ -5,7 +5,8 @@
 import {UsesAbilities, Interaction, stepDetails} from "@thekla/core";
 import {FindElements}                            from "../abilities/FindElements";
 import {UseBrowserFeatures}                      from "../abilities/UseBrowserFeatures";
-import {SppElement}                              from "../SppWebElements";
+import {SppElement, SppElementList}              from "../SppWebElements";
+import {Click}                                   from "./Click";
 
 class PagePosition implements PagePositionInterface {
 
@@ -48,6 +49,9 @@ class ElementScroller implements Interaction<void, void> {
         return FindElements.as(actor).findElement(this.element).scrollIntoView(this.center);
     }
 
+    /**
+     * @deprecated
+     */
     public atTheViewportCenter(): ElementScroller {
         this.center = true;
         return this;
@@ -56,7 +60,8 @@ class ElementScroller implements Interaction<void, void> {
     /**
      * @ignore
      */
-    public constructor(public element: SppElement) {
+    public constructor(public element: SppElement, centered?: boolean) {
+        this.center = !!centered;
     }
 }
 
@@ -82,12 +87,28 @@ export class Scroll {
      * specify which element or position should be scrolled to
      * @param element
      */
-    public static to(element: SppElement): ElementScroller {
-        return new ElementScroller(element);
-    }
+    public static get to(): ScrollHelper {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        return to;
+    };
 
     public static toPosition(position: PagePosition): PageScroller {
         return new PageScroller(position);
     }
 }
 
+const to = (element: SppElement): ElementScroller => {
+    return new ElementScroller(element);
+};
+
+const centered = (element: SppElement): ElementScroller => {
+    return new ElementScroller(element, true);
+};
+
+to.centered = centered;
+
+interface ScrollHelper extends Function {
+    centered: (element: SppElement) => ElementScroller;
+
+    (element: SppElement): ElementScroller;
+}
