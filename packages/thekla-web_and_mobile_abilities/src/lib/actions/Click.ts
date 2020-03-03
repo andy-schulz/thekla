@@ -2,12 +2,26 @@
  * Action to click on a web element
  */
 
-import {UsesAbilities, Interaction, stepDetails} from "@thekla/core";
+import {Interaction, stepDetails, UsesAbilities} from "@thekla/core";
 import {FindElements}                            from "../abilities/FindElements";
-import {SppElementList, SppElement}              from "../SppWebElements";
+import {SppElement, SppElementList}              from "../SppWebElements";
 
 export class Click implements Interaction<void, void> {
     private centerElement = false;
+
+    /**
+     * @ignore
+     */
+    constructor(public element: SppElement | SppElementList, centerElement?: boolean) {
+        if (centerElement)
+            this.centerElement = true;
+    }
+
+    public static get on(): ClickHelper {
+        // eslint-disable-next-line @typescript-eslint/no-use-before-define
+        return on;
+    }
+
     /**
      * @ignore
      */
@@ -20,36 +34,15 @@ export class Click implements Interaction<void, void> {
         }
 
         return this.centerElement ?
-            FindElements.as(actor)
-                .findElement(this.element as SppElement)
-                .scrollIntoView(true)
-                .then(() => {
-                    return FindElements.as(actor).findElement(this.element as SppElement).click();
-                }) :
-            FindElements.as(actor)
-                .findElement(this.element as SppElement)
-                .click();
-    }
-
-    // /**
-    //  * specify which element should be clicked on
-    //  * @param element - the SPP Element
-    //  */
-    // public static on(element: SppElement | SppElementList): Click {
-    //     return new Click(element as SppElement);
-    // }
-
-    public static get on(): ClickHelper {
-        // eslint-disable-next-line @typescript-eslint/no-use-before-define
-        return on;
-    }
-
-    /**
-     * @ignore
-     */
-    constructor(public element: SppElement | SppElementList, centerElement?: boolean) {
-        if(centerElement)
-            this.centerElement = true;
+               FindElements.as(actor)
+                           .findElement(this.element as SppElement)
+                           .scrollIntoView(true)
+                           .then(() => {
+                               return FindElements.as(actor).findElement(this.element as SppElement).click();
+                           }) :
+               FindElements.as(actor)
+                           .findElement(this.element as SppElement)
+                           .click();
     }
 }
 
@@ -64,7 +57,7 @@ const centered = (element: SppElement | SppElementList): Click => {
 on.centered = centered;
 
 interface ClickHelper extends Function {
-    (element: SppElement | SppElementList): Click;
-
     centered: (element: SppElement | SppElementList) => Click;
+
+    (element: SppElement | SppElementList): Click;
 }
