@@ -28,6 +28,13 @@ export const isElementOutsideOfView = (className: string) => {
         out.elementOutside = out.topOutside && out.bottomOutside || out.leftOutside && out.rightOutside;
         out.elementPartialOutside = !out.elementOutside && out.anyOutside;
         out.elementInside = !out.anyOutside;
+        out.bounding = bounding;
+        out.window = {
+            windowInnerHeight: window.innerHeight,
+            windowInnerWidth: window.innerWidth,
+            clientHeight: document.documentElement.clientHeight,
+            clientWidth: document.documentElement.clientWidth,
+        }
 
         return out;
 
