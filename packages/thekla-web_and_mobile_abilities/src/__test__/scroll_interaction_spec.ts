@@ -79,6 +79,7 @@ describe(`Scroll`, (): void => {
         it(`should move the element into the viewport 
         - (test case id: bc7ff4ef-d0ea-4ac1-b2c6-5cedefd11391)`, async (): Promise<void> => {
 
+            await Navigate.to(`/`).performAs(Sam);
             await Navigate.to(`/tables`).performAs(Sam);
 
             let isOutsideView: BoundaryCheck =
@@ -97,6 +98,7 @@ describe(`Scroll`, (): void => {
         it(`should move the element into the viewports center (deprecated)
         - (test case id: fc96865f-7be8-4c3e-aa4b-757f5462b0cc)`, async (): Promise<void> => {
 
+            await Navigate.to(`/`).performAs(Sam);
             await Navigate.to(`/tables`).performAs(Sam);
 
             let row49IsOutsideView: BoundaryCheck =
@@ -133,6 +135,7 @@ describe(`Scroll`, (): void => {
         it(`should move the element into the viewports center
         - (test case id: d3b91050-bb8e-44d6-8c27-e92129deef4c)`, async (): Promise<void> => {
 
+            await Navigate.to(`/`).performAs(Sam);
             await Navigate.to(`/tables`).performAs(Sam);
 
             let row49IsOutsideView: BoundaryCheck =
