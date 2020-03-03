@@ -11,26 +11,27 @@ nav_order: 10
 1. TOC
 {:toc}
 
-# Click
+## Click
 
 Clicks on the given browser element (mobile / desktop) or an app element (mobile). 
 
 > the `Tap` interaction is not implemented, it will follow soon
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
-| name     | parameter           | description              |
-| :---     | :---                | :---                     |
-| `.on()`* | element: SppElement | the element to click on. |
+| name              | parameter           | description                                                |
+| :---              | :---                | :---                                                       |
+| `.on()`*          | element: SppElement | click the element                                          |
+| `.on.centered()`* | element: SppElement | first scroll element to the viewports center then click it |
 
-## Example
+### Example
 {: .no_toc }
 
 ```typescript
@@ -40,37 +41,44 @@ Josh.attemptsTo(
 )
 ```
 
-# Drag
+```typescript
+Josh.attemptsTo(
+    Click
+        .on.centered(Googles.SEARCH_BUTTON)
+)
+```
 
-## Ability
+## Drag
+
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name         | parameter        | description |
 | :---         | :---             | :---        |
 | `.method()`* | param: PARAMETER | description |
 
-## Example
+### Example
 {: .no_toc }
 
-# Enter
+## Enter
 
 Enters a value into a text field or area. 
 To upload a file you are entering the file location into the uploads input field.
 
 If the field contains already a value, the new value will be appended.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name            | parameter           | description                                                  |
@@ -79,7 +87,7 @@ If the field contains already a value, the new value will be appended.
 | `.into()`       | element: SppElement | the input field or text area the value shall be entered into |
 | `.into.empty()` | element: SppElement | remove all text from the field before entering the new value |
 
-## Example
+### Example
 {: .no_toc }
 
 Enter new text into Googles search field.
@@ -102,23 +110,23 @@ Josh.attemptsTo(
 )
 ```
 
-# Hover
+## Hover
 Move the mouse pointer over an element.
  
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name       | parameter | description                     |
 | :---       | :---      | :---                            |
 | `.over()`* | -         | move the mouse over the element |
 
-## Example
+### Example
 {: .no_toc }
 
  ```typescript
@@ -128,23 +136,23 @@ Move the mouse pointer over an element.
  )
 ```
 
-# Navigate
+## Navigate
 
 Load the an URL in the browser.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name     | parameter   | description             |
 | :---     | :---        | :---                    |
 | `.to()`* | url: string | browse to the given url |
 
-## Example
+### Example
 {: .no_toc }
 
 ```typescript
@@ -154,15 +162,15 @@ Josh.attemptsTo(
 )
 ```
 
-# Scroll
+## Scroll
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name                     | parameter              | description                                                                           |
@@ -171,7 +179,7 @@ Josh.attemptsTo(
 | `.atTheViewportCenter()` |                        | if scrolled to an element position the element at the center of the visible view port |
 | `.toPosition()`*         | position: PagePosition | scroll to a pages position, currently implemented are Page.bottom() and Page.top()    |
 
-## Example
+### Example
 {: .no_toc }
 
 ```typescript
@@ -183,24 +191,24 @@ josh.attemptsTo(
 )
 ```
 
-# Tap NOT IMPLEMENTED YET
+## Tap NOT IMPLEMENTED YET
 
 Tap on an element or position of an touch enabled device ( mobile or desktop / laptop).
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name     | parameter                              | description                              |
 | :---     | :---                                   | :---                                     |
 | `.on()`* | element: SppElement or position: Point | taps on an element or a screens position |
 
-## Example
+### Example
 {: .no_toc }
 
 ```typescript
