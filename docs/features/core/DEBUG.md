@@ -131,8 +131,8 @@ function of type:
 ```` 
 
 As the name suggests the function wraps the Sleep activity into a Debug activity.
-When the Debug activity is executed the function passed the the ``.debug()`` method
-is executed first followed by the execution of the wrapped activity 
+When the Debug activity is executed, it first calls the function passed to the ``.debug()`` method
+followed by the execution of the wrapped activity 
 (here: the ``Sleep`` activity).
 
 The breakpoint can be set to the following line:
