@@ -41,9 +41,9 @@
     "@thekla/assertion": "^2.8.3",
     "@thekla/config": "^2.8.3",
     "@thekla/support": "^2.11.0",
-    "del-cli": "^3.0.0",
-    "jasmine": "^3.5.0",
-    "nyc": "^15.0.0"
+    "del-cli": "^3.0.1",
+    "jasmine": "^3.6.1",
+    "nyc": "^15.1.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }

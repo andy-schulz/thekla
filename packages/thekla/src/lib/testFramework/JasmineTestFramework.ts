@@ -12,33 +12,35 @@ export class JasmineTestFramework {
     public run(specs: string[]): Promise<any> {
         this.logger.debug(`Starting Jasmine Tests.`);
         // eslint-disable-next-line @typescript-eslint/no-var-requires
-        const Jasmine = require(`jasmine`);
-        const jasminer = new Jasmine();
-        const jasmineGlobal = jasmine;
 
-        const reporter = new TheklaReporter();
-        jasminer.addReporter(reporter);
+        return import(`jasmine`).then((J) => {
+            const J1 = new J.default({})
 
-        return new Promise((fulfill, reject) => {
+            const jasmineGlobal = jasmine;
+
+            const reporter = new TheklaReporter();
+            J1.addReporter(reporter);
+
             if(this.frameworkOptions.defaultTimeoutInterval)
                 jasmineGlobal.DEFAULT_TIMEOUT_INTERVAL = this.frameworkOptions.defaultTimeoutInterval;
 
-            jasminer.onComplete(function(passed: any) {
-                try {
-                    fulfill({
-                        failedCount: reporter.failedCount,
-                        specResults: reporter.testResult
-                    });
-                } catch (err) {
-                    reject(err);
-                }
-            });
+            J1.configureDefaultReporter({});
+            J1.projectBaseDir = path.resolve();
+            J1.addSpecFiles(specs);
+            J1.execute();
 
-            jasminer.configureDefaultReporter({});
-            jasminer.projectBaseDir = path.resolve();
-            jasminer.specDir = ``;
-            jasminer.addSpecFiles(specs);
-            jasminer.execute();
-        });
+            return new Promise((fulfill, reject) => {
+                J1.onComplete(function(passed: any) {
+                    try {
+                        fulfill({
+                            failedCount: reporter.failedCount,
+                            specResults: reporter.testResult
+                        });
+                    } catch (err) {
+                        reject(err);
+                    }
+                });
+            });
+        })
     }
 }

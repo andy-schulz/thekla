@@ -178,7 +178,7 @@ describe(`Using the log formater`, (): void => {
 
         it(`should return the string if no encoding is set 
         - (test case id: 29b4c4ca-511e-4d49-ada3-cc94152da617)`, (): void => {
-            expect(encodeLog(``)(testString)).toEqual(testString);
+            expect(encodeLog()(testString)).toEqual(testString);
         });
 
         it(`should return the string if no encoding is set (undefined)

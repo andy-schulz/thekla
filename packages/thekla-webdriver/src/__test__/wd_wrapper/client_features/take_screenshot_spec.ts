@@ -116,7 +116,7 @@ describe(`Taking a screenshot`, (): void => {
                         expect(false).toBeTruthy(`call to saveScreenshot should throw an error, but it doesnt`);
                 })
                 .catch((error: Error): void => {
-                    expect(error.toString()).toMatch(/contains invalid (.*) path characters/, `Wrong error message thrown`);
+                    expect(error.toString()).toMatch(/Error: Path contains invalid characters:(.*)/, `Wrong error message thrown`);
                 });
         });
     });

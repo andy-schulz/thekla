@@ -1,6 +1,6 @@
 import {RequestOptions}  from "@thekla/config";
 import * as assert       from "assert";
-import {RestRequestRqst} from "../rqst/RestRequestRqst";
+import {RestRequestRqst} from "../../rqst/RestRequestRqst";
 
 class UT extends RestRequestRqst {
     public static testMerge(orig: RequestOptions, merger: RequestOptions): RequestOptions {
@@ -16,21 +16,21 @@ describe(`Using the RestAPI`, (): void => {
                `- (test case id: 82878ec9-736b-4db9-912a-139c3ea16949)`, (): void => {
 
             const restOptsOrig: RequestOptions = {
-                body: {
+                jsonBody: {
                     one: `one`,
                     array: [`one`]
                 }
             };
 
             const restOptsMerger: RequestOptions = {
-                body: {
+                jsonBody: {
                     two: `two`,
                     array: [`two`]
                 }
             };
 
             const result: RequestOptions = {
-                body: {
+                jsonBody: {
                     one: `one`,
                     two: `two`,
                     array: [`one`, `two`]

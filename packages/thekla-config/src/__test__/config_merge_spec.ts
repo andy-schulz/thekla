@@ -71,7 +71,7 @@ describe(`Merge into TheklaConfig`, () => {
                 }
             };
 
-            expect(processor.mergeTestframeworkOptions(fn.testFramework,config)).toEqual(expected);
+            expect(processor.mergeTestFrameworkOptions(fn.testFramework,config)).toEqual(expected);
         });
 
         it(`as an empty framework name string - (test case id: e351a223-889a-490c-9c71-b13b5a861c7f)`, () => {
@@ -93,7 +93,7 @@ describe(`Merge into TheklaConfig`, () => {
                 }
             };
 
-            expect(processor.mergeTestframeworkOptions(fn.testFramework,config)).toEqual(expected);
+            expect(processor.mergeTestFrameworkOptions(fn.testFramework,config)).toEqual(expected);
         });
     });
 
@@ -123,7 +123,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -150,7 +150,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -177,7 +177,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -207,7 +207,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -235,7 +235,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -262,7 +262,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -292,7 +292,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -322,7 +322,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -350,7 +350,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -377,7 +377,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -407,7 +407,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -437,7 +437,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -466,7 +466,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -503,7 +503,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -538,7 +538,7 @@ describe(`Merge into TheklaConfig`, () => {
                     }
                 }
             };
-            const actual = processor.mergeTestframeworkOptions(fn.testFramework,config);
+            const actual = processor.mergeTestFrameworkOptions(fn.testFramework,config);
             expect(actual).toEqual(expected);
         });
 
@@ -563,7 +563,7 @@ describe(`Merge into TheklaConfig`, () => {
             };
 
             try {
-                processor.mergeTestframeworkOptions(fn.testFramework,config);
+                processor.mergeTestFrameworkOptions(fn.testFramework,config);
                 expect(false).toBeTruthy(`processor.mergeTestframeworkOptions should throw an Error, but it doesnt.`);
             } catch (e) {
                 expect(e.toString()).toContain(`Can't parse the World Parameter worldParameters`);

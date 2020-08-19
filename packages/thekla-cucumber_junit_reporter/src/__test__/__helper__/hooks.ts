@@ -9,7 +9,7 @@ export const beforeFunc = (world: {[key: string]: any}) => {
 
     return function () {
 
-        world.eventBroadcaster = new EventEmitter();
+        world.eventBroadcaster = new EventEmitter.EventEmitter();
 
         world.output = ``;
 

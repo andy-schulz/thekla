@@ -9,8 +9,6 @@ describe(`creating the wdio config`, (): void => {
         - (test case id: 2643fb6e-0d7c-45c1-9529-39b39a099b32)`, (): void => {
 
             const serverConfig: ServerConfig = {
-                user: `user`,
-                key: `key`
             };
 
             const capabilities: DesiredCapabilities = {
@@ -18,8 +16,6 @@ describe(`creating the wdio config`, (): void => {
             };
 
             const expected = {
-                user: `user`,
-                key: `key`,
                 capabilities: {browserName: process.env.BROWSERNAME ? process.env.BROWSERNAME : `chrome`}
             };
 
@@ -109,17 +105,15 @@ describe(`creating the wdio config`, (): void => {
             const capabilities: DesiredCapabilities = {
                 browserName: `chrome`,
                 proxy: {
-                    proxyType: `direct`
+                    proxyType: `noproxy`
                 }
             };
 
-            // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
-            // @ts-ignore // bug in webdriver: "direct" is not defined for option ... typings says "noproxy"
             expect(transformToWdioConfig(serverConfig, capabilities)).toEqual({
                 capabilities: {
                     browserName: `chrome`,
                     proxy: {
-                        proxyType: `direct`,
+                        proxyType: `noproxy`,
                     }
                 }
             })

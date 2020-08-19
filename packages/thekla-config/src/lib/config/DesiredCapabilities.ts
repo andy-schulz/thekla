@@ -105,7 +105,7 @@ export interface FirefoxBrowserOptions {
     };
 }
 
-export type ProxyType = "autodetect" | "direct" | "manual" | "pac" | "system"
+export type ProxyType = "autodetect" | "noproxy" | "manual" | "pac" | "system"
 export interface ProxyConfig {
     proxyType: ProxyType;
     proxyAutoconfigUrl?: string;

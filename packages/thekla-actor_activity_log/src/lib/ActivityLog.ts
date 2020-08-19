@@ -44,23 +44,23 @@ export class ActivityLog {
         this.rootActivityLogEntry.status = list.includes(`failed`) ? `failed` : list.includes(`running`) ? `running` : `passed`
     }
 
-    public getStructuredLog(logPrefix = `    `, encoding = ``): string {
+    public getStructuredLog(logPrefix = `    `, encoding: BufferEncoding = `utf8`): string {
         this.setRootNodeStatus();
         const logTree = this.rootActivityLogEntry.getLogTree();
         return _.flow(
             formatLogWithPrefix(`${logPrefix}`)(0),
             encodeLog(encoding)
         )(logTree)
-    };
+    }
 
-    public getStructuredHtmlLog(encoding = ``): string {
+    public getStructuredHtmlLog(encoding: BufferEncoding = `utf8`): string {
         this.setRootNodeStatus();
         const logTree = this.rootActivityLogEntry.getLogTree();
         return _.flow(
             formatLogAsHtmlTree,
             encodeLog(encoding)
         )(logTree)
-    };
+    }
 
     public constructor(name: string) {
         this._currentActivity = new ActivityLogEntry(

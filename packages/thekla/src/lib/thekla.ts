@@ -63,7 +63,7 @@ export class Thekla {
             }
 
         } else {
-            throw Error(`Framework ${framework} is not implemented yet`);
+            return Promise.reject(`Framework ${framework} is not implemented yet`);
         }
     }
 }

@@ -29,15 +29,15 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@types/chai": "^4.2.7",
-    "@types/node": "^10.17.14",
+    "@types/chai": "^4.2.12",
+    "@types/node": "^14.0.27",
     "chai": "^4.2.0"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
-    "del-cli": "^3.0.0",
-    "jasmine": "^3.5.0",
-    "nyc": "^15.0.0"
+    "del-cli": "^3.0.1",
+    "jasmine": "^3.6.1",
+    "nyc": "^15.1.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }

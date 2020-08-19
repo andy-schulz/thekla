@@ -26,12 +26,12 @@ describe(`The config retrievers`, (): void => {
         restConfig: {
             default: `myRestConfig2`,
             myRestConfig: {
-                restClientName: `request`
+                restClientName: `got`
             },
             myRestConfig2: {
-                restClientName: `request`,
+                restClientName: `got`,
                 requestOptions: {
-                    host: `restClientHost2`
+                    baseUrl: `restClientHost2`
                 }
             }
         },
@@ -116,12 +116,12 @@ But got:
     restConfig: {
         "default": "",
         "myRestConfig": {
-                "restClientName": "request"
+                "restClientName": "got"
         },
         "myRestConfig2": {
-                "restClientName": "request",
+                "restClientName": "got",
                 "requestOptions": {
-                        "host": "restClientHost2"
+                        "baseUrl": "restClientHost2"
                 }
         }
 }`);
@@ -198,12 +198,12 @@ But got:
     restConfig: {
         "default": "doesNotExist",
         "myRestConfig": {
-                "restClientName": "request"
+                "restClientName": "got"
         },
         "myRestConfig2": {
-                "restClientName": "request",
+                "restClientName": "got",
                 "requestOptions": {
-                        "host": "restClientHost2"
+                        "baseUrl": "restClientHost2"
                 }
         }
 }`);
@@ -284,12 +284,12 @@ But got:
     restConfig: {
         "default": "myRestConfig2",
         "myRestConfig": {
-                "restClientName": "request"
+                "restClientName": "got"
         },
         "myRestConfig2": {
-                "restClientName": "request",
+                "restClientName": "got",
                 "requestOptions": {
-                        "host": "restClientHost2"
+                        "baseUrl": "restClientHost2"
                 }
         }
 }`)
@@ -318,7 +318,7 @@ But got:
                     browserName: `myBrowser`
                 },
                 restConfig: {
-                    restClientName: `request`
+                    restClientName: `got`
                 },
                 testFramework: {frameworkName: `jasmine`}
             };
@@ -326,7 +326,7 @@ But got:
             const globalConfig = getConfiguredTheklaGlobal(config);
             expect(globalConfig.serverConfig()).toEqual({serverAddress: {}});
             expect(globalConfig.capabilities()).toEqual({browserName: `myBrowser`});
-            expect(globalConfig.restConfig()).toEqual({restClientName: `request`});
+            expect(globalConfig.restConfig()).toEqual({restClientName: `got`});
         });
 
     });
@@ -384,9 +384,9 @@ But got:
             const config = _.merge(_.cloneDeep(basicConfig), merge);
 
             const expectedRestClientConfig: RestClientConfig = {
-                restClientName: `request`,
+                restClientName: `got`,
                 requestOptions: {
-                    host: `restClientHost2`
+                    baseUrl: `restClientHost2`
                 }
             };
 

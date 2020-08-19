@@ -20,7 +20,8 @@ describe(`The Thekla global object`, () => {
     });
 
     beforeEach(async () => {
-        forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: `ignore`});
+        forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {});
+        // forked = child.fork(`${__dirname}/../__fixtures__/client.js`, [], {stdio: `ignore`});
     });
 
     afterEach(() => {
@@ -76,7 +77,17 @@ describe(`The Thekla global object`, () => {
 
             return new Promise((resolve, reject) => {
                 try {
+
+                    forked.stdout?.on(`data`, (data) => {
+                        console.log(data)
+                    })
+
+                    forked.stderr?.on(`data`, (data) => {
+                        console.log(data)
+                    })
+
                     forked.on(`message`, (result: TheklaTestResult) => {
+                        console.log(result);
                         expect(result.specResult.failedCount).toEqual(0);
                         expect(result.specResult.specResults[0].description)
                             .toEqual(`Thekla globals Should be accessible inside a spec`);

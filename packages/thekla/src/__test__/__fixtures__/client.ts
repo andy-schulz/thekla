@@ -17,6 +17,7 @@ proc.on(`message`, async (testData: TheklaTestData) => {
     // const thekla = new Thekla();
     // const command = new Command(thekla, testData.args);
     // return  command.run()
+
     run(testData.args)
         .then((specResult: any) => {
             const theklaResult: TheklaTestResult = {
@@ -31,6 +32,7 @@ proc.on(`message`, async (testData: TheklaTestData) => {
 
         })
         .catch((e: any) => {
+
             // send the results in case the call was NOT successful, again ... the evaluation will be done by the test
             // eslint-disable-next-line @typescript-eslint/ban-ts-ignore
             // @ts-ignore

@@ -6,13 +6,13 @@ describe(`Creating the global object`, (): void => {
         - (test case id: 865d158f-5683-47cb-87b7-ac39e2ac7412)`, (): void => {
             const config: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 }
             };
 
             const expected: TheklaConfig = {
                 testFramework: {
-                    frameworkName: "jasmine"
+                    frameworkName: `jasmine`
                 }
             };
 

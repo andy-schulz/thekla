@@ -23,7 +23,7 @@ describe(`Passing the rest config`, () => {
             };
 
             const fn: RestClientConfig = {
-                    restClientName: `request`
+                    restClientName: `got`
             };
 
             const expected: TheklaConfig = {
@@ -31,11 +31,11 @@ describe(`Passing the rest config`, () => {
                     frameworkName: `jasmine`
                 },
                 restConfig: {
-                    restClientName: `request`
+                    restClientName: `got`
                 }
             };
 
-            expect(processor.mergeRestConfigOptions(fn,config)).toEqual(expected);
+            expect(processor.mergeRequestConfigOptions(fn,config)).toEqual(expected);
         });
 
         it(`as an undefined value should not replace the  ` +
@@ -45,7 +45,7 @@ describe(`Passing the rest config`, () => {
                     frameworkName: `jasmine`,
                 },
                 restConfig: {
-                    restClientName: `request`
+                    restClientName: `got`
                 }
             };
 
@@ -58,11 +58,11 @@ describe(`Passing the rest config`, () => {
                     frameworkName: `jasmine`
                 },
                 restConfig: {
-                    restClientName: `request`
+                    restClientName: `got`
                 }
             };
 
-            expect(processor.mergeRestConfigOptions(fn,config)).toEqual(expected);
+            expect(processor.mergeRequestConfigOptions(fn,config)).toEqual(expected);
         });
     });
 
@@ -78,7 +78,7 @@ describe(`Passing the rest config`, () => {
 
             const fn = {
                 requestOptions: {
-                    body: {
+                    jsonBody: {
                         test: `myElement`
                     }
                 }
@@ -90,13 +90,13 @@ describe(`Passing the rest config`, () => {
                 },
                 restConfig: {
                     requestOptions: {
-                        body: {
+                        jsonBody: {
                             test: `myElement`
                         }
                     }
                 }
             };
-            const actual = processor.mergeRestConfigOptions(fn,config);
+            const actual = processor.mergeRequestConfigOptions(fn,config);
 
             expect(actual).toEqual(expected);
         });
@@ -108,7 +108,7 @@ describe(`Passing the rest config`, () => {
                     frameworkName: `jasmine`
                 },
                 restConfig: {
-                    restClientName: `request`,
+                    restClientName: `got`,
                     requestOptions: {
                         proxy: `mzProxy`
                     }
@@ -127,13 +127,13 @@ describe(`Passing the rest config`, () => {
                     frameworkName: `jasmine`
                 },
                 restConfig: {
-                    restClientName: `request`,
+                    restClientName: `got`,
                     requestOptions: {
                         proxy: `mzProxy2`
                     }
                 },
             };
-            const actual = processor.mergeRestConfigOptions(fn,config);
+            const actual = processor.mergeRequestConfigOptions(fn,config);
 
             expect(actual).toEqual(expected);
         });

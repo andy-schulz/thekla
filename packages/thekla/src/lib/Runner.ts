@@ -1,7 +1,7 @@
-import {Command}     from "../lib/command";
-import {Thekla}      from "../lib/thekla";
-import {helpText}    from "../lib/commands/help";
 import * as minimist from "minimist";
+import {Command}     from "../lib/command";
+import {helpText}    from "../lib/commands/help";
+import {Thekla}      from "../lib/thekla";
 
 export const run = (pArgs: minimist.ParsedArgs): Promise<any> => {
     try {

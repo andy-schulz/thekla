@@ -19,7 +19,7 @@ export interface TheklaConfig {
 
 export type ServerConfigSet = ServerConfig | ConfigSet<ServerConfig>
 export type CapabilitiesConfigSet = DesiredCapabilities | ConfigSet<DesiredCapabilities>
-export type RestClientConfigSet = RestClientConfig | ConfigSet<RestClientConfig>
+export type RestClientConfigSet = ConfigSet<RestClientConfig> | RestClientConfig
 
 export type ConfigSet<T> = {
     default: string;

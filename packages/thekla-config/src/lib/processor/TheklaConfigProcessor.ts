@@ -1,10 +1,8 @@
-import {RequestPromiseOptions} from "request-promise-native";
-import {RestClientConfig}      from "../../index";
-import merge                   from "deepmerge";
-
-import {getLogger}                                       from "@log4js-node/log4js-api";
-import {flow, curry}                                     from "lodash/fp";
-import { TheklaConfig, CucumberOptions, JasmineOptions } from "../config/TheklaConfig";
+import {getLogger}                                     from "@log4js-node/log4js-api";
+import merge                                           from "deepmerge";
+import {curry, flow}                                   from "lodash/fp";
+import {RequestOptions, RestClientConfig}              from "../../index";
+import {CucumberOptions, JasmineOptions, TheklaConfig} from "../config/TheklaConfig";
 
 export class TheklaConfigProcessor {
     private logger = getLogger(`TheklaConfigProcessor`);
@@ -20,15 +18,15 @@ export class TheklaConfigProcessor {
         return config;
     }
 
-    public mergeTestframeworkOptions(fwk: any, config: TheklaConfig): TheklaConfig {
-        if(!fwk) return config;
-        const c: {[key: string]: any} = {};
+    public mergeTestFrameworkOptions(fwk: any, config: TheklaConfig): TheklaConfig {
+        if (!fwk) return config;
+        const c: { [key: string]: any } = {};
 
         const mergeTestframeworkName = curry((name: string | undefined, cnfg: TheklaConfig): TheklaConfig => {
-            const configToSet: {[key: string]: any} = {};
-            if(!name) return cnfg;
+            const configToSet: { [key: string]: any } = {};
+            if (!name) return cnfg;
 
-            if(!(name === `jasmine` || name === `cucumber`)) {
+            if (!(name === `jasmine` || name === `cucumber`)) {
                 const message = `Passed framework name as command line argument is ${JSON.stringify(name)} but should be 'jasmine' or 'cucumber'`;
                 this.logger.error(message);
                 throw new Error(message);
@@ -36,47 +34,49 @@ export class TheklaConfigProcessor {
                 configToSet.testFramework = {};
                 configToSet.testFramework.frameworkName = name;
             }
-            return  merge(cnfg,configToSet) as TheklaConfig;
+            return merge(cnfg, configToSet) as TheklaConfig;
         });
 
         const mergeCucumberOptions = curry((ccOpts: CucumberOptions | undefined, cnfg: TheklaConfig): TheklaConfig => {
-            if(!ccOpts) return cnfg;
-            const configToSet: any = {testFramework: {
+            if (!ccOpts) return cnfg;
+            const configToSet: any = {
+                testFramework: {
                     cucumberOptions: {}
-                }};
+                }
+            };
 
             const mergeAttributes = (index: string, format: string | string[] | undefined): void => {
                 // remove the tags if --tags="" was passed as command line
-                if(format === `` && cnfg.testFramework && cnfg.testFramework.cucumberOptions && (cnfg.testFramework.cucumberOptions as {[key: string]: any})[index]) {
+                if (format === `` && cnfg.testFramework && cnfg.testFramework.cucumberOptions && (cnfg.testFramework.cucumberOptions as { [key: string]: any })[index]) {
                     this.logger.debug(`...${index}="" was passed on command line. Removing all tags from config ...`);
-                    (cnfg.testFramework.cucumberOptions as {[key: string]: any})[index] = undefined;
+                    (cnfg.testFramework.cucumberOptions as { [key: string]: any })[index] = undefined;
                     return;
                 }
 
-                if(!format) return;
+                if (!format) return;
                 configToSet.testFramework.cucumberOptions[index] = Array.isArray(format) ? format : [format];
             };
 
             const mergeWorldParameter = (worldParams: any): void => {
-                if(!worldParams) return;
-                if(typeof worldParams === `object` && {}.constructor == worldParams.constructor) {
-                    configToSet.testFramework.cucumberOptions.worldParameters  =  worldParams
+                if (!worldParams) return;
+                if (typeof worldParams === `object` && {}.constructor == worldParams.constructor) {
+                    configToSet.testFramework.cucumberOptions.worldParameters = worldParams
                 } else {
                     throw new Error(`Can't parse the World Parameter ${worldParams}`)
                 }
             };
 
-            mergeAttributes(`require`,ccOpts.require);
-            mergeAttributes(`tags`,ccOpts.tags);
-            mergeAttributes(`format`,ccOpts.format);
+            mergeAttributes(`require`, ccOpts.require);
+            mergeAttributes(`tags`, ccOpts.tags);
+            mergeAttributes(`format`, ccOpts.format);
             mergeWorldParameter(ccOpts.worldParameters);
 
             const overwriteMerge = (destinationArray: any[], sourceArray: any[], options: any): any[] => sourceArray;
-            return merge(cnfg,configToSet, { arrayMerge: overwriteMerge });
+            return merge(cnfg, configToSet, {arrayMerge: overwriteMerge});
         });
 
-        const mergeJasmineOptions = curry((jsmOpts: JasmineOptions| undefined, cnfg: TheklaConfig) => {
-            if(!jsmOpts) return cnfg;
+        const mergeJasmineOptions = curry((jsmOpts: JasmineOptions | undefined, cnfg: TheklaConfig) => {
+            if (!jsmOpts) return cnfg;
 
             throw new Error(`Jasmine CLI Options are not implemented yet`);
         });
@@ -95,36 +95,36 @@ export class TheklaConfigProcessor {
         // return conf;
     }
 
-    public mergeRestConfigOptions(restConfig: RestClientConfig | undefined, config: TheklaConfig): TheklaConfig {
-        if(!restConfig) return config;
+    public mergeRequestConfigOptions(restConfig: RestClientConfig | undefined, config: TheklaConfig): TheklaConfig {
+        if (!restConfig) return config;
 
-        if(!config.restConfig)
+        if (!config.restConfig)
             config.restConfig = {};
 
         const setRestClient = curry((restClientName: string | undefined, config: TheklaConfig): TheklaConfig => {
-            if(!restClientName) return config;
+            if (!restClientName) return config;
 
             const conf = config;
 
-            if(restClientName === `request`)
-                (conf.restConfig as RestClientConfig).restClientName = `request`;
+            if (restClientName === `got`)
+                (conf.restConfig as RestClientConfig).restClientName = `got`;
             else
-                throw new Error(`Dont know rest client ${restClientName}. Only nodjs request client is implemented. `);
+                throw new Error(`Dont know rest client ${restClientName}. Only nodjs got client is implemented. `);
 
             return conf;
         });
 
-        const mergeRestClientOptions = curry((restClientOptions: RequestPromiseOptions | undefined, config: TheklaConfig) => {
-            if(!restClientOptions)
+        const mergeRestClientOptions = curry((restClientOptions: RequestOptions | undefined, config: TheklaConfig) => {
+            if (!restClientOptions)
                 return config;
 
             const conf = config;
 
-            if(!(conf.restConfig as RestClientConfig).requestOptions) {
+            if (!(conf.restConfig as RestClientConfig).requestOptions) {
                 (conf.restConfig as RestClientConfig).requestOptions = {};
             }
-            const m: RequestPromiseOptions =
-                (conf.restConfig as RestClientConfig).requestOptions as RequestPromiseOptions;
+            const m: RequestOptions =
+                (conf.restConfig as RestClientConfig).requestOptions as RequestOptions;
 
             const mergedOpts = merge(m, restClientOptions);
 

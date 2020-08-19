@@ -79,8 +79,8 @@ export class Command {
         const processor = new TheklaConfigProcessor();
 
         config = processor.mergeSpecs(args.specs, config);
-        config = processor.mergeTestframeworkOptions(args.testFramework, config);
-        config = processor.mergeRestConfigOptions(args.restConfig, config);
+        config = processor.mergeTestFrameworkOptions(args.testFramework, config);
+        config = processor.mergeRequestConfigOptions(args.restConfig, config);
 
         return Promise.resolve(config);
     }

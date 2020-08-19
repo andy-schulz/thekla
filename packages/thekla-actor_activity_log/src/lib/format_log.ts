@@ -73,7 +73,7 @@ export const formatLogWithPrefix = (logPrefix = ``): (repeat: number) => (logNod
     }
 };
 
-export const encodeLog = (encoding = ``): (source: string) => string => {
+export const encodeLog = (encoding: BufferEncoding = `utf8`): (source: string) => string => {
     return (source: string): string => {
         if(!encoding)
             return source;

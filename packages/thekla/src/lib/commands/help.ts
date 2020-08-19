@@ -1,4 +1,4 @@
-import chalk, {Chalk} from 'chalk'
+import chalk, {Chalk, Level} from 'chalk'
 
 export const menus: { [key: string]: any } = {
     main: (chalk: Chalk) => `
@@ -30,7 +30,7 @@ export const menus: { [key: string]: any } = {
     Passing multiple features files in an array is not supported yet, please pass in a single string as described in: https://github.com/cucumber/cucumber-js/blob/master/docs/cli.md#running-specific-features.`
 };
 
-export const mainMenu = (level: number) => {
+export const mainMenu = (level: Level) => {
     const ctx = new chalk.Instance({level: level});
 
     return menus.main(ctx);

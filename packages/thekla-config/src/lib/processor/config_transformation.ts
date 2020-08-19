@@ -1,21 +1,12 @@
-import deepmerge               from "deepmerge";
-import {curry, set, transform} from "lodash"
-import * as fp                 from "lodash/fp"
-import {Options}               from "webdriver"
-import {
-    AppiumOptions, BrowserStackCapabilities, DesiredCapabilities, ProxyConfig
-}                              from "../../index";
-import {ServerConfig}          from "../../index";
+import deepmerge                                                                                 from "deepmerge";
+import {curry, set, transform}                                                                   from "lodash"
+import * as fp                                                                                   from "lodash/fp"
+import {Options}                                                                                 from "webdriver"
+import {AppiumOptions, BrowserStackCapabilities, DesiredCapabilities, ProxyConfig, ServerConfig} from "../..";
 
 const transformServerConfig = (serverConfig: ServerConfig): (option: Options) => Options => {
     return (options: Options): Options => {
         const opts = options;
-
-        if (serverConfig.user)
-            opts.user = serverConfig.user;
-
-        if (serverConfig.key)
-            opts.key = serverConfig.key;
 
         if (!serverConfig.serverAddress)
             return opts;
