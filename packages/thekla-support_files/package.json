@@ -28,7 +28,7 @@
   "dependencies": {
     "@thekla/config": "^2.8.3",
     "@types/lodash": "^4.14.149",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.20",
     "moment": "^2.24.0",
     "webdriver": "^5.23.0"
   },
