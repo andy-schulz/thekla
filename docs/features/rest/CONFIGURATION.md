@@ -127,7 +127,7 @@ Richard.attemptsTo(
 
 ## Options
 
-### ``baseUrl``
+### baseUrl
 
 Set the baseUrl for the request.
 
@@ -137,7 +137,9 @@ Set the baseUrl for the request.
 }
 ````
 
-### ``port``
+---
+
+### port
 
 Set the request port
 
@@ -147,7 +149,9 @@ Set the request port
 }
 ````
 
-### ``headers``
+---
+
+### headers
 
 Set the requests header information
 
@@ -160,7 +164,9 @@ Set the requests header information
 }
 ````
 
-### ``searchParams``
+---
+
+### searchParams
 
 Add queryParameter to the request
 
@@ -189,8 +195,9 @@ const systemStatus = request(On.resource(`http://my.domain.com/queries/`));
                          .using(opts)
 ````
 
+---
 
-### ``pathParams``
+### pathParams
 
 Add path parameter to the request
 
@@ -220,11 +227,14 @@ const opts: RequestOptions = {
 const systemStatus = request(On.resource(`http://my.domain.com/{user}/one/{password}/two`));
                          .using(opts)
 ````
-### ``jsonBody`` and ``textBody``
 
+---
 
+### jsonBody and textBody
 
-### ``responseType``
+---
+
+### responseType
 
 In case the ``responseType`` is set to ``json`` the system tries to parse the result body to a JSON
 
@@ -234,7 +244,9 @@ In case the ``responseType`` is set to ``json`` the system tries to parse the re
 }
 ````
 
-### ``proxy``
+---
+
+### proxy
 
 Specify the proxy information if you are behind a corporate proxy.
 
