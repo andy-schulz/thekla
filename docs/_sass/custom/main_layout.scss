@@ -1,5 +1,5 @@
 @media (min-width: 66.5rem) {
-  .main-content {
+  .main {
     margin-left: calc((100% - 1064px) / 2 + 150px);
   }
   .side-bar {
@@ -9,7 +9,7 @@
 }
 
 @media (min-width: 50rem) {
-  .main-content {
+  .main {
     max-width: 1000px;
   }
 }
