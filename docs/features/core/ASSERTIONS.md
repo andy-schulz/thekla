@@ -6,10 +6,6 @@ nav_order: 10
 ---
 
 # Basic Assertions
-{: .no_toc }
-
-1. TOC
-{:toc}
 
 The ``thekla`` assertions are based on the [Chai Assertion Library](https://www.chaijs.com/).
 

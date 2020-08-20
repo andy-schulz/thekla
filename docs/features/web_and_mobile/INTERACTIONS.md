@@ -6,7 +6,6 @@ nav_order: 50
 ---
 
 # Interactions of Web and Mobile Abilities
-{: .no_toc }
 
 ## Click
 

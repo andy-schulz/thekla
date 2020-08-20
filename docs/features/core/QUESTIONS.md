@@ -6,12 +6,6 @@ nav_order: 10
 ---
 
 # Basic Questions
-{: .no_toc }
-
-The basic questions were created for 
-
-1. TOC
-{:toc}
 
 ## Result
 

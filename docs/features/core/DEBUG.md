@@ -6,10 +6,6 @@ nav_order: 100
 ---
 
 # Debug your tests
-{: .no_toc }
-
-1. TOC
-{:toc}
 
 ## using breakpoints from your IDE
 

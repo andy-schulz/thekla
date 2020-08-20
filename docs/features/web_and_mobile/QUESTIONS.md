@@ -5,7 +5,6 @@ has_children: true
 nav_order: 60
 ---
 # Questions of Web and Mobile Abilities
-{: .no_toc }
 
 ## Attribute
 

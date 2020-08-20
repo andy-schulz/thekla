@@ -6,10 +6,6 @@ nav_order: 10
 ---
 
 # Basic Interactions
-{: .no_toc }
-
-1. TOC
-{:toc}
 
 ## SEE
 

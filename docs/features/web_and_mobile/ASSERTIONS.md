@@ -6,8 +6,7 @@ nav_order: 20
 ---
 
 # Web and Mobile Assertions
-{: .no_toc }
 
-# visible
+## visible
 
-# enabled
+## enabled

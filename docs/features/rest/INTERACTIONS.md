@@ -6,21 +6,16 @@ nav_order: 10
 ---
 
 # Interactions for working with REST APIs
-{: .no_toc }
 
-1. TOC
-{:toc}
-
-# Delete
+## Delete
 
 Delete from the specified resource.
 
-## Ability
+### Ability
 {: .no_toc }
-
 - [UseTheRestApi](../../abilities/USE_THE_REST_API.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name                 | parameter           | description                                                                   |
@@ -28,7 +23,7 @@ Delete from the specified resource.
 | `.from()`*           | request: SppRequest | the request to send for the DELETE method                                     |
 | `.continueOnError()` | -                   | dont exit in case of an error, html codes 4xx and 5xx are considered an error |
 
-## Example
+### Example
 {: .no_toc }
 
 create a request. In general the resource is parameterized e.g. a userId,
@@ -49,16 +44,16 @@ const response = await john.attemptsTo(
 const response = await Delete.from(user).performAs(john)
 ````
 
-# Get
+## Get
 
 Get the resource.
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [UseTheRestApi](../../abilities/USE_THE_REST_API.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
 | name                 | parameter           | description                                                                   |
@@ -66,7 +61,7 @@ Get the resource.
 | `.from()`*           | request: SppRequest | the request to send for the GET method                                     |
 | `.continueOnError()` | -                   | dont exit in case of an error, html codes 4xx and 5xx are considered an error |
 
-## Example
+### Example
 {: .no_toc }
 
 ````typescript
@@ -79,15 +74,15 @@ const response = await john.attemptsTo(
 const response = await Get.from(user).performAs(john)
 ````
 
-# Post
+## Post
 
-## Ability
+### Ability
 {: .no_toc }
 
 - [UseTheRestApi](../../abilities/USE_THE_REST_API.md)
 
-## Methods
+### Methods
 {: .no_toc }
 
-## Example
+### Example
 {: .no_toc }

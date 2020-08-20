@@ -6,9 +6,8 @@ nav_order: 70
 ---
 
 # Web And Mobile Conditions
-{: .no_toc }
 
-# UntilElementCondition
+## UntilElementCondition
 
 The UntilElementCondition specifies the state an element can have. Right now 4 states are implemented:
 
@@ -17,7 +16,7 @@ The UntilElementCondition specifies the state an element can have. Right now 4 s
 1. is enabled
 1. is not enabled
 
-# Methods and Attributes
+### Methods and Attributes
 
 | name         | parameter | description                                         |
 | :---         | :---      | :---                                                |
@@ -26,7 +25,7 @@ The UntilElementCondition specifies the state an element can have. Right now 4 s
 | `.visible()` | -         | check for the visibility status                     |
 | `.enabled()` | -         | check for the enabled status                        |
 
-## Example
+### Example
 
 ```typescript
 john.attemptsTo(
@@ -34,4 +33,3 @@ john.attemptsTo(
         andCheck(UntilElement.is.visible)
 )
 ```
-

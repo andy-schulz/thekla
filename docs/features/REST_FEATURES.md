@@ -4,7 +4,7 @@ has_children: true
 nav_order: 120
 ---
 
-# Short Introduction to the Rest Features
+# Short Introduction to the Request Features
 
 ## Installation
 
@@ -29,10 +29,6 @@ Martha.can(UseTheRestApi.with(theRestClient));
 const mathApiRequest = request(On.resource(`http://api.mathjs.org/v4/?expr=2*(7-3)`));
 
 Martha.attemptsTo()
-
-
-
-
 
 ````
 

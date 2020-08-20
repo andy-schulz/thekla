@@ -6,24 +6,18 @@ nav_order: 10
 ---
 
 # Abilities to work with REST APIs
-{: .no_toc }
 
-1. TOC
-{:toc}
-
-# UseTheRestApi
+## UseTheRestApi
 
 Acors ability to use a rest API.
 
-## Methods
-{: .no_toc }
+### Methods
 
 | name        | parameter                 | description                                     |
 | :---        | :---                      | :---                                            |
 | `.with()`* | client: Client | returns an ability instance with                |
 
-## Example
-{: .no_toc }
+### Example
 
 Pass the ability to an actor.
 

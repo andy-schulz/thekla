@@ -5,9 +5,8 @@ has_children: true
 nav_order: 40
 ---
 # Creating web elements and web element lists
-{: .no_toc }
 
-# SppElement
+## SppElement
 
 An `SppElement` can be created by calling the `element()` function.
 The `SppElement` is used when interacting with the browser or mobile device.
@@ -16,14 +15,12 @@ To identify the element  the [`By`] selector is passed to the `element()` functi
 
 > See section [`By`](#by-element-selector) for using the By selector
 
-## Abiliy
-{: .no_toc }
+### Abiliy
 
 - [BrowseTheWeb](../abilities/BROWSE_THE_WEB.md)
 - [OperateOnMobileDevice](../abilities/OPERATE_ON_MOBILE_DEVICE.md)
 
-## Method
-{: .no_toc }
+### Method
 
 | name                        | parameter                        | description                                                                                                           |
 | :---                        | :---                             | :---                                                                                                                  |
@@ -34,8 +31,7 @@ To identify the element  the [`By`] selector is passed to the `element()` functi
 | `.all()`                    | locator: by                      | search for all elements from this element in the dom                                                                  |
 
 
-## Example
-{: .no_toc }
+### Example
 
 Create a SppElement
 
@@ -67,21 +63,19 @@ const mySearchElement = element(By.css(`.googlesSearchArea`))
     .shallWait(UntilElement.is.visible)
 ```
 
-# SppElementList
+## SppElementList
 
-# SppFrameElement
+## SppFrameElement
 
-# By element selector
+## By element selector
 
 The `By` element selector specifies which selector shall be used to find an element.
 
-## Ability
-{: .no_toc }
+### Ability
 
 none
 
-## Methods
-{: .no_toc }
+### Methods
 
 | name                    | parameter                               | description                                                         |
 | :---                    | :---                                    | :---                                                                |
@@ -90,8 +84,7 @@ none
 | `.cssContainingText()`* | locator: string, containingText: string | returns the element found by css selector containing the given text |
 | `.accessibilityId()`*   | locator: string                         | appium only: returns an element found by accessibility selector     |
 
-## Example
-{: .no_toc }
+### Example
 
 ````typescript
 import {element, By} from "thekla"
