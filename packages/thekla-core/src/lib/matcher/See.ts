@@ -1,8 +1,7 @@
-import {AnswersQuestions, PerformsTask} from "../Actor";
-import {Question}                       from "../questions/Question";
+import {Duration, Question}             from "../..";
 import {Activity, Oracle}               from "../actions/Activities";
+import {AnswersQuestions, PerformsTask} from "../Actor";
 import {stepDetails}                    from "../decorators/step_decorators";
-import { Duration } from "../..";
 
 /**
  * PT = Parameter Type, Type of parameter which could be passed to the interaction
@@ -17,6 +16,15 @@ export class See<PT, MPT> implements Oracle<PT, void> {
     private thenActivities: Activity<PT, void>[] = [];
     private otherwiseActivities: Activity<PT, void>[] = [];
 
+    private constructor(
+        private question: Question<PT, MPT>
+    ) {
+    }
+
+    public static if<SPT, SMPT>(question: Question<SPT, SMPT>): See<SPT, SMPT> {
+        return new See(question)
+    }
+
     @stepDetails<AnswersQuestions, PT, void>(`ask if '<<question>>' fulfills the matcher`)
     public async performAs(actor: AnswersQuestions | PerformsTask, activityResult?: PT): Promise<void> {
 
@@ -26,11 +34,11 @@ export class See<PT, MPT> implements Oracle<PT, void> {
                 // @ts-ignore setTimeout is taken from node and not from window -> type mismatch
                 return new Promise((resolve): number => setTimeout(resolve, this.duration.inMs))
                     .then((): Promise<boolean> => {
-                        return loop(counter -1);
+                        return loop(counter - 1);
                     });
             };
 
-            if(counter < 1)
+            if (counter < 1)
                 return Promise.resolve(
                     this.matcher(await (actor as AnswersQuestions).toAnswer(this.question, activityResult))
                 );
@@ -47,7 +55,7 @@ export class See<PT, MPT> implements Oracle<PT, void> {
 
             return promise
                 .then((matched: boolean): Promise<boolean> | boolean => {
-                    if(!matched) {
+                    if (!matched) {
                         return nextLoop();
                     } else {
                         return matched;
@@ -60,9 +68,9 @@ export class See<PT, MPT> implements Oracle<PT, void> {
 
         return loop(this.repeater - 1)
             .then((match: boolean): Promise<void> => {
-                if(match && this.thenActivities.length > 0)
+                if (match && this.thenActivities.length > 0)
                     return (actor as PerformsTask).attemptsTo(...this.thenActivities);
-                if(match)
+                if (match)
                     return Promise.resolve();
 
                 return Promise.reject(new Error(`See interaction with question '${this.question.toString()}' and matcher 
@@ -71,15 +79,11 @@ export class See<PT, MPT> implements Oracle<PT, void> {
 
             })
             .catch((e): Promise<void> => {
-                if(this.otherwiseActivities.length > 0)
+                if (this.otherwiseActivities.length > 0)
                     return (actor as PerformsTask).attemptsTo(...this.otherwiseActivities);
                 else
                     return Promise.reject(e);
             });
-    }
-
-    public static if <SPT, SMPT>(question: Question<SPT, SMPT>): See<SPT, SMPT> {
-        return new See(question)
     }
 
     public then(...activities: Activity<PT, void>[]): See<PT, MPT> {
@@ -92,27 +96,23 @@ export class See<PT, MPT> implements Oracle<PT, void> {
         return this;
     }
 
-    public is(matcher: (text: MPT) => boolean | Promise<boolean>): See<PT,MPT> {
+    public is(matcher: (text: MPT) => boolean | Promise<boolean>): See<PT, MPT> {
         this.matcher = matcher;
         return this;
     }
 
-    public repeatFor(times: number, duration: number | Duration = Duration.in.milliSeconds(1000)): See<PT,MPT> {
+    public repeatFor(times: number, duration: number | Duration = Duration.in.milliSeconds(1000)): See<PT, MPT> {
         this.duration = (typeof duration === `number`) ?
-            Duration.in.milliSeconds(duration) :
-            duration
+                        Duration.in.milliSeconds(duration) :
+                        duration
 
-        if(times < 1 || times > 1000)
+        if (times < 1 || times > 1000)
             throw new Error(`The repeat 'times' value should be between 1 and 1000. But its: ${times}`);
 
-        if(this.duration.inMs < 0 || this.duration.inMs > 60000)
+        if (this.duration.inMs < 0 || this.duration.inMs > 60000)
             throw new Error(`The interval value should be between 1 and 60000 ms (1 minute). But its: ${duration}`);
 
         this.repeater = times;
         return this;
     }
-
-    private constructor(
-        private question: Question<PT, MPT>
-    ) {}
 }

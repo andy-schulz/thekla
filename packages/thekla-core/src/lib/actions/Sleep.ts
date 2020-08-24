@@ -1,14 +1,22 @@
-import {getLogger}      from "@log4js-node/log4js-api"
-import {UsesAbilities}  from "../Actor";
-import {stepDetails}    from "../decorators/step_decorators";
-import {wait}           from "../utils/utils";
-import {Interaction}    from "./Activities";
-import { Duration } from "../utils/Duration";
+import {getLogger}     from "@log4js-node/log4js-api"
+import {UsesAbilities} from "../Actor";
+import {stepDetails}   from "../decorators/step_decorators";
+import {Duration}      from "../utils/Duration";
+import {wait}          from "../utils/utils";
+import {Interaction}   from "./Activities";
 
 export class Sleep implements Interaction<void, void> {
-    private logger = getLogger(`Sleep`);
     public sleepReason = ``;
+    private logger = getLogger(`Sleep`);
     private sleepTimeInMs: number;
+
+    private constructor(sleepTime: number | Duration) {
+        this.sleepTimeInMs = typeof sleepTime === `number` ? sleepTime : sleepTime.inMs
+    }
+
+    public static for(sleepTime: number | Duration): Sleep {
+        return new Sleep(sleepTime);
+    }
 
     @stepDetails<UsesAbilities, void, void>(`stop all actions for '<<sleepTimeInMs>>' ms<<sleepReason>>`)
     // parameter is needed for stepDetails typing
@@ -19,17 +27,9 @@ export class Sleep implements Interaction<void, void> {
         });
     }
 
-    public static for(sleepTime: number | Duration): Sleep {
-        return new Sleep(sleepTime);
-    }
-
     public because(sleepReason: string): Sleep {
         this.sleepReason = ` because ${sleepReason}`;
         return this;
-    }
-
-    private constructor(sleepTime: number | Duration) {
-        this.sleepTimeInMs = typeof sleepTime === `number` ? sleepTime : sleepTime.inMs
     }
 
 }
