@@ -41,7 +41,7 @@ Options can be specified on three different Levels:
 
 I will use the ``baseUrl`` attribute to demonstrate the three different configuration types.
 
-### Specify options on client Level
+### On Client Level
 
 RequestOptions specified at client level will be used for all further requests and must not be specified at the
 other levels again, but can be overwritten.
@@ -71,7 +71,9 @@ Richard.attemptsTo(
 )
 ````
 
-### Specify options on Request Level
+Set options like proxy or baseUrl on this level so it will be used by every request.
+
+### On Request Level
 
 If you want to set request options per request use the ``using()`` method when creating the request.
 
@@ -96,9 +98,11 @@ Richard.attemptsTo(
 )
 ````
 
-### Specify options on Method Level
+### On Method Level
 
-The request itself is immutable, so you can set the options directly before the method executes.
+The request itself is immutable, so you can set the options directly before executing the request. 
+
+You can reuse the 
 
 ````typescript
 const Richard: Actor = Actor.named(`Richard`);
@@ -113,6 +117,7 @@ const opts: RequestOptions = {
     baseUrl: `https://my.domain.com`
  }
 
+// set the options directly before calling the request method
 Richard.attemptsTo(
     Get.from(systemStatus.using(opts))
        
@@ -124,6 +129,8 @@ Richard.attemptsTo(
 )
 ````
 
+Set options like pathParams or queryParams on this level, as those parameters most probably changing
+on each request execution. 
 
 ## Options
 
