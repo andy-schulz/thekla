@@ -23,6 +23,8 @@ import {falsy, notFalsy, notTruthy, truthy}                   from "./assertion_
 
 export class AssertionImpl implements TheklaAssertion {
 
+    private description: string[] = [];
+
     private options: TheklaAssertionOptions = {
         not: false,
         deep: false,
@@ -34,33 +36,40 @@ export class AssertionImpl implements TheklaAssertion {
     }
 
     get to(): AssertionImpl {
+        this.description.push(`to`)
         return this;
     }
 
     get be(): AssertionImpl {
+        this.description.push(`be`)
         return this;
     }
 
     get have(): AssertionImpl {
+        this.description.push(`have`)
         return this;
     }
 
     get not(): AssertionImpl {
+        this.description.push(`not`)
         this.options.not = true;
         return this;
     }
 
     get deep(): AssertionImpl {
+        this.description.push(`deep`)
         this.options.deep = true;
         return this;
     }
 
     get own(): AssertionImpl {
+        this.description.push(`own`)
         this.options.own = true;
         return this;
     }
 
     get nested(): AssertionImpl {
+        this.description.push(`nested`)
         this.options.nested = true;
         return this;
     }
@@ -79,11 +88,16 @@ export class AssertionImpl implements TheklaAssertion {
      * @returns {ExecuteAssertion<AT>}
      */
     public equal<AT>(expected: AT, message?: string): ExecuteAssertion<AT> {
-        const equal = this.options.deep ?
-            (this.options.not ? notDeepEqual : deepEqual) :
-            (this.options.not ? notStrictEqual : strictEqual);
+        this.description.push(`equal ${expected}`)
 
-        return this.assert(equal(expected, message));
+        const equal = this.options.deep ?
+                      (this.options.not ? notDeepEqual : deepEqual) :
+                      (this.options.not ? notStrictEqual : strictEqual);
+
+        const val = this.assert(equal(expected, message))
+        val.description = this.description.join(` `);
+
+        return val;
     }
 
     /**
@@ -96,9 +110,12 @@ export class AssertionImpl implements TheklaAssertion {
      * @returns {ExecuteAssertion<boolean>}
      */
     public truthy(message?: string): ExecuteAssertion<boolean> {
+        this.description.push(`truthy`)
         const checkTruthy = this.options.not ? notTruthy : truthy;
 
-        return this.assert(checkTruthy(message));
+        const val = this.assert(checkTruthy(message));
+        val.description = this.description.join(` `)
+        return val;
 
     }
 
@@ -112,9 +129,12 @@ export class AssertionImpl implements TheklaAssertion {
      * @returns {ExecuteAssertion<boolean>}
      */
     public falsy(message?: string): ExecuteAssertion<boolean> {
+        this.description.push(`falsy`)
         const checkFalsy = this.options.not ? notFalsy : falsy;
 
-        return this.assert(checkFalsy(message));
+        const val = this.assert(checkFalsy(message));
+        val.description = this.description.join(` `);
+        return val;
     }
 
     /**
@@ -128,9 +148,12 @@ export class AssertionImpl implements TheklaAssertion {
      * @returns {ExecuteAssertion<string>}
      */
     public match(expected: RegExp, message?: string): ExecuteAssertion<string> {
+        this.description.push(`match ${expected}`);
         const checkMatch = this.options.not ? notMatch : match;
 
-        return this.assert(checkMatch(expected, message))
+        const val = this.assert(checkMatch(expected, message))
+        val.description = this.description.join(` `)
+        return val;
     }
 
     /**
@@ -164,17 +187,28 @@ export class AssertionImpl implements TheklaAssertion {
         map.set([false, true, false, true].toString(), deepNestedInclude);
         map.set([true, true, false, true].toString(), notDeepNestedInclude);
         map.set([false, false, true, true].toString(),
-                () => {throw FailedOwnAndNestedChaining.for(`include`)});
+            () => {
+                throw FailedOwnAndNestedChaining.for(`include`)
+            });
         map.set([true, false, true, true].toString(),
-                () => {throw FailedOwnAndNestedChaining.for(`include`)});
+            () => {
+                throw FailedOwnAndNestedChaining.for(`include`)
+            });
         map.set([false, true, true, true].toString(),
-                () => {throw FailedOwnAndNestedChaining.for(`include`)});
+            () => {
+                throw FailedOwnAndNestedChaining.for(`include`)
+            });
         map.set([true, true, true, true].toString(),
-                () => {throw FailedOwnAndNestedChaining.for(`include`)});
+            () => {
+                throw FailedOwnAndNestedChaining.for(`include`)
+            });
 
         const checkInclude = map.get([not, deep, own, nested].toString());
 
-        return this.assert(checkInclude(needle, message))
+        this.description.push(`include ${JSON.stringify(needle)}`);
+        const val =  this.assert(checkInclude(needle, message));
+        val.description = this.description.join(` `)
+        return val;
     }
 
     /**
@@ -192,14 +226,14 @@ export class AssertionImpl implements TheklaAssertion {
 /**
  * the static assertion class returning an Assertion instance
  */
-class AssertionStatic {
+class AssertionStatic{
 
     /**
      * return a standard assertion class
      * @returns {TheklaAssertion}
      */
     public static get to(): TheklaAssertion {
-        return new AssertionImpl([]);
+        return new AssertionImpl([]).to;
     }
 
     /**

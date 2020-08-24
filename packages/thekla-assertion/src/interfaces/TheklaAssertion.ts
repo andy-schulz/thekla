@@ -1,5 +1,3 @@
-import {ArrayTypes} from "../lib/assertion_include_spec";
-
 export interface TheklaAssertion extends LanguageCandy, AssertionFlags {
     equal: <AT>(expected: AT, message?: string) => ExecuteAssertion<AT>;
     truthy: (message?: string) => ExecuteAssertion<boolean>;
@@ -32,6 +30,8 @@ export interface AssertionFlags {
  * assertion execution
  */
 export interface TheklaAssertionCall<AT> {
+    description?: string;
+
     (actual: AT): boolean;
 }
 
