@@ -10,6 +10,7 @@ export const createGotOptions = (reqOpts: RequestOptions): ExtendOptions => {
 
     return pipe(
         reqOpts.baseUrl ? setBaseUrl(reqOpts.baseUrl) : identity(reqOpts),
+        reqOpts.port ? setPort(reqOpts.port) : identity(reqOpts),
         reqOpts.textBody ? setTextBody(reqOpts.textBody) : identity(reqOpts),
         reqOpts.jsonBody ? setJsonBody(reqOpts.jsonBody) : identity(reqOpts),
         reqOpts.responseType ? setResponseType(reqOpts.responseType) : identity(reqOpts),
@@ -26,6 +27,10 @@ const identity: CurriedOptionsFunc<RequestOptions> = curry((reqOpts: RequestOpti
 
 const setBaseUrl: CurriedOptionsFunc<string> = curry((baseUrl: string, gotOpts: ExtendOptions): ExtendOptions => {
     return merge(gotOpts, {prefixUrl: baseUrl});
+})
+
+const setPort: CurriedOptionsFunc<string | number> = curry((port: string | number, gotOpts: ExtendOptions): ExtendOptions => {
+    return merge(gotOpts, {port: port});
 })
 
 const setTextBody: CurriedOptionsFunc<string> = curry((textBody: string, gotOpts: ExtendOptions): ExtendOptions => {
