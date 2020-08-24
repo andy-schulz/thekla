@@ -1,5 +1,6 @@
 import {Activity, Duration, Question, See} from "../..";
 import {PerformsTask}                      from "../Actor";
+import {stepDetails}                       from "../decorators/step_decorators";
 import {Task}                              from "./Activities";
 
 export class Repeat<PT, QPT, QRT> extends Task<PT, PT> {
@@ -12,7 +13,16 @@ export class Repeat<PT, QPT, QRT> extends Task<PT, PT> {
 
     private lastError: Error;
 
-    public performAs(actor: PerformsTask, result: PT): Promise<PT> {
+    private constructor(private activities: Activity<any, any>[]) {
+        super();
+    }
+
+    public static activities(...activities: Activity<any, any>[]): Repeat<any, any, any> {
+        return new Repeat(activities);
+    }
+
+    @stepDetails<PerformsTask, PT, PT>(`repeat task for <<retries>> times and wait for <<durationBetweenRetries>> in between`)
+    public performAs(actor: PerformsTask, result?: PT): Promise<PT> {
         let counter: number = this.retries;
 
         return new Promise((resolve, reject) => {
@@ -26,26 +36,22 @@ export class Repeat<PT, QPT, QRT> extends Task<PT, PT> {
                 actor.attemptsTo(
                     ...this.activities
                 )
-                .then(() => {
-                     return actor.attemptsTo(
-                         See.if(this.question)
-                            .is(this.expected)
-                     )
-                     .then(() => resolve(result))
-                     .catch((e) => {
-                         this.lastError = e;
-                         setTimeout(loop, this.durationBetweenRetries.inMs)
+                     .then(() => {
+                         return actor.attemptsTo(
+                             See.if(this.question)
+                                .is(this.expected)
+                         )
+                                     .then(() => resolve(result))
+                                     .catch((e) => {
+                                         this.lastError = e;
+                                         setTimeout(loop, this.durationBetweenRetries.inMs)
+                                     })
                      })
-                })
-                .catch(reject)
+                     .catch(reject)
             };
 
             loop();
         });
-    }
-
-    public static activities(...activities: Activity<any, any>[]): Repeat<any, any, any> {
-        return new Repeat(activities);
     }
 
     public until(question: Question<QPT, QRT>): Repeat<PT, QPT, QRT> {
@@ -69,9 +75,5 @@ export class Repeat<PT, QPT, QRT> extends Task<PT, PT> {
         this.retries = retries;
         this.durationBetweenRetries = durationBetweenRetries;
         return this;
-    }
-
-    private constructor(private activities: Activity<any, any>[]) {
-        super();
     }
 }
