@@ -7,6 +7,95 @@ nav_order: 10
 
 # Basic Interactions
 
+## AndThen
+
+One limitation of chaining tasks is, that a result of one task can only be used in the following task and
+not by any other following tasks. To get around this limitation you can use the ``AndThen`` task group.
+
+### Ability
+{: .no_toc }
+
+none
+
+### Methods
+{: .no_toc }
+
+| name      | parameter                                                           | description                                                |
+| :---      | :---                                                                | :---                                                       |
+| `.run()`* | func : (actor: Actor, result: ParameterType) => Promise<ResultType> | group tasks to reuse a task result in multiple other tasks |
+
+### Examples
+{: .no_toc }
+
+Both Task2 and Task3 will need the result of Task1 as input parameter. To path the parameter to both Tasks
+you can use the ``AndThen`` task group. 
+
+```typescript
+Josh.attemptsTo(
+    Task1.of(taskParameter: ParamType),
+    AndThen.run((actor: Actor, task1Result: Task1ReturnType) => {
+        actor.attemptsTo(
+            Task2.of(task1Result),
+            Task3.of(task1Result)
+        )       
+    }),
+    Task4.of(taskParameter))
+```
+
+## REPEAT
+
+Repeat will retry activities until a questions result is met. This comes in handy when you test a web page
+which does not automatically load the status of a background process and you have to press a refresh button
+to see if the status has changed.
+
+### Ability
+{: .no_toc }
+
+none
+
+### Methods
+{: .no_toc }
+
+| name             | parameter                           | description                                                                   |
+| :---             | :---                                | :---                                                                          |
+| `.activities()`* | activity: Activity, ....            | sleep for the amount of time in ms                                            |
+| `.until()`       | question: Question                  | the question to retrieve the result                                           |
+| `.is()`          | expected: Assertion                 | the assertion to check the questions result                                   |
+| `.retryFor()`    | retries: number, duration: Duration | query the question for # of 'retries' and wait for 'duration' between retries |
+
+### Examples
+{: .no_toc }
+
+To wait for a status change by pressing a refresh button you could do:
+
+```typescript
+Josh.attemptsTo(
+    Repeat.activities(
+        Click.on(REFRESH_BUTTON)
+    ).until(
+        Text.of(STATUS_FIELD)
+    ).is(
+        Expected.to.equal(`SUCCESS`)
+    )   
+)
+```
+
+Check every two seconds for a status change and abort after 10 checks.
+
+```typescript
+Josh.attemptsTo(
+    Repeat.activities(
+        Click.on(REFRESH_BUTTON)
+    ).until(
+        Text.of(STATUS_FIELD)
+    ).is(
+        Expected.to.equal(`SUCCESS`)
+    ).retryFor(
+        10, Duration.in.seconds(2)
+    )   
+)
+```
+
 ## SEE
 
 The See interaction executes a `Question` and checks if the answer matches a given state. 
@@ -63,60 +152,6 @@ Josh.attemptsTo(
             Click.on(mySaveButton))
         .otherwise(
             Click.on(myCancelButton))
-```
-
-## REPEAT
-
-Repeat will retry activities until a questions result is met. This comes in handy when you test a web page
-which does not automatically load the status of a background process and you have to press a refresh button
-to see if the status has changed.
-
-### Ability
-{: .no_toc }
-
-none
-
-### Methods
-{: .no_toc }
-
-| name             | parameter                           | description                                                                   |
-| :---             | :---                                | :---                                                                          |
-| `.activities()`* | activity: Activity, ....            | sleep for the amount of time in ms                                            |
-| `.until()`       | question: Question                  | the question to retrieve the result                                           |
-| `.is()`          | expected: Assertion                 | the assertion to check the questions result                                   |
-| `.retryFor()`    | retries: number, duration: Duration | query the question for # of 'retries' and wait for 'duration' between retries |
-
-### Examples
-{: .no_toc }
-
-To wait for a status change by pressing a refresh button you could do:
-
-```typescript
-Josh.attemptsTo(
-    Repeat.activities(
-        Click.on(REFRESH_BUTTON)
-    ).until(
-        Text.of(STATUS_FIELD)
-    ).is(
-        Expected.to.equal(`SUCCESS`)
-    )   
-)
-```
-
-Check every two seconds for a status change and abort after 10 checks.
-
-```typescript
-Josh.attemptsTo(
-    Repeat.activities(
-        Click.on(REFRESH_BUTTON)
-    ).until(
-        Text.of(STATUS_FIELD)
-    ).is(
-        Expected.to.equal(`SUCCESS`)
-    ).retryFor(
-        10, Duration.in.seconds(2)
-    )   
-)
 ```
 
 ## SLEEP
