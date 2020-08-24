@@ -13,7 +13,7 @@ class VisibleStatus implements Question<void, boolean> {
     }
 
     public toString(): string {
-        return `Status of element '${this.element.toString()}'`
+        return `Visibility of element '${this.element.toString()}'`
     }
 }
 
@@ -102,3 +102,5 @@ export class Status {
         }
     }
 }
+
+export const Visibility = Status.visible;

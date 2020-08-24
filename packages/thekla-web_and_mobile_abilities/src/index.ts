@@ -33,8 +33,7 @@ export {Value}                                               from "./lib/questio
 export {Attribute}                                           from "./lib/questions/Attribute";
 export {Count}                                               from "./lib/questions/Count";
 export {TheSites}                                            from "./lib/questions/TheSites";
-export {Status, ElementStatus}                               from "./lib/questions/Status";
-export {Expected}                                            from "./lib/matcher/Expected"
+export {Status, ElementStatus, Visibility}                   from "./lib/questions/Status";
 
 /**
  * Reexports from @thekla/webdriver
