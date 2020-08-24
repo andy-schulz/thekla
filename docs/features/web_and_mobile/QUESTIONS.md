@@ -114,7 +114,7 @@ john.attemptsTo(
 
 ## Status
 
-Get the visibiliy or enabled status of an element.
+Get the visibility or enabled status of an element.
 
 ### Ability
 {: .no_toc }
@@ -132,6 +132,9 @@ Get the visibiliy or enabled status of an element.
 | `.of()*`         | element: SppElement                                              | the element to get the visibility or enabled status from                                                                              |
 | `.ofAll()*`      | elements: SppElementList, options: {all: true / false (default)} | the element list to get the visibility or enabled status from. If all is set to true, the status is all elements is returned as array |
 
+``Status.visible.of(element)`` can be written as ``Visibility.of(element)``. The ``Visibility`` object is just
+an alias for ``Status.visible``
+
 ### Example
 {: .no_toc }
 
@@ -140,6 +143,13 @@ Use the `See` interaction to check if the elements is visible.
 ````typescript
 john.attemptsTo(
     See.if(Status.visible.of(element))
+        .is(Expected.to.be.truthy())
+)
+
+// or
+
+john.attemptsTo(
+    See.if(Visibility.of(element))
         .is(Expected.to.be.truthy())
 )
 ````
