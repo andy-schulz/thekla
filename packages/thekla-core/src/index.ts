@@ -34,12 +34,6 @@ export {Result} from "./lib/questions/Result";
 export {DoesNotHave}          from "./lib/errors/DoesNotHave";
 export {CanNotCreateDuration} from "./lib/errors/CanNotCreateDuration";
 
-/**
- * Matcher
- */
-//Function Matcher
-export {Expected}             from "./lib/matcher/FunctionMatcher/Expected"
-
 // Decorators
 export {stepDetails, step} from "./lib/decorators/step_decorators"
 export {wait}              from "./lib/utils/utils"
