@@ -4,7 +4,7 @@ import got                 from "got"
 import R                   from "ramda";
 import {RestRequestResult} from "..";
 import {RestRequest}       from "../interface/RestRequest";
-import {createGotOptions}  from "./parse_config_file.ts'";
+import {createGotOptions}  from "./parse_config_file";
 import {replacePathParams} from "./path_parameters";
 
 export class RestRequestRqst implements RestRequest {
