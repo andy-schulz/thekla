@@ -14,13 +14,11 @@ export declare type ResponseType = 'json' | 'buffer' | 'text'
 export declare type SearchParamsType =  string | { [key: string]: string | number | boolean | null | undefined; }
 export interface RequestOptions {
 
+    baseUrl?: string;
     port?: string | number;
 
-    searchParams?: SearchParamsType;
-
-    baseUrl?: string;
-
     headers?: Headers;
+    searchParams?: SearchParamsType;
     pathParams?: PathParameters;
 
     jsonBody?: {
