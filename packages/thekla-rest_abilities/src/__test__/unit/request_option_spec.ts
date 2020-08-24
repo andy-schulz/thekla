@@ -1,4 +1,5 @@
 import {RequestOptions}    from "@thekla/config";
+import {Agents}            from "got";
 import {createGotOptions}  from "../../rqst/parse_config_file";
 import {replacePathParams} from "../../rqst/path_parameters";
 
@@ -62,9 +63,10 @@ describe(`defining request options`, () => {
                 proxy: `http://my.proxy.com:8080`
             }
 
-            const expectedStringOpts = `{"agent":{"http":{"_events":{},"_eventsCount":1,"defaultPort":80,"protocol":"http:","options":{"keepAlive":true,"keepAliveMsecs":1000,"maxSockets":256,"maxFreeSockets":256,"path":null},"requests":{},"sockets":{},"freeSockets":{},"keepAliveMsecs":1000,"keepAlive":true,"maxSockets":256,"maxFreeSockets":256,"proxy":"http://my.proxy.com:8080/"}}}`
+            const gotOpts: any = createGotOptions(opts)
 
-            expect(JSON.stringify(createGotOptions(opts))).toEqual(expectedStringOpts)
+            expect(gotOpts?.agent?.http?.defaultPort).toEqual(80)
+            expect(gotOpts?.agent?.http?.protocol).toEqual(`http:`)
         });
 
         it(`should create correct HTTPS got proxy options
@@ -73,10 +75,10 @@ describe(`defining request options`, () => {
             const opts: RequestOptions = {
                 proxy: `https://my.proxy.com:8080`
             }
+            const gotOpts: any = createGotOptions(opts)
 
-            const expectedStringOpts = `{"agent":{"http":{"_events":{},"_eventsCount":1,"defaultPort":443,"protocol":"https:","options":{"keepAlive":true,"keepAliveMsecs":1000,"maxSockets":256,"maxFreeSockets":256,"path":null},"requests":{},"sockets":{},"freeSockets":{},"keepAliveMsecs":1000,"keepAlive":true,"maxSockets":256,"maxFreeSockets":256,"maxCachedSessions":100,"_sessionCache":{"map":{},"list":[]},"proxy":"https://my.proxy.com:8080/"}}}`
-
-            expect(JSON.stringify(createGotOptions(opts))).toEqual(expectedStringOpts)
+            expect(gotOpts?.agent?.http?.defaultPort).toEqual(443)
+            expect(gotOpts?.agent?.http?.protocol).toEqual(`https:`)
         });
     });
 });
