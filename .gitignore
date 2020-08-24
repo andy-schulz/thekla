@@ -97,5 +97,7 @@ _archive
 
 .build
 
+.jekyll-cache
+
 ### add test fixtures
 !packages/**/__fixtures__
