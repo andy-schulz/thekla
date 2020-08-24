@@ -38,16 +38,6 @@ class EnterBase implements Interaction<void, void> {
         return this.intoFunc;
     }
 
-    /**
-     * @deprecated sinse version 3.x - use Enter.value().into.empty() instead
-     * @param {boolean} clear
-     * @returns {Enter}
-     */
-    public butClearsTheFieldBefore(clear = true): EnterBase {
-        this.clearField = clear;
-        return this;
-    }
-
     public constructor(private sequence: string | undefined | Question<void, string>) {
         // build the helper function so that
         // Enter.value().into() and

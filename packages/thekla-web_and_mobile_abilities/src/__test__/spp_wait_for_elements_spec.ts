@@ -10,14 +10,13 @@ import {
     By,
     ClientHelper,
     element,
-    Expected as WebExpected,
     Navigate,
     RunningBrowser,
     Status,
     Text,
-    UntilElement,
+    UntilElement, Visibility,
     Wait
-}                                                                            from "..";
+} from "..";
 import {ElementStatus}                                                       from "../lib/questions/Status";
 
 const logger = getLogger(`Spec: Spp wait for elements`);
@@ -199,19 +198,16 @@ describe(`Waiting for SPP Elements`, (): void => {
         - (test case id: 2faab3b4-54b0-43cf-a616-71995c4f0440)`, (): Promise<void> => {
             return walterTheWaiter.attemptsTo(
                 Navigate.to(`/modals`),
-                Wait.until(Status.of(modal))
-                    .is(WebExpected.notToBeVisible())
+                Wait.until(Visibility.of(modal))
+                    .is(Expected.to.be.falsy())
                     .forAsLongAs(500)
             ).then((): void => {
                 expect(true).toBe(false, `Action should time out after 5000 ms but it doesnt`)
             }).catch((e): void => {
-                expect(e.toString()).toContain(
-                    `Waiting until 
-Status of element 
-    called 'The modal window' 
-    located by >>byCss: [id='ModalView']<< 
-which was expected notToBeVisible 
-timed out after 500 ms.`)
+                expect(e.toString()).toContain(`Visibility of element ''The modal window'`)
+                expect(e.toString()).toContain(`located by >>byCss: [id='ModalView']<<`)
+                expect(e.toString()).toContain(`which was expected to be falsy`)
+                expect(e.toString()).toContain(`timed out after 500 ms.`)
             });
 
         });
@@ -222,8 +218,8 @@ timed out after 500 ms.`)
             const start = Date.now();
 
             return walterTheWaiter.attemptsTo(
-                Wait.until(Status.of(modal))
-                    .is(WebExpected.notToBeVisible())
+                Wait.until(Visibility.of(modal))
+                    .is(Expected.not.to.be.truthy())
                     .forAsLongAs(7000)
             ).then((): void => {
                 const end = Date.now();

@@ -5,9 +5,13 @@ import {UsesAbilities, Interaction, stepDetails, AnswersQuestions, Question} fro
 import {Oracle}                                                              from "@thekla/core/dist/lib/actions/Activities";
 import {UntilElementCondition}                                               from "@thekla/webdriver";
 import {WaitOnElements}                                                      from "../abilities/WaitOnElements";
-import {NamedMatcherFunction}                                                from "../matcher/Expected";
 import {SppElement}                                                          from "../SppWebElements";
 import {getLogger}                                                           from "@log4js-node/log4js-api"
+
+export interface NamedMatcherFunction<MPT> extends Function {
+    (actual: MPT): boolean | Promise<boolean>;
+    description?: string;
+}
 
 class WaitUntil<PT, MPT> implements Oracle<PT, boolean> {
 
@@ -41,7 +45,7 @@ timed out after ${this.timeout} ms.`);
         });
     }
 
-    public is(matcher: (text: MPT) => boolean | Promise<boolean>): WaitUntil<PT, MPT> {
+    public is(matcher: (param: MPT) => boolean | Promise<boolean>): WaitUntil<PT, MPT> {
         this.matcher = matcher;
         return this;
     }

@@ -114,7 +114,7 @@ describe(`Scroll`, (): void => {
             expect(row50isOutsideView.anyOutside).toBeTruthy(`row 50 is inside view, but it should be outside`);
             expect(row51isOutsideView.anyOutside).toBeTruthy(`row 51 is inside view, but it should be outside`);
 
-            await Scroll.to(row50).atTheViewportCenter()
+            await Scroll.to.centered(row50)
                         .performAs(Sam);
 
             row49IsOutsideView =
