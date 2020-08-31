@@ -253,6 +253,18 @@ In case the ``responseType`` is set to ``json`` the system tries to parse the re
 
 ---
 
+### resolveBodyOnly
+
+When set return the body only and ignore all request result attributes.
+
+````json
+{
+    "resolveBodyOnly": true
+}
+````
+
+---
+
 ### proxy
 
 Specify the proxy information if you are behind a corporate proxy.
