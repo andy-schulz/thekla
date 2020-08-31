@@ -6,7 +6,9 @@ export class Attribute implements Question<void, string> {
     private attributeName = ``;
 
     public answeredBy(actor: UsesAbilities): Promise<string> {
-        return FindElements.as(actor).findElement(this.element).getAttribute(this.attributeName);
+        return FindElements.as(actor).findElement(this.element).getAttribute(this.attributeName).then((value: any) => {
+            return `${value}`
+        });
     }
 
     public static of(element: SppElement): Attribute {
