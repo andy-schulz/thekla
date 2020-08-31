@@ -15,6 +15,7 @@ export const createGotOptions = (reqOpts: RequestOptions): ExtendOptions => {
         reqOpts.jsonBody ? setJsonBody(reqOpts.jsonBody) : identity(reqOpts),
         reqOpts.responseType ? setResponseType(reqOpts.responseType) : identity(reqOpts),
         reqOpts.searchParams ? setSearchParams(reqOpts.searchParams) : identity(reqOpts),
+        reqOpts.resolveBodyOnly ? setResolveBodyOnly(reqOpts.resolveBodyOnly) : identity(reqOpts),
 
         // proxy shall be last to add
         reqOpts.proxy ? setProxy(reqOpts.proxy) : identity(reqOpts)
@@ -47,6 +48,10 @@ const setResponseType: CurriedOptionsFunc<ResponseType> = curry((responseType: R
 
 const setSearchParams: CurriedOptionsFunc<SearchParamsType> = curry((searchParams: SearchParamsType, gotOpts: ExtendOptions): ExtendOptions => {
     return merge(gotOpts, {searchParams: searchParams});
+})
+
+const setResolveBodyOnly: CurriedOptionsFunc<boolean> = curry((bodyOnly: boolean, gotOpts: ExtendOptions): ExtendOptions => {
+    return merge(gotOpts, {resolveBodyOnly: bodyOnly});
 })
 
 const setProxy: CurriedOptionsFunc<string> = curry((proxyUrl: string, gotOpts: ExtendOptions): ExtendOptions => {

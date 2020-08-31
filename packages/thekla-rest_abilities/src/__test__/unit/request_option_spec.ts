@@ -54,6 +54,31 @@ describe(`defining request options`, () => {
         });
     });
 
+    describe(`with resolveBodyOnly`, () => {
+
+        it(`should pass
+        test id: 4d32b7a9-054d-481c-9b46-2397e0b2e58c`, () => {
+            const opts: RequestOptions = {
+                resolveBodyOnly: true
+            }
+
+            expect(createGotOptions(opts).resolveBodyOnly).toEqual(true);
+
+        });
+    });
+
+    describe(`without resolveBodyOnly`, () => {
+
+        it(`should pass
+        test id: 861a41f6-dab1-4974-ac24-473ad1ff0bf9`, () => {
+            const opts: RequestOptions = {
+            }
+
+            expect(createGotOptions(opts).resolveBodyOnly).toEqual(undefined);
+
+        });
+    });
+
     describe(`with proxy`, () => {
 
         it(`should create correct HTTP got proxy options

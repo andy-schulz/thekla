@@ -28,5 +28,7 @@ export interface RequestOptions {
 
     responseType?: ResponseType;
 
+    resolveBodyOnly?: boolean;
+
     proxy?: string
 }
