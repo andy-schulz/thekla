@@ -1,6 +1,6 @@
 {
   "name": "@thekla/core",
-  "version": "3.2.0",
+  "version": "3.2.1",
   "description": "the SPP (ScreenPlay Pattern) core elements used to create abilities and interactions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
