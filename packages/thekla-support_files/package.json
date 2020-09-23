@@ -27,14 +27,14 @@
   },
   "dependencies": {
     "@thekla/config": "^3.2.0",
-    "@types/lodash": "^4.14.149",
+    "@types/lodash": "^4.14.161",
     "lodash": "^4.17.20",
-    "moment": "^2.24.0",
+    "moment": "^2.29.0",
     "webdriver": "^5.23.0"
   },
   "devDependencies": {
-    "del-cli": "^3.0.0",
-    "nyc": "^15.0.0"
+    "del-cli": "^3.0.1",
+    "nyc": "^15.1.0"
   },
   "gitHead": "9f1b95e9f07ab5d8e1fdaab5e181bdca058b5bfa"
 }
