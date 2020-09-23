@@ -10,6 +10,7 @@ export class AndThen<PT, RT> extends Task<PT, RT> {
         this.executor = executor;
     }
 
+    public static run<S_PT, S_RT>(func: (actor: PerformsTask, result: S_PT) => Promise<S_RT>): AndThen<S_PT, S_RT>;
     public static run<S_PT, S_RT>(func: (actor: PerformsTask, result?: S_PT) => Promise<S_RT>): AndThen<S_PT, S_RT> {
         return new AndThen(func)
     }

@@ -51,9 +51,9 @@ describe(`group`, () => {
             return glen
                 .attemptsTo(
                     Task1.usesString(`start task`),
-                    AndThen.run((glen1: PerformsTask, data = `test`): Promise<string> => {
+                    AndThen.run((glen1: PerformsTask, data: string): Promise<string> => {
                         return glen1.attemptsTo(
-                            Task1.usesString(data as string))
+                            Task1.usesString(data))
                     }))
                 .then((data: string) => {
                     expect(data).toEqual(`start task`)
