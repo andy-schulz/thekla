@@ -11,10 +11,13 @@ export class AndThen<PT, RT> extends Task<PT, RT> {
     }
 
     public static run<S_PT, S_RT>(func: (actor: PerformsTask, result: S_PT) => Promise<S_RT>): AndThen<S_PT, S_RT>;
+    public static run<S_PT, S_RT>(func: (actor: PerformsTask) => Promise<S_RT>): AndThen<S_PT, S_RT>;
     public static run<S_PT, S_RT>(func: (actor: PerformsTask, result?: S_PT) => Promise<S_RT>): AndThen<S_PT, S_RT> {
         return new AndThen(func)
     }
 
+    performAs(actor: PerformsTask): Promise<RT>;
+    performAs(actor: PerformsTask, result: PT): Promise<RT>;
     @step<PerformsTask, PT, RT>(`run a task group`)
     performAs(actor: PerformsTask, result?: PT): Promise<RT> {
         return this.executor(actor, result);
