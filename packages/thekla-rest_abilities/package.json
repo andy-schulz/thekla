@@ -39,14 +39,17 @@
     "@thekla/core": "^3.2.2",
     "@types/lodash": "^4.14.159",
     "@types/ramda": "^0.27.14",
+    "@types/tough-cookie": "^4.0.0",
     "deepmerge": "^4.2.2",
     "got": "^11.5.2",
     "hpagent": "^0.1.1",
     "lodash": "^4.17.20",
-    "ramda": "^0.27.1"
+    "ramda": "^0.27.1",
+    "tough-cookie": "^4.0.0"
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/jasmine": "^3.5.14",
     "del-cli": "^3.0.1",
     "jasmine": "^3.6.1",
     "nyc": "^15.1.0"

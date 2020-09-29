@@ -34,6 +34,7 @@
   },
   "devDependencies": {
     "@istanbuljs/nyc-config-typescript": "^1.0.1",
+    "@types/jasmine": "^3.5.14",
     "@thekla/support": "^3.2.2",
     "del-cli": "^3.0.1",
     "jasmine": "^3.6.1",
