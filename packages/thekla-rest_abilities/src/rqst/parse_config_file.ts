@@ -1,7 +1,7 @@
-import {RequestOptions, ResponseType, SearchParamsType} from "@thekla/config"
-import {ExtendOptions}                                  from "got";
-import {HttpProxyAgent, HttpsProxyAgent}                from "hpagent";
-import {curry, merge, pipe}                             from "ramda";
+import {Headers, RequestOptions, ResponseType, SearchParamsType} from "@thekla/config"
+import {ExtendOptions}                                           from "got";
+import {HttpProxyAgent, HttpsProxyAgent}                         from "hpagent";
+import {curry, merge, pipe}                                      from "ramda";
 
 type CurriedOptionsFunc<T> = (arg: T) => (gotOpts: ExtendOptions) => ExtendOptions;
 type JsonBody = { [key: string]: any; }
@@ -11,6 +11,7 @@ export const createGotOptions = (reqOpts: RequestOptions): ExtendOptions => {
     return pipe(
         reqOpts.baseUrl ? setBaseUrl(reqOpts.baseUrl) : identity(reqOpts),
         reqOpts.port ? setPort(reqOpts.port) : identity(reqOpts),
+        reqOpts.headers ? setHeaders(reqOpts.headers) : identity(reqOpts),
         reqOpts.textBody ? setTextBody(reqOpts.textBody) : identity(reqOpts),
         reqOpts.jsonBody ? setJsonBody(reqOpts.jsonBody) : identity(reqOpts),
         reqOpts.responseType ? setResponseType(reqOpts.responseType) : identity(reqOpts),
@@ -54,16 +55,20 @@ const setResolveBodyOnly: CurriedOptionsFunc<boolean> = curry((bodyOnly: boolean
     return merge(gotOpts, {resolveBodyOnly: bodyOnly});
 })
 
+const setHeaders: CurriedOptionsFunc<Headers> = curry((headers: Headers, gotOpts: ExtendOptions): ExtendOptions => {
+    return merge(gotOpts, {headers: headers});
+})
+
 const setProxy: CurriedOptionsFunc<string> = curry((proxyUrl: string, gotOpts: ExtendOptions): ExtendOptions => {
 
     const httpProxy = {
         agent: {
             http: new HttpProxyAgent({
-                keepAlive: true,
+                keepAlive:      true,
                 keepAliveMsecs: 1000,
-                maxSockets: 256,
+                maxSockets:     256,
                 maxFreeSockets: 256,
-                proxy: proxyUrl
+                proxy:          proxyUrl
             })
         }
     }
@@ -71,11 +76,11 @@ const setProxy: CurriedOptionsFunc<string> = curry((proxyUrl: string, gotOpts: E
     const httpsProxy = {
         agent: {
             http: new HttpsProxyAgent({
-                keepAlive: true,
+                keepAlive:      true,
                 keepAliveMsecs: 1000,
-                maxSockets: 256,
+                maxSockets:     256,
                 maxFreeSockets: 256,
-                proxy: proxyUrl
+                proxy:          proxyUrl
             })
         }
     }

@@ -1,5 +1,4 @@
 import {RequestOptions}    from "@thekla/config";
-import {Agents}            from "got";
 import {createGotOptions}  from "../../rqst/parse_config_file";
 import {replacePathParams} from "../../rqst/path_parameters";
 
@@ -18,7 +17,7 @@ describe(`defining request options`, () => {
                 }
             }
 
-            expect(replacePathParams(resource, opts)).toEqual(expected,`path parameter not replaced`)
+            expect(replacePathParams(resource, opts)).toEqual(expected, `path parameter not replaced`)
         });
 
         it(`should only replace the found path parameters
@@ -27,12 +26,12 @@ describe(`defining request options`, () => {
             const expected = `a/b/c/{two}`
             const opts: RequestOptions = {
                 pathParams: {
-                    one: `c`,
+                    one:   `c`,
                     three: `d`
                 }
             }
 
-            expect(replacePathParams(resource, opts)).toEqual(expected,`only the found path parameter should have been replaced`)
+            expect(replacePathParams(resource, opts)).toEqual(expected, `only the found path parameter should have been replaced`)
         });
     });
 
@@ -46,11 +45,10 @@ describe(`defining request options`, () => {
                 pathParams: {}
             }
 
-            const opts2: RequestOptions = {
-            }
+            const opts2: RequestOptions = {}
 
-            expect(replacePathParams(resource, opts1)).toEqual(expected,`path parameter for empty object not replaced`)
-            expect(replacePathParams(resource, opts2)).toEqual(expected,`path parameter for absent object not replaced`)
+            expect(replacePathParams(resource, opts1)).toEqual(expected, `path parameter for empty object not replaced`)
+            expect(replacePathParams(resource, opts2)).toEqual(expected, `path parameter for absent object not replaced`)
         });
     });
 
@@ -71,10 +69,56 @@ describe(`defining request options`, () => {
 
         it(`should pass
         test id: 861a41f6-dab1-4974-ac24-473ad1ff0bf9`, () => {
-            const opts: RequestOptions = {
-            }
+            const opts: RequestOptions = {}
 
             expect(createGotOptions(opts).resolveBodyOnly).toEqual(undefined);
+
+        });
+    });
+
+    describe(`with headers`, () => {
+
+        it(`should create correct HTTP got header options
+        test id: 5eda79f2-ff7d-4bb7-ad9c-df445b094178`, () => {
+
+            const opts: RequestOptions = {
+                headers: {
+                    "one": "two",
+                    "three": "four"
+                }
+            }
+
+            expect(createGotOptions(opts).headers).toEqual({"one": "two", "three": "four"});
+
+        });
+    });
+
+    describe(`without headers`, () => {
+
+        it(`should pass
+        test id: 3eecc42e-dbd7-4ae5-a144-4b95b145152a`, () => {
+
+            const opts: RequestOptions = {}
+
+            expect(createGotOptions(opts).headers).toEqual(undefined);
+
+        });
+
+        it(`should pass when explicitly set to undefined
+        test id: b1b5b96e-b8a4-4f03-a02c-f8e0c838e307`, () => {
+
+            const opts: RequestOptions = {headers: undefined}
+
+            expect(createGotOptions(opts).headers).toEqual(undefined);
+
+        });
+
+        it(`should pass when set to empty object
+        test id: 3eecc42e-dbd7-4ae5-a144-4b95b145152a`, () => {
+
+            const opts: RequestOptions = {headers: {}}
+
+            expect(createGotOptions(opts).headers).toEqual({});
 
         });
     });
