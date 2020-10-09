@@ -69,12 +69,16 @@ class DelayedDurationResult<PT> implements Question<PT, PT> {
 export class Result<PT> implements Question<PT, PT> {
     private readonly value: PT | undefined;
 
-    public static ofLastActivity<PT>(): Result<PT> {
+    public static ofLastActivity<PTS>(): Result<PTS> {
         return new Result()
     }
 
-    public static of<PT>(value: PT): DelayedDurationResult<PT> {
-        return new DelayedDurationResult<PT>(value)
+    public static ofActivities<PTS>(): Result<PTS> {
+        return new Result()
+    }
+
+    public static of<PTS>(value: PTS): DelayedDurationResult<PTS> {
+        return new DelayedDurationResult<PTS>(value)
     }
 
     public answeredBy(actor: UsesAbilities, activityResult: PT): Promise<PT> {

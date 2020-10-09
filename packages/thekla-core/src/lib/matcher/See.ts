@@ -5,7 +5,7 @@ import {stepDetails}                    from "../decorators/step_decorators";
 
 /**
  * PT = Parameter Type, Type of parameter which could be passed to the interaction
- * MPT = Matcher Parameter Type, type of parameter passed the the given matcher
+ * MPT = Matcher Parameter Type, type of parameter passed to the given matcher
  */
 
 export class See<PT, MPT> implements Oracle<PT, void> {
@@ -96,7 +96,7 @@ export class See<PT, MPT> implements Oracle<PT, void> {
         return this;
     }
 
-    public is(matcher: (text: MPT) => boolean | Promise<boolean>): See<PT, MPT> {
+    public is(matcher: (value: MPT) => boolean | Promise<boolean>): See<PT, MPT> {
         this.matcher = matcher;
         return this;
     }

@@ -75,6 +75,20 @@ describe(`Chaining Activities`, function () {
             expect(value).toEqual(`2`);
         });
 
+        it(`should propagate the the results by passing the first parameter as function param
+        - (test case id: f89c3d05-faec-4db4-aa29-b9ee41ed561b)`, async (): Promise<void> => {
+            const chris = Actor.named(`Chris`);
+
+            const value = await chris.attemptsTo_(
+                TaskStoS.use(),
+                TaskStoN.use(),
+                TaskNtoN.use(),
+                TaskNtoS.use()
+            )(`2`);
+
+            expect(value).toEqual(`2`);
+        });
+
         it(`should examine the values when debugged
         test id: f5c304c2-0417-4947-8b76-07b5af3b20bf`, async () => {
             const chris = Actor.named(`Chris`);
@@ -91,6 +105,21 @@ describe(`Chaining Activities`, function () {
             expect(value).toEqual(`2`);
         });
 
+        it(`should examine the values when debugged by passing the first parameter as function param
+        test id: f5c304c2-0417-4947-8b76-07b5af3b20bf`, async () => {
+            const chris = Actor.named(`Chris`);
+
+            const value = await chris.attemptsTo_(
+                TaskStoS.use(),
+                TaskStoN.use(),
+                Debug.by(result => expect(result).toEqual(2)),
+                Dbg(TaskNtoN.use()).debug(result => expect(result).toEqual(2)),
+                TaskNtoS.use()
+            )(`2`);
+
+            expect(value).toEqual(`2`);
+        });
+
         it(`should pass the values for the default debug function
         test id: f5c304c2-0417-4947-8b76-07b5af3b20bf`, async () => {
             const chris = Actor.named(`Chris`);
@@ -102,6 +131,20 @@ describe(`Chaining Activities`, function () {
                 Dbg(TaskNtoN.use()),
                 TaskNtoS.use()
             );
+
+            expect(value).toEqual(`2`);
+        });
+
+        it(`should pass the values for the default debug function by passing the first parameter as function param
+        test id: f5c304c2-0417-4947-8b76-07b5af3b20bf`, async () => {
+            const chris = Actor.named(`Chris`);
+
+            const value = await chris.attemptsTo_(
+                TaskStoS.use(),
+                TaskStoN.use(),
+                Dbg(TaskNtoN.use()),
+                TaskNtoS.use()
+            )(`2`);
 
             expect(value).toEqual(`2`);
         });
