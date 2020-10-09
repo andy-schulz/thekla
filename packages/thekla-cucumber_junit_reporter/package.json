@@ -1,6 +1,6 @@
 {
   "name": "@thekla/cucumber-junit-formatter",
-  "version": "3.2.3",
+  "version": "3.3.0",
   "description": "junit result formatter for cucumber",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
