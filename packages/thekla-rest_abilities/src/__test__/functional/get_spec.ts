@@ -17,7 +17,7 @@ describe(`Using the GET method`, () => {
     Richard.whoCan(UseTheRestApi.with(ExecutingRestClient.from(restClientConfig)));
 
     describe(`on a resource`, () => {
-        fit(`should return status code 200
+        it(`should return status code 200
         test id: 15bae575-4ac9-4fee-adb8-b69e909706a7`, async () => {
             const getReq = request(On.resource(`get`));
 

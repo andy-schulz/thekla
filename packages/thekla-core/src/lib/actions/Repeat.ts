@@ -35,10 +35,6 @@ export class Repeat<PT, RT, QPT, QRT> extends Task<PT, RT> {
         return new Repeat(activities, false);
     }
 
-    public static test<PT, P, R1>(a1: A<P, R1>): Repeat<any, any, any, any> {
-        return new Repeat([a1], false);
-    }
-
     // public static activitiesAndPassResult(...activities: Activity<any, any>[]): Repeat<any, any, any> {
     //     return new Repeat(activities, true);
     // }
