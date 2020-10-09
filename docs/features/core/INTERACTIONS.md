@@ -32,7 +32,7 @@ you can use the ``AndThen`` task group.
 
 ```typescript
 Josh.attemptsTo(
-    Task1.of(taskParameter: ParamType),
+    Task1.of(taskParameter),
     AndThen.run((actor: Actor, task1Result: Task1ReturnType) => {
         actor.attemptsTo(
             Task2.of(task1Result),
@@ -44,9 +44,12 @@ Josh.attemptsTo(
 
 ## REPEAT
 
-Repeat will retry activities until a questions result is met. This comes in handy when you test a web page
-which does not automatically load the status of a background process and you have to press a refresh button
-to see if the status has changed.
+Repeat will retry activities until a question result meets an expected result.  
+Whenever you have to implement an active polling to observe a status
+change use this action.
+
+The final result of the activity list will be passed to the next activity
+following the ``Repeat`` activity.
 
 ### Ability
 {: .no_toc }
@@ -96,6 +99,17 @@ Josh.attemptsTo(
 )
 ```
 
+Pass the activity result to the following task:
+
+```typescript
+Josh.attemptsTo(
+    Repeat.activities(
+        Get.from(resource))
+    .until(Result.ofLastActivity())
+    .is(Expected.to.deep.equal({status: "success"}))   
+)
+```
+
 ## SEE
 
 The See interaction executes a `Question` and checks if the answer matches a given state. 
@@ -109,20 +123,22 @@ See.if(Text.of(MYELEMENT))
 Possible `Questions` are:
 
 - Core Questions - created for training and demonstration purposes
-    - [``Result.of(VALUE)``](QUESTIONS.md#result)
+    - [Result](QUESTIONS.md#result)
 - Web Questions
-    - [``Text.of(ELEMENT)``](../web_and_mobile/INTERACTIONS.md#text)
-    - [``Value.of(ELEMENT)``](../web_and_mobile/INTERACTIONS.md#value)
-    - [``Attribute.of(ELEMENT).called(ATTRIBUTE_NAME)``](../web_and_mobile/INTERACTIONS.md#attribute)
+    - [Text](../web_and_mobile/QUESTIONS.md#text)
+    - [Value](../web_and_mobile/QUESTIONS.md#value)
+    - [Attribute](../web_and_mobile/QUESTIONS.md#attribute)
     
 - etc. 
 
-> See [Questions](../../../basics/QUESTIONS.md).
+> See [Questions](./QUESTIONS.md).
 
 The `Matcher` is a function of type `(answer: <TYPE>) => boolean)`.
-You can provide you own function or choose one provided by see `Expected` module.
+You can provide you own function or choose one provided by the `Expected` module.
 
-> See [Matcher](../../../basics/MATCHER.md).
+> See [Matcher](./ASSERTIONS.md).
+
+
 
 ### Ability
 {: .no_toc }
@@ -140,10 +156,12 @@ none
 | `.then()`      | activities: Activity[]                   | if check is `true` execute the following activites                                        |
 | `.otherwise()` | activities: Activity[]                   | if check is `false` execute the following activities                                      |
 
-### Example
+### Examples
 {: .no_toc }
 
-```typescript
+See action using ``.then()`` and ``.otherwise()``.
+
+````typescript
 Josh.attemptsTo(
     See.if(Text.of(myElement))
         .is(Expected.toBe(`The Text`))
@@ -151,8 +169,38 @@ Josh.attemptsTo(
         .then(
             Click.on(mySaveButton))
         .otherwise(
-            Click.on(myCancelButton))
-```
+            Click.on(myCancelButton)))
+````
+
+The Activity Result preceding the See action will be passed through to  
+the next Activity following the See action.
+
+e.g.
+
+````typescript
+actor.attemptsTo(
+    PrecedingTask.doingSomething(),
+    
+    See.if(MyQuestion)
+       .is(Expected.to.equal(something)),
+    
+    FollowingTask.usingResultFromPrecedingTask()
+)
+````
+
+... or checking the result of the preceding task before continuing with
+further activities.
+
+````typescript
+actor.attemptsTo(
+    PrecedingTask.doingSomething(),
+    
+    See.if(Result.ofLastActivity())
+       .is(Expected.to.equal(something)),
+    
+    FollowingTask.usingResultFromPrecedingTask()
+)
+````
 
 ## SLEEP
 
@@ -187,11 +235,12 @@ Josh.attemptsTo(
 
 ## WAIT
 
-Wait for an element to change its state. Right now you can wait until the element
+Wait for a web element to change its state.  
+Right now you can wait until the element:
 - is / is not visible
 - is / is not enabled
 
-To specify the desired state the [`UntilElementCondition`](../../conditions/UNTIL_ELEMENT_CONDITION.md) condition shall be used.
+To specify the desired state the [`UntilElementCondition`](../web_and_mobile/UNTIL_ELEMENT_CONDITION.md) condition shall be used.
 
 ### Ability
 {: .no_toc }

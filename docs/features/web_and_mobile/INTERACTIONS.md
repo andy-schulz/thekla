@@ -16,8 +16,8 @@ Clicks on the given browser element (mobile / desktop) or an app element (mobile
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
-- [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
+- [OperateOnMobileDevice](./ABILITIES.md#operateonmobiledevice)
 
 ### Methods
 {: .no_toc }
@@ -49,7 +49,7 @@ Josh.attemptsTo(
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
 
 ### Methods
 {: .no_toc }
@@ -71,8 +71,8 @@ If the field contains already a value, the new value will be appended.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
-- [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
+- [OperateOnMobileDevice](./ABILITIES.md#operateonmobiledevice)
 
 ### Methods
 {: .no_toc }
@@ -113,7 +113,7 @@ Move the mouse pointer over an element.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
 
 ### Methods
 {: .no_toc }
@@ -139,7 +139,7 @@ Load the an URL in the browser.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
 
 ### Methods
 {: .no_toc }
@@ -163,8 +163,8 @@ Josh.attemptsTo(
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
-- [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
+- [OperateOnMobileDevice](./ABILITIES.md#operateonmobiledevice)
 
 ### Methods
 {: .no_toc }
@@ -188,15 +188,15 @@ josh.attemptsTo(
 )
 ```
 
-## Tap NOT IMPLEMENTED YET
+## Tap ``NOT IMPLEMENTED YET``
 
 Tap on an element or position of an touch enabled device ( mobile or desktop / laptop).
 
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
-- [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
+- [OperateOnMobileDevice](./ABILITIES.md#operateonmobiledevice)
 
 ### Methods
 {: .no_toc }

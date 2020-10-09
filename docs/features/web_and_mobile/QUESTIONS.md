@@ -13,7 +13,7 @@ Get the value of a web elements attribute.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
 
 ### Methods
 {: .no_toc }
@@ -48,7 +48,7 @@ Count the number of elements found by the given element selector.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
 
 ### Methods
 {: .no_toc }
@@ -83,7 +83,7 @@ can then be entered into an input field to test the upload functionality of a si
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
 
 ### Methods
 {: .no_toc }
@@ -119,8 +119,8 @@ Get the visibility or enabled status of an element.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
-- [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
+- [OperateOnMobileDevice](./ABILITIES.md#operateonmobiledevice)
 
 ### Methods
 {: .no_toc }
@@ -182,8 +182,8 @@ Get the content / text of element.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
-- [OperateOnMobileDevice](../../abilities/OPERATE_ON_MOBILE_DEVICE.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
+- [OperateOnMobileDevice](./ABILITIES.md#operateonmobiledevice)
 
 ### Methods
 {: .no_toc }
@@ -218,7 +218,7 @@ Get the title or the url of a site.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
 
 ### Methods
 {: .no_toc }
@@ -253,7 +253,7 @@ Get the content of the value attribute.
 ### Ability
 {: .no_toc }
 
-- [BrowseTheWeb](../../abilities/BROWSE_THE_WEB.md)
+- [BrowseTheWeb](./ABILITIES.md#browsetheweb)
 
 ### Methods
 {: .no_toc }
@@ -286,4 +286,4 @@ The `Value` question was added for convenience. You can use the Attribute questi
 const value = await Attribute.of(element).called(`class`)
 ```
 
-> See section [Attribute](ATTRIBUTE.md) for details.
+> See section [Attribute](#attribute) for details.
