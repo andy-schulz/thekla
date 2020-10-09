@@ -1,5 +1,24 @@
-import {Expected}                                      from "@thekla/assertion";
-import {Actor, Duration, Result, ReturnTaskValue, See} from "../..";
+import {Expected}                                                          from "@thekla/assertion";
+import {Actor, Duration, PerformsTask, Result, ReturnTaskValue, See, Task} from "../..";
+
+
+class Returns extends Task<undefined, string> {
+
+    private val: string= `test`;
+
+    private constructor(value: string) {
+        super();
+        this.val = value;
+    }
+
+    public static staticString(val: string): Returns {
+        return new Returns(val)
+    }
+
+    performAs(actor: PerformsTask): Promise<string> {
+        return Promise.resolve(this.val);
+    }
+}
 
 describe(`Using the See interaction`, (): void => {
     const Josh = Actor.named(`Josh`);
@@ -86,6 +105,17 @@ describe(`Using the See interaction`, (): void => {
                 See.if(Result.of(`12345`))
                    .is(Expected.to.equal(`12345`))
             )
+        });
+
+        it(`should pass and return the result` +
+            `- (test case id: 1a01e989-deff-41b6-b1dc-ff7a6797fc90)`, async (): Promise<void> => {
+            await John.attemptsTo(
+                Returns.staticString(`12345`),
+                See.if(Result.ofLastActivity<string>())
+                    .is(Expected.to.equal(`12345`))
+            ).then((val) => {
+                expect(val).toEqual(`12345`)
+            })
         });
 
         it(`should poll the status until the value is set` +

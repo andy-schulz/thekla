@@ -8,13 +8,13 @@ import {stepDetails}                    from "../decorators/step_decorators";
  * MPT = Matcher Parameter Type, type of parameter passed to the given matcher
  */
 
-export class See<PT, MPT> implements Oracle<PT, void> {
+export class See<PT, MPT> implements Oracle<PT, any> {
     private matcher: (value: MPT) => boolean | Promise<boolean>;
     private repeater = 1;
     private duration = Duration.in.milliSeconds(1000);
 
-    private thenActivities: Activity<PT, void>[] = [];
-    private otherwiseActivities: Activity<PT, void>[] = [];
+    private thenActivities: Activity<any, any>[] = [];
+    private otherwiseActivities: Activity<any, any>[] = [];
 
     private constructor(
         private question: Question<PT, MPT>
@@ -25,8 +25,8 @@ export class See<PT, MPT> implements Oracle<PT, void> {
         return new See(question)
     }
 
-    @stepDetails<AnswersQuestions, PT, void>(`ask if '<<question>>' fulfills the matcher`)
-    public async performAs(actor: AnswersQuestions | PerformsTask, activityResult?: PT): Promise<void> {
+    @stepDetails<AnswersQuestions, PT, any>(`ask if '<<question>>' fulfills the matcher`)
+    public async performAs(actor: AnswersQuestions | PerformsTask, activityResult?: PT): Promise<any> {
 
         const loop = async (counter: number): Promise<boolean> => {
             const nextLoop = (): Promise<boolean> => {
@@ -67,18 +67,18 @@ export class See<PT, MPT> implements Oracle<PT, void> {
         };
 
         return loop(this.repeater - 1)
-            .then((match: boolean): Promise<void> => {
+            .then((match: boolean): Promise<any> => {
                 if (match && this.thenActivities.length > 0)
                     return (actor as PerformsTask).attemptsTo(...this.thenActivities);
                 if (match)
-                    return Promise.resolve();
+                    return Promise.resolve(activityResult);
 
                 return Promise.reject(new Error(`See interaction with question '${this.question.toString()}' and matcher 
                 ${this.matcher.toString()}
                 returned ${match}. No 'otherwise' activities were given`));
 
             })
-            .catch((e): Promise<void> => {
+            .catch((e): Promise<any> => {
                 if (this.otherwiseActivities.length > 0)
                     return (actor as PerformsTask).attemptsTo(...this.otherwiseActivities);
                 else
@@ -86,12 +86,12 @@ export class See<PT, MPT> implements Oracle<PT, void> {
             });
     }
 
-    public then(...activities: Activity<PT, void>[]): See<PT, MPT> {
+    public then(...activities: Activity<any, any>[]): See<PT, MPT> {
         this.thenActivities = activities;
         return this;
     }
 
-    public otherwise(...activities: Activity<PT, void>[]): See<PT, MPT> {
+    public otherwise(...activities: Activity<any, any>[]): See<PT, MPT> {
         this.otherwiseActivities = activities;
         return this;
     }
