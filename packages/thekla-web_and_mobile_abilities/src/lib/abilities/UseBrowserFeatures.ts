@@ -42,7 +42,11 @@ export class UseBrowserFeatures implements Ability {
         return this.client.switchToWindowMatchingTheTitle(titlePart);
     }
 
-    public uploadFile(file: string) {
+    public uploadFile(file: string): Promise<string> {
         return this.client.uploadFile(file);
+    }
+
+    public executeScript(func: () => unknown): Promise<unknown> {
+        return this.client.executeScript(func);
     }
 }

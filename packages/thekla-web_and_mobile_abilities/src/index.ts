@@ -16,6 +16,7 @@ export {Authenticate, AuthenticationInfo}                          from "./lib/a
 export {Click}                                                     from "./lib/actions/Click";
 export {Hover}                                                     from "./lib/actions/Hover";
 export {Enter}                                                     from "./lib/actions/Enter";
+export {Execute}                                                   from "./lib/actions/Execute";
 export {Navigate}                                                  from "./lib/actions/Navigate";
 export {Wait}                                                      from "./lib/actions/Wait";
 export {Scroll, Page}                                              from "./lib/actions/Scroll";
