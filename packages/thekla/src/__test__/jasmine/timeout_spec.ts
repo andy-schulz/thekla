@@ -68,7 +68,7 @@ describe(`Setting the Timeout`, () => {
 
         forked.send(testData);
 
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             try {
                 forked.on(`message`, (result: TheklaTestResult) => {
                     expect(result.specResult.failedCount).toEqual(1);
@@ -105,7 +105,7 @@ describe(`Setting the Timeout`, () => {
 
         forked.send(testData);
 
-        return new Promise((resolve, reject) => {
+        return new Promise<void>((resolve, reject) => {
             try {
                 forked.on(`message`, (result: TheklaTestResult) => {
                     expect(result.specResult.failedCount).toEqual(1);

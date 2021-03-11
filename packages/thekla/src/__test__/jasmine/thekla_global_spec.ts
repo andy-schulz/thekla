@@ -75,7 +75,7 @@ describe(`The Thekla global object`, () => {
 
             forked.send(testData);
 
-            return new Promise((resolve, reject) => {
+            return new Promise<void>((resolve, reject) => {
                 try {
 
                     forked.stdout?.on(`data`, (data) => {
