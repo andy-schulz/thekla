@@ -28,7 +28,6 @@ describe(`Using the GET method`, () => {
                 console.log(e);
                 throw e;
             }
-            console.log(result)
             expect(result.request.options.method).toEqual(`GET`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
