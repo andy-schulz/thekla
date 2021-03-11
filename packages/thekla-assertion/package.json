@@ -1,6 +1,6 @@
 {
   "name": "@thekla/assertion",
-  "version": "3.3.0",
+  "version": "3.4.0",
   "description": "the SPP (ScreenPlay Pattern) assertion library",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
