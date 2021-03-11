@@ -1,6 +1,6 @@
 {
   "name": "@thekla/rest-abilities",
-  "version": "3.4.0",
+  "version": "3.4.1",
   "description": "UseTheRestApi ability to write REST API tests in the screenplay pattern style",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
