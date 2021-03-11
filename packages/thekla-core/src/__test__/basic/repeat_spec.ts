@@ -4,8 +4,8 @@ import {Repeat}                                                  from "../../";
 
 class Increment extends Task<string, number> {
 
-    private increment: number = 1;
-    private current: number = 0;
+    private increment = 1;
+    private current = 0;
 
     private constructor(increment: number) {
         super();
@@ -57,7 +57,7 @@ describe(`Repeating activities`, () => {
         it(`should pass when the assertion passes
         test id: ac5599b4-7e4b-40c1-9730-5ea140ff962d`, () => {
             return Richard.attemptsTo(
-                Repeat.test(Increment.by(1))
+                Repeat.activities(Increment.by(1))
                     .until(Result.ofActivities())
                     .is(Expected.to.be.equal(5))
                     .retryFor(5, Duration.in.milliSeconds(1))
