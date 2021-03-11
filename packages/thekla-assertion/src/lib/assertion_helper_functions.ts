@@ -18,7 +18,7 @@ export const assertAll = <AT>(assertions: AssertionFunc): ExecuteAssertion<AT> =
 
         const error: string[] = [];
 
-        assertions.map((assertion: (actual: AT) => boolean) => {
+        assertions.forEach((assertion: (actual: AT) => boolean) => {
             try {
                 return assertion(actual)
             } catch (err) {
