@@ -70,7 +70,10 @@ describe(`Trying to Add two numbers by the mathjs API`, (): void => {
                         `${a} + ${b}`
                     ],
                     "precision": 2
-                })
+                }),
+                headers: {
+                    "content-type": `application/json`
+                }
             };
 
             const req = request(On.resource(``))
@@ -92,7 +95,10 @@ describe(`Trying to Add two numbers by the mathjs API`, (): void => {
                         `${a} + ${b}`
                     ],
                     "precision": 2
-                })
+                }),
+                headers:{
+                    "content-type": `application/json`
+                }
             };
 
             const req = request(On.resource(``))
