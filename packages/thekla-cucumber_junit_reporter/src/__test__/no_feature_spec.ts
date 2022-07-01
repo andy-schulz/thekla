@@ -1,9 +1,9 @@
-import {beforeFunc} from "./__helper__/hooks";
+import {initializeWorld} from "./__helper__/hooks";
 
 describe(`JunitFormatter`, () => {
     const world: {[key: string]: any} = {};
 
-    beforeAll(beforeFunc(world));
+    beforeAll(initializeWorld(world, "", ""));
 
     describe(`no features`, () => {
 
