@@ -2,18 +2,23 @@ import {RequestOptions, RestClientConfig}                     from "@thekla/conf
 import {Actor}                                                from "@thekla/core";
 import {ExecutingRestClient, Get, On, request, UseTheRestApi} from "../..";
 
-const {REST_BASE_PORT, REST_BASE_URL, REQUEST_PROXY} = process.env;
+const {REST_BASE_HOST, REQUEST_PROXY} = process.env;
 
 describe(`Using option`, () => {
     const restClientConfig: RestClientConfig = {
         requestOptions: {
-            baseUrl: `${REST_BASE_URL}:${REST_BASE_PORT ?? 8443}`,
+            baseUrl: `https://${REST_BASE_HOST}`,
             proxy:   REQUEST_PROXY
         }
     };
 
     const Richard: Actor = Actor.named(`Richard`);
     Richard.whoCan(UseTheRestApi.with(ExecutingRestClient.from(restClientConfig)));
+
+    beforeAll(() => {
+        if (process.env.REST_BASE_HOST == undefined)
+            return Promise.reject(`Environment variable REST_BASE_URL not set.`)
+    })
 
     describe(`pathParameters`, () => {
 
@@ -57,7 +62,7 @@ describe(`Using option`, () => {
             return Get.from(putReq.using(opts))
                 .performAs(Richard)
                 .then((body) => {
-                    expect(body.url).toEqual(`http://httpbin.org/get`)
+                    expect(body.url).toEqual(`https://httpbin.org/get`)
                     expect(body.args).toEqual({}, `check was not performed on body, only body contains the "args" attribute`)
                 })
                 .catch((error) => {

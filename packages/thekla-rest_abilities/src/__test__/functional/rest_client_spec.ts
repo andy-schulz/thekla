@@ -2,7 +2,7 @@ import {RestClientConfig}                                     from "@thekla/conf
 import {Actor}                                                from "@thekla/core";
 import {ExecutingRestClient, Get, On, request, UseTheRestApi} from "../../index";
 
-const {REST_BASE_PORT, REST_BASE_URL, REQUEST_PROXY} = process.env;
+const {REST_BASE_HOST, REQUEST_PROXY} = process.env;
 
 describe(`Using the REST Client`, () => {
 
@@ -17,7 +17,7 @@ describe(`Using the REST Client`, () => {
         test id: 57cb62d2-5ae0-4101-a62c-5081512de205`, async () => {
             const getReq = request(On.resource(`get`))
                 .using({
-                           baseUrl: `${REST_BASE_URL}:${REST_BASE_PORT ?? 8443}`,
+                           baseUrl: `https://${REST_BASE_HOST}`,
                            proxy: REQUEST_PROXY
                        });
 

@@ -3,13 +3,20 @@ import {Actor}                                                                  
 import {ExecutingRestClient, Method, On, request, RestRequestResult, Send, UseTheRestApi} from "../../index";
 import {Delete}                                                                           from "../../spp/actions/Delete";
 
-const {REST_BASE_PORT, REST_BASE_URL, REQUEST_PROXY} = process.env;
+const {REST_BASE_HOST, REQUEST_PROXY} = process.env;
 
 describe(`Using the DELETE method`, () => {
 
     const restClientConfig: RestClientConfig = {
         requestOptions: {
-            baseUrl: `${REST_BASE_URL}:${REST_BASE_PORT ?? 8443}`,
+            baseUrl: `http://${REST_BASE_HOST}`,
+            proxy: REQUEST_PROXY
+        }
+    };
+
+    const secureClientConfig: RestClientConfig = {
+        requestOptions: {
+            baseUrl: `https://${REST_BASE_HOST}`,
             proxy: REQUEST_PROXY
         }
     };
@@ -17,7 +24,15 @@ describe(`Using the DELETE method`, () => {
     const Richard: Actor = Actor.named(`Richard`);
     Richard.whoCan(UseTheRestApi.with(ExecutingRestClient.from(restClientConfig)));
 
-    describe(`on a resource`, () => {
+    const SecureRichard: Actor = Actor.named(`SecureRichard`);
+    SecureRichard.whoCan(UseTheRestApi.with(ExecutingRestClient.from(secureClientConfig)));
+
+    beforeAll(() => {
+        if (process.env.REST_BASE_HOST == undefined)
+            return Promise.reject(`Environment variable REST_BASE_URL not set.`)
+    })
+
+    describe(`on an http resource`, () => {
 
         it(`should return status code 200
         test id: c8c693c0-56c6-4ad1-bb87-fe03a5bdde95`, async () => {
@@ -34,7 +49,7 @@ describe(`Using the DELETE method`, () => {
             expect(result.request.options.method).toEqual(`DELETE`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_HOST)
         });
 
         it(`with the general Send interaction should return status code 200
@@ -52,7 +67,46 @@ describe(`Using the DELETE method`, () => {
             expect(result.request.options.method).toEqual(`DELETE`);
             expect(result.statusCode).toEqual(200);
             const body = JSON.parse(result.body);
-            expect(body?.headers?.Host).toContain(REST_BASE_URL?.replace(`http://`, ``))
+            expect(body?.headers?.Host).toContain(REST_BASE_HOST)
+        });
+    });
+
+    describe(`on an https resource`, () => {
+
+        it(`should return status code 200
+        test id: c8c693c0-56c6-4ad1-bb87-fe03a5bdde95`, async () => {
+            const deleteReq = request(On.resource(`delete`));
+
+            let result;
+            try {
+                result = await Delete.from(deleteReq).performAs(SecureRichard);
+            } catch (e) {
+                console.log(e);
+                throw e;
+            }
+
+            expect(result.request.options.method).toEqual(`DELETE`);
+            expect(result.statusCode).toEqual(200);
+            const body = JSON.parse(result.body);
+            expect(body?.headers?.Host).toContain(REST_BASE_HOST)
+        });
+
+        it(`with the general Send interaction should return status code 200
+        test id: c8268867-120a-4641-aa0e-83fe4c251ff7`, async () => {
+            const deleteReq = request(On.resource(`delete`));
+
+            let result;
+            try {
+                result = await Send.the(deleteReq).as(Method.delete()).performAs(SecureRichard);
+            } catch (e) {
+                console.log(e);
+                throw e;
+            }
+
+            expect(result.request.options.method).toEqual(`DELETE`);
+            expect(result.statusCode).toEqual(200);
+            const body = JSON.parse(result.body);
+            expect(body?.headers?.Host).toContain(REST_BASE_HOST)
         });
     });
 
