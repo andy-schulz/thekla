@@ -78,7 +78,7 @@ const createJUnitFile = (suite: any, suiteName: string, featureName: string, sce
     const replaceCh = (str: string) => str.replace(/[\s]+/g, `_`).replace(/[.]+/g, `_`);
 
     const testCase = suite.testCase()
-        .className(replaceCh(suiteName) +"." + replaceCh(featureName))
+        .className(replaceCh(suiteName) + `.` + replaceCh(featureName))
         .name(replaceCh(scenarioName));
 
     testCase.time(result.duration / 1000000);
