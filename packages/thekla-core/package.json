@@ -1,6 +1,6 @@
 {
   "name": "@thekla/core",
-  "version": "3.4.0",
+  "version": "3.5.0",
   "description": "the SPP (ScreenPlay Pattern) core elements used to create abilities and interactions",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -30,9 +30,9 @@
   },
   "dependencies": {
     "@log4js-node/log4js-api": "^1.0.2",
-    "@thekla/activity-log": "^3.3.0",
+    "@thekla/activity-log": "^3.5.0",
     "@thekla/assertion": "^3.4.0",
-    "@thekla/config": "^3.3.0",
+    "@thekla/config": "^3.5.0",
     "@types/deep-diff": "^1.0.0",
     "@types/lodash": "^4.14.159",
     "@types/node": "^14.0.27",
