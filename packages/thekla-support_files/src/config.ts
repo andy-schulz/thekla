@@ -58,7 +58,8 @@ export const getStandardTheklaDesiredCapabilities = (browserstackSessionName?: s
 
 const standardWdioConfig: WebDriver.Options = {
     hostname: SERVER_HOSTNAME ?? `localhost`,
-    port: SERVER_PORT ? parseInt(SERVER_PORT) : 4444,
+    protocol: `https`,
+    port: SERVER_PORT ? parseInt(SERVER_PORT) : undefined,
     logLevel: (LOGLEVEL ? LOGLEVEL as WebDriverLogTypes : `info`),
     capabilities: {
         browserName: BROWSERNAME ?? `chrome`,
