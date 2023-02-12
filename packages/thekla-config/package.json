@@ -33,7 +33,7 @@
     "@log4js-node/log4js-api": "^1.0.2",
     "@types/lodash": "^4.14.159",
     "deepmerge": "^4.2.2",
-    "got": "^11.5.2",
+    "got": "^12.5.3",
     "webdriver": "^5.23.0"
   },
   "devDependencies": {
